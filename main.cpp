@@ -1,4 +1,5 @@
 #include "MainWindow.hpp"
+#include "yaml-cpp/yaml.h"
 
 #include <QApplication>
 
