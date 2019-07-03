@@ -16,8 +16,7 @@ CONFIG(debug, debug|release) {
     QMAKE_CXXFLAGS += --debug
 }
 
-LIBS += -L$$shadowed($$PWD)/src/ -lsrc
-
-INCLUDEPATH += $$PWD/src/
+include($$PWD/src/src.pri)
 
 SOURCES += $$PWD/main.cpp
+

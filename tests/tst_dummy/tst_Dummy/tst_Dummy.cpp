@@ -11,6 +11,7 @@ class tst_Dummy : public QObject
 void tst_Dummy::foo()
 {
     QEXPECT_FAIL("it is only for example", "it is only for example", Continue);
+    QVERIFY(false);
 }
 
 QTEST_APPLESS_MAIN(tst_Dummy)

@@ -16,6 +16,8 @@ CONFIG(debug, debug|release) {
     QMAKE_CXXFLAGS += --debug
 }
 
+include($$PWD/../3rd-party/yaml-cpp/yaml-cpp.pri)
+
 FORMS += \
     MainWindow.ui
 

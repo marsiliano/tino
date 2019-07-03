@@ -2,6 +2,8 @@
 
 #include "ui_MainWindow.h"
 
+#include <yaml-cpp/yaml.h>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -18,4 +20,15 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::readYaml()
+{
+    YAML::Parser p;
+    YAML::Alias("");
+    //    YAML::Node config = YAML::Load("prova.yaml");
+
+    /*for (std::size_t i = 0; i < config.size(); i++) {
+        std::cout << config[i].as<int>();
+    }*/
 }

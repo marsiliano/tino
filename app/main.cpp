@@ -1,7 +1,8 @@
 #include "MainWindow.hpp"
-#include "yaml-cpp/yaml.h"
 
 #include <QApplication>
+#include <QDebug>
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
