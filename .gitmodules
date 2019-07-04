@@ -1,9 +1,6 @@
-[submodule "app/3rd-party/yaml-cpp/yaml-cpp"]
-	path = app/3rd-party/yaml-cpp/yaml-cpp
+[submodule "src/yaml/yaml-cpp"]
+	path = src/yaml/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp.git
-[submodule "app/3rd-party/qtmqtt"]
-	path = app/3rd-party/qtmqtt
-	url = https://github.com/qt/qtmqtt.git
-[submodule "app/3rd-party/qtshell"]
-	path = app/3rd-party/qtshell
-	url = https://github.com/benlau/qtshell.git
+[submodule "tino"]
+	path = tino
+	url = https://github.com/guerinoni/tino.git
