@@ -11,10 +11,11 @@ class Byte
     bool rw;
 
   public:
+    Byte() = default;
     Byte(std::vector<bool> v, std::vector<std::string> description, bool rw);
     std::vector<std::string> getDescription();
     bool operator[](int const i);
     bool getRw();
-    Byte operator=(const Byte &other);
+    Byte &operator=(const Byte &other);
 };
 } // namespace core

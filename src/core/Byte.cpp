@@ -22,7 +22,7 @@ bool core::Byte::getRw()
     return rw;
 }
 
-core::Byte core::Byte::operator=(const core::Byte &other)
+core::Byte &core::Byte::operator=(const core::Byte &other)
 {
     this->v           = other.v;
     this->rw          = other.rw;

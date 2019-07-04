@@ -1,3 +1,4 @@
+#include "../core/Block.hpp"
 #include "QtWidgets/qboxlayout.h"
 
 #include <QtWidgets/qboxlayout.h>
@@ -7,10 +8,10 @@
 class Mask : public QWidget
 {
     Q_OBJECT
-
   public:
-    Mask(QWidget *parent = 0);
+    Mask(core::Byte val, QWidget *parent = nullptr);
     ~Mask() {}
     void doStuff(int i);
-  signals:
+    core::Byte val;
+    QPalette getClr(bool state);
 };
