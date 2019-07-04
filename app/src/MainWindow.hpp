@@ -14,7 +14,6 @@ class MainWindow : public QMainWindow
   public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void readYaml();
 
   private:
     Ui::MainWindow *ui;

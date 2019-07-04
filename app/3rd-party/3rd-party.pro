@@ -1,2 +1,2 @@
-TEMPLATE = subdirs
-SUBDIRS += yaml-cpp
+#TEMPLATE = subdirs
+#SUBDIRS += yaml-cpp

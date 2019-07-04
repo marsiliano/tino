@@ -16,13 +16,17 @@ CONFIG(debug, debug|release) {
     QMAKE_CXXFLAGS += --debug
 }
 
-include($$PWD/../3rd-party/yaml-cpp/yaml-cpp.pri)
-
 FORMS += \
     MainWindow.ui
 
 HEADERS += \
-    MainWindow.hpp
+    MainWindow.hpp \
+Byte.hpp \
+Block.hpp \
+Group.hpp \
 
 SOURCES += \
-    MainWindow.cpp
+    MainWindow.cpp \
+Byte.cpp \
+Block.cpp  \
+Group.cpp \
