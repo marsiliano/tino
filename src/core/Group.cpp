@@ -5,18 +5,37 @@
  * j: joined
  */
 
-Core::Group::Group(std::vector<Core::Byte> v, char type)
+core::Group::Group(std::vector<core::Byte> v, char type)
 {
     this->v    = v;
     this->type = type;
 }
 
-char Core::Group::getType()
+core::Group::Group(std::vector<bool> v, std::vector<std::string> description,
+                   bool rw, char type)
+{
+    this->type = type = type;
+    this->add(v, description, rw);
+}
+
+void core::Group::add(std::vector<bool> v, std::vector<std::string> description,
+                      bool rw)
+{
+    core::Byte tv(v, description, rw);
+    this->v[v.size() - 1] = tv;
+}
+
+char core::Group::getType()
 {
     return type;
 }
 
-Core::Byte Core::Group::operator[](const int i)
+core::Byte core::Group::operator[](const int i)
 {
     return v[i];
+}
+
+int core::Group::getDim()
+{
+    return v.size();
 }

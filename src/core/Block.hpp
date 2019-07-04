@@ -1,18 +1,18 @@
 #include "Group.hpp"
 
-namespace Core
+namespace core
 {
 class Block
 {
   private:
-    std::vector<Core::Group> v;
+    std::vector<core::Group> v;
     std::string name;
 
   public:
-    Block(std::vector<Core::Group> v, std::string name);
-    Core::Group operator[](const int i);
+    Block(std::vector<core::Group> v, std::string name);
+    core::Group operator[](const int i);
     std::string getName();
 };
-} // namespace Core
+} // namespace core
 
 /* fare una classe derivata di value, associato o mask?*/

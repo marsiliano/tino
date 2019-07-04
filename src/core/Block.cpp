@@ -1,15 +1,15 @@
 #include "Block.hpp"
 
-Core::Block::Block(std::vector<Core::Group> v, std::string name)
+core::Block::Block(std::vector<core::Group> v, std::string name)
 {
     this->v    = v;
     this->name = name;
 }
-std::string Core::Block::getName()
+std::string core::Block::getName()
 {
     return name;
 }
-Core::Group Core::Block::operator[](const int i)
+core::Group core::Block::operator[](const int i)
 {
     return v[i];
 }

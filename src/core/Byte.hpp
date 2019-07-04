@@ -1,19 +1,20 @@
 #include <iostream>
 #include <vector>
 
-namespace Core
+namespace core
 {
 class Byte
 {
   private:
     std::vector<bool> v;
-    std::string name;
+    std::vector<std::string> description;
     bool rw;
 
   public:
-    Byte(std::vector<bool> v, std::string name, bool rw);
-    std::string getName();
+    Byte(std::vector<bool> v, std::vector<std::string> description, bool rw);
+    std::vector<std::string> getDescription();
     bool operator[](int const i);
     bool getRw();
+    Byte operator=(const Byte &other);
 };
-} // namespace Core
+} // namespace core

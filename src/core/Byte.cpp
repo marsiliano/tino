@@ -1,22 +1,31 @@
 #include "Byte.hpp"
 
-Core::Byte::Byte(std::vector<bool> v, std::string name, bool rw)
+core::Byte::Byte(std::vector<bool> v, std::vector<std::string> description,
+                 bool rw)
 {
-    this->v    = v;
-    this->name = name;
-    this->rw   = rw;
+    this->v           = v;
+    this->description = description;
+    this->rw          = rw;
 }
 
-std::string Core::Byte::getName()
+std::vector<std::string> core::Byte::getDescription()
 {
-    return name;
+    return description;
 }
-bool Core::Byte::operator[](const int i)
+bool core::Byte::operator[](const int i)
 {
     return v[i];
 }
 
-bool Core::Byte::getRw()
+bool core::Byte::getRw()
 {
     return rw;
+}
+
+core::Byte core::Byte::operator=(const core::Byte &other)
+{
+    this->v           = other.v;
+    this->rw          = other.rw;
+    this->description = other.description;
+    return *this;
 }
