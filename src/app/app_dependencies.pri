@@ -1,2 +1,3 @@
 TINO_LIB_DEPENDS += \
-    gui
+    gui \
+    core

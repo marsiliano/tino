@@ -94,4 +94,4 @@ SOURCES += \
     $$PWD/yaml-cpp/src/simplekey.cpp \
     $$PWD/yaml-cpp/src/singledocparser.cpp \
     $$PWD/yaml-cpp/src/stream.cpp \
-    $$PWD/yaml-cpp/src/tag.cpp
+$$PWD/yaml-cpp/src/tag.cpp
