@@ -15,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
     file->addAction(quit);
 
     ui->menuBar->addMenu(file);
+
+    m = new Mask(this);
+    m->setGeometry(200, 200, 1000, 10000);
 }
 
 MainWindow::~MainWindow()

@@ -5,4 +5,5 @@ SUBDIRS += \
     core \
     yaml \
     gui \
+    widget \
     app

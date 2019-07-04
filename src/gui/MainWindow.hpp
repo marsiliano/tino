@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../widget/Mask.hpp"
+
 #include <QMainWindow>
 
 namespace Ui
@@ -17,4 +19,5 @@ class MainWindow : public QMainWindow
 
   private:
     Ui::MainWindow *ui;
+    Mask *m;
 };
