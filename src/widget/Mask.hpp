@@ -15,5 +15,5 @@ class Mask : public QWidget
     QPushButton *b[8];
     void setClr(const int i);
   public slots:
-    void doStuff(int i);
+    void doStuff(const int i);
 };

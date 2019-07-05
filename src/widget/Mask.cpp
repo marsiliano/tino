@@ -14,7 +14,7 @@ Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
         b[i]->setGeometry((150 * i), 100, 100, 50);
         setClr(i);
 
-        connect(b[i], SIGNAL(released()), this, SLOT(doStuff(i)));
+        connect(b[i], SIGNAL(clicked()), this, SLOT(doStuff(i)));
 
         l->addWidget(b[i], 0, i, Qt::AlignVCenter);
     }

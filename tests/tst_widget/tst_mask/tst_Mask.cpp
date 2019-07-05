@@ -52,14 +52,18 @@ void tst_Mask::tst_color()
 
 void tst_Mask::tst_click()
 {
-    std::vector<bool> v = {
-        true, false, true, false, true, false, true, false
-    };
-    std::vector<std::string> s = { "prova" };
-    core::Byte b(v, s, false);
-    Mask m(b, nullptr);
+    QString clr;
+    bool val;
 
     for (int i = 0; i < 8; ++i) {
+        clr = getClr(i);
+        val = m->val[i];
+
+        m->doStuff(i);
+        m->doStuff(i);
+
+        QCOMPARE(clr, getClr(i));
+        QCOMPARE(val, m->val[i]);
     }
 }
 QTEST_MAIN(tst_Mask)
