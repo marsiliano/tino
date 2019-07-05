@@ -60,10 +60,14 @@ void tst_Mask::tst_click()
         val = m->val[i];
 
         m->doStuff(i);
-        m->doStuff(i);
 
-        QCOMPARE(clr, getClr(i));
-        QCOMPARE(val, m->val[i]);
+        if (val == true) {
+            QCOMPARE(expb, getClr(i));
+            QCOMPARE(false, m->val[i]);
+        } else {
+            QCOMPARE(expr, getClr(i));
+            QCOMPARE(true, m->val[i]);
+        }
     }
 }
 QTEST_MAIN(tst_Mask)
