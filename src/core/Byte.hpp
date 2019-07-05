@@ -13,10 +13,11 @@ class Byte
   public:
     Byte() = default;
     Byte(std::vector<bool> v, std::vector<std::string> description, bool rw);
-    std::vector<std::string> getDescription();
+    std::string getDescription(const int i);
     bool operator[](int const i);
     bool getRw();
     Byte &operator=(const Byte &other);
     void set(const int i);
+    int getDim();
 };
 } // namespace core

@@ -8,9 +8,9 @@ core::Byte::Byte(std::vector<bool> v, std::vector<std::string> description,
     this->rw          = rw;
 }
 
-std::vector<std::string> core::Byte::getDescription()
+std::string core::Byte::getDescription(const int i)
 {
-    return description;
+    return description[i];
 }
 bool core::Byte::operator[](const int i)
 {
@@ -25,7 +25,10 @@ bool core::Byte::getRw()
 {
     return rw;
 }
-
+int core::Byte::getDim()
+{
+    return v.size();
+}
 core::Byte &core::Byte::operator=(const core::Byte &other)
 {
     this->v           = other.v;

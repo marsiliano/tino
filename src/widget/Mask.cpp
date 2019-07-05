@@ -14,6 +14,9 @@ Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
         b[current]->setGeometry((150 * current), 100, 100, 50);
         this->setClr(current);
 
+        b[current]->setText(
+            QString::fromStdString(val.getDescription(current)));
+
         connect(b[current], SIGNAL(clicked()), this, SLOT(doStuff()));
 
         l->addWidget(b[current], 0, current, Qt::AlignVCenter);

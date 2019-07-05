@@ -13,3 +13,8 @@ core::Group &core::Block::operator[](const int i)
 {
     return v[i];
 }
+
+int core::Block::getDim()
+{
+    return v.size();
+}

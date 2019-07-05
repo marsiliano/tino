@@ -11,8 +11,7 @@ class Block
   public:
     Block(std::vector<core::Group> v, std::string name);
     core::Group &operator[](const int i);
+    int getDim();
     std::string getName();
 };
 } // namespace core
-
-/* fare una classe derivata di value, associato o mask?*/
