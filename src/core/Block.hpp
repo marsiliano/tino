@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Group.hpp"
 
 namespace core

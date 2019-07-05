@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../core/Block.hpp"
 #include "QtWidgets/qboxlayout.h"
 

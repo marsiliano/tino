@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Byte.hpp"
 
 namespace core
