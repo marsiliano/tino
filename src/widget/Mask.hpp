@@ -11,9 +11,18 @@ class Mask : public QWidget
   public:
     Mask(core::Byte val, QWidget *parent = nullptr);
     ~Mask() {}
-    core::Byte val;
+    QString getStyleBtn(const int i);
+    bool valAt(const int i);
+    void set(const int i);
+    void clckBtn(const int i);
+
+    friend class tst_Mask;
+
+  private:
     QPushButton *b[8];
+    core::Byte val;
+    int current;
     void setClr(const int i);
   public slots:
-    void doStuff(const int i);
+    void doStuff();
 };

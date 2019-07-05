@@ -8,22 +8,31 @@ Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
 
     QGridLayout *l = new QGridLayout(this);
 
-    for (int i = 0; i < 8; ++i) {
-        b[i] = new QPushButton(this);
+    for (current = 0; current < 8; ++current) {
+        b[current] = new QPushButton(this);
 
-        b[i]->setGeometry((150 * i), 100, 100, 50);
-        setClr(i);
+        b[current]->setGeometry((150 * current), 100, 100, 50);
+        this->setClr(current);
 
-        connect(b[i], SIGNAL(clicked()), this, SLOT(doStuff(i)));
+        connect(b[current], SIGNAL(clicked()), this, SLOT(doStuff()));
 
-        l->addWidget(b[i], 0, i, Qt::AlignVCenter);
+        l->addWidget(b[current], 0, current, Qt::AlignVCenter);
     }
 }
 
-void Mask::doStuff(const int i)
+void Mask::doStuff()
 {
-    this->val.set(i);
-    setClr(i);
+    this->set(current);
+}
+
+bool Mask::valAt(const int i)
+{
+    return val[i];
+}
+
+QString Mask::getStyleBtn(const int i)
+{
+    return b[i]->styleSheet();
 }
 
 void Mask::setClr(const int i)
@@ -32,4 +41,10 @@ void Mask::setClr(const int i)
         b[i]->setStyleSheet("background-color:#ff0000;");
     else
         b[i]->setStyleSheet("background-color:#0000ff;");
+}
+
+void Mask::set(const int i)
+{
+    this->val.set(i);
+    this->setClr(i);
 }

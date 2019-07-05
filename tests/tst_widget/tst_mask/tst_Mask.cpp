@@ -35,7 +35,7 @@ void tst_Mask::initTestCase()
 
 QString tst_Mask::getClr(const int i)
 {
-    QString cmp = m->b[i]->styleSheet();
+    QString cmp = m->getStyleBtn(i);
     cmp         = cmp.mid(cmp.indexOf("background-color:"), expr.length());
     return cmp;
 }
@@ -57,16 +57,16 @@ void tst_Mask::tst_click()
 
     for (int i = 0; i < 8; ++i) {
         clr = getClr(i);
-        val = m->val[i];
+        val = m->valAt(i);
 
-        m->doStuff(i);
+        m->b[i]->click();
 
         if (val == true) {
             QCOMPARE(expb, getClr(i));
-            QCOMPARE(false, m->val[i]);
+            QCOMPARE(false, m->valAt(i));
         } else {
             QCOMPARE(expr, getClr(i));
-            QCOMPARE(true, m->val[i]);
+            QCOMPARE(true, m->valAt(i));
         }
     }
 }
