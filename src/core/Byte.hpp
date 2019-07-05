@@ -17,5 +17,6 @@ class Byte
     bool operator[](int const i);
     bool getRw();
     Byte &operator=(const Byte &other);
+    void set(const int i);
 };
 } // namespace core

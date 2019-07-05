@@ -15,7 +15,7 @@ class Group
     void add(std::vector<bool> v, std::vector<std::string> description,
              bool rw);
     char getType();
-    Byte operator[](const int i);
+    Byte &operator[](const int i);
     int getDim();
 };
 } // namespace core

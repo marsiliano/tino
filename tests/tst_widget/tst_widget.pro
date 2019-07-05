@@ -1,3 +1,3 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-    tst_Dummy
+    tst_mask

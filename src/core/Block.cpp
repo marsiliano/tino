@@ -9,7 +9,7 @@ std::string core::Block::getName()
 {
     return name;
 }
-core::Group core::Block::operator[](const int i)
+core::Group &core::Block::operator[](const int i)
 {
     return v[i];
 }

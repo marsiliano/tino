@@ -5,7 +5,6 @@
 Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
 {
     this->val = val;
-    QPushButton *b[8];
 
     QGridLayout *l = new QGridLayout(this);
 
@@ -13,27 +12,24 @@ Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
         b[i] = new QPushButton(this);
 
         b[i]->setGeometry((150 * i), 100, 100, 50);
-        connect(b[i], SIGNAL(released()), this, SLOT(doStuff(i)));
+        setClr(i);
 
-        b[i]->setPalette(getClr(val[i]));
+        connect(b[i], SIGNAL(released()), this, SLOT(doStuff(i)));
 
         l->addWidget(b[i], 0, i, Qt::AlignVCenter);
     }
 }
 
-void Mask::doStuff(int i)
+void Mask::doStuff(const int i)
 {
-    this->setPalette(getClr(!val[i]));
+    this->val.set(i);
+    setClr(i);
 }
 
-QPalette Mask::getClr(bool state)
+void Mask::setClr(const int i)
 {
-    QPushButton temp;
-    QPalette pal = temp.palette();
-
-    if (state)
-        pal.setColor(QPalette::Button, QColor(255, 0, 0));
+    if (this->val[i])
+        b[i]->setStyleSheet("background-color:#ff0000;");
     else
-        pal.setColor(QPalette::Button, QColor(0, 0, 255));
-    return pal;
+        b[i]->setStyleSheet("background-color:#0000ff;");
 }

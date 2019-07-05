@@ -10,7 +10,7 @@ class Block
 
   public:
     Block(std::vector<core::Group> v, std::string name);
-    core::Group operator[](const int i);
+    core::Group &operator[](const int i);
     std::string getName();
 };
 } // namespace core

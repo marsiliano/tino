@@ -16,6 +16,10 @@ bool core::Byte::operator[](const int i)
 {
     return v[i];
 }
+void core::Byte::set(const int i)
+{
+    v[i] = !v[i];
+}
 
 bool core::Byte::getRw()
 {

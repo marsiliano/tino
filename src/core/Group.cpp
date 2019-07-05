@@ -30,7 +30,7 @@ char core::Group::getType()
     return type;
 }
 
-core::Byte core::Group::operator[](const int i)
+core::Byte &core::Group::operator[](const int i)
 {
     return v[i];
 }

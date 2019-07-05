@@ -11,7 +11,9 @@ class Mask : public QWidget
   public:
     Mask(core::Byte val, QWidget *parent = nullptr);
     ~Mask() {}
-    void doStuff(int i);
     core::Byte val;
-    QPalette getClr(bool state);
+    QPushButton *b[8];
+    void setClr(const int i);
+  public slots:
+    void doStuff(int i);
 };

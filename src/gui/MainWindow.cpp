@@ -15,6 +15,13 @@ MainWindow::MainWindow(QWidget *parent) :
     file->addAction(quit);
 
     ui->menuBar->addMenu(file);
+
+    std::vector<bool> v = {
+        true, false, true, false, true, false, true, false
+    };
+    std::vector<std::string> s = { "prova" };
+    core::Byte b(v, s, false);
+    Mask d(b, nullptr);
 }
 
 MainWindow::~MainWindow()
