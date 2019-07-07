@@ -4,6 +4,6 @@ CONFIG   += ordered
 SUBDIRS += \
     core \
     yaml \
-    widget \
     gui \
+    widget \
     app
