@@ -1,53 +1,37 @@
 #include "Mask.hpp"
 
-#include "QtWidgets/qpushbutton.h"
-
 Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
 {
-    this->val = val;
-
     QGridLayout *l = new QGridLayout(this);
 
-    for (current = 0; current < 8; ++current) {
-        b[current] = new QPushButton(this);
+    c      = new BtnContainer();
+    c->val = val;
 
-        b[current]->setGeometry((150 * current), 100, 100, 50);
-        this->setClr(current);
+    for (int i = 0; i < 8; ++i) {
+        c->b[i] = new QPushButton(this);
 
-        b[current]->setText(
-            QString::fromStdString(val.getDescription(current)));
+        c->b[i]->setGeometry((150 * i), 100, 100, 50);
+        c->setClr(i);
 
-        connect(b[current], SIGNAL(clicked()), this, SLOT(doStuff()));
+        c->b[i]->setText(QString::fromStdString(val.getDescription(i)));
 
-        l->addWidget(b[current], 0, current, Qt::AlignVCenter);
+        connect(c->b[i], &QPushButton::clicked, this, [&]() { c->set(i); });
+
+        l->addWidget(c->b[i], 0, i, Qt::AlignVCenter);
     }
-}
-
-void Mask::doStuff()
-{
-    this->set(current);
 }
 
 bool Mask::valAt(const int i)
 {
-    return val[i];
+    return c->val[i];
 }
 
 QString Mask::getStyleBtn(const int i)
 {
-    return b[i]->styleSheet();
-}
-
-void Mask::setClr(const int i)
-{
-    if (this->val[i])
-        b[i]->setStyleSheet("background-color:#ff0000;");
-    else
-        b[i]->setStyleSheet("background-color:#0000ff;");
+    return c->b[i]->styleSheet();
 }
 
 void Mask::set(const int i)
 {
-    this->val.set(i);
-    this->setClr(i);
+    c->set(i);
 }

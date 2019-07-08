@@ -13,6 +13,23 @@ MainWindow::MainWindow(QWidget *parent) :
     file->addAction(quit);
 
     ui->menuBar->addMenu(file);
+
+    std::vector<bool> v = {
+        true, false, true, false, true, false, true, false
+    };
+    std::vector<std::string> s = {
+        "prova0", "prova1", "prova2", "prova3",
+        "prova4", "prova5", "prova6", "prova7",
+    };
+    core::Byte b(v, s, false);
+    std::vector<core::Byte> vb = { b };
+
+    core::Group g(vb, 'm');
+
+    //    auto m = new Mask(b, this);
+    auto G = new GroupWidget(g, this);
+    G->setGeometry(50, 50, 300, 100);
+    this->layout()->addWidget(G);
 }
 
 MainWindow::~MainWindow()

@@ -15,6 +15,7 @@ class Byte
   public:
     Byte() = default;
     Byte(std::vector<bool> v, std::vector<std::string> description, bool rw);
+    ~Byte() {}
     std::string getDescription(const int i);
     bool operator[](int const i);
     bool getRw();

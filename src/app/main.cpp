@@ -1,4 +1,5 @@
 #include "../gui/MainWindow.hpp"
+
 #include <QApplication>
 #include <QDebug>
 #include <iostream>

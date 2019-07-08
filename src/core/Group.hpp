@@ -14,6 +14,7 @@ class Group
     Group(std::vector<Byte> v, char type);
     Group(std::vector<bool> v, std::vector<std::string> description, bool rw,
           char type);
+    ~Group() {}
     void add(std::vector<bool> v, std::vector<std::string> description,
              bool rw);
     char getType();

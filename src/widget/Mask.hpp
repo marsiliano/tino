@@ -1,11 +1,6 @@
 #pragma once
 
-#include "../core/Block.hpp"
-#include "QtWidgets/qboxlayout.h"
-
-#include <QtWidgets/qboxlayout.h>
-#include <QtWidgets/qpushbutton.h>
-#include <QtWidgets/qwidget.h>
+#include "BtnContainer.hpp"
 
 class Mask : public QWidget
 {
@@ -15,16 +10,12 @@ class Mask : public QWidget
     ~Mask() {}
     QString getStyleBtn(const int i);
     bool valAt(const int i);
-    void set(const int i);
-    void clckBtn(const int i);
 
-    friend class tst_Mask;
+    void set(const int i);
+    void setClr(const int i);
 
   private:
-    QPushButton *b[8];
-    core::Byte val;
-    int current;
-    void setClr(const int i);
-  public slots:
-    void doStuff();
+    BtnContainer *c;
+
+    friend class tst_Mask;
 };

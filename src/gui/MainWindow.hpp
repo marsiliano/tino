@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../widget/Mask.hpp"
+#include "../widget/BlockWidget.hpp"
 
 #include <QMainWindow>
 
