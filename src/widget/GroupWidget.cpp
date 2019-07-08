@@ -15,7 +15,7 @@ GroupWidget::GroupWidget(core::Group val, QWidget *parent)
 
         for (int i = 0; i < val.getDim(); ++i) {
             m[i] = new Mask(val[i], this);
-            l->addWidget(m[i], 0, i, Qt::AlignVCenter);
+            l->addWidget(m[i], 1 + i, 0, Qt::AlignVCenter);
         }
     } /*else if (val.getType() == 'v') {
     } else if (val.getType() == 'j') {

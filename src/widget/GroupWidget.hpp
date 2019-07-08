@@ -1,3 +1,4 @@
+#pragma once
 #include "Mask.hpp"
 
 #include <QtWidgets/QLabel>

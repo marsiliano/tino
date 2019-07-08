@@ -22,14 +22,17 @@ MainWindow::MainWindow(QWidget *parent) :
         "prova4", "prova5", "prova6", "prova7",
     };
     core::Byte b(v, s, false);
-    std::vector<core::Byte> vb = { b };
+    std::vector<core::Byte> vb = { b, b, b };
 
     core::Group g(vb, 'm');
 
-    //    auto m = new Mask(b, this);
-    auto G = new GroupWidget(g, this);
-    G->setGeometry(50, 50, 300, 100);
-    this->layout()->addWidget(G);
+    std::vector<core::Group> vg = { g, g };
+    core::Block block(vg, "block");
+
+    auto B = new BlockWidget(block, this);
+    B->setGeometry(0, 0, 800, 500);
+
+    this->layout()->addWidget(B);
 }
 
 MainWindow::~MainWindow()

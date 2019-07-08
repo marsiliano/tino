@@ -1,26 +1,13 @@
 #pragma once
 
 #include "../core/Block.hpp"
-#include "QtWidgets/qboxlayout.h"
 
+#include <QWidgetSet>
+#include <QtWidgets/QBoxLayout>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/qboxlayout.h>
-#include <QtWidgets/qpushbutton.h>
-#include <QtWidgets/qwidget.h>
+#include <QtWidgets/QWidget>
 #include <functional>
 #include <memory>
-
-// class BitGui
-//{
-//  public:
-//    std::unique_ptr<QPushButton> btn;
-//    bool status;
-
-//    void toggle()
-//    {
-//        status = !status;
-//    }
-//};
 
 class BtnContainer
 {
