@@ -2,19 +2,19 @@
 
 BtnContainer::BtnContainer()
 {
-    b.reserve(8);
-}
-
-void BtnContainer::set(const int i)
-{
-    val.set(i);
-    setClr(i);
+    for (int i = 0; i < 8; ++i) {
+        b.emplace_back(std::make_pair(
+            std::unique_ptr<QPushButton>(new QPushButton()), [i, this]() {
+                val.set(i);
+                setClr(i);
+            }));
+    }
 }
 
 void BtnContainer::setClr(const int i)
 {
     if (val[i])
-        b[i]->setStyleSheet("background-color:#ff0000;");
+        b[i].first->setStyleSheet("background-color:#ff0000;");
     else
-        b[i]->setStyleSheet("background-color:#0000ff;");
+        b[i].first->setStyleSheet("background-color:#0000ff;");
 }

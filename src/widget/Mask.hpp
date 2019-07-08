@@ -10,9 +10,7 @@ class Mask : public QWidget
     ~Mask() {}
     QString getStyleBtn(const int i);
     bool valAt(const int i);
-
     void set(const int i);
-    void setClr(const int i);
 
   private:
     BtnContainer *c;

@@ -18,10 +18,7 @@ bool core::Byte::operator[](const int i)
 }
 void core::Byte::set(const int i)
 {
-    if (v[i])
-        v[i] = false;
-    else
-        v[i] = true;
+    v[i] = !v[i];
 }
 
 bool core::Byte::getRw()

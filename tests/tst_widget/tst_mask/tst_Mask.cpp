@@ -28,7 +28,10 @@ void tst_Mask::initTestCase()
     std::vector<bool> v = {
         true, false, true, false, true, false, true, false
     };
-    std::vector<std::string> s = { "prova" };
+    std::vector<std::string> s = {
+        "prova1", "prova2", "prova3", "prova4",
+        "prova5", "prova6", "prova7", "prova8",
+    };
     core::Byte b(v, s, false);
     m = new Mask(b, nullptr);
 }
@@ -59,7 +62,7 @@ void tst_Mask::tst_click()
         clr = getClr(i);
         val = m->valAt(i);
 
-        m->c->b[i]->click();
+        m->c->b[i].first->click();
 
         if (val == true) {
             QCOMPARE(expb, getClr(i));

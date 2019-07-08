@@ -8,16 +8,17 @@ Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
     c->val = val;
 
     for (int i = 0; i < 8; ++i) {
-        c->b[i] = new QPushButton(this);
-
-        c->b[i]->setGeometry((150 * i), 100, 100, 50);
+        c->b[i].first->setGeometry((150 * i), 100, 100, 50);
         c->setClr(i);
 
-        c->b[i]->setText(QString::fromStdString(val.getDescription(i)));
+        c->b[i].first->setText(QString::fromStdString(val.getDescription(i)));
 
-        connect(c->b[i], &QPushButton::clicked, this, [&]() { c->set(i); });
+        connect(c->b[i].first.get(), &QPushButton::clicked, this,
+                c->b[i].second);
 
-        l->addWidget(c->b[i], 0, i, Qt::AlignVCenter);
+        std::cout << "assign " << i;
+
+        l->addWidget(c->b[i].first.get(), 1, i, Qt::AlignVCenter);
     }
 }
 
@@ -28,10 +29,5 @@ bool Mask::valAt(const int i)
 
 QString Mask::getStyleBtn(const int i)
 {
-    return c->b[i]->styleSheet();
-}
-
-void Mask::set(const int i)
-{
-    c->set(i);
+    return c->b[i].first->styleSheet();
 }
