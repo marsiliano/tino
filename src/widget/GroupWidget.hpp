@@ -1,5 +1,6 @@
 #pragma once
 #include "Mask.hpp"
+#include "Value.hpp"
 
 #include <QtWidgets/QLabel>
 

@@ -6,8 +6,8 @@ GroupWidget::GroupWidget(core::Group val, QWidget *parent)
     QLabel *lGroup = new QLabel(this);
 
     Mask *m[val.getDim()];
-    /*Value *v[]
-     * Joined *j[]*/
+    Value *v[val.getDim()];
+    // Joined *j[]
 
     if (val.getType() == 'm') {
         lGroup->setText(QString::fromStdString("mask group"));
@@ -17,7 +17,14 @@ GroupWidget::GroupWidget(core::Group val, QWidget *parent)
             m[i] = new Mask(val[i], this);
             l->addWidget(m[i], 1 + i, 0, Qt::AlignVCenter);
         }
-    } /*else if (val.getType() == 'v') {
+    } else if (val.getType() == 'v') {
+        lGroup->setText(QString::fromStdString("value group"));
+        l->addWidget(lGroup, 0, 0, Qt::AlignVCenter);
+
+        for (int i = 0; i < val.getDim(); ++i) {
+            v[i] = new Value(val[i], this);
+            l->addWidget(v[i], 1 + i, 0, Qt::AlignVCenter);
+        }
     } else if (val.getType() == 'j') {
-    }*/
+    }
 }
