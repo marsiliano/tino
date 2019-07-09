@@ -21,5 +21,6 @@ class Group
     Byte &operator[](const int i);
     int getDim();
     bool operator==(const Group &other);
+    Group &operator=(const Group &other);
 };
 } // namespace core

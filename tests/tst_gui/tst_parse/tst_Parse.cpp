@@ -13,6 +13,7 @@ class tst_Parse : public QObject
   private slots:
     void initTestCase();
     void tst_load();
+    void parse();
 };
 
 void tst_Parse::initTestCase()
@@ -50,6 +51,16 @@ void tst_Parse::tst_load()
     else
         qDebug() << "ok";
     QCOMPARE(base.IsNull(), false);
+}
+
+void tst_Parse::parse()
+{
+    //    MainWindow m;
+    //    std::vector<core::Block> cmp = m.parse();
+
+    //    for (int i = 0; i < all.size(); ++i) {
+    //        QVERIFY(all[i] == cmp[i]);
+    //    }
 }
 
 QTEST_MAIN(tst_Parse)

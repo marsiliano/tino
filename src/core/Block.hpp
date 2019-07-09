@@ -17,5 +17,6 @@ class Block
     int getDim();
     std::string getName();
     bool operator==(const Block &other);
+    Block &operator=(const Block &other);
 };
 } // namespace core

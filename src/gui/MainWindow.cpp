@@ -47,44 +47,60 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-std::vector<core::Block> parse(std::string filename)
+std::vector<core::Block> parse()
 {
     std::vector<core::Block> all;
 
-    std::vector<core::Byte> b;
-    std::vector<core::Group> g;
+    YAML::Node base =
+        YAML::LoadFile("../../test/tst_gui/tst_parse/testConfig.yaml");
+    YAML::Node blocklist = base["blocks"]; // get block names
 
-    //    YAML::Node base      = YAML::LoadFile(filename);
-    //    YAML::Node blocklist = base["blocks"]; // get block names
+    for (int i = 0; i < blocklist.size(); ++i) {
+        YAML::Node blockNode =
+            base[blocklist[i].as<std::string>()]; // get the block ==
+        // names
 
-    //    for (int i = 0; i < blocklist.size(); ++i) {
-    //        YAML::Node blockNode = base[blocklist[i]]; // get the group names
+        std::vector<core::Group> g;
 
-    //        for (int j = 0; j < blockNode.size(); ++j) {
-    //            YAML::Node groupNode = blockNode[i]; // get the group
-    //            YAML::Node bytesNode = groupNode["bytes"];
+        for (int j = 0; j < blockNode.size(); ++j) {
+            YAML::Node groupNode =
+                blockNode[blockNode[i].as<std::string>()]; // get the
+                                                           // group
+            YAML::Node bytesNode = groupNode["bytes"];
 
-    //            bool rw;
-    //            std::vector<bool> v;
-    //            std::vector<std::string> s;
+            std::vector<core::Byte> b;
 
-    //            switch (j % 3) {
-    //                case 0:
-    //                    rw = bytesNode[j];
-    //                    break;
-    //                case 1:
-    //                    for (int k = 0; k < bytesNode[j].size(); ++k) {
-    //                        v.push_back(bytesNode[j][k]);
-    //                    }
-    //                    break;
-    //                case 2:
-    //                    for (int k = 0; k < bytesNode[j].size(); ++k) {
-    //                        s.push_back(bytesNode[j][k]);
-    //                    }
-    //                    break;
-    //            } // end switch
-    //        }
-    //    }
+            bool rw;
+            std::vector<bool> v;
+            std::vector<std::string> s;
+
+            for (int k = 0; k < bytesNode.size(); ++k) {
+                switch (k % 3) {
+                    case 0:
+                        rw = bytesNode[j];
+                        break;
+                    case 1:
+                        v.clear();
+                        for (int l = 0; l < bytesNode[j].size(); ++l) {
+                            v.push_back(bytesNode[j][k].as<bool>());
+                        }
+                        break;
+                    case 2:
+                        s.clear();
+                        for (int l = 0; l < bytesNode[j].size(); ++l) {
+                            s.push_back(bytesNode[j][k].as<std::string>());
+                        }
+                        core::Byte tb(v, s, rw);
+                        b.push_back(tb);
+                        break;
+                } // end switch
+            }
+            core::Group tg(b, groupNode["type"].as<char>());
+            g.push_back(tg);
+        } // end (int j = 0; j < blockNode.size(); ++j)
+        core::Block tblock(g, blocklist[i].as<std::string>());
+        all.push_back(tblock);
+    }
 
     return all;
 }

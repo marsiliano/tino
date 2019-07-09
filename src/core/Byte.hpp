@@ -1,8 +1,8 @@
 #pragma once
 
+#include <QDebug>
 #include <iostream>
 #include <vector>
-
 namespace core
 {
 class Byte

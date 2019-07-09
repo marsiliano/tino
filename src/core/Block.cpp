@@ -21,7 +21,7 @@ int core::Block::getDim()
 
 bool core::Block::operator==(const core::Block &other)
 {
-    if (name != other.name || v.size() != other.v.size())
+    if ((name != other.name) || (v.size() != other.v.size()))
         return false;
 
     for (int i = 0; i < v.size(); ++i) {
@@ -29,5 +29,15 @@ bool core::Block::operator==(const core::Block &other)
             return false;
     }
 
+    qDebug() << "block";
     return true;
+}
+
+core::Block &core::Block::operator=(const core::Block &other)
+{
+    for (int i = 0; i < other.v.size(); ++i)
+        this->v[i] = other.v[i];
+
+    name = other.name;
+    return *this;
 }

@@ -31,9 +31,14 @@ int core::Byte::getDim()
 }
 core::Byte &core::Byte::operator=(const core::Byte &other)
 {
-    this->v           = other.v;
-    this->rw          = other.rw;
-    this->description = other.description;
+    for (int i = 0; i < v.size(); ++i)
+        this->v[i] = other.v[i];
+
+    this->rw = other.rw;
+
+    for (int i = 0; i < other.v.size(); ++i)
+        this->description[i] = other.description[i];
+
     return *this;
 }
 
@@ -41,11 +46,11 @@ bool core::Byte::operator==(const core::Byte &other)
 {
     int i;
 
-    if (rw != other.rw || description.size() != other.description.size())
+    if ((rw != other.rw) || (description.size() != other.description.size()))
         return false;
 
     for (i = 0; i < 8; ++i) {
-        if (other.v[i] != v[i])
+        if (v[i] != other.v[i])
             return false;
     }
 

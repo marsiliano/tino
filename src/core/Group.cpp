@@ -40,14 +40,24 @@ int core::Group::getDim()
     return v.size();
 }
 
+core::Group &core::Group::operator=(const Group &other)
+{
+    this->type = other.type;
+
+    for (int i = 0; i < other.v.size(); ++i)
+        this->v[i] = other.v[i];
+    return *this;
+}
+
 bool core::Group::operator==(const core::Group &other)
 {
-    if (type != other.type || v.size() != other.v.size())
+    if ((type != other.type) || (v.size() != other.v.size()))
         return false;
 
     for (int i = 0; i < 8; ++i) {
         if (!(v[i] == other.v[i]))
             return false;
     }
+    qDebug() << "group";
     return true;
 }
