@@ -41,16 +41,13 @@ bool core::Byte::operator==(const core::Byte &other)
 {
     int i;
 
-    if (rw != other.rw)
+    if (rw != other.rw || description.size() != other.description.size())
         return false;
 
     for (i = 0; i < 8; ++i) {
         if (other.v[i] != v[i])
             return false;
     }
-
-    if (description.size() != other.description.size())
-        return false;
 
     for (i = 0; i < description.size(); ++i) {
         if (description[i] != other.description[i])
