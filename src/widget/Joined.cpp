@@ -14,7 +14,7 @@ Joined::Joined(core::Group val, QWidget *parent)
     int v = 0;
     for (int i = 0; i < val.getDim(); ++i) {
         lbl[i] = new QLabel(this, Qt::Widget);
-        l->addWidget(lbl[i], i, 0, this, Qt::AlignVCenter);
+        l->addWidget(lbl[i], i, 0, Qt::AlignVCenter);
         for (int j = 0; j < 8; j++) {
             if (val[i][j])
                 v += pow(2, j);

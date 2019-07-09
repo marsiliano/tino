@@ -5,6 +5,7 @@
 class Mask : public QWidget
 {
     Q_OBJECT
+
   public:
     Mask(core::Byte val, QWidget *parent = nullptr);
     ~Mask() {}

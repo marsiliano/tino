@@ -23,4 +23,5 @@ class Group
     bool operator==(const Group &other);
     Group &operator=(const Group &other);
 };
+
 } // namespace core

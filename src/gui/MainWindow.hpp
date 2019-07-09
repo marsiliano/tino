@@ -1,9 +1,8 @@
 #pragma once
 
-#include "../widget/BlockWidget.hpp"
-#include "../yaml/yaml-cpp/include/yaml-cpp/yaml.h"
-
+#include <BlockWidget.hpp>
 #include <QMainWindow>
+#include <yaml-cpp/yaml.h>
 
 namespace Ui
 {

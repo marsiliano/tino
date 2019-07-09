@@ -1,6 +1,7 @@
 #include "Group.hpp"
 
-/*m: mask
+/*
+ * m: mask
  * v: value
  * j: joined
  */

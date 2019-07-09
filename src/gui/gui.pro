@@ -12,5 +12,3 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/MainWindow.cpp
-
-DISTFILES +=

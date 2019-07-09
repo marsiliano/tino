@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../core/Block.hpp"
-
+#include <Block.hpp>
 #include <QWidgetSet>
 #include <QtWidgets/QBoxLayout>
 #include <QtWidgets/QPushButton>

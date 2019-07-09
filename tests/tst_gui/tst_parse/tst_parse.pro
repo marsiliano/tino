@@ -1,7 +1,9 @@
 TINO_LIB_DEPENDS += \
     core \
     yaml \
-    gui \
+    gui
+
+INCLUDEPATH += $$PWD/../../../src/yaml/yaml-cpp/include
 
 include(../../test.pri)
 

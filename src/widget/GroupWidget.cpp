@@ -30,6 +30,6 @@ GroupWidget::GroupWidget(core::Group val, QWidget *parent)
         l->addWidget(lGroup, 0, 0, Qt::AlignVCenter);
 
         Joined jo(val, this);
-        l->addWidget(jo, 1, 0, this, Qt::AlignVCenter);
+        l->addWidget(&jo, 1, 0, Qt::AlignVCenter);
     }
 }

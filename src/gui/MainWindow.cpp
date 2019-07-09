@@ -47,7 +47,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-std::vector<core::Block> parse()
+std::vector<core::Block> MainWindow::parse()
 {
     std ::vector<core::Block> all;
 

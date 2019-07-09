@@ -7,6 +7,8 @@ TARGET = tino
 QT -= testlib
 QT += core gui widgets
 
+INCLUDEPATH += $$PWD/../yaml/yaml-cpp/include
+
 CONFIG(release, debug|release) {
     QMAKE_CXXFLAGS += -O3
 }

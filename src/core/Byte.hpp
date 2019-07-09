@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <iostream>
 #include <vector>
+
 namespace core
 {
 class Byte
@@ -24,4 +25,5 @@ class Byte
     int getDim();
     bool operator==(const Byte &other);
 };
+
 } // namespace core

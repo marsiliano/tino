@@ -19,4 +19,5 @@ class Block
     bool operator==(const Block &other);
     Block &operator=(const Block &other);
 };
+
 } // namespace core
