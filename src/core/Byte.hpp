@@ -22,5 +22,6 @@ class Byte
     Byte &operator=(const Byte &other);
     void set(const int i);
     int getDim();
+    bool operator==(const Byte &other);
 };
 } // namespace core

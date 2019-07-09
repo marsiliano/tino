@@ -39,3 +39,15 @@ int core::Group::getDim()
 {
     return v.size();
 }
+
+bool core::Group::operator==(const core::Group &other)
+{
+    if (type != other.type || v.size() != other.v.size())
+        return false;
+
+    for (int i = 0; i < 8; ++i) {
+        if (!(v[i] == other.v[i]))
+            return false;
+    }
+    return true;
+}

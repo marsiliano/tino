@@ -16,5 +16,6 @@ class Block
     core::Group &operator[](const int i);
     int getDim();
     std::string getName();
+    bool operator==(const Block &other);
 };
 } // namespace core

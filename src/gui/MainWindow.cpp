@@ -54,8 +54,8 @@ std::vector<core::Block> parse(std::string filename)
     std::vector<core::Byte> b;
     std::vector<core::Group> g;
 
-    YAML::Node base      = YAML::LoadFile(filename);
-    YAML::Node blocklist = base["blocks"]; // get block names
+    //    YAML::Node base      = YAML::LoadFile(filename);
+    //    YAML::Node blocklist = base["blocks"]; // get block names
 
     //    for (int i = 0; i < blocklist.size(); ++i) {
     //        YAML::Node blockNode = base[blocklist[i]]; // get the group names

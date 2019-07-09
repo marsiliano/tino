@@ -20,5 +20,6 @@ class Group
     char getType();
     Byte &operator[](const int i);
     int getDim();
+    bool operator==(const Group &other);
 };
 } // namespace core
