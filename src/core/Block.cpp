@@ -29,14 +29,12 @@ bool core::Block::operator==(const core::Block &other)
             return false;
     }
 
-    qDebug() << "block";
     return true;
 }
 
 core::Block &core::Block::operator=(const core::Block &other)
 {
-    for (int i = 0; i < other.v.size(); ++i)
-        this->v[i] = other.v[i];
+    this->v = other.v;
 
     name = other.name;
     return *this;

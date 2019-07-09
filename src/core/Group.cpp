@@ -44,8 +44,7 @@ core::Group &core::Group::operator=(const Group &other)
 {
     this->type = other.type;
 
-    for (int i = 0; i < other.v.size(); ++i)
-        this->v[i] = other.v[i];
+    this->v = other.v;
     return *this;
 }
 
@@ -58,6 +57,5 @@ bool core::Group::operator==(const core::Group &other)
         if (!(v[i] == other.v[i]))
             return false;
     }
-    qDebug() << "group";
     return true;
 }
