@@ -1,5 +1,6 @@
 TINO_LIB_DEPENDS += \
     core \
+    yaml \
     gui \
 
 include(../../test.pri)

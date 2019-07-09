@@ -47,11 +47,44 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-std::vector<core::Block> parse()
+std::vector<core::Block> parse(std::string filename)
 {
     std::vector<core::Block> all;
-    YAML::Node base   = YAML::Load("config.yaml");
-    YAML::Node blocks = base["blocks"];
+
+    std::vector<core::Byte> b;
+    std::vector<core::Group> g;
+
+    YAML::Node base      = YAML::LoadFile(filename);
+    YAML::Node blocklist = base["blocks"]; // get block names
+
+    //    for (int i = 0; i < blocklist.size(); ++i) {
+    //        YAML::Node blockNode = base[blocklist[i]]; // get the group names
+
+    //        for (int j = 0; j < blockNode.size(); ++j) {
+    //            YAML::Node groupNode = blockNode[i]; // get the group
+    //            YAML::Node bytesNode = groupNode["bytes"];
+
+    //            bool rw;
+    //            std::vector<bool> v;
+    //            std::vector<std::string> s;
+
+    //            switch (j % 3) {
+    //                case 0:
+    //                    rw = bytesNode[j];
+    //                    break;
+    //                case 1:
+    //                    for (int k = 0; k < bytesNode[j].size(); ++k) {
+    //                        v.push_back(bytesNode[j][k]);
+    //                    }
+    //                    break;
+    //                case 2:
+    //                    for (int k = 0; k < bytesNode[j].size(); ++k) {
+    //                        s.push_back(bytesNode[j][k]);
+    //                    }
+    //                    break;
+    //            } // end switch
+    //        }
+    //    }
 
     return all;
 }

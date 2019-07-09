@@ -18,7 +18,7 @@ class MainWindow : public QMainWindow
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    std::vector<core::Block> parse();
+    std::vector<core::Block> parse(std::string filename);
 
   private:
     Ui::MainWindow *ui;
