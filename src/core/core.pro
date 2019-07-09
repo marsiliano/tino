@@ -2,10 +2,10 @@ include(../tinolibrary.pri)
 
 HEADERS += \
     $$PWD/Byte.hpp \
-    Block.hpp \
-    Group.hpp
+    $$PWD/Block.hpp \
+    $$PWD/Group.hpp
 
 SOURCES += \
     $$PWD/Byte.cpp \
-    Block.cpp \
-    Group.cpp
+    $$PWD/Block.cpp \
+    $$PWD/Group.cpp

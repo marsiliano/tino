@@ -1,13 +1,15 @@
 include(../tinolibrary.pri)
 
 HEADERS += \
+    $$PWD/BtnContainer.hpp \
     $$PWD/Mask.hpp \
-    $$PWD/BlockWidget.hpp \
+    $$PWD/Value.hpp \
     $$PWD/GroupWidget.hpp \
-    BtnContainer.hpp
+    $$PWD/BlockWidget.hpp \
 
 SOURCES += \
+    $$PWD/BtnContainer.cpp \
     $$PWD/Mask.cpp \
-    $$PWD/BlockWidget.cpp \
+    $$PWD/Value.cpp \
     $$PWD/GroupWidget.cpp \
-    BtnContainer.cpp
+    $$PWD/BlockWidget.cpp \
