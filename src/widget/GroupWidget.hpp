@@ -1,4 +1,5 @@
 #pragma once
+#include "Joined.hpp"
 #include "Mask.hpp"
 #include "Value.hpp"
 

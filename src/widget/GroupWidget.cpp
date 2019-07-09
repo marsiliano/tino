@@ -26,5 +26,10 @@ GroupWidget::GroupWidget(core::Group val, QWidget *parent)
             l->addWidget(v[i], 1 + i, 0, Qt::AlignVCenter);
         }
     } else if (val.getType() == 'j') {
+        lGroup->setText(QString::fromStdString("joined group"));
+        l->addWidget(lGroup, 0, 0, Qt::AlignVCenter);
+
+        Joined jo(val, this);
+        l->addWidget(jo, 1, 0, this, Qt::AlignVCenter);
     }
 }

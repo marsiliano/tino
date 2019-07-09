@@ -49,7 +49,7 @@ MainWindow::~MainWindow()
 
 std::vector<core::Block> parse()
 {
-    std::vector<core::Block> all;
+    std ::vector<core::Block> all;
 
     YAML::Node base =
         YAML::LoadFile("../../test/tst_gui/tst_parse/testConfig.yaml");

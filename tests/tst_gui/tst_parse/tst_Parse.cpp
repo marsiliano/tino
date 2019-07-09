@@ -55,12 +55,12 @@ void tst_Parse::tst_load()
 
 void tst_Parse::parse()
 {
-    //    MainWindow m;
-    //    std::vector<core::Block> cmp = m.parse();
+    MainWindow m;
+    std::vector<core::Block> cmp = m.parse();
 
-    //    for (int i = 0; i < all.size(); ++i) {
-    //        QVERIFY(all[i] == cmp[i]);
-    //    }
+    for (int i = 0; i < all.size(); ++i) {
+        QVERIFY(all[i] == cmp[i]);
+    }
 }
 
 QTEST_MAIN(tst_Parse)

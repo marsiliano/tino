@@ -18,7 +18,7 @@ class MainWindow : public QMainWindow
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    static std::vector<core::Block> parse();
+    std::vector<core::Block> parse();
 
   private:
     Ui::MainWindow *ui;

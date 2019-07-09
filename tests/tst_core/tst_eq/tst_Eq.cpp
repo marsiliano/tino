@@ -42,7 +42,9 @@ core::Block tst_Eq::get()
 
 void tst_Eq::tst_eq()
 {
-    QVERIFY(get() == get());
+    core::Block b1 = get();
+    core::Block b2 = get();
+    QVERIFY(b1 == b2);
 }
 
 QTEST_MAIN(tst_Eq)

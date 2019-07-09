@@ -2,8 +2,8 @@ TEMPLATE  = subdirs
 CONFIG   += ordered
 
 SUBDIRS += \
-    core \
     yaml \
+    core \
     widget \
     gui \
     app
