@@ -46,3 +46,12 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+std::vector<core::Block> parse()
+{
+    std::vector<core::Block> all;
+    YAML::Node base   = YAML::Load("config.yaml");
+    YAML::Node blocks = base["blocks"];
+
+    return all;
+}

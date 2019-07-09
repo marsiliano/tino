@@ -1,0 +1,30 @@
+blocks: [blockname1, blockname2]
+
+blockname1: [groupname1, groupname2]
+
+groupname1: 
+    type: mask
+
+    bytes:
+        [true] #read - write
+        [true, false, true, false, true, false, true, false]
+        [bitname1, bitname2, bitname3, bitname4, bitname5, bitname6, bitname7, bitname8]
+        [false]
+        [true, false, true, false, true, false, true, false]
+        [bitname1, bitname2, bitname3, bitname4, bitname5, bitname6, bitname7, bitname8]
+        [false]
+        [true, false, true, false, true, false, true, false]
+        [bitname1, bitname2, bitname3, bitname4, bitname5, bitname6, bitname7, bitname8]
+
+groupname2: 
+    type: value
+    bytes:
+        [false]
+        [true, false, true, false, true, false, true, false]
+        [bytename]
+        [false]
+        [true, false, true, false, true, false, true, false]
+        [bytename]
+        [false]
+        [true, false, true, false, true, false, true, false]
+        [bytename1]
