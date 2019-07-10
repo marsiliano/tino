@@ -1,5 +1,6 @@
 include(../tinolibrary.pri)
 
+
 HEADERS += \
     $$PWD/Byte.hpp \
     $$PWD/Block.hpp \
@@ -11,3 +12,4 @@ SOURCES += \
     $$PWD/Block.cpp \
     $$PWD/Group.cpp \
     $$PWD/Generator.cpp
+

@@ -4,6 +4,10 @@
 #include "Generator.hpp"
 
 #include <QMainWindow>
+#include <QModbusDataUnit>
+#include <QModbusRtuSerialSlave>
+#include <QModbusServer>
+#include <QPushButton>
 #include <yaml-cpp/yaml.h>
 
 namespace Ui
@@ -19,8 +23,11 @@ class MainWindow : public QMainWindow
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    std::vector<core::Block> parse(std::string flname);
+  public slots:
+    void activateConnection();
 
   private:
     Ui::MainWindow *ui;
+    QPushButton *btnActivateConnection;
+    std::vector<core::Block> all;
 };

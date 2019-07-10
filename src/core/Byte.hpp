@@ -12,6 +12,7 @@ class Byte
     std::vector<bool> v;
     std::vector<std::string> description;
     bool rw;
+    int start;
 
   public:
     Byte() = default;

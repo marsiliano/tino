@@ -14,10 +14,43 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->menuBar->addMenu(file);
 
-    auto B = new BlockWidget(core::Generator::getBlock(), this);
-    B->setGeometry(0, 0, 800, 500);
+    all.push_back(core::Generator::getBlock());
 
-    this->layout()->addWidget(B);
+    BlockWidget *B[all.size()];
+    for (int i = 0; i < all.size(); ++i) {
+        B[i] = new BlockWidget(all[0], this);
+        B[i]->setGeometry(0, i, 800, 500);
+        this->layout()->addWidget(B[i]);
+    }
+
+    btnActivateConnection = new QPushButton(this);
+    btnActivateConnection->setText("connect");
+    connect(btnActivateConnection, SIGNAL(&QPushButton::clicked), this,
+            SLOT(activateConnection()));
+    this->layout()->addWidget(btnActivateConnection);
+
+    QModbusServer *server = new QModbusRtuSerialSlave(this);
+    QModbusDataUnitMap reg;
+
+    for (int i = 0; i < all.size(); ++i) {
+        for (int j = 0; j < all[i].getDim(); ++j) {
+            for (int k = 0; k < all[i][j].getDim(); ++k) {
+                for (int l = 0; l < all[i][j][k].getDim(); ++l) {
+                    QVector<quint16> v;
+
+                    for (int m = 0; m < 8; ++l) {
+                        if (all[i][j][l][m])
+                            v.append(1);
+                        else
+                            v.append(0);
+                    }
+                    QModbusDataUnit u(QModbusDataUnit::DiscreteInputs, 555, v);
+                    reg.insert(QModbusDataUnit::DiscreteInputs, u);
+                }
+            }
+        }
+    }
+    server->setMap(reg);
 }
 
 MainWindow::~MainWindow()
@@ -25,9 +58,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-std::vector<core::Block> MainWindow::parse(std::string flname)
+void MainWindow::activateConnection()
 {
-    std ::vector<core::Block> all;
-
-    return all;
+    if (btnActivateConnection->text() == "connect")
+        btnActivateConnection->setText("disconect");
+    else
+        btnActivateConnection->setText("connect");
 }
