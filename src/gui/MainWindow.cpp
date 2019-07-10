@@ -47,12 +47,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-std::vector<core::Block> MainWindow::parse()
+std::vector<core::Block> MainWindow::parse(std::string flname)
 {
     std ::vector<core::Block> all;
 
-    YAML::Node base =
-        YAML::LoadFile("../../test/tst_gui/tst_parse/testConfig.yaml");
+    YAML::Node base      = YAML::LoadFile(flname);
     YAML::Node blocklist = base["blocks"]; // get block names
 
     for (int i = 0; i < blocklist.size(); ++i) {

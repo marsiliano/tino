@@ -38,7 +38,7 @@ core::Byte &core::Byte::operator=(const core::Byte &other)
     return *this;
 }
 
-bool core::Byte::operator==(const core::Byte &other)
+bool core::Byte::operator==(const core::Byte &other) const
 {
     int i;
 

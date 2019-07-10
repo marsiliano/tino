@@ -20,7 +20,7 @@ class Group
     char getType();
     Byte &operator[](const int i);
     int getDim();
-    bool operator==(const Group &other);
+    bool operator==(const Group &other) const;
     Group &operator=(const Group &other);
 };
 

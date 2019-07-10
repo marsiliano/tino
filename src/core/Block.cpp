@@ -19,7 +19,7 @@ int core::Block::getDim()
     return v.size();
 }
 
-bool core::Block::operator==(const core::Block &other)
+bool core::Block::operator==(const core::Block &other) const
 {
     if ((name != other.name) || (v.size() != other.v.size()))
         return false;
@@ -28,7 +28,6 @@ bool core::Block::operator==(const core::Block &other)
         if (!(v[i] == other.v[i]))
             return false;
     }
-
     return true;
 }
 
