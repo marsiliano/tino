@@ -1,6 +1,8 @@
 #pragma once
 
-#include <BlockWidget.hpp>
+#include "BlockWidget.hpp"
+#include "Generator.hpp"
+
 #include <QMainWindow>
 #include <yaml-cpp/yaml.h>
 

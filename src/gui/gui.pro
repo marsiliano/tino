@@ -8,7 +8,7 @@ FORMS += \
     $$PWD/MainWindow.ui
 
 HEADERS += \
-    $$PWD/MainWindow.hpp
+    $$PWD/MainWindow.hpp \
 
 SOURCES += \
-    $$PWD/MainWindow.cpp
+    $$PWD/MainWindow.cpp \

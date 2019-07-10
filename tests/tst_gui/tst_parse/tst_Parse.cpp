@@ -56,60 +56,6 @@ void tst_Parse::tst_load()
 
 void tst_Parse::compareSize()
 {
-    //    YAML::Node base = YAML::Load("config.yaml");
-    //    YAML::Node blocklist = base["blocks"]; // get block names
-
-    //    for (int i = 0; i < blocklist.size(); ++i) {
-    //        qDebug() << QString::fromStdString("block: " +
-    //                                           blocklist[i].as<std::string>());
-    //        YAML::Node blockNode =
-    //            base[blocklist[i].as<std::string>()]; // get the block ==
-    //        // names
-
-    //        std::vector<core::Group> g;
-
-    //        for (int j = 0; j < blockNode.size(); ++j) {
-    //            YAML::Node groupNode =
-    //                blockNode[blockNode[i].as<std::string>()]; // get the
-    //                                                           // group
-    //            YAML::Node bytesNode = groupNode["bytes"];
-
-    //            std::vector<core::Byte> b;
-
-    //            bool rw;
-    //            std::vector<bool> v;
-    //            std::vector<std::string> s;
-
-    //            for (int k = 0; k < bytesNode.size(); ++k) {
-    //                switch (k % 3) {
-    //                    case 0:
-    //                        rw = bytesNode[j];
-    //                        break;
-    //                    case 1:
-    //                        v.clear();
-    //                        for (int l = 0; l < bytesNode[j].size(); ++l)
-    //                        {
-    //                            v.push_back(bytesNode[j][k].as<bool>());
-    //                        }
-    //                        break;
-    //                    case 2:
-    //                        s.clear();
-    //                        for (int l = 0; l < bytesNode[j].size(); ++l)
-    //                        {
-    //                            s.push_back(bytesNode[j][k].as<std::string>());
-    //                        }
-    //                        core::Byte tb(v, s, rw);
-    //                        b.push_back(tb);
-    //                        break;
-    //                } // end switch
-    //            }
-    //            core::Group tg(b, groupNode["type"].as<char>());
-    //            g.push_back(tg);
-    //        } // end (int j = 0; j < blockNode.size(); ++j)
-    //        core::Block tblock(g, blocklist[i].as<std::string>());
-    //        all.push_back(tblock);
-    //    }
-
     QCOMPARE(all.size(), cmp.size());
 }
 
