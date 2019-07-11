@@ -20,8 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(btnActivateConnection, SIGNAL(&QPushButton::clicked), this,
             SLOT(activateConnection()));
 
-    Connector c;
-    c.all.push_back(core::Generator::getBlock());
+    core::Block tblock = core::Generator::getBlock();
+
+    Connector c(tblock);
 
     BlockWidget *B[c.all.size()];
     for (int i = 0; i < c.all.size(); ++i) {

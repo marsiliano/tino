@@ -53,14 +53,10 @@ bool core::Group::operator==(const core::Group &other) const
 {
     if ((type != other.type) || (v.size() != other.v.size()))
         return false;
-    else
-        qDebug() << "(type != other.type) || (v.size() != other.v.size())";
 
     for (int i = 0; i < v.size(); ++i) {
         if (!(v[i] == other.v[i]))
             return false;
-        else
-            qDebug() << i << " v";
     }
     return true;
 }

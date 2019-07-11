@@ -17,7 +17,6 @@ Value::Value(core::Byte val, QWidget *parent)
         if (val[i])
             v += pow(2, i);
     }
-    std::cout << "value: " << v << std::endl;
     box->setValue(v);
 
     l->addWidget(lblValue, 0, 0, Qt::AlignVCenter);
