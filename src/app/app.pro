@@ -21,5 +21,10 @@ CONFIG(debug, debug|release) {
     QMAKE_CXXFLAGS += --debug
 }
 
-SOURCES += $$PWD/main.cpp
+SOURCES += \
+    $$PWD/main.cpp \
+    $$PWD/Connector.cpp
+
+HEADERS += \
+    $$PWD/Connector.hpp
 

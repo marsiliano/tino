@@ -4,11 +4,7 @@
 #include "Generator.hpp"
 
 #include <QMainWindow>
-#include <QModbusDataUnit>
-#include <QModbusRtuSerialSlave>
-#include <QModbusServer>
 #include <QPushButton>
-#include <QtSerialPort/QSerialPort>
 #include <yaml-cpp/yaml.h>
 
 namespace Ui
@@ -23,7 +19,6 @@ class MainWindow : public QMainWindow
   public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    QModbusDataUnit writeBlock(const int i);
 
   public slots:
     void activateConnection();
@@ -31,6 +26,4 @@ class MainWindow : public QMainWindow
   private:
     Ui::MainWindow *ui;
     QPushButton *btnActivateConnection;
-    std::vector<core::Block> all;
-    QModbusServer *server;
 };
