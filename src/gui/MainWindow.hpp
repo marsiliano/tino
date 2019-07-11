@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BlockWidget.hpp"
+#include "Connector.hpp"
 #include "Generator.hpp"
 
 #include <QMainWindow>

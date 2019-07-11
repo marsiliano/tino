@@ -6,4 +6,5 @@ SUBDIRS += \
     core \
     widget \
     gui \
+    connector \
     app

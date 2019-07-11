@@ -8,6 +8,7 @@ QT -= testlib
 QT += core gui widgets
 
 INCLUDEPATH += $$PWD/../yaml/yaml-cpp/include
+INCLUDEPATH += $$PWD/../gui
 
 CONFIG(release, debug|release) {
     QMAKE_CXXFLAGS += -O3
@@ -23,8 +24,5 @@ CONFIG(debug, debug|release) {
 
 SOURCES += \
     $$PWD/main.cpp \
-    $$PWD/Connector.cpp
 
-HEADERS += \
-    $$PWD/Connector.hpp
 

@@ -19,6 +19,16 @@ MainWindow::MainWindow(QWidget *parent) :
     layout()->addWidget(btnActivateConnection);
     connect(btnActivateConnection, SIGNAL(&QPushButton::clicked), this,
             SLOT(activateConnection()));
+
+    Connector c;
+    c.all.push_back(core::Generator::getBlock());
+
+    BlockWidget *B[c.all.size()];
+    for (int i = 0; i < c.all.size(); ++i) {
+        B[i] = new BlockWidget(c.all[i], this);
+        B[i]->setGeometry(0, i, 800, 500);
+        this->layout()->addWidget(B[i]);
+    }
 }
 
 void MainWindow::activateConnection()

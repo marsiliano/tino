@@ -1,6 +1,5 @@
 TINO_LIB_NAME = gui
 TINO_LIB_DEPENDS += \
     widget \
-    yaml
-
-QT += serialbus
+    yaml \
+    connector \
