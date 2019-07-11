@@ -38,7 +38,7 @@ void tst_Parse::initTestCase()
     core::Group g1(vb1, 'v');
 
     std::vector<core::Group> vg = { g, g1 };
-    core::Block bl(vg, "block");
+    core::Block bl(vg, 0, "block");
 
     all = { bl, bl };
 }

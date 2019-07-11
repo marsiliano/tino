@@ -52,7 +52,7 @@ std::vector<core::Block> core::Generator::parse()
             core::Group tg(b, groupNode["type"].as<char>());
             g.push_back(tg);
         } // end (int j = 0; j < blockNode.size(); ++j)
-        core::Block tblock(g, blocklist[i].as<std::string>());
+        core::Block tblock(g, 0, blocklist[i].as<std::string>());
         all.push_back(tblock);
     }
     return all;
@@ -100,6 +100,6 @@ core::Group core::Generator::getGroup2()
 core::Block core::Generator::getBlock()
 {
     std::vector<core::Group> vg = { getGroup1(), getGroup2() };
-    core::Block bl(vg, "block");
+    core::Block bl(vg, 0, "block");
     return bl;
 }

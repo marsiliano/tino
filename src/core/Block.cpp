@@ -1,9 +1,11 @@
 #include "Block.hpp"
 
-core::Block::Block(std::vector<core::Group> v, std::string name)
+core::Block::Block(std::vector<core::Group> v, int startAddress,
+                   std::string name)
 {
-    this->v    = v;
-    this->name = name;
+    this->v            = v;
+    this->name         = name;
+    this->startAddress = startAddress;
 }
 std::string core::Block::getName()
 {
@@ -37,4 +39,19 @@ core::Block &core::Block::operator=(const core::Block &other)
 
     name = other.name;
     return *this;
+}
+
+int core::Block::getStartAddress()
+{
+    return startAddress;
+}
+
+int core::Block::getNbyte()
+{
+    int n = 0;
+
+    for (int i = 0; i < v.size(); ++i)
+        n += v[i].getDim();
+
+    return n;
 }
