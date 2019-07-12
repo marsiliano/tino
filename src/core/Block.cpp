@@ -26,11 +26,12 @@ bool core::Block::operator==(const core::Block &other) const
     if ((name != other.name) || (v.size() != other.v.size()))
         return false;
 
-    for (int i = 0; i < v.size(); ++i) {
-        if (!(v[i] == other.v[i]))
-            return false;
-    }
-    return true;
+    int i = 0;
+
+    while (i < v.size() && v[i] == other.v[i])
+        ++i;
+
+    return i == v.size() ? true : false;
 }
 
 core::Block &core::Block::operator=(const core::Block &other)
@@ -50,8 +51,8 @@ int core::Block::getNbyte()
 {
     int n = 0;
 
-    for (int i = 0; i < v.size(); ++i)
-        n += v[i].getDim();
+    //    std::for_each(v.begin(), v.end(), [&](int &i) { n += v[i].getDim();
+    //    });
 
     return n;
 }

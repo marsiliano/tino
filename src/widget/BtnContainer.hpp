@@ -5,6 +5,7 @@
 #include <QtWidgets/QBoxLayout>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
+#include <algorithm>
 #include <functional>
 #include <memory>
 

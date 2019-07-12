@@ -13,7 +13,7 @@ class Mask : public QWidget
     bool valAt(const int i);
 
   private:
-    BtnContainer *c;
+    std::unique_ptr<BtnContainer> c;
 
     friend class tst_Mask;
 };

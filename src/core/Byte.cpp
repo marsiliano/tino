@@ -40,20 +40,16 @@ core::Byte &core::Byte::operator=(const core::Byte &other)
 
 bool core::Byte::operator==(const core::Byte &other) const
 {
-    int i;
-
     if ((rw != other.rw) || (description.size() != other.description.size()))
         return false;
 
-    for (i = 0; i < 8; ++i) {
-        if (v[i] != other.v[i])
-            return false;
-    }
+    bool r;
 
-    for (i = 0; i < description.size(); ++i) {
-        if (description[i] != other.description[i])
-            return false;
-    }
+    for (int i = 0; i < 8; ++i)
+        r = v[i] == other.v[i] ? true : false;
+    return r;
 
-    return true;
+    for (int i = 0; i < description.size(); ++i)
+        r = description[i] != other.description[i] ? true : false;
+    return r;
 }

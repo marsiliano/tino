@@ -24,9 +24,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     Connector c(tblock);
 
-    BlockWidget *B[c.all.size()];
+    std::vector<BlockWidget *> B;
     for (int i = 0; i < c.all.size(); ++i) {
-        B[i] = new BlockWidget(c.all[i], this);
+        B.push_back(new BlockWidget(c.all[i], this));
         B[i]->setGeometry(0, i, 800, 500);
         this->layout()->addWidget(B[i]);
     }

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QDebug>
+#include <algorithm>
+#include <functional>
 #include <iostream>
 #include <vector>
 
