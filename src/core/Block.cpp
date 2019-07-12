@@ -51,8 +51,8 @@ int core::Block::getNbyte()
 {
     int n = 0;
 
-    //    std::for_each(v.begin(), v.end(), [&](int &i) { n += v[i].getDim();
-    //    });
+    std::for_each(v.begin(), v.end(),
+                  [&n](core::Group &g) { n += g.getDim(); });
 
     return n;
 }
