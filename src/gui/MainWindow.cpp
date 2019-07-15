@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     btnActivateConnection = new QPushButton();
     btnActivateConnection->setText("connect");
+    btnActivateConnection->setGeometry(0, 0, 100, 50);
     layout()->addWidget(btnActivateConnection);
     connect(btnActivateConnection, SIGNAL(&QPushButton::clicked), this,
             SLOT(activateConnection()));

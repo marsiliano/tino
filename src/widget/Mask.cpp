@@ -6,19 +6,21 @@ Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
 
     c      = std::unique_ptr<BtnContainer>(new BtnContainer);
     c->val = val;
+    int i  = 0;
 
-    //    std::for_each(c->b.begin(), c->b.end(), [l, this](int &i) {
-    //        c->b[i].first->setGeometry(i, 0, 100, 50);
-    //        c->setClr(i);
+    std::for_each(
+        c->b.begin(), c->b.end(),
+        [&](std::pair<std::unique_ptr<QPushButton>, std::function<void()>> &n) {
+            n.first->setGeometry(i, 0, 100, 50);
+            c->setClr(i);
 
-    //        c->b[i].first->setText(
-    //            QString::fromStdString(c->val.getDescription(i)));
+            n.first->setText(QString::fromStdString(c->val.getDescription(i)));
 
-    //        connect(c->b[i].first.get(), &QPushButton::clicked, this,
-    //                c->b[i].second);
+            connect(n.first.get(), &QPushButton::clicked, this, n.second);
 
-    //        l->addWidget(c->b[i].first.get(), 1, i, Qt::AlignVCenter);
-    //    });
+            l->addWidget(n.first.get(), 1, i, Qt::AlignVCenter);
+            ++i;
+        });
 }
 
 bool Mask::valAt(const int i)
