@@ -7,6 +7,13 @@ Connector::Connector(core::Block &block)
     startConnection();
 
     writeBlock(all[0]);
+
+    QModbusDataUnit q;
+    modbus_server->data(&q);
+    auto v = q.values();
+    qDebug() << "number of values: " << v.size();
+
+    std::for_each(v.begin(), v.end(), [](quint16 i) { qDebug() << i; });
 }
 
 Connector::~Connector()
@@ -31,7 +38,10 @@ void Connector::startConnection()
         reg.insert(QModbusDataUnit::HoldingRegisters,
                    { QModbusDataUnit::HoldingRegisters, 0, n.getNbyte() * 8 });
     });
-    modbus_server->setMap(reg);
+    if (modbus_server->setMap(reg))
+        qDebug() << "set map";
+    else
+        qDebug() << "unable to set map";
 
     modbus_server->setConnectionParameter(
         QModbusDevice::SerialPortNameParameter, "/dev/pts/1");
@@ -47,6 +57,8 @@ void Connector::startConnection()
 
     if (!modbus_server->connectDevice())
         qDebug() << "cannot connect ";
+    else
+        qDebug() << "connect";
 
     qDebug() << "error: " << modbus_server->errorString();
     qDebug() << "state: " << modbus_server->state();
@@ -72,6 +84,7 @@ void Connector::writeBlock(core::Block &all)
                 if (all[i][j][k])
                     t += 2 ^ k;
             }
+            qDebug() << "writing " << t;
             modbus_server->setData(QModbusDataUnit::HoldingRegisters,
                                    all.getStartAddress() + start++, t);
         }
