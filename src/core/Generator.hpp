@@ -11,7 +11,8 @@ class Generator
     static core::Byte getByte2();
     static core::Group getGroup1();
     static core::Group getGroup2();
-    static core::Block getBlock();
+    static core::Block getBlock1();
+    static core::Block getBlock2();
 };
 
 } // namespace core

@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(btnActivateConnection, SIGNAL(&QPushButton::clicked), this,
             SLOT(activateConnection()));
 
-    core::Block tblock = core::Generator::getBlock();
+    core::Block tblock = core::Generator::getBlock1();
 
     Connector c(tblock);
 

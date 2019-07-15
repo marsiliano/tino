@@ -4,7 +4,7 @@ CONFIG   += ordered
 SUBDIRS += \
     yaml \
     core \
+    connector \
     widget \
     gui \
-    connector \
     app
