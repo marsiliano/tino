@@ -8,7 +8,8 @@ class Mask : public QWidget
 
   public:
     Mask(core::Byte val, QWidget *parent = nullptr);
-    ~Mask() {}
+    ~Mask() = default;
+    Mask(const Mask&) = default;
     QString getStyleBtn(const int i);
     bool valAt(const int i);
 

@@ -1,6 +1,6 @@
 #include "Value.hpp"
 
-Value::Value(core::Byte val, QWidget *parent)
+Value::Value(core::Byte val, QWidget *parent) : QWidget(parent)
 {
     QGridLayout *l = new QGridLayout(this);
 
@@ -12,12 +12,10 @@ Value::Value(core::Byte val, QWidget *parent)
     box->setMaximum(255);
     box->setGeometry(0, 0, 150, 100);
 
-    int v = 0;
-    for (int i = 0; i < 8; ++i) {
-        if (val[i])
-            v += pow(2, i);
-    }
-    box->setValue(v);
+    double v = 0;
+    for (unsigned long i = 0; i < 8; ++i)
+        v += (val[i] ? pow(2, i) : 0);
+    box->setValue(static_cast<int> (v));
 
     l->addWidget(lblValue, 0, 0, Qt::AlignVCenter);
     l->addWidget(box, 0, 1, Qt::AlignVCenter);

@@ -8,15 +8,15 @@ core::Byte::Byte(std::vector<bool> v, std::vector<std::string> description,
     this->rw          = rw;
 }
 
-std::string core::Byte::getDescription(const int i)
+std::string core::Byte::getDescription(long unsigned i)
 {
     return description[i];
 }
-bool core::Byte::operator[](const int i)
+bool core::Byte::operator[](long unsigned i)
 {
     return v[i];
 }
-void core::Byte::set(const int i)
+void core::Byte::set(long unsigned i)
 {
     v[i] = !v[i];
 }
@@ -24,10 +24,6 @@ void core::Byte::set(const int i)
 bool core::Byte::getRw()
 {
     return rw;
-}
-int core::Byte::getDim()
-{
-    return v.size();
 }
 core::Byte &core::Byte::operator=(const core::Byte &other)
 {
@@ -43,13 +39,13 @@ bool core::Byte::operator==(const core::Byte &other) const
     if ((rw != other.rw) || (description.size() != other.description.size()))
         return false;
 
-    bool r;
+    bool r = false;
+    unsigned long int i;
 
-    for (int i = 0; i < 8; ++i)
+    for (i = 0; i < 8; ++i)
         r = v[i] == other.v[i] ? true : false;
-    return r;
 
-    for (int i = 0; i < description.size(); ++i)
+    for (i = 0; i < description.size(); ++i)
         r = description[i] != other.description[i] ? true : false;
     return r;
 }

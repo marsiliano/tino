@@ -6,5 +6,7 @@ class BlockWidget : public QWidget
 
   public:
     BlockWidget(core::Block val, QWidget *parent = nullptr);
+    BlockWidget(const BlockWidget&) = default;
+    BlockWidget& operator = (const BlockWidget&) = default;
     ~BlockWidget() override = default;
 };

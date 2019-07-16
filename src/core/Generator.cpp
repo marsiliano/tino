@@ -4,7 +4,7 @@ std::vector<core::Block> core::Generator::parse()
 {
     // open the conf.json
     std::ifstream conf("/home/fsl/tino/conf.json", std::ios::in);
-    std::cout << conf.is_open() ? "conf.json opened" : "conf.json NOT opened";
+    std::cout << (conf.is_open() ? "conf.json opened" : "conf.json NOT opened");
 
     // put conf.json in std::string s
     std::string s, t;
@@ -19,29 +19,29 @@ std::vector<core::Block> core::Generator::parse()
 
     std::vector<core::Block> all;
 
-    for (int i = 0; i < blocks.Size(); ++i) {
+    for (rapidjson::SizeType i = 0; i < blocks.Size(); ++i) {
         const auto &block = blocks[i];
 
         std::vector<core::Group> g;
 
-        for (int j = 0; j < block["groups"].Size(); ++j) {
+        for (rapidjson::SizeType j = 0; j < block["groups"].Size(); ++j) {
             const auto &group = block["groups"][j];
 
             std::vector<core::Byte> b;
 
-            for (int k = 0; k < group["bytes"].Size(); ++k) {
+            for (rapidjson::SizeType k = 0; k < group["bytes"].Size(); ++k) {
                 const auto &byte = group["bytes"][k];
 
                 bool rw;
                 std::vector<bool> v;
                 std::vector<std::string> s;
 
-                for (int l = 0; l < 8; ++l) {
-                    // load bits
-                }
-                for (int l = 0; l < byte["desc"].Size(); ++l) {
-                    // load desc
-                }
+                for (int l = 0; l < 8; ++l)
+                    v.push_back(byte["values"][j].GetBool());
+
+                for (int l = 0; l < static_cast<int> (byte["desc"].Size()); ++l)
+                     s.push_back(byte["desc"][j].GetString());
+
                 core::Byte tb(v, s, rw);
                 b.push_back(tb);
             }

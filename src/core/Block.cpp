@@ -11,12 +11,12 @@ std::string core::Block::getName()
 {
     return name;
 }
-core::Group &core::Block::operator[](const int i)
+core::Group &core::Block::operator[](long unsigned i)
 {
     return v[i];
 }
 
-int core::Block::getDim()
+long unsigned core::Block::getDim()
 {
     return v.size();
 }
@@ -26,7 +26,7 @@ bool core::Block::operator==(const core::Block &other) const
     if ((name != other.name) || (v.size() != other.v.size()))
         return false;
 
-    int i = 0;
+    long unsigned i = 0;
 
     while (i < v.size() && v[i] == other.v[i])
         ++i;

@@ -77,10 +77,10 @@ void Connector::endConnection()
 void Connector::writeBlock(core::Block &all)
 {
     int start = 0;
-    for (int i = 0; i < all.getDim(); ++i) {
-        for (int j = 0; j < all[i].getDim(); ++j) {
+    for (unsigned long i = 0; i < all.getDim(); ++i) {
+        for (unsigned long j = 0; j < all[i].getDim(); ++j) {
             int t = 0;
-            for (int k = 0; k < 8; ++k)
+            for (unsigned long k = 0; k < 8; ++k)
                 t += all[i][j][k] ? 2 ^ k : 0;
             qDebug() << "writing " << t;
             modbus_server->setData(QModbusDataUnit::HoldingRegisters,

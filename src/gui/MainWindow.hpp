@@ -6,7 +6,6 @@
 
 #include <QMainWindow>
 #include <QPushButton>
-#include <yaml-cpp/yaml.h>
 
 namespace Ui
 {

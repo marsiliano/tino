@@ -1,12 +1,12 @@
 #include "GroupWidget.hpp"
 
-GroupWidget::GroupWidget(core::Group val, QWidget *parent)
+GroupWidget::GroupWidget(core::Group val, QWidget *parent) : QWidget(parent)
 {
     QGridLayout *l = new QGridLayout(this);
     QLabel *lGroup = new QLabel(this);
 
-    Mask *m[val.getDim()];
-    Value *v[val.getDim()];
+    std::vector<Mask*> m;
+    std::vector<Value*> v;
     // Joined *j[]
 
     if (val.getType() == 'm') {
@@ -14,16 +14,16 @@ GroupWidget::GroupWidget(core::Group val, QWidget *parent)
         l->addWidget(lGroup, 0, 0, Qt::AlignVCenter);
 
         for (int i = 0; i < val.getDim(); ++i) {
-            m[i] = new Mask(val[i], this);
-            l->addWidget(m[i], 1 + i, 0, Qt::AlignVCenter);
+            m.emplace_back(new Mask(val[i], this));
+            l->addWidget(m[static_cast<unsigned long> (i)], 1 + i, 0, Qt::AlignVCenter);
         }
     } else if (val.getType() == 'v') {
         lGroup->setText(QString::fromStdString("value group"));
         l->addWidget(lGroup, 0, 0, Qt::AlignVCenter);
 
         for (int i = 0; i < val.getDim(); ++i) {
-            v[i] = new Value(val[i], this);
-            l->addWidget(v[i], 1 + i, 0, Qt::AlignVCenter);
+            v.emplace_back(new Value(val[i], this));
+            l->addWidget(v[static_cast<unsigned long> (i)], 1 + i, 0, Qt::AlignVCenter);
         }
     } else if (val.getType() == 'j') {
         lGroup->setText(QString::fromStdString("joined group"));

@@ -2,7 +2,7 @@
 
 #include <QtWidgets/QLabel>
 
-BlockWidget::BlockWidget(core::Block val, QWidget *parent)
+BlockWidget::BlockWidget(core::Block val, QWidget *parent) : QWidget(parent)
 {
     QVBoxLayout *l = new QVBoxLayout(this);
 
@@ -10,10 +10,10 @@ BlockWidget::BlockWidget(core::Block val, QWidget *parent)
     lBlock->setText(QString::fromStdString(val.getName()));
     l->addWidget(lBlock, 0, Qt::AlignHCenter);
 
-    GroupWidget *g[val.getDim()];
+    std::vector<GroupWidget *> g;
 
     for (int i = 0; i < val.getDim(); ++i) {
-        g[i] = new GroupWidget(val[i], this);
-        l->addWidget(g[i], 0, Qt::AlignHCenter);
+        g.emplace_back(new GroupWidget(val[i], this));
+        l->addWidget(g[static_cast<unsigned long> (i)], 0, Qt::AlignHCenter);
     }
 }

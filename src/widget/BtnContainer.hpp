@@ -13,6 +13,8 @@ class BtnContainer
 {
   public:
     BtnContainer();
+    BtnContainer(const BtnContainer&) = default;
+    ~BtnContainer() = default;
     std::vector<std::pair<std::unique_ptr<QPushButton>, std::function<void()>>>
         b;
     core::Byte val;

@@ -19,13 +19,14 @@ class Byte
   public:
     Byte() = default;
     Byte(std::vector<bool> v, std::vector<std::string> description, bool rw);
-    ~Byte() {}
-    std::string getDescription(const int i);
-    bool operator[](int const i);
+    ~Byte() = default;
+    Byte(const Byte&) = default;
+
+    std::string getDescription(long unsigned i);
+    bool operator[](long unsigned i);
     bool getRw();
     Byte &operator=(const Byte &other);
-    void set(const int i);
-    int getDim();
+    void set(long unsigned i);
     bool operator==(const Byte &other) const;
     bool isMask();
 };

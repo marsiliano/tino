@@ -13,10 +13,11 @@ class Block
 
   public:
     Block(std::vector<core::Group> v, int startAddress, std::string name);
-    ~Block() {}
+    ~Block() = default;
+    Block(const Block&) = default;
     int getStartAddress();
-    core::Group &operator[](const int i);
-    int getDim();
+    core::Group &operator[](long unsigned i);
+    long unsigned getDim();
     std::string getName();
     int getNbyte();
     bool operator==(const Block &other) const;
