@@ -1,1 +1,0 @@
-TINO_LIB_NAME = yaml

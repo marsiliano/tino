@@ -45,13 +45,8 @@ void tst_Parse::initTestCase()
 
 void tst_Parse::tst_load()
 {
-    YAML::Node base = YAML::LoadFile("nfs.example.lan.yml");
-
-    //    if (base.IsNull())
-    //        qDebug() << "nnull";
-    //    else
-    //        qDebug() << "ok";
-    QCOMPARE(base.IsNull(), false);
+    std::ifstream conf("/home/fsl/tino/conf.json", std::ios::in);
+    QVERIFY(conf.is_open());
 }
 
 void tst_Parse::compareSize()

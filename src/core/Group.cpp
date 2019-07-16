@@ -6,17 +6,19 @@
  * j: joined
  */
 
-core::Group::Group(std::vector<core::Byte> v, char type)
+core::Group::Group(std::vector<Byte> v, char type /*, std::string name*/)
 {
     this->v    = v;
     this->type = type;
+    this->name = name;
 }
 
-core::Group::Group(std::vector<bool> v, std::vector<std::string> description,
-                   bool rw, char type)
+core::Group::Group(std::vector<bool> v, /*std::tring name,*/
+                   std::vector<std::string> description, bool rw, char type)
 {
     this->type = type = type;
     this->add(v, description, rw);
+    //    this->name = name;
 }
 
 void core::Group::add(std::vector<bool> v, std::vector<std::string> description,

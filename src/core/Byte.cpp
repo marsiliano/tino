@@ -53,3 +53,8 @@ bool core::Byte::operator==(const core::Byte &other) const
         r = description[i] != other.description[i] ? true : false;
     return r;
 }
+
+bool core::Byte::isMask()
+{
+    return description.size() == 1 ? false : true;
+}

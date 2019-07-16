@@ -1,6 +1,11 @@
 #pragma once
 #include "Block.hpp"
-#include "yaml-cpp/yaml.h"
+#include "rapidjson/document.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/writer.h"
+
+#include <fstream>
+
 namespace core
 {
 class Generator

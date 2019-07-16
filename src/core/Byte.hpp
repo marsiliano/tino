@@ -27,6 +27,7 @@ class Byte
     void set(const int i);
     int getDim();
     bool operator==(const Byte &other) const;
+    bool isMask();
 };
 
 } // namespace core

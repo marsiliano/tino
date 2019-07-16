@@ -1,0 +1,100 @@
+{"blocks": [
+    {
+        "name": "blockname1",
+        "groups": [
+        {
+            "type": "m",
+            "bytes": [
+                {
+                    "name": "bytename1",
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
+                },
+                {
+                    "name": "bytename2",
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
+                },
+                {
+                    "name": "bytename3",
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
+                }
+            ]
+        },
+        {
+            "type": "m",
+            "bytes": [
+                {
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bytename1"]
+                },
+                {
+                    "name": "bytename2",
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bytename1"]
+                },
+                {
+                    "name": "bytename3",
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bytename1"]
+                }
+            ]
+        }
+    },
+    {
+        "name": "blockname2",
+        "groups": [
+        {
+            "type": "m",
+            "bytes": [
+                {
+                    "name": "bytename1",
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
+                },
+                {
+                    "name": "bytename2",
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
+                },
+                {
+                    "name": "bytename3",
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
+                }
+            ]
+        },
+        {
+            "type": "m",
+            "bytes": [
+                {
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bytename1"]
+                },
+                {
+                    "name": "bytename2",
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bytename1"]
+                },
+                {
+                    "name": "bytename3",
+                    "rw": true,
+                    "values": [true, false, true, false, true, false, true, false],
+                    "desc": ["bytename1"]
+                }
+            ]
+        }
+    }
+}

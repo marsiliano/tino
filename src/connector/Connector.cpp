@@ -80,10 +80,8 @@ void Connector::writeBlock(core::Block &all)
     for (int i = 0; i < all.getDim(); ++i) {
         for (int j = 0; j < all[i].getDim(); ++j) {
             int t = 0;
-            for (int k = 0; k < 8; ++k) {
-                if (all[i][j][k])
-                    t += 2 ^ k;
-            }
+            for (int k = 0; k < 8; ++k)
+                t += all[i][j][k] ? 2 ^ k : 0;
             qDebug() << "writing " << t;
             modbus_server->setData(QModbusDataUnit::HoldingRegisters,
                                    all.getStartAddress() + start++, t);

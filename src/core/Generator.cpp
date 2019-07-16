@@ -2,57 +2,53 @@
 
 std::vector<core::Block> core::Generator::parse()
 {
+    // open the conf.json
+    std::ifstream conf("/home/fsl/tino/conf.json", std::ios::in);
+    std::cout << conf.is_open() ? "conf.json opened" : "conf.json NOT opened";
+
+    // put conf.json in std::string s
+    std::string s, t;
+    while (getline(conf, t))
+        s += t;
+
+    // parse std::string s in json
+    rapidjson::Document d;
+    d.Parse(s.c_str());
+
+    const rapidjson::Value &blocks = d["blocks"]; // get the main object
+
     std::vector<core::Block> all;
 
-    YAML::Node base      = YAML::Load("config.yaml");
-    YAML::Node blocklist = base["blocks"]; // get block names
-
-    for (int i = 0; i < blocklist.size(); ++i) {
-        qDebug() << QString::fromStdString("block: " +
-                                           blocklist[i].as<std::string>());
-        YAML::Node blockNode =
-            base[blocklist[i].as<std::string>()]; // get the block ==
-        // names
+    for (int i = 0; i < blocks.Size(); ++i) {
+        const auto &block = blocks[i];
 
         std::vector<core::Group> g;
 
-        for (int j = 0; j < blockNode.size(); ++j) {
-            YAML::Node groupNode =
-                blockNode[blockNode[i].as<std::string>()]; // get the
-                                                           // group
-            YAML::Node bytesNode = groupNode["bytes"];
+        for (int j = 0; j < block["groups"].Size(); ++j) {
+            const auto &group = block["groups"][j];
 
             std::vector<core::Byte> b;
 
-            bool rw;
-            std::vector<bool> v;
-            std::vector<std::string> s;
+            for (int k = 0; k < group["bytes"].Size(); ++k) {
+                const auto &byte = group["bytes"][k];
 
-            for (int k = 0; k < bytesNode.size(); ++k) {
-                switch (k % 3) {
-                    case 0:
-                        rw = bytesNode[j];
-                        break;
-                    case 1:
-                        v.clear();
-                        for (int l = 0; l < bytesNode[j].size(); ++l) {
-                            v.push_back(bytesNode[j][k].as<bool>());
-                        }
-                        break;
-                    case 2:
-                        s.clear();
-                        for (int l = 0; l < bytesNode[j].size(); ++l) {
-                            s.push_back(bytesNode[j][k].as<std::string>());
-                        }
-                        core::Byte tb(v, s, rw);
-                        b.push_back(tb);
-                        break;
-                } // end switch
+                bool rw;
+                std::vector<bool> v;
+                std::vector<std::string> s;
+
+                for (int l = 0; l < 8; ++l) {
+                    // load bits
+                }
+                for (int l = 0; l < byte["desc"].Size(); ++l) {
+                    // load desc
+                }
+                core::Byte tb(v, s, rw);
+                b.push_back(tb);
             }
-            core::Group tg(b, groupNode["type"].as<char>());
+            core::Group tg(b, group["type"].GetBool());
             g.push_back(tg);
-        } // end (int j = 0; j < blockNode.size(); ++j)
-        core::Block tblock(g, 0, blocklist[i].as<std::string>());
+        }
+        core::Block tblock(g, 0, block["name"].GetString());
         all.push_back(tblock);
     }
     return all;
