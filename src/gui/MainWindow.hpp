@@ -21,9 +21,6 @@ class MainWindow : public QMainWindow
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-  public slots:
-    void activateConnection();
-
   private:
     Ui::MainWindow *ui;
     QGridLayout *mainlayout;

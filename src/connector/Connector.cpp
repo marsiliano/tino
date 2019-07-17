@@ -1,20 +1,18 @@
 #include "Connector.hpp"
 
-Connector::Connector(core::Block &block)
+Connector::Connector(core::Block &block, QObject *parent) : QObject(parent)
 {
     all.push_back(block);
-    modbus_server = nullptr;
-    startConnection();
 
     //    writeBlock(all[0]);
-    modbus_server->setData(QModbusDataUnit::Coils, 0, true);
+    //    modbus_server->setData(QModbusDataUnit::Coils, 0, true);
 
-    QModbusDataUnit q;
-    modbus_server->data(&q);
-    auto v = q.values();
-    qDebug() << "number of values: " << v.size();
+    //    QModbusDataUnit q;
+    //    modbus_server->data(&q);
+    //    auto v = q.values();
+    //    qDebug() << "number of values: " << v.size();
 
-    std::for_each(v.begin(), v.end(), [](quint16 i) { qDebug() << i; });
+    //    std::for_each(v.begin(), v.end(), [](quint16 i) { qDebug() << i; });
 }
 
 Connector::~Connector()
@@ -22,18 +20,17 @@ Connector::~Connector()
     endConnection();
 }
 
-void Connector::startConnection()
+void Connector::startConnection(QString portname)
 {
-    //    if (!modbus_server) {
-    qDebug() << "is connecting...";
+    //    stocazz *server = new stocazz(all);
+    //    modbus_server = dynamic_cast<QModbusRtuSerialSlave *>(server);
 
-    stocazz *server = new stocazz(all);
-    modbus_server   = dynamic_cast<QModbusRtuSerialSlave *>(server);
-    if (modbus_server == nullptr) {
+    modbus_server = new QModbusRtuSerialSlave(this);
+
+    if (!modbus_server) {
         qDebug() << "modbus_server null";
         return;
     }
-
     //    QModbusDataUnitMap reg;
     //    std::for_each(all.begin(), all.end(), [&, this](core::Block &n) {
     //        reg.insert(QModbusDataUnit::HoldingRegisters,
@@ -54,7 +51,7 @@ void Connector::startConnection()
     //        qDebug() << "unable to set map";
 
     modbus_server->setConnectionParameter(
-        QModbusDevice::SerialPortNameParameter, "/dev/pts/1");
+        QModbusDevice::SerialPortNameParameter, portname);
     modbus_server->setConnectionParameter(QModbusDevice::SerialParityParameter,
                                           QSerialPort::EvenParity);
     modbus_server->setConnectionParameter(
@@ -80,6 +77,7 @@ void Connector::endConnection()
 {
     if (modbus_server)
         modbus_server->disconnectDevice();
+
     delete modbus_server;
     modbus_server = nullptr;
 }
@@ -98,10 +96,10 @@ void Connector::writeBlock(core::Block &all)
     }
 }
 
-stocazz::stocazz(std::vector<core::Block> &all) : QModbusRtuSerialSlave()
-{
-    this->all = all;
-}
+// stocazz::stocazz(std::vector<core::Block> &all) : QModbusRtuSerialSlave()
+//{
+//    this->all = all;
+//}
 
 // QModbusResponse stocazz::processRequest(const QModbusPdu &request)
 //{

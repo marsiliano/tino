@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
     core::Block tblock = core::Generator::getBlock1();
-    Connector c(tblock);
+    Connector c(tblock, this);
 
     ui->setupUi(this);
 
@@ -31,8 +31,15 @@ MainWindow::MainWindow(QWidget *parent) :
     btnConnect->setText("connect");
     top->addWidget(btnConnect, 0, Qt::AlignVCenter);
 
-    connect(btnConnect, SIGNAL(&QPushButton::clicked), this,
-            SLOT(activateConnection()));
+    connect(btnConnect, &QPushButton::clicked, this, [&]() {
+        if (btnConnect->text() == "connect") {
+            btnConnect->setText("disconect");
+            c.startConnection(linePort->text());
+        } else {
+            btnConnect->setText("connect");
+            c.endConnection();
+        }
+    });
 
     QRect r(50, 50, 400, 100);
     top->setGeometry(r);
@@ -44,15 +51,6 @@ MainWindow::MainWindow(QWidget *parent) :
         B[i]->setGeometry(50 + i * 500, 150, 800, 400);
         mainlayout->addWidget(B[i], i + 1, 0, Qt::AlignLeft);
     }
-    this->layout()->addItem(mainlayout);
-}
-
-void MainWindow::activateConnection()
-{
-    if (btnConnect->text() == "connect")
-        btnConnect->setText("disconect");
-    else
-        btnConnect->setText("connect");
 }
 
 MainWindow::~MainWindow()
