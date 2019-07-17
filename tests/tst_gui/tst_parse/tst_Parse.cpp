@@ -13,15 +13,14 @@ class tst_Parse : public QObject
   private slots:
     void initTestCase();
     void tst_load();
-    void parse();
     void compareSize();
+    void parse();
 };
 
 void tst_Parse::initTestCase()
 {
-    qDebug() << "init";
     all = { core::Generator::getBlock1(), core::Generator::getBlock2() };
-    qDebug() << "init1";
+    cmp = core::Generator::parse();
 }
 
 void tst_Parse::tst_load()
@@ -32,7 +31,6 @@ void tst_Parse::tst_load()
 
 void tst_Parse::compareSize()
 {
-    cmp = core::Generator::parse();
     QCOMPARE(all.size(), cmp.size());
 }
 
