@@ -3,7 +3,7 @@
 std::vector<core::Block> core::Generator::parse()
 {
     // open the conf.json
-    std::ifstream conf("/home/fsl/tino/conf.json", std::ios::in);
+    std::ifstream conf("/home/fsl/tino/src/conf.json", std::ios::in);
     std::cout << (conf.is_open() ? "conf.json opened" : "conf.json NOT opened");
 
     // put conf.json in std::string s
@@ -19,29 +19,33 @@ std::vector<core::Block> core::Generator::parse()
 
     std::vector<core::Block> all;
 
-
-    std::for_each(blocks.Begin(), blocks.End(), [&](const auto& block){
+    std::for_each(blocks.Begin(), blocks.End(), [&](const auto &block) {
         std::vector<core::Group> g;
 
-        std::for_each(block["groups"].Begin(), block["groups"].End(), [&](const auto& group){
-            std::vector<core::Byte> b;
+        std::for_each(
+            block["groups"].Begin(), block["groups"].End(),
+            [&](const auto &group) {
+                std::vector<core::Byte> b;
 
-            std::for_each(group["bytes"].Begin(), group["bytes"].End(), [&](const auto& byte){
-                std::vector<bool> v;
-                std::vector<std::string> s;
+                std::for_each(
+                    group["bytes"].Begin(), group["bytes"].End(),
+                    [&](const auto &byte) {
+                        std::vector<bool> v;
+                        std::vector<std::string> s;
 
-                for (int l = 0; l < 8; ++l)
-                    v.push_back(byte["values"][l].GetBool());
+                        for (int l = 0; l < 8; ++l)
+                            v.push_back(byte["values"][l].GetBool());
 
-                for (int l = 0; l < static_cast<int> (byte["desc"].Size()); ++l)
-                     s.push_back(byte["desc"][l].GetString());
+                        for (int l = 0;
+                             l < static_cast<int>(byte["desc"].Size()); ++l)
+                            s.push_back(byte["desc"][l].GetString());
 
-                core::Byte tb(v, s, byte["rw"].GetBool());
-                b.push_back(tb);
+                        core::Byte tb(v, s, byte["rw"].GetBool());
+                        b.push_back(tb);
+                    });
+                core::Group tg(b, group["type"].GetBool());
+                g.push_back(tg);
             });
-            core::Group tg(b, group["type"].GetBool());
-            g.push_back(tg);
-        });
         core::Block tblock(g, 0, block["name"].GetString());
         all.push_back(tblock);
     });

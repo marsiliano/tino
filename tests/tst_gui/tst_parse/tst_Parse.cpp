@@ -19,39 +19,20 @@ class tst_Parse : public QObject
 
 void tst_Parse::initTestCase()
 {
-    std::vector<bool> v = {
-        true, false, true, false, true, false, true, false
-    };
-    std::vector<std::string> s = {
-        "bitname1", "bitname2", "bitname3", "bitname4",
-        "bitname5", "bitname6", "bitname7", "bitname8",
-    };
-    std::vector<std::string> s1 = { "bytename" };
-
-    core::Byte b(v, s, true);
-    std::vector<core::Byte> vb = { b, b, b };
-
-    core::Byte b1(v, s1, false);
-    std::vector<core::Byte> vb1 = { b1, b1, b1 };
-
-    core::Group g(vb, 'm');
-    core::Group g1(vb1, 'v');
-
-    std::vector<core::Group> vg = { g, g1 };
-    core::Block bl(vg, 0, "block");
-
-    all = { bl, bl };
-    cmp = core::Generator::parse();
+    qDebug() << "init";
+    all = { core::Generator::getBlock1(), core::Generator::getBlock2() };
+    qDebug() << "init1";
 }
 
 void tst_Parse::tst_load()
 {
-    std::ifstream conf("/home/fsl/tino/conf.json", std::ios::in);
+    std::ifstream conf("/home/fsl/tino/src/conf.json", std::ios::in);
     QVERIFY(conf.is_open());
 }
 
 void tst_Parse::compareSize()
 {
+    cmp = core::Generator::parse();
     QCOMPARE(all.size(), cmp.size());
 }
 
