@@ -29,4 +29,5 @@ class MainWindow : public QMainWindow
     QLabel *lblPort;
     QLineEdit *linePort;
     QPushButton *btnConnect;
+    Connector *c;
 };

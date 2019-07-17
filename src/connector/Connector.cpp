@@ -1,18 +1,9 @@
 #include "Connector.hpp"
 
-Connector::Connector(core::Block &block, QObject *parent) : QObject(parent)
+Connector::Connector(core::Block &block, QObject *parent) :
+    QObject(parent), modbus_server{ nullptr }
 {
     all.push_back(block);
-
-    //    writeBlock(all[0]);
-    //    modbus_server->setData(QModbusDataUnit::Coils, 0, true);
-
-    //    QModbusDataUnit q;
-    //    modbus_server->data(&q);
-    //    auto v = q.values();
-    //    qDebug() << "number of values: " << v.size();
-
-    //    std::for_each(v.begin(), v.end(), [](quint16 i) { qDebug() << i; });
 }
 
 Connector::~Connector()
@@ -22,16 +13,14 @@ Connector::~Connector()
 
 void Connector::startConnection(QString portname)
 {
-    //    stocazz *server = new stocazz(all);
-    //    modbus_server = dynamic_cast<QModbusRtuSerialSlave *>(server);
-
     modbus_server = new QModbusRtuSerialSlave(this);
 
     if (!modbus_server) {
         qDebug() << "modbus_server null";
         return;
     }
-    //    QModbusDataUnitMap reg;
+    QModbusDataUnitMap reg;
+    reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 10 });
     //    std::for_each(all.begin(), all.end(), [&, this](core::Block &n) {
     //        reg.insert(QModbusDataUnit::HoldingRegisters,
     //                   { QModbusDataUnit::HoldingRegisters, 0, n.getNbyte() *
@@ -70,7 +59,15 @@ void Connector::startConnection(QString portname)
     qDebug() << "error: " << modbus_server->errorString();
     qDebug() << "state: " << modbus_server->state();
 
-    //}
+    //    writeBlock(all[0]);
+    modbus_server->setData(QModbusDataUnit::Coils, 0, true);
+
+    QModbusDataUnit q;
+    modbus_server->data(&q);
+    auto v = q.values();
+    qDebug() << "number of values: " << v.size();
+
+    std::for_each(v.begin(), v.end(), [](quint16 i) { qDebug() << i; });
 }
 
 void Connector::endConnection()

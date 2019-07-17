@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
     core::Block tblock = core::Generator::getBlock1();
-    Connector c(tblock, this);
+    c                  = new Connector(tblock, this);
 
     ui->setupUi(this);
 
@@ -34,10 +34,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(btnConnect, &QPushButton::clicked, this, [&]() {
         if (btnConnect->text() == "connect") {
             btnConnect->setText("disconect");
-            c.startConnection(linePort->text());
+            c->startConnection(linePort->text());
         } else {
             btnConnect->setText("connect");
-            c.endConnection();
+            c->endConnection();
         }
     });
 
@@ -46,8 +46,8 @@ MainWindow::MainWindow(QWidget *parent) :
     mainlayout->addItem(top, 0, 0, Qt::AlignTop);
 
     std::vector<BlockWidget *> B;
-    for (std::vector<core::Block>::size_type i = 0; i < c.all.size(); ++i) {
-        B.push_back(new BlockWidget(c.all[i], this));
+    for (std::vector<core::Block>::size_type i = 0; i < c->all.size(); ++i) {
+        B.push_back(new BlockWidget(c->all[i], this));
         B[i]->setGeometry(50 + i * 500, 150, 800, 400);
         mainlayout->addWidget(B[i], i + 1, 0, Qt::AlignLeft);
     }

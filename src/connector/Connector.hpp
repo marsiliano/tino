@@ -19,7 +19,7 @@
 class Connector : public QObject
 {
   public:
-    QModbusServer *modbus_server;
+    QModbusServer *modbus_server{ nullptr };
     Connector(core::Block &block, QObject *parent);
     ~Connector();
     std::vector<core::Block> all;
