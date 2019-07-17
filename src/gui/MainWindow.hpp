@@ -4,6 +4,7 @@
 #include "Connector.hpp"
 #include "Generator.hpp"
 
+#include <QLineEdit>
 #include <QMainWindow>
 #include <QPushButton>
 
@@ -25,5 +26,9 @@ class MainWindow : public QMainWindow
 
   private:
     Ui::MainWindow *ui;
-    QPushButton *btnActivateConnection;
+
+    QGridLayout *top;
+    QLabel *lblPort;
+    QLineEdit *linePort;
+    QPushButton *btnConnect;
 };

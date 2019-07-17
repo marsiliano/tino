@@ -14,13 +14,23 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->menuBar->addMenu(file);
 
-    btnActivateConnection = new QPushButton();
-    btnActivateConnection->setText("connect");
-    btnActivateConnection->setGeometry(0, 0, 100, 50);
-    layout()->addWidget(btnActivateConnection);
-    connect(btnActivateConnection, SIGNAL(&QPushButton::clicked), this,
+    top = new QGridLayout(this);
+
+    lblPort = new QLabel(this);
+    lblPort->setText("Port: ");
+    top->addWidget(lblPort, 0, 0, Qt::AlignVCenter);
+
+    linePort = new QLineEdit(this);
+    top->addWidget(linePort, 0, 1, Qt::AlignVCenter);
+
+    btnConnect = new QPushButton(this);
+    btnConnect->setText("connect");
+    top->addWidget(btnConnect, 0, 2, Qt::AlignVCenter);
+
+    connect(btnConnect, SIGNAL(&QPushButton::clicked), this,
             SLOT(activateConnection()));
 
+    layout()->addItem(top);
     core::Block tblock = core::Generator::getBlock1();
 
     Connector c(tblock);
@@ -35,10 +45,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::activateConnection()
 {
-    if (btnActivateConnection->text() == "connect")
-        btnActivateConnection->setText("disconect");
+    if (btnConnect->text() == "connect")
+        btnConnect->setText("disconect");
     else
-        btnActivateConnection->setText("connect");
+        btnConnect->setText("connect");
 }
 
 MainWindow::~MainWindow()

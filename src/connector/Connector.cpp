@@ -34,10 +34,19 @@ void Connector::startConnection()
     }
 
     QModbusDataUnitMap reg;
-    std::for_each(all.begin(), all.end(), [&, this](core::Block &n) {
-        reg.insert(QModbusDataUnit::HoldingRegisters,
-                   { QModbusDataUnit::HoldingRegisters, 0, n.getNbyte() * 8 });
-    });
+    //    std::for_each(all.begin(), all.end(), [&, this](core::Block &n) {
+    //        reg.insert(QModbusDataUnit::HoldingRegisters,
+    //                   { QModbusDataUnit::HoldingRegisters, 0, n.getNbyte() *
+    //                   8 });
+    //    });
+    reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 10 });
+    reg.insert(QModbusDataUnit::DiscreteInputs,
+               { QModbusDataUnit::DiscreteInputs, 0, 10 });
+    reg.insert(QModbusDataUnit::InputRegisters,
+               { QModbusDataUnit::InputRegisters, 0, 10 });
+    reg.insert(QModbusDataUnit::HoldingRegisters,
+               { QModbusDataUnit::HoldingRegisters, 0, 10 });
+
     if (modbus_server->setMap(reg))
         qDebug() << "set map";
     else
