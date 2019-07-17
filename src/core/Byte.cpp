@@ -39,15 +39,21 @@ bool core::Byte::operator==(const core::Byte &other) const
     if ((rw != other.rw) || (description.size() != other.description.size()))
         return false;
 
-    bool r = false;
-    unsigned long int i;
+    unsigned long i = 0;
+    while (i < 8 && v[i] == other.v[i])
+        ++i;
 
-    for (i = 0; i < 8; ++i)
-        r = v[i] == other.v[i] ? true : false;
+    if (i != 8)
+        return false;
+    i = 0;
 
-    for (i = 0; i < description.size(); ++i)
-        r = description[i] != other.description[i] ? true : false;
-    return r;
+    while (i < description.size() && description[i] == other.description[i])
+        ++i;
+
+    if (i != description.size())
+        return false;
+
+    return true;
 }
 
 bool core::Byte::isMask()
