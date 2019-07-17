@@ -5,6 +5,9 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
+    core::Block tblock = core::Generator::getBlock1();
+    Connector c(tblock);
+
     ui->setupUi(this);
 
     auto file = new QMenu("File", ui->menuBar);
@@ -14,33 +17,34 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->menuBar->addMenu(file);
 
-    top = new QGridLayout(this);
+    top        = new QBoxLayout(QBoxLayout::LeftToRight, this);
+    mainlayout = new QGridLayout(this);
 
     lblPort = new QLabel(this);
     lblPort->setText("Port: ");
-    top->addWidget(lblPort, 0, 0, Qt::AlignVCenter);
+    top->addWidget(lblPort, 0, Qt::AlignVCenter);
 
     linePort = new QLineEdit(this);
-    top->addWidget(linePort, 0, 1, Qt::AlignVCenter);
+    top->addWidget(linePort, 0, Qt::AlignVCenter);
 
     btnConnect = new QPushButton(this);
     btnConnect->setText("connect");
-    top->addWidget(btnConnect, 0, 2, Qt::AlignVCenter);
+    top->addWidget(btnConnect, 0, Qt::AlignVCenter);
 
     connect(btnConnect, SIGNAL(&QPushButton::clicked), this,
             SLOT(activateConnection()));
 
-    layout()->addItem(top);
-    core::Block tblock = core::Generator::getBlock1();
-
-    Connector c(tblock);
+    QRect r(50, 50, 400, 100);
+    top->setGeometry(r);
+    mainlayout->addItem(top, 0, 0, Qt::AlignTop);
 
     std::vector<BlockWidget *> B;
     for (std::vector<core::Block>::size_type i = 0; i < c.all.size(); ++i) {
         B.push_back(new BlockWidget(c.all[i], this));
-        B[i]->setGeometry(0, i, 800, 500);
-        this->layout()->addWidget(B[i]);
+        B[i]->setGeometry(50 + i * 500, 150, 800, 400);
+        mainlayout->addWidget(B[i], i + 1, 0, Qt::AlignLeft);
     }
+    this->layout()->addItem(mainlayout);
 }
 
 void MainWindow::activateConnection()

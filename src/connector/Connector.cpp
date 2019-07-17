@@ -6,7 +6,8 @@ Connector::Connector(core::Block &block)
     modbus_server = nullptr;
     startConnection();
 
-    writeBlock(all[0]);
+    //    writeBlock(all[0]);
+    modbus_server->setData(QModbusDataUnit::Coils, 0, true);
 
     QModbusDataUnit q;
     modbus_server->data(&q);
@@ -33,24 +34,24 @@ void Connector::startConnection()
         return;
     }
 
-    QModbusDataUnitMap reg;
+    //    QModbusDataUnitMap reg;
     //    std::for_each(all.begin(), all.end(), [&, this](core::Block &n) {
     //        reg.insert(QModbusDataUnit::HoldingRegisters,
     //                   { QModbusDataUnit::HoldingRegisters, 0, n.getNbyte() *
     //                   8 });
     //    });
-    reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 10 });
-    reg.insert(QModbusDataUnit::DiscreteInputs,
-               { QModbusDataUnit::DiscreteInputs, 0, 10 });
-    reg.insert(QModbusDataUnit::InputRegisters,
-               { QModbusDataUnit::InputRegisters, 0, 10 });
-    reg.insert(QModbusDataUnit::HoldingRegisters,
-               { QModbusDataUnit::HoldingRegisters, 0, 10 });
+    //    reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 10 });
+    //    reg.insert(QModbusDataUnit::DiscreteInputs,
+    //               { QModbusDataUnit::DiscreteInputs, 0, 10 });
+    //    reg.insert(QModbusDataUnit::InputRegisters,
+    //               { QModbusDataUnit::InputRegisters, 0, 10 });
+    //    reg.insert(QModbusDataUnit::HoldingRegisters,
+    //               { QModbusDataUnit::HoldingRegisters, 0, 10 });
 
-    if (modbus_server->setMap(reg))
-        qDebug() << "set map";
-    else
-        qDebug() << "unable to set map";
+    //    if (modbus_server->setMap(reg))
+    //        qDebug() << "set map";
+    //    else
+    //        qDebug() << "unable to set map";
 
     modbus_server->setConnectionParameter(
         QModbusDevice::SerialPortNameParameter, "/dev/pts/1");
@@ -91,7 +92,6 @@ void Connector::writeBlock(core::Block &all)
             int t = 0;
             for (unsigned long k = 0; k < 8; ++k)
                 t += all[i][j][k] ? 2 ^ k : 0;
-            qDebug() << "writing " << t;
             modbus_server->setData(QModbusDataUnit::HoldingRegisters,
                                    all.getStartAddress() + start++, t);
         }

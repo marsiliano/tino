@@ -26,8 +26,9 @@ class MainWindow : public QMainWindow
 
   private:
     Ui::MainWindow *ui;
+    QGridLayout *mainlayout;
 
-    QGridLayout *top;
+    QBoxLayout *top;
     QLabel *lblPort;
     QLineEdit *linePort;
     QPushButton *btnConnect;

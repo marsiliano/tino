@@ -11,6 +11,9 @@ class GroupWidget : public QWidget
 
   public:
     GroupWidget(core::Group val, QWidget *parent = nullptr);
-    GroupWidget(const GroupWidget&) = default;
-    ~GroupWidget() override = default;
+    GroupWidget(const GroupWidget &) = default;
+    ~GroupWidget() override          = default;
+
+  private:
+    QBoxLayout *l;
 };
