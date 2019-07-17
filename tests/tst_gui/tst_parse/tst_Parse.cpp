@@ -14,6 +14,8 @@ class tst_Parse : public QObject
     void initTestCase();
     void tst_load();
     void compareSize();
+    void compareBlockName();
+    void compareBlockNbytes();
     void parse();
 };
 
@@ -32,6 +34,18 @@ void tst_Parse::tst_load()
 void tst_Parse::compareSize()
 {
     QCOMPARE(all.size(), cmp.size());
+}
+
+void tst_Parse::compareBlockName()
+{
+    for (int i = 0; i < all.size(); ++i)
+        QVERIFY(all[i].getName() == cmp[i].getName());
+}
+
+void tst_Parse::compareBlockNbytes()
+{
+    for (int i = 0; i < all.size(); ++i)
+        QVERIFY(all[i].getNbyte() == cmp[i].getNbyte());
 }
 
 void tst_Parse::parse()

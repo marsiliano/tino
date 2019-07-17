@@ -75,7 +75,7 @@ core::Byte core::Generator::getByte2()
     };
     std::vector<std::string> s = { "bytename" };
 
-    core::Byte b(v, s, false);
+    core::Byte b(v, s, true);
     return b;
 }
 
@@ -96,13 +96,13 @@ core::Group core::Generator::getGroup2()
 core::Block core::Generator::getBlock1()
 {
     std::vector<core::Group> vg = { getGroup1(), getGroup2() };
-    core::Block bl(vg, 0, "block");
+    core::Block bl(vg, 0, "blockname1");
     return bl;
 }
 
 core::Block core::Generator::getBlock2()
 {
-    std::vector<core::Group> vg = { getGroup2(), getGroup1() };
-    core::Block bl(vg, 0, "block");
+    std::vector<core::Group> vg = { getGroup1(), getGroup2() };
+    core::Block bl(vg, 0, "blockname2");
     return bl;
 }

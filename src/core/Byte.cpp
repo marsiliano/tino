@@ -45,6 +45,7 @@ bool core::Byte::operator==(const core::Byte &other) const
 
     if (i != 8)
         return false;
+
     i = 0;
 
     while (i < description.size() && description[i] == other.description[i])
