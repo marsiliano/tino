@@ -14,9 +14,8 @@ Joined::Joined(core::Group val, QWidget *parent) : QWidget(parent)
 
     long v = 0;
     for (int i = 0; i < dim; ++i) {
-        lbl.emplace_back(
-            new QLabel(QString::fromStdString(val[i].getDescription(0)), this,
-                       Qt::Widget));
+        lbl.emplace_back(new QLabel(QString::fromStdString(val[i].getDesc(0)),
+                                    this, Qt::Widget));
         l->addWidget(lbl[i], 0, Qt::AlignVCenter);
         for (int j = 0; j < 8; j++)
             v += (val[i][j] ? pow(2, j) : 0);

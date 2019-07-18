@@ -16,4 +16,5 @@ class GroupWidget : public QWidget
 
   private:
     QBoxLayout *l;
+    QLabel *lblGroup;
 };

@@ -1,16 +1,15 @@
 #include "Byte.hpp"
 
-core::Byte::Byte(std::vector<bool> v, std::vector<std::string> description,
-                 bool rw)
+core::Byte::Byte(std::vector<bool> v, std::vector<std::string> desc, bool rw)
 {
-    this->v           = v;
-    this->description = description;
-    this->rw          = rw;
+    this->v    = v;
+    this->desc = desc;
+    this->rw   = rw;
 }
 
-std::string core::Byte::getDescription(long unsigned i)
+std::string core::Byte::getDesc(long unsigned i)
 {
-    return description[i];
+    return desc[i];
 }
 bool core::Byte::operator[](long unsigned i)
 {
@@ -27,16 +26,16 @@ bool core::Byte::getRw()
 }
 core::Byte &core::Byte::operator=(const core::Byte &other)
 {
-    this->v           = other.v;
-    this->rw          = other.rw;
-    this->description = other.description;
+    this->v    = other.v;
+    this->rw   = other.rw;
+    this->desc = other.desc;
 
     return *this;
 }
 
 bool core::Byte::operator==(const core::Byte &other) const
 {
-    if ((rw != other.rw) || (description.size() != other.description.size()))
+    if ((rw != other.rw) || (desc.size() != other.desc.size()))
         return false;
 
     unsigned long i = 0;
@@ -48,10 +47,10 @@ bool core::Byte::operator==(const core::Byte &other) const
 
     i = 0;
 
-    while (i < description.size() && description[i] == other.description[i])
+    while (i < desc.size() && desc[i] == other.desc[i])
         ++i;
 
-    if (i != description.size())
+    if (i != desc.size())
         return false;
 
     return true;
@@ -59,5 +58,5 @@ bool core::Byte::operator==(const core::Byte &other) const
 
 bool core::Byte::isMask()
 {
-    return description.size() == 1 ? false : true;
+    return desc.size() == 1 ? false : true;
 }

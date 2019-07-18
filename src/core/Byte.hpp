@@ -12,17 +12,17 @@ class Byte
 {
   private:
     std::vector<bool> v;
-    std::vector<std::string> description;
+    std::vector<std::string> desc;
     bool rw;
     int start;
 
   public:
     Byte() = default;
-    Byte(std::vector<bool> v, std::vector<std::string> description, bool rw);
-    ~Byte() = default;
-    Byte(const Byte&) = default;
+    Byte(std::vector<bool> v, std::vector<std::string> desc, bool rw);
+    ~Byte()            = default;
+    Byte(const Byte &) = default;
 
-    std::string getDescription(long unsigned i);
+    std::string getDesc(long unsigned i);
     bool operator[](long unsigned i);
     bool getRw();
     Byte &operator=(const Byte &other);

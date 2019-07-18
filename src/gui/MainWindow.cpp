@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     c                  = new Connector(tblock, this);
 
     ui->setupUi(this);
+    this->setWindowTitle("Tino");
 
     auto file = new QMenu("File", ui->menuBar);
     auto quit = new QAction("Quit", file);

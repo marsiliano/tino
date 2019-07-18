@@ -1,6 +1,5 @@
 #pragma once
 
-#include "BtnContainer.hpp"
 #include "Value.hpp"
 
 class Joined : public QWidget
@@ -9,6 +8,7 @@ class Joined : public QWidget
 
   public:
     Joined(core::Group val, QWidget *parent);
+    ~Joined() override = default;
 
   private:
     QBoxLayout *l;

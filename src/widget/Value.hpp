@@ -13,4 +13,9 @@ class Value : public QWidget
   public:
     Value(core::Byte val, QWidget *parent = nullptr);
     ~Value() override = default;
+
+  private:
+    QBoxLayout *l;
+    QSpinBox *box;
+    QLabel *lblValue;
 };

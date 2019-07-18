@@ -2,7 +2,7 @@
 
 Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
 {
-    QGridLayout *l = new QGridLayout(this);
+    l = new QBoxLayout(QBoxLayout::LeftToRight, this);
 
     c      = std::unique_ptr<BtnContainer>(new BtnContainer);
     c->val = val;
@@ -14,11 +14,11 @@ Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
             n.first->setGeometry(i, 0, 100, 50);
             c->setClr(i);
 
-            n.first->setText(QString::fromStdString(c->val.getDescription(i)));
+            n.first->setText(QString::fromStdString(c->val.getDesc(i)));
 
             connect(n.first.get(), &QPushButton::clicked, this, n.second);
 
-            l->addWidget(n.first.get(), 1, i, Qt::AlignVCenter);
+            l->addWidget(n.first.get(), 0, Qt::AlignVCenter);
             ++i;
         });
 }

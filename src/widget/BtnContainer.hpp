@@ -9,9 +9,7 @@
 #include <functional>
 #include <memory>
 
-class BtnContainer
-{
-  public:
+struct BtnContainer {
     BtnContainer();
     BtnContainer(const BtnContainer &) = default;
     ~BtnContainer()                    = default;
