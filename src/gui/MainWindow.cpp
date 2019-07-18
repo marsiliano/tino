@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // ui
     ui->setupUi(this);
     this->setWindowTitle("Tino");
-    blockWidth = 700;
 
     // titlebar
     auto file = new QMenu("File", ui->menuBar);
@@ -55,15 +54,18 @@ MainWindow::MainWindow(QWidget *parent) :
         //        "/home/fsl/tino/src/conf.json"
         qDebug() << "filename: " << filename;
         blocks = core::Generator::parse(filename.toStdString());
+        sp     = new QSplitter(this);
 
         for (std::vector<core::Block>::size_type i = 0; i < blocks.size();
              ++i) {
-            blocksWidget.push_back(new BlockWidget(blocks[i], this));
-            blocksWidget[i]->setGeometry(50 + i * blockWidth, 150, blockWidth,
-                                         600);
-            mainlayout->addWidget(blocksWidget[i], 0, i, Qt::AlignLeft);
-            blocksWidget[i]->show();
+            blocksWidget.push_back(new ScrollBlock(blocks[i], this));
+            //            blocksWidget[i]->setSizePolicy(QSizePolicy::DefaultType::Maximum);
+            sp->addWidget(blocksWidget[i]);
         }
+        mainlayout->addWidget(sp);
+        sp->setGeometry(50, 150, this->size().width() - 100,
+                        this->size().height() - 200);
+        sp->show();
         c = new Connector(&blocks, this);
     });
 
@@ -72,6 +74,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->layout()->addItem(top);
     this->layout()->addItem(mainlayout);
+}
+
+void MainWindow::resizeEvent(QResizeEvent *e)
+{
+    //    sp->setGeometry(50, 150, this->size().width() - 100,
+    //                    this->size().height() - 200);
 }
 
 MainWindow::~MainWindow()

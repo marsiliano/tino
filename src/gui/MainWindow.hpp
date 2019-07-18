@@ -1,12 +1,13 @@
 #pragma once
 
-#include "BlockWidget.hpp"
 #include "Connector.hpp"
 #include "Generator.hpp"
+#include "ScrollBlock.hpp"
 
 #include <QFileDialog>
 #include <QLineEdit>
 #include <QMainWindow>
+#include <QSplitter>
 
 namespace Ui
 {
@@ -20,17 +21,18 @@ class MainWindow : public QMainWindow
   public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void resizeEvent(QResizeEvent *e);
 
   private:
     std::vector<core::Block> blocks;
-    std::vector<BlockWidget *> blocksWidget;
+    std::vector<ScrollBlock *> blocksWidget;
     Connector *c;
-    int blockWidth;
 
     Ui::MainWindow *ui;
 
     QGridLayout *mainlayout; // blockWidgets
     QBoxLayout *top;         // btn connect, btnFile...
+    QSplitter *sp;
 
     QLabel *lblPort;
     QLineEdit *linePort;

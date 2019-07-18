@@ -1,14 +1,8 @@
 #include "BlockWidget.hpp"
 
-#include <QtWidgets/QLabel>
-
 BlockWidget::BlockWidget(core::Block val, QWidget *parent) : QWidget(parent)
 {
     l = new QBoxLayout(QBoxLayout::TopToBottom, this);
-
-    QLabel *lBlock = new QLabel(this);
-    lBlock->setText(QString::fromStdString(val.getName()));
-    l->addWidget(lBlock, 0, Qt::AlignLeft);
 
     std::vector<GroupWidget *> g;
 

@@ -1,3 +1,4 @@
+#pragma once
 #include "GroupWidget.hpp"
 
 class BlockWidget : public QWidget
