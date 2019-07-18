@@ -11,8 +11,6 @@ std::vector<core::Block> core::Generator::parse(std::string name)
     while (getline(conf, t))
         s += (t + '\n');
 
-    qDebug() << QString::fromStdString(s);
-
     // parse std::string s in json
     rapidjson::Document d;
     d.Parse(s.c_str());

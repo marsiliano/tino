@@ -5,10 +5,6 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
-    // conf parsing
-    all = core::Generator::parse("/home/fsl/tino/src/conf.json");
-    c   = new Connector(all, this);
-
     // ui
     ui->setupUi(this);
     this->setWindowTitle("Tino");
@@ -47,17 +43,35 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     });
 
+    // load file
+    btnFile = new QPushButton(this);
+    btnFile->setText("load file");
+    top->addWidget(btnFile, 0, Qt::AlignVCenter);
+
+    connect(btnFile, &QPushButton::clicked, this, [this]() {
+        QString filename = QFileDialog::getOpenFileName(
+            this, tr("Open config"), "/", tr("json Files (*.json)"));
+
+        //        "/home/fsl/tino/src/conf.json"
+        qDebug() << "filename: " << filename;
+        blocks = core::Generator::parse(filename.toStdString());
+
+        for (std::vector<core::Block>::size_type i = 0; i < blocks.size();
+             ++i) {
+            blocksWidget.push_back(new BlockWidget(blocks[i], this));
+            blocksWidget[i]->setGeometry(50 + i * blockWidth, 150, blockWidth,
+                                         600);
+            mainlayout->addWidget(blocksWidget[i], 0, i, Qt::AlignLeft);
+            blocksWidget[i]->show();
+        }
+        c = new Connector(&blocks, this);
+    });
+
     QRect r(50, 50, 400, 100);
     top->setGeometry(r);
-    mainlayout->addItem(top, 0, 0, Qt::AlignTop);
 
-    // load blocks
-    std::vector<BlockWidget *> B;
-    for (std::vector<core::Block>::size_type i = 0; i < c->all.size(); ++i) {
-        B.push_back(new BlockWidget(c->all[i], this));
-        B[i]->setGeometry(50 + i * blockWidth, 150, blockWidth, 600);
-        mainlayout->addWidget(B[i], i + 1, 0, Qt::AlignLeft);
-    }
+    this->layout()->addItem(top);
+    this->layout()->addItem(mainlayout);
 }
 
 MainWindow::~MainWindow()

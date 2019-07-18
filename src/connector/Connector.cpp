@@ -1,6 +1,6 @@
 #include "Connector.hpp"
 
-Connector::Connector(std::vector<core::Block> &all, QObject *parent) :
+Connector::Connector(std::vector<core::Block> *all, QObject *parent) :
     QObject(parent), modbus_server{ nullptr }
 {
     this->all = all;
@@ -59,7 +59,7 @@ void Connector::startConnection(QString portname)
     qDebug() << "error: " << modbus_server->errorString();
     qDebug() << "state: " << modbus_server->state();
 
-    //    writeBlock(all[0]);
+    //    writeBlock((*all)[0]);
     modbus_server->setData(QModbusDataUnit::Coils, 0, true);
 
     QModbusDataUnit q;

@@ -5,6 +5,7 @@
 #include <QModbusRtuSerialSlave>
 #include <QModbusServer>
 #include <QtSerialPort/QSerialPort>
+#include <memory>
 
 // class stocazz : public QModbusRtuSerialSlave
 //{
@@ -18,9 +19,9 @@
 
 struct Connector : public QObject {
     QModbusServer *modbus_server{ nullptr };
-    Connector(std::vector<core::Block> &all, QObject *parent);
+    Connector(std::vector<core::Block> *all, QObject *parent);
     ~Connector();
-    std::vector<core::Block> all;
+    std::vector<core::Block> *all;
     void startConnection(QString portname);
     void endConnection();
     void writeBlock(core::Block &block);

@@ -4,9 +4,9 @@
 #include "Connector.hpp"
 #include "Generator.hpp"
 
+#include <QFileDialog>
 #include <QLineEdit>
 #include <QMainWindow>
-#include <QPushButton>
 
 namespace Ui
 {
@@ -22,16 +22,18 @@ class MainWindow : public QMainWindow
     ~MainWindow();
 
   private:
-    std::vector<core::Block> all;
-
+    std::vector<core::Block> blocks;
+    std::vector<BlockWidget *> blocksWidget;
+    Connector *c;
     int blockWidth;
 
     Ui::MainWindow *ui;
-    QGridLayout *mainlayout;
 
-    QBoxLayout *top;
+    QGridLayout *mainlayout; // blockWidgets
+    QBoxLayout *top;         // btn connect, btnFile...
+
     QLabel *lblPort;
     QLineEdit *linePort;
     QPushButton *btnConnect;
-    Connector *c;
+    QPushButton *btnFile;
 };

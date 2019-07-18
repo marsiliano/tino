@@ -8,9 +8,7 @@
 
 namespace core
 {
-class Generator
-{
-  public:
+struct Generator {
     static std::vector<core::Block> parse(std::string name);
     static core::Byte getByte1();
     static core::Byte getByte2();
