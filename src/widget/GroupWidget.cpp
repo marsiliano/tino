@@ -7,7 +7,6 @@ GroupWidget::GroupWidget(core::Group val, QWidget *parent) : QWidget(parent)
 
     std::vector<Mask *> m;
     std::vector<Value *> v;
-    // Joined *j[]
 
     if (val.getType() == 'm') {
         lGroup->setText(QString::fromStdString("mask group"));
@@ -29,7 +28,7 @@ GroupWidget::GroupWidget(core::Group val, QWidget *parent) : QWidget(parent)
         lGroup->setText(QString::fromStdString("joined group"));
         l->addWidget(lGroup, 0, Qt::AlignHCenter);
 
-        Joined jo(val, this);
-        l->addWidget(&jo, 0, Qt::AlignHCenter);
+        Joined *jo = new Joined(val, this);
+        l->addWidget(jo, 0, Qt::AlignHCenter);
     }
 }

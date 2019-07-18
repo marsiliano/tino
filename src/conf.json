@@ -41,6 +41,26 @@
                         "desc": ["bytename"]
                     }
                 ]
+            },
+            {
+                "type": "j",
+                "bytes": [
+                    {
+                        "rw": true,
+                        "values": [true, false, true, false, true, false, true, false],
+                        "desc": ["bytename"]
+                    },
+                    {
+                        "rw": true,
+                        "values": [true, false, true, false, true, false, true, false],
+                        "desc": ["bytename"]
+                    },
+                    {
+                        "rw": true,
+                        "values": [true, false, true, false, true, false, true, false],
+                        "desc": ["bytename"]
+                    }
+                ]
             }
         ]
     },
@@ -69,6 +89,26 @@
             },
             {
                 "type": "v",
+                "bytes": [
+                    {
+                        "rw": true,
+                        "values": [true, false, true, false, true, false, true, false],
+                        "desc": ["bytename"]
+                    },
+                    {
+                        "rw": true,
+                        "values": [true, false, true, false, true, false, true, false],
+                        "desc": ["bytename"]
+                    },
+                    {
+                        "rw": true,
+                        "values": [true, false, true, false, true, false, true, false],
+                        "desc": ["bytename"]
+                    }
+                ]
+            },
+            {
+                "type": "j",
                 "bytes": [
                     {
                         "rw": true,

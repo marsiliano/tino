@@ -57,8 +57,8 @@ void tst_Eq::tst_nEqByte()
 
 void tst_Eq::tst_nByte()
 {
-    QVERIFY(core::Generator::getBlock1().getNbyte() == 6);
-    QVERIFY(core::Generator::getBlock2().getNbyte() == 6);
+    QVERIFY(core::Generator::getBlock1().getNbyte() == 9);
+    QVERIFY(core::Generator::getBlock2().getNbyte() == 9);
 }
 
 QTEST_MAIN(tst_Eq)

@@ -9,4 +9,7 @@ class Joined : public QWidget
 
   public:
     Joined(core::Group val, QWidget *parent);
+
+  private:
+    QBoxLayout *l;
 };

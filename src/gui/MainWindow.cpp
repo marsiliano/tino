@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
     std::vector<BlockWidget *> B;
     for (std::vector<core::Block>::size_type i = 0; i < c->all.size(); ++i) {
         B.push_back(new BlockWidget(c->all[i], this));
-        B[i]->setGeometry(50 + i * 500, 150, 800, 400);
+        B[i]->setGeometry(50 + i * 500, 150, 800, 600);
         mainlayout->addWidget(B[i], i + 1, 0, Qt::AlignLeft);
     }
 }
