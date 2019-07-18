@@ -22,7 +22,7 @@ class tst_Parse : public QObject
 void tst_Parse::initTestCase()
 {
     all = { core::Generator::getBlock1(), core::Generator::getBlock2() };
-    cmp = core::Generator::parse();
+    cmp = core::Generator::parse("/home/fsl/tino/src/conf.json");
 }
 
 void tst_Parse::tst_load()

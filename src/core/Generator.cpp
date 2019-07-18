@@ -1,9 +1,9 @@
 #include "Generator.hpp"
 
-std::vector<core::Block> core::Generator::parse()
+std::vector<core::Block> core::Generator::parse(std::string name)
 {
     // open the conf.json
-    std::ifstream conf("/home/fsl/tino/src/conf.json", std::ios::in);
+    std::ifstream conf(name, std::ios::in);
     std::cout << (conf.is_open() ? "conf.json opened" : "conf.json NOT opened");
 
     // put conf.json in std::string s

@@ -16,11 +16,9 @@
 //    //    QModbusResponse processRequest(const QModbusPdu &request) override;
 //};
 
-class Connector : public QObject
-{
-  public:
+struct Connector : public QObject {
     QModbusServer *modbus_server{ nullptr };
-    Connector(core::Block &block, QObject *parent);
+    Connector(std::vector<core::Block> &all, QObject *parent);
     ~Connector();
     std::vector<core::Block> all;
     void startConnection(QString portname);

@@ -1,9 +1,9 @@
 #include "Connector.hpp"
 
-Connector::Connector(core::Block &block, QObject *parent) :
+Connector::Connector(std::vector<core::Block> &all, QObject *parent) :
     QObject(parent), modbus_server{ nullptr }
 {
-    all.push_back(block);
+    this->all = all;
 }
 
 Connector::~Connector()

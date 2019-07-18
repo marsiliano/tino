@@ -5,22 +5,27 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
-    core::Block tblock = core::Generator::getBlock1();
-    c                  = new Connector(tblock, this);
+    // conf parsing
+    all = core::Generator::parse("/home/fsl/tino/src/conf.json");
+    c   = new Connector(all, this);
 
+    // ui
     ui->setupUi(this);
     this->setWindowTitle("Tino");
+    blockWidth = 700;
 
+    // titlebar
     auto file = new QMenu("File", ui->menuBar);
     auto quit = new QAction("Quit", file);
     connect(quit, &QAction::triggered, this, []() { qApp->quit(); });
     file->addAction(quit);
-
     ui->menuBar->addMenu(file);
 
+    // layout
     top        = new QBoxLayout(QBoxLayout::LeftToRight, this);
     mainlayout = new QGridLayout(this);
 
+    // top
     lblPort = new QLabel(this);
     lblPort->setText("Port: ");
     top->addWidget(lblPort, 0, Qt::AlignVCenter);
@@ -46,10 +51,11 @@ MainWindow::MainWindow(QWidget *parent) :
     top->setGeometry(r);
     mainlayout->addItem(top, 0, 0, Qt::AlignTop);
 
+    // load blocks
     std::vector<BlockWidget *> B;
     for (std::vector<core::Block>::size_type i = 0; i < c->all.size(); ++i) {
         B.push_back(new BlockWidget(c->all[i], this));
-        B[i]->setGeometry(50 + i * 500, 150, 800, 600);
+        B[i]->setGeometry(50 + i * blockWidth, 150, blockWidth, 600);
         mainlayout->addWidget(B[i], i + 1, 0, Qt::AlignLeft);
     }
 }

@@ -22,6 +22,10 @@ class MainWindow : public QMainWindow
     ~MainWindow();
 
   private:
+    std::vector<core::Block> all;
+
+    int blockWidth;
+
     Ui::MainWindow *ui;
     QGridLayout *mainlayout;
 
