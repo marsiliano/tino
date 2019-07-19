@@ -5,6 +5,7 @@ QT += core gui widgets
 HEADERS += \
     $$PWD/BtnContainer.hpp \
     $$PWD/Mask.hpp \
+    $$PWD/HalfMask.hpp \
     $$PWD/Value.hpp \
     $$PWD/Joined.hpp \
     $$PWD/GroupWidget.hpp \
@@ -14,6 +15,7 @@ HEADERS += \
 SOURCES += \
     $$PWD/BtnContainer.cpp \
     $$PWD/Mask.cpp \
+    $$PWD/HalfMask.cpp \
     $$PWD/Value.cpp \
     $$PWD/Joined.cpp \
     $$PWD/GroupWidget.cpp \

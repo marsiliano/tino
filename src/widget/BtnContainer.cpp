@@ -9,6 +9,9 @@ BtnContainer::BtnContainer()
                 setClr(i);
             }));
     }
+    //    ci vorrebbe un modo per mettere in un Btncontainer i button da 0 a 3 e
+    //    nell'altro dal 4 al 7, altrimenti entrambi contengono anche i valori
+    //    dell'altro
 }
 
 void BtnContainer::setClr(const int i)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BtnContainer.hpp"
+#include "HalfMask.hpp"
 
 class Mask : public QWidget
 {
@@ -10,12 +10,14 @@ class Mask : public QWidget
     Mask(core::Byte val, QWidget *parent = nullptr);
     ~Mask() override   = default;
     Mask(const Mask &) = default;
-    QString getStyleBtn(const int i);
-    bool valAt(const int i);
+
+    QString getStyleBtn(int i);
+    bool valAt(int i);
+    void clickBtn(int i);
 
   private:
-    QBoxLayout *l;
-    std::unique_ptr<BtnContainer> c;
+    QVBoxLayout *l;
+    std::vector<HalfMask *> m;
 
     friend class tst_Mask;
 };

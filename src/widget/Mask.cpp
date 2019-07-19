@@ -2,33 +2,26 @@
 
 Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
 {
-    l = new QBoxLayout(QBoxLayout::LeftToRight, this);
+    l = new QVBoxLayout(this);
 
-    c      = std::unique_ptr<BtnContainer>(new BtnContainer);
-    c->val = val;
-    int i  = 0;
-
-    std::for_each(
-        c->b.begin(), c->b.end(),
-        [&](std::pair<std::unique_ptr<QPushButton>, std::function<void()>> &n) {
-            n.first->setGeometry(i, 0, 100, 50);
-            c->setClr(i);
-
-            n.first->setText(QString::fromStdString(c->val.getDesc(i)));
-
-            connect(n.first.get(), &QPushButton::clicked, this, n.second);
-
-            l->addWidget(n.first.get(), 0, Qt::AlignVCenter);
-            ++i;
-        });
+    for (int i = 0; i < 2; ++i) {
+        m.push_back(new HalfMask(val, i * 4, this));
+        l->addWidget(m[i], 0, Qt::AlignVCenter);
+    }
 }
 
-bool Mask::valAt(const int i)
+bool Mask::valAt(int i)
 {
-    return c->val[i];
+    return (i < 4 ? m[0]->c->val[i] : m[1]->c->val[i]);
 }
 
-QString Mask::getStyleBtn(const int i)
+QString Mask::getStyleBtn(int i)
 {
-    return c->b[i].first->styleSheet();
+    return (i < 4 ? m[0]->c->b[i].first->styleSheet()
+                  : m[1]->c->b[i].first->styleSheet());
+}
+
+void Mask::clickBtn(int i)
+{
+    i < 4 ? m[0]->c->b[i].first->click() : m[1]->c->b[i].first->click();
 }
