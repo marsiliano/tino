@@ -63,14 +63,14 @@ MainWindow::MainWindow(QWidget *parent) :
             sp->addWidget(blocksWidget[i]);
             sp->setCollapsible(i, false);
         }
-        sp->setGeometry(50, 150, this->size().width() - 100,
-                        this->size().height() - 200);
+        sp->setGeometry(30, 130, this->size().width() - 30,
+                        this->size().height() - 135);
         mainlayout->addWidget(sp, 0, 0, Qt::AlignVCenter);
 
         sp->show();
         c = new Connector(&blocks, this);
     });
-    QRect r(50, 50, 400, 100);
+    QRect r(30, 30, 400, 100);
     top->setGeometry(r);
 
     this->layout()->addItem(top);
@@ -79,8 +79,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::resizeEvent(QResizeEvent *e)
 {
-    //    sp->setGeometry(50, 150, this->size().width() - 100,
-    //                    this->size().height() - 200);
+    if (sp && c)
+        sp->setGeometry(50, 150, this->size().width() - 100,
+                        this->size().height() - 200);
 }
 
 MainWindow::~MainWindow()
