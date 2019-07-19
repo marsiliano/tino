@@ -52,23 +52,30 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(btnFile, &QPushButton::clicked, this, [this]() {
         QString filename = QFileDialog::getOpenFileName(
             this, tr("Open config"), "/", tr("json Files (*.json)"));
-
         blocks = core::Generator::parse(filename.toStdString());
-        qDebug() << "still alive";
-        sp = new QSplitter(this);
+
+        c  = new Connector(&blocks, this);
+        sp = new QSplitter(Qt::Vertical, this);
+
+        int cont = 0;
 
         for (std::vector<core::Block>::size_type i = 0; i < blocks.size();
-             ++i) {
-            blocksWidget.push_back(new ScrollBlock(blocks[i], this));
-            sp->addWidget(blocksWidget[i]);
-            sp->setCollapsible(i, false);
-        }
-        sp->setGeometry(30, 130, this->size().width() - 30,
-                        this->size().height() - 135);
-        mainlayout->addWidget(sp, 0, 0, Qt::AlignVCenter);
+             i++) {
+            if (i == 0 || i % 4 == 0)
+                spv.emplace_back(new QSplitter(Qt::Horizontal, this));
 
+            blocksWidget.push_back(new ScrollBlock(blocks[i], this));
+            spv[cont]->addWidget(blocksWidget[i]);
+            spv[cont]->setCollapsible(i, false);
+
+            if (i == blocks.size() - 1 || i % 4 == 3) {
+                sp->addWidget(spv[cont]);
+                ++cont;
+            }
+        }
+        mainlayout->addWidget(sp, 0, 0, Qt::AlignVCenter);
+        resizeSp();
         sp->show();
-        c = new Connector(&blocks, this);
     });
     QRect r(30, 30, 400, 100);
     top->setGeometry(r);
@@ -79,9 +86,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::resizeEvent(QResizeEvent *e)
 {
+    resizeSp();
+}
+
+void MainWindow::resizeSp()
+{
     if (sp && c)
-        sp->setGeometry(50, 150, this->size().width() - 100,
-                        this->size().height() - 200);
+        sp->setGeometry(30, 130, this->size().width() - 30,
+                        this->size().height() - 135);
 }
 
 MainWindow::~MainWindow()

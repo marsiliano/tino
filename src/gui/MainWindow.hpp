@@ -22,6 +22,7 @@ class MainWindow : public QMainWindow
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void resizeEvent(QResizeEvent *e);
+    void resizeSp();
 
   private:
     std::vector<core::Block> blocks;
@@ -30,9 +31,11 @@ class MainWindow : public QMainWindow
 
     Ui::MainWindow *ui;
 
-    QGridLayout *mainlayout; // blockWidgets
-    QBoxLayout *top;         // btn connect, btnFile...
+    QBoxLayout *top; // btn connect, btnFile...
+    QGridLayout *mainlayout;
+
     QSplitter *sp;
+    std::vector<QSplitter *> spv;
 
     QLabel *lblPort;
     QLineEdit *linePort;

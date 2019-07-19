@@ -97,23 +97,9 @@ core::Group core::Generator::getGroup3()
     return g;
 }
 
-core::Block core::Generator::getBlock1()
+core::Block core::Generator::getBlock(std::string n)
 {
     std::vector<core::Group> vg = { getGroup1(), getGroup2(), getGroup3() };
-    core::Block bl(vg, 0, "blockname1");
-    return bl;
-}
-
-core::Block core::Generator::getBlock2()
-{
-    std::vector<core::Group> vg = { getGroup1(), getGroup2(), getGroup3() };
-    core::Block bl(vg, 0, "blockname2");
-    return bl;
-}
-
-core::Block core::Generator::getBlock3()
-{
-    std::vector<core::Group> vg = { getGroup1(), getGroup2(), getGroup3() };
-    core::Block bl(vg, 0, "blockname3");
+    core::Block bl(vg, 0, "blockname" + n);
     return bl;
 }

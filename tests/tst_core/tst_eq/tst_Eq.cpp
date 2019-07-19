@@ -21,14 +21,16 @@ class tst_Eq : public QObject
 
 void tst_Eq::tst_EqBlock()
 {
-    QVERIFY(core::Generator::getBlock1() == core::Generator::getBlock1());
-    QVERIFY(core::Generator::getBlock2() == core::Generator::getBlock2());
+    QVERIFY(core::Generator::getBlock("1") == core::Generator::getBlock("1"));
+    QVERIFY(core::Generator::getBlock("2") == core::Generator::getBlock("2"));
 }
 
 void tst_Eq::tst_nEqBlock()
 {
-    QVERIFY(!(core::Generator::getBlock1() == core::Generator::getBlock2()));
-    QVERIFY(!(core::Generator::getBlock2() == core::Generator::getBlock1()));
+    QVERIFY(
+        !(core::Generator::getBlock("1") == core::Generator::getBlock("2")));
+    QVERIFY(
+        !(core::Generator::getBlock("2") == core::Generator::getBlock("1")));
 }
 
 void tst_Eq::tst_EqGroup()
@@ -57,8 +59,8 @@ void tst_Eq::tst_nEqByte()
 
 void tst_Eq::tst_nByte()
 {
-    QVERIFY(core::Generator::getBlock1().getNbyte() == 9);
-    QVERIFY(core::Generator::getBlock2().getNbyte() == 9);
+    QVERIFY(core::Generator::getBlock("1").getNbyte() == 9);
+    QVERIFY(core::Generator::getBlock("2").getNbyte() == 9);
 }
 
 QTEST_MAIN(tst_Eq)

@@ -62,7 +62,7 @@ void tst_Mask::tst_click()
         clr = getClr(i);
         val = m->valAt(i);
 
-        m->c->b[i].first->click();
+        m->clickBtn(i);
 
         if (val == true) {
             QCOMPARE(expb, getClr(i));
