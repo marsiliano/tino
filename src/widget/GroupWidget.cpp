@@ -5,12 +5,10 @@ GroupWidget::GroupWidget(core::Group val, QWidget *parent) : QWidget(parent)
     l        = new QBoxLayout(QBoxLayout::TopToBottom, this);
     lblGroup = new QLabel(this);
 
-    std::vector<Mask *> m;
-    std::vector<Value *> v;
-
     if (val.getType() == 'm') {
         lblGroup->setText(QString::fromStdString("mask group"));
         l->addWidget(lblGroup, 0, Qt::AlignHCenter);
+        std::vector<Mask *> m;
 
         for (int i = 0; i < val.getDim(); ++i) {
             m.emplace_back(new Mask(val[i], this));
@@ -19,6 +17,7 @@ GroupWidget::GroupWidget(core::Group val, QWidget *parent) : QWidget(parent)
     } else if (val.getType() == 'v') {
         lblGroup->setText(QString::fromStdString("value group"));
         l->addWidget(lblGroup, 0, Qt::AlignHCenter);
+        std::vector<Value *> v;
 
         for (int i = 0; i < val.getDim(); ++i) {
             v.emplace_back(new Value(val[i], this));

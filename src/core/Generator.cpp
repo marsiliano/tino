@@ -110,3 +110,10 @@ core::Block core::Generator::getBlock2()
     core::Block bl(vg, 0, "blockname2");
     return bl;
 }
+
+core::Block core::Generator::getBlock3()
+{
+    std::vector<core::Group> vg = { getGroup1(), getGroup2(), getGroup3() };
+    core::Block bl(vg, 0, "blockname3");
+    return bl;
+}

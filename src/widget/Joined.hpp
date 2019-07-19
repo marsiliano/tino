@@ -12,4 +12,5 @@ class Joined : public QWidget
 
   private:
     QBoxLayout *l;
+    std::vector<QLabel *> lbl;
 };

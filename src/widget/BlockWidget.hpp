@@ -13,4 +13,5 @@ class BlockWidget : public QWidget
 
   private:
     QBoxLayout *l;
+    std::vector<GroupWidget *> g;
 };

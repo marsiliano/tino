@@ -10,8 +10,6 @@ Joined::Joined(core::Group val, QWidget *parent) : QWidget(parent)
     box->setMaximum(dim * 255);
     l->addWidget(box, 0, Qt::AlignVCenter);
 
-    std::vector<QLabel *> lbl;
-
     long v = 0;
     for (int i = 0; i < dim; ++i) {
         lbl.emplace_back(new QLabel(QString::fromStdString(val[i].getDesc(0)),

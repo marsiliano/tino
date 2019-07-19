@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     btnConnect->setText("connect");
     top->addWidget(btnConnect, 0, Qt::AlignVCenter);
 
+    // connect
     connect(btnConnect, &QPushButton::clicked, this, [&]() {
         if (btnConnect->text() == "connect") {
             btnConnect->setText("disconect");
@@ -47,28 +48,28 @@ MainWindow::MainWindow(QWidget *parent) :
     btnFile->setText("load file");
     top->addWidget(btnFile, 0, Qt::AlignVCenter);
 
+    // draw blocks
     connect(btnFile, &QPushButton::clicked, this, [this]() {
         QString filename = QFileDialog::getOpenFileName(
             this, tr("Open config"), "/", tr("json Files (*.json)"));
 
-        //        "/home/fsl/tino/src/conf.json"
-        qDebug() << "filename: " << filename;
         blocks = core::Generator::parse(filename.toStdString());
-        sp     = new QSplitter(this);
+        qDebug() << "still alive";
+        sp = new QSplitter(this);
 
         for (std::vector<core::Block>::size_type i = 0; i < blocks.size();
              ++i) {
             blocksWidget.push_back(new ScrollBlock(blocks[i], this));
-            //            blocksWidget[i]->setSizePolicy(QSizePolicy::DefaultType::Maximum);
             sp->addWidget(blocksWidget[i]);
+            sp->setCollapsible(i, false);
         }
-        mainlayout->addWidget(sp);
         sp->setGeometry(50, 150, this->size().width() - 100,
                         this->size().height() - 200);
+        mainlayout->addWidget(sp, 0, 0, Qt::AlignVCenter);
+
         sp->show();
         c = new Connector(&blocks, this);
     });
-
     QRect r(50, 50, 400, 100);
     top->setGeometry(r);
 
