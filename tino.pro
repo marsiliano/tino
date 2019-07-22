@@ -1,6 +1,6 @@
 include(tino.pri)
 
-!minQtVersion(5, 13, 0) {
+!minQtVersion(5, 11, 0) {
     message("Cannot build $$IDE_DISPLAY_NAME with Qt version $${QT_VERSION}.")
     error("Use at least Qt 5.13.0.")
 }
