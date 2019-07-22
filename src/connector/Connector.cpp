@@ -1,6 +1,6 @@
 #include "Connector.hpp"
 
-Connector::Connector(std::vector<core::Block> *all, QObject *parent) :
+Connector::Connector(std::vector<core::Block> &all, QObject *parent) :
     QObject(parent), modbus_server{ nullptr }
 {
     this->all = all;
@@ -21,23 +21,6 @@ void Connector::startConnection(QString portname)
     }
     QModbusDataUnitMap reg;
     reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 10 });
-    //    std::for_each(all.begin(), all.end(), [&, this](core::Block &n) {
-    //        reg.insert(QModbusDataUnit::HoldingRegisters,
-    //                   { QModbusDataUnit::HoldingRegisters, 0, n.getNbyte() *
-    //                   8 });
-    //    });
-    //    reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 10 });
-    //    reg.insert(QModbusDataUnit::DiscreteInputs,
-    //               { QModbusDataUnit::DiscreteInputs, 0, 10 });
-    //    reg.insert(QModbusDataUnit::InputRegisters,
-    //               { QModbusDataUnit::InputRegisters, 0, 10 });
-    //    reg.insert(QModbusDataUnit::HoldingRegisters,
-    //               { QModbusDataUnit::HoldingRegisters, 0, 10 });
-
-    //    if (modbus_server->setMap(reg))
-    //        qDebug() << "set map";
-    //    else
-    //        qDebug() << "unable to set map";
 
     modbus_server->setConnectionParameter(
         QModbusDevice::SerialPortNameParameter, portname);
@@ -59,7 +42,7 @@ void Connector::startConnection(QString portname)
     qDebug() << "error: " << modbus_server->errorString();
     qDebug() << "state: " << modbus_server->state();
 
-    //    writeBlock((*all)[0]);
+    //    writeBlock(all[0]);
     modbus_server->setData(QModbusDataUnit::Coils, 0, true);
 
     QModbusDataUnit q;

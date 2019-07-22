@@ -17,4 +17,6 @@ ScrollBlock::ScrollBlock(core::Block val, QWidget *parent) : QWidget(parent)
 
     l->addWidget(lBlock, 0, Qt::AlignHCenter);
     l->addWidget(a);
+
+    this->setMinimumWidth(50);
 }
