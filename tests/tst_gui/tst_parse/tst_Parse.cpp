@@ -9,6 +9,7 @@ class tst_Parse : public QObject
   private:
     std::vector<core::Block> all;
     std::vector<core::Block> cmp;
+    long unsigned int i;
 
   private slots:
     void initTestCase();
@@ -42,19 +43,19 @@ void tst_Parse::compareSize()
 
 void tst_Parse::compareBlockName()
 {
-    for (int i = 0; i < all.size(); ++i)
+    for (i = 0; i < all.size(); ++i)
         QVERIFY(all[i].getName() == cmp[i].getName());
 }
 
 void tst_Parse::compareBlockNbytes()
 {
-    for (int i = 0; i < all.size(); ++i)
+    for (i = 0; i < all.size(); ++i)
         QVERIFY(all[i].getNbyte() == cmp[i].getNbyte());
 }
 
 void tst_Parse::parse()
 {
-    for (int i = 0; i < all.size(); ++i)
+    for (i = 0; i < all.size(); ++i)
         QVERIFY(all[i] == cmp[i]);
 }
 
