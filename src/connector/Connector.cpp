@@ -1,17 +1,7 @@
-#include "Connector.hpp"
+﻿#include "Connector.hpp"
 
-Connector::Connector(std::vector<core::Block> &all, QObject *parent) :
+Connector::Connector(QObject *parent) :
     QObject(parent), modbus_server{ nullptr }
-{
-    this->all = all;
-}
-
-Connector::~Connector()
-{
-    endConnection();
-}
-
-void Connector::startConnection(QString portname)
 {
     modbus_server = new QModbusRtuSerialSlave(this);
 
@@ -19,60 +9,91 @@ void Connector::startConnection(QString portname)
         qDebug() << "modbus_server null";
         return;
     }
+
     QModbusDataUnitMap reg;
     reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 10 });
+    reg.insert(QModbusDataUnit::DiscreteInputs,
+               { QModbusDataUnit::DiscreteInputs, 0, 10 });
+    reg.insert(QModbusDataUnit::InputRegisters,
+               { QModbusDataUnit::InputRegisters, 0, 10 });
+    reg.insert(QModbusDataUnit::HoldingRegisters,
+               { QModbusDataUnit::HoldingRegisters, 0, 10 });
 
-    modbus_server->setConnectionParameter(
-        QModbusDevice::SerialPortNameParameter, portname);
-    modbus_server->setConnectionParameter(QModbusDevice::SerialParityParameter,
-                                          QSerialPort::EvenParity);
-    modbus_server->setConnectionParameter(
-        QModbusDevice::SerialBaudRateParameter, QSerialPort::Baud57600);
-    modbus_server->setConnectionParameter(
-        QModbusDevice::SerialDataBitsParameter, QSerialPort::Data8);
-    modbus_server->setConnectionParameter(
-        QModbusDevice::SerialStopBitsParameter, QSerialPort::OneStop);
-    modbus_server->setServerAddress(1);
+    modbus_server->setMap(reg);
+}
 
-    if (!modbus_server->connectDevice())
-        qDebug() << "cannot connect ";
-    else
-        qDebug() << "connect";
+Connector::~Connector()
+{
+    endConnection();
 
-    qDebug() << "error: " << modbus_server->errorString();
-    qDebug() << "state: " << modbus_server->state();
+    delete modbus_server;
+    modbus_server = nullptr;
+}
 
-    //    writeBlock(all[0]);
-    modbus_server->setData(QModbusDataUnit::Coils, 0, true);
+void Connector::startConnection(QString portname)
+{
+    if (modbus_server) {
+        modbus_server->setConnectionParameter(
+            QModbusDevice::SerialPortNameParameter, portname);
+        modbus_server->setConnectionParameter(
+            QModbusDevice::SerialParityParameter, QSerialPort::EvenParity);
+        modbus_server->setConnectionParameter(
+            QModbusDevice::SerialBaudRateParameter, QSerialPort::Baud57600);
+        modbus_server->setConnectionParameter(
+            QModbusDevice::SerialDataBitsParameter, QSerialPort::Data8);
+        modbus_server->setConnectionParameter(
+            QModbusDevice::SerialStopBitsParameter, QSerialPort::OneStop);
+        modbus_server->setServerAddress(1);
 
-    QModbusDataUnit q;
-    modbus_server->data(&q);
-    auto v = q.values();
-    qDebug() << "number of values: " << v.size();
+        if (!modbus_server->connectDevice())
+            qDebug() << "cannot connect ";
+        else
+            qDebug() << "connect";
 
-    std::for_each(v.begin(), v.end(), [](quint16 i) { qDebug() << i; });
+        qDebug() << "error: " << modbus_server->errorString();
+        qDebug() << "state: " << modbus_server->state();
+
+        //    QModbusDataUnit q;
+        //    modbus_server->data(&q);
+        //    auto values = q.values();
+        //    qDebug() << "number of values: " << values.size();
+
+        //    std::for_each(values.begin(), values.end(),
+        //                  [](quint16 i) { qDebug() << i; });
+    }
 }
 
 void Connector::endConnection()
 {
     if (modbus_server)
         modbus_server->disconnectDevice();
-
-    delete modbus_server;
-    modbus_server = nullptr;
 }
 
 void Connector::writeBlock(core::Block &all)
 {
-    int start = 0;
-    for (unsigned long i = 0; i < all.getDim(); ++i) {
-        for (unsigned long j = 0; j < all[i].getDim(); ++j) {
-            int t = 0;
-            for (unsigned long k = 0; k < 8; ++k)
-                t += all[i][j][k] ? 2 ^ k : 0;
-            modbus_server->setData(QModbusDataUnit::HoldingRegisters,
-                                   all.getStartAddress() + start++, t);
-        }
+    if (modbus_server) {
+        //    int start = 0;
+        //    for (unsigned long i = 0; i < all.getDim(); ++i) {
+        //        for (unsigned long j = 0; j < all[i].getDim(); ++j) {
+        //            int t = 0;
+        //            for (unsigned long k = 0; k < 8; ++k)
+        //                t += all[i][j][k] ? 2 ^ k : 0;
+        //            modbus_server->setData(QModbusDataUnit::HoldingRegisters,
+        //                                   all.getStartAddress() + start++,
+        //                                   t);
+        //        }
+        //    }
+
+        //    QVector<qint16> v = { 1 };
+        //    QModbusDataUnit u(QModbusDataUnit::Coils, 00000, 4);
+
+        if (modbus_server->setData(QModbusDataUnit::Coils, 0, true))
+            qDebug() << "i can set data";
+        else
+            qDebug() << "error writing data: " << modbus_server->errorString();
+        //    modbus_server->setData(QModbusDataUnit::Coils, 00001, 1);
+        //    modbus_server->setData(QModbusDataUnit::Coils, 00002, 1);
+        //    modbus_server->setData(QModbusDataUnit::Coils, 00003, 1);
     }
 }
 

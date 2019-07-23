@@ -18,6 +18,7 @@ class CentralWidget : public QWidget
     QLabel *lblPort;
     QLineEdit *linePort;
     QPushButton *btnConnect;
+    QPushButton *btnWrite;
     QPushButton *btnFile;
 
     std::vector<core::Block> blocks;

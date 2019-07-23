@@ -32,11 +32,23 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         }
     });
 
+    // write something
+    btnWrite = new QPushButton(this);
+    btnWrite->setText("write");
+    l->addWidget(btnWrite, 0, 3, Qt::AlignLeft);
+    l->setColumnStretch(3, 0);
+
+    connect(btnWrite, &QPushButton::clicked, this, [&]() {
+        //        for (core::Block &tb : blocks)
+        //            c->writeBlock(tb);
+        c->writeBlock(blocks[0]);
+    });
+
     // load file
     btnFile = new QPushButton(this);
     btnFile->setText("load file");
-    l->addWidget(btnFile, 0, 3, Qt::AlignLeft);
-    l->setColumnStretch(3, 1);
+    l->addWidget(btnFile, 0, 4, Qt::AlignLeft);
+    l->setColumnStretch(4, 2);
 
     // draw blocks
     connect(btnFile, &QPushButton::clicked, this, [&]() {
@@ -45,7 +57,7 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
                                          tr("json Files (*.json)"))
                 .toStdString());
 
-        c = new Connector(blocks, this);
+        c = new Connector(this);
         m = new MainSplitter(blocks, this);
 
         l->addWidget(m, 1, 0, 1, 4, Qt::AlignLeft);

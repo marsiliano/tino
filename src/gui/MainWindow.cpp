@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     all = new CentralWidget(this);
     this->setCentralWidget(all);
 
-    resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
+    resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
 }
 
 MainWindow::~MainWindow()
