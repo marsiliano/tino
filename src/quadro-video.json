@@ -1,0 +1,83 @@
+{"blocks": [
+    {
+        "name": "da QUADRO a VIDEO a sola lettura",
+        "start": 0,
+        "groups": [
+            {
+                "type": "j",
+                "bytes": [
+                    {
+                        "rw": false,
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["SND_AMB 0"]
+                    },
+                    {
+                        "rw": false,
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["SND_AMB 1"]
+                    }
+                ]
+            },
+            {
+                "type": "j",
+                "bytes": [
+                    {
+                        "rw": false,
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["SCUORE 0"]
+                    },
+                    {
+                        "rw": false,
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["SCUORE 1"]
+                    }
+                ]
+            },
+            {
+                "type": "j",
+                "bytes": [
+                    {
+                        "rw": false,
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["SCUORE2 0"]
+                    },
+                    {
+                        "rw": false,
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["SCUORE2 1"]
+                    }
+                ]
+            },
+            {
+                "type": "j",
+                "bytes": [
+                    {
+                        "rw": false,
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["SND_SOTV 0"]
+                    },
+                    {
+                        "rw": false,
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["SND_SOTV 1"]
+                    }
+                ]
+            },
+            {
+                "type": "j",
+                "bytes": [
+                    {
+                        "rw": false,
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["MED_UR 0"]
+                    },
+                    {
+                        "rw": false,
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["MED_UR 1"]
+                    }
+                ]
+            }
+        ]
+    }
+]}

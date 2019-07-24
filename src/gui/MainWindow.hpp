@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CentralWidget.hpp"
+#include "ModbusSettings.hpp"
 
 #include <QMainWindow>
 
@@ -20,4 +21,6 @@ class MainWindow : public QMainWindow
   private:
     Ui::MainWindow *ui;
     CentralWidget *all;
+
+    ModbusSettings *sett;
 };
