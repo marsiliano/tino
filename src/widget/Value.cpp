@@ -11,10 +11,7 @@ Value::Value(core::Byte val, QWidget *parent) : QWidget(parent)
     box->setMinimum(0);
     box->setMaximum(255);
 
-    double v = 0;
-    for (unsigned long i = 0; i < 8; ++i)
-        v += (val[i] ? pow(2, i) : 0);
-    box->setValue(static_cast<int>(v));
+    box->setValue(static_cast<int>(val.getInt()));
 
     l->addWidget(box, 0, Qt::AlignVCenter);
     l->addWidget(lblValue, 0, Qt::AlignVCenter);

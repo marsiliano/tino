@@ -60,6 +60,6 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         c = new Connector(this);
         m = new MainSplitter(blocks, this);
 
-        l->addWidget(m, 1, 0, 1, 4, Qt::AlignLeft);
+        l->addWidget(m, 1, 0, 1, 5, Qt::AlignLeft);
     });
 }

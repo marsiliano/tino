@@ -4,7 +4,6 @@
 
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QSpinBox>
-#include <cmath>
 
 class Value : public QWidget
 {

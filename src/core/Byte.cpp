@@ -1,5 +1,7 @@
 #include "Byte.hpp"
 
+#include <cmath>
+
 core::Byte::Byte(std::vector<bool> v, std::vector<std::string> desc, bool rw)
 {
     this->v    = v;
@@ -59,4 +61,14 @@ bool core::Byte::operator==(const core::Byte &other) const
 bool core::Byte::isMask()
 {
     return desc.size() == 1 ? false : true;
+}
+
+double core::Byte::getInt()
+{
+    double value = 0;
+
+    for (unsigned long i = 0; i < 8; ++i)
+        value += (v[i] ? pow(2, i) : 0);
+
+    return value;
 }

@@ -15,8 +15,7 @@ Joined::Joined(core::Group val, QWidget *parent) : QWidget(parent)
         lbl.emplace_back(new QLabel(QString::fromStdString(val[i].getDesc(0)),
                                     this, Qt::Widget));
         l->addWidget(lbl[i], 0, Qt::AlignVCenter);
-        for (int j = 0; j < 8; j++)
-            v += (val[i][j] ? pow(2, j) : 0);
+        v += val[i].getInt();
     }
     box->setValue(static_cast<int>(v));
 }
