@@ -12,7 +12,7 @@ Connector::Connector(QObject *parent) :
 
     QModbusDataUnitMap reg;
     reg.insert(QModbusDataUnit::HoldingRegisters,
-               { QModbusDataUnit::HoldingRegisters, 0, 999 });
+               { QModbusDataUnit::HoldingRegisters, 0, 9999 });
 
     modbus_server->setMap(reg);
 }
@@ -58,22 +58,23 @@ void Connector::endConnection()
 
 int Connector::writeBlock(core::Block &all)
 {
-    int start = -1;
+    int cont = -1;
     if (modbus_server) {
-        ++start;
+        ++cont;
         for (unsigned long i = 0; i < all.getDim(); ++i) {
             for (unsigned long j = 0; j < all[i].getDim(); ++j) {
                 if (modbus_server->setData(QModbusDataUnit::HoldingRegisters,
-                                           all.getStartAddress() + start++,
+                                           all.getStartAddress() + cont++,
                                            all[i][j].getInt()))
-                    qDebug() << "writing " << all[i][j].getInt();
+                    qDebug() << "writing " << all[i][j].getInt()
+                             << " address: " << (all.getStartAddress() + j);
                 else
                     qDebug() << "error writing data: "
                              << modbus_server->errorString();
             }
         }
     }
-    return start;
+    return cont;
 }
 
 // stocazz::stocazz(std::vector<core::Block> &all) : QModbusRtuSerialSlave()

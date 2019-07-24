@@ -15,7 +15,7 @@ struct Generator {
     static core::Group getGroup1();
     static core::Group getGroup2();
     static core::Group getGroup3();
-    static core::Block getBlock(std::string n);
+    static core::Block getBlock(int n);
 };
 
 } // namespace core

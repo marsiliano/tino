@@ -23,9 +23,9 @@ class tst_Parse : public QObject
 void tst_Parse::initTestCase()
 {
     all = {
-        core::Generator::getBlock("1"), core::Generator::getBlock("2"),
-        core::Generator::getBlock("3"), core::Generator::getBlock("4"),
-        core::Generator::getBlock("5"),
+        core::Generator::getBlock(1), core::Generator::getBlock(2),
+        core::Generator::getBlock(3), core::Generator::getBlock(4),
+        core::Generator::getBlock(5),
     };
     cmp = core::Generator::parse("/home/fsl/tino/src/conf.json");
 }
@@ -44,13 +44,14 @@ void tst_Parse::compareSize()
 void tst_Parse::compareBlockName()
 {
     for (i = 0; i < all.size(); ++i)
-        QVERIFY(all[i].getName() == cmp[i].getName());
+        QCOMPARE(QString::fromStdString(all[i].getName()),
+                 QString::fromStdString(cmp[i].getName()));
 }
 
 void tst_Parse::compareBlockNbytes()
 {
     for (i = 0; i < all.size(); ++i)
-        QVERIFY(all[i].getNbyte() == cmp[i].getNbyte());
+        QCOMPARE(all[i].getNbyte(), cmp[i].getNbyte());
 }
 
 void tst_Parse::parse()

@@ -46,7 +46,8 @@ std::vector<core::Block> core::Generator::parse(std::string name)
                 core::Group tg(b, group["type"].GetString()[0]);
                 g.push_back(tg);
             });
-        core::Block tblock(g, 0, block["name"].GetString());
+        core::Block tblock(g, block["start"].GetInt(),
+                           block["name"].GetString());
         all.push_back(tblock);
     });
     return all;
@@ -97,9 +98,10 @@ core::Group core::Generator::getGroup3()
     return g;
 }
 
-core::Block core::Generator::getBlock(std::string n)
+core::Block core::Generator::getBlock(int n)
 {
     std::vector<core::Group> vg = { getGroup1(), getGroup2(), getGroup3() };
-    core::Block bl(vg, 0, "blockname" + n);
+    QString name                = QString("blockname%1").arg(n);
+    core::Block bl(vg, (n - 1) * (vg.size() * 3), name.toStdString());
     return bl;
 }
