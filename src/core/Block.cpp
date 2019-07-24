@@ -16,7 +16,7 @@ core::Group &core::Block::operator[](long unsigned i)
     return v[i];
 }
 
-long unsigned core::Block::getDim()
+long unsigned core::Block::getDim() const
 {
     return v.size();
 }

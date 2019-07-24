@@ -1,6 +1,7 @@
 #include "GroupWidget.hpp"
 
-GroupWidget::GroupWidget(core::Group val, QWidget *parent) : QWidget(parent)
+widget::GroupWidget::GroupWidget(core::Group val, QWidget *parent) :
+    QWidget(parent)
 {
     l        = new QBoxLayout(QBoxLayout::TopToBottom, this);
     lblGroup = new QLabel(this);

@@ -11,7 +11,7 @@ class ScrollBlock : public QWidget
     ScrollBlock(core::Block val, QWidget *parent = nullptr);
 
   private:
-    BlockWidget *child;
+    widget::BlockWidget *child;
 
     QLabel *lBlock;
     QScrollArea *a;

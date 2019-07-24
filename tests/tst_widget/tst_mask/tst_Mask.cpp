@@ -1,4 +1,5 @@
-#include "../../../src/widget/Mask.hpp"
+#include "Generator.hpp"
+#include "Mask.hpp"
 
 #include <QDebug>
 #include <QtTest>
@@ -10,7 +11,7 @@ class tst_Mask : public QObject
   private:
     QString expr;
     QString expb;
-    Mask *m;
+    widget::Mask *m;
 
     QString getClr(const int i);
 
@@ -25,15 +26,8 @@ void tst_Mask::initTestCase()
     expr = "background-color:#ff0000";
     expb = "background-color:#0000ff";
 
-    std::vector<bool> v = {
-        true, false, true, false, true, false, true, false
-    };
-    std::vector<std::string> s = {
-        "prova1", "prova2", "prova3", "prova4",
-        "prova5", "prova6", "prova7", "prova8",
-    };
-    core::Byte b(v, s, false);
-    m = new Mask(b, nullptr);
+    core::Byte b = core::Generator::getByte1();
+    m            = new widget::Mask(b, nullptr);
 }
 
 QString tst_Mask::getClr(const int i)

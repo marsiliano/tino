@@ -1,6 +1,7 @@
 #include "BlockWidget.hpp"
 
-BlockWidget::BlockWidget(core::Block val, QWidget *parent) : QWidget(parent)
+widget::BlockWidget::BlockWidget(core::Block val, QWidget *parent) :
+    QWidget(parent)
 {
     l = new QBoxLayout(QBoxLayout::TopToBottom, this);
 

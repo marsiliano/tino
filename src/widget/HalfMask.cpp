@@ -1,6 +1,7 @@
 #include "HalfMask.hpp"
 
-HalfMask::HalfMask(core::Byte val, int offset, QWidget *parent) : QWidget(parent)
+widget::HalfMask::HalfMask(core::Byte val, int offset, QWidget *parent) :
+    QWidget(parent)
 {
     l = new QHBoxLayout(this);
 
@@ -11,7 +12,8 @@ HalfMask::HalfMask(core::Byte val, int offset, QWidget *parent) : QWidget(parent
         c->setClr(i);
 
         c->b[i].first->setText(QString::fromStdString(c->val.getDesc(i)));
-        connect(c->b[i].first.get(), &QPushButton::clicked, this, c->b[i].second);
+        connect(c->b[i].first.get(), &QPushButton::clicked, this,
+                c->b[i].second);
 
         l->addWidget(c->b[i].first.get(), 0, Qt::AlignLeft);
     }

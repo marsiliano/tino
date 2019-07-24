@@ -1,6 +1,6 @@
 #include "Mask.hpp"
 
-Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
+widget::Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
 {
     l = new QVBoxLayout(this);
 
@@ -10,18 +10,18 @@ Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
     }
 }
 
-bool Mask::valAt(int i)
+bool widget::Mask::valAt(int i)
 {
     return (i < 4 ? m[0]->c->val[i] : m[1]->c->val[i]);
 }
 
-QString Mask::getStyleBtn(int i)
+QString widget::Mask::getStyleBtn(int i)
 {
     return (i < 4 ? m[0]->c->b[i].first->styleSheet()
                   : m[1]->c->b[i].first->styleSheet());
 }
 
-void Mask::clickBtn(int i)
+void widget::Mask::clickBtn(int i)
 {
     i < 4 ? m[0]->c->b[i].first->click() : m[1]->c->b[i].first->click();
 }

@@ -1,5 +1,7 @@
 #include "Generator.hpp"
 
+#include <sstream>
+
 std::vector<core::Block> core::Generator::parse(std::string name)
 {
     // open the conf.json
@@ -101,7 +103,10 @@ core::Group core::Generator::getGroup3()
 core::Block core::Generator::getBlock(int n)
 {
     std::vector<core::Group> vg = { getGroup1(), getGroup2(), getGroup3() };
-    QString name                = QString("blockname%1").arg(n);
-    core::Block bl(vg, (n - 1) * (vg.size() * 3), name.toStdString());
+
+    std::stringstream stream;
+    stream << "blockname" << n;
+
+    core::Block bl(vg, (n - 1) * (vg.size() * 3), stream.str());
     return bl;
 }

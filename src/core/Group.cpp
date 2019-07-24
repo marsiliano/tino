@@ -37,7 +37,7 @@ core::Byte &core::Group::operator[](long unsigned i)
     return v[i];
 }
 
-long unsigned core::Group::getDim()
+long unsigned core::Group::getDim() const
 {
     return v.size();
 }

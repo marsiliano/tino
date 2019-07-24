@@ -1,6 +1,6 @@
 #include "BtnContainer.hpp"
 
-BtnContainer::BtnContainer()
+widget::BtnContainer::BtnContainer()
 {
     for (int i = 0; i < 8; ++i) {
         b.emplace_back(std::make_pair(
@@ -14,7 +14,7 @@ BtnContainer::BtnContainer()
     //    dell'altro
 }
 
-void BtnContainer::setClr(const int i)
+void widget::BtnContainer::setClr(const int i)
 {
     if (val[i])
         b[i].first->setStyleSheet("background-color:#ff0000;");

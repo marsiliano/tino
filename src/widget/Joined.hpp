@@ -2,6 +2,8 @@
 
 #include "Value.hpp"
 
+namespace widget
+{
 class Joined : public QWidget
 {
     Q_OBJECT
@@ -14,3 +16,4 @@ class Joined : public QWidget
     QBoxLayout *l;
     std::vector<QLabel *> lbl;
 };
+} // namespace widget

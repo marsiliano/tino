@@ -3,6 +3,8 @@
 CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
 {
     l = new QGridLayout(this);
+    m = nullptr;
+    c = nullptr;
 
     // top
     lblPort = new QLabel(this);
@@ -23,8 +25,8 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
     connect(btnConnect, &QPushButton::clicked, this, [&]() {
         if (c) {
             if (btnConnect->text() == "connect") {
-                btnConnect->setText("disconect");
-                c->startConnection(linePort->text());
+                if (c->startConnection(linePort->text()))
+                    btnConnect->setText("disconect");
             } else {
                 btnConnect->setText("connect");
                 c->endConnection();
@@ -56,12 +58,32 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
 
     // draw blocks
     connect(btnFile, &QPushButton::clicked, this, [&]() {
-        blocks = core::Generator::parse(
-            QFileDialog::getOpenFileName(this, tr("Open config"), "/",
-                                         tr("json Files (*.json)"))
-                .toStdString());
+        QString s = QFileDialog::getOpenFileName(this, tr("Open config"), "/",
+                                                 tr("json Files (*.json)"));
 
-        c = new Connector(this);
+        if (s.length() <= 0)
+            return;
+
+        blocks = core::Generator::parse(s.toStdString());
+
+        c = nullptr;
+        lblNbytes->setText("0 bytes written");
+
+        short unsigned int sz = 0;
+        for (core::Block &bl : blocks)
+            sz += static_cast<quint16>(bl.getNbyte());
+
+        if (c) {
+            c->endConnection();
+            delete c;
+        }
+
+        if (m) {
+            delete m;
+            m = nullptr;
+        }
+
+        c = new Connector(sz, this);
         m = new MainSplitter(blocks, this);
 
         l->addWidget(m, 1, 0, 1, 6, Qt::AlignLeft);

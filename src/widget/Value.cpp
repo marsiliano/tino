@@ -1,6 +1,6 @@
 #include "Value.hpp"
 
-Value::Value(core::Byte val, QWidget *parent) : QWidget(parent)
+widget::Value::Value(core::Byte val, QWidget *parent) : QWidget(parent)
 {
     l = new QBoxLayout(QBoxLayout::LeftToRight, this);
 

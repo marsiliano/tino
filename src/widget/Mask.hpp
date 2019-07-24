@@ -2,6 +2,8 @@
 
 #include "HalfMask.hpp"
 
+namespace widget
+{
 class Mask : public QWidget
 {
     Q_OBJECT
@@ -21,3 +23,4 @@ class Mask : public QWidget
 
     friend class tst_Mask;
 };
+} // namespace widget

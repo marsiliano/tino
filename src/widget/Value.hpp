@@ -5,6 +5,8 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QSpinBox>
 
+namespace widget
+{
 class Value : public QWidget
 {
     Q_OBJECT
@@ -18,3 +20,4 @@ class Value : public QWidget
     QSpinBox *box;
     QLabel *lblValue;
 };
+} // namespace widget

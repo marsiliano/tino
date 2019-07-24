@@ -1,27 +1,23 @@
 #pragma once
 #include "Block.hpp"
 
-#include <QModbusDataUnit>
+#include <QDebug>
 #include <QModbusRtuSerialSlave>
-#include <QModbusServer>
 #include <QtSerialPort/QSerialPort>
-#include <memory>
 
 // class stocazz : public QModbusRtuSerialSlave
 //{
-//  private:
-//    std::vector<core::Block> all;
-
 //  public:
-//    stocazz(std::vector<core::Block> &all);
-//    //    QModbusResponse processRequest(const QModbusPdu &request) override;
+//    stocazz(QObject *parent);
+//    QModbusResponse processRequest(const QModbusPdu &request) override;
 //};
 
 struct Connector : public QObject {
-    QModbusServer *modbus_server{ nullptr };
-    Connector(QObject *parent);
+    //    stocazz *modbus_server;
+    QModbusRtuSerialSlave *modbus_server;
+    Connector(short unsigned int sz, QObject *parent);
     ~Connector();
-    void startConnection(QString portname);
+    bool startConnection(QString portname);
     void endConnection();
     int writeBlock(core::Block &block);
 };

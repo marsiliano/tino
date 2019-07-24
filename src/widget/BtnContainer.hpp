@@ -1,14 +1,15 @@
 #pragma once
 
-#include <Block.hpp>
+#include "Block.hpp"
+
 #include <QWidgetSet>
 #include <QtWidgets/QBoxLayout>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
-#include <algorithm>
-#include <functional>
 #include <memory>
 
+namespace widget
+{
 struct BtnContainer {
     BtnContainer();
     BtnContainer(const BtnContainer &) = default;
@@ -19,3 +20,4 @@ struct BtnContainer {
 
     void setClr(const int i);
 };
+} // namespace widget

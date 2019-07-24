@@ -1,18 +1,24 @@
 ﻿#include "Connector.hpp"
 
-Connector::Connector(QObject *parent) :
-    QObject(parent), modbus_server{ nullptr }
+Connector::Connector(short unsigned int sz, QObject *parent) : QObject(parent)
 {
     modbus_server = new QModbusRtuSerialSlave(this);
 
-    if (!modbus_server) {
-        qDebug() << "modbus_server null";
-        return;
-    }
+    //    QModbusRtuSerialSlave *tmpServer = new QModbusRtuSerialSlave(this);
+    //    if (!tmpServer) {
+    //        qDebug() << "tmpServer null";
+    //        return;
+    //    }
+
+    //    modbus_server = dynamic_cast<stocazz *>(tmpServer);
+    //    if (!modbus_server) {
+    //        qDebug() << "modbus_server null";
+    //        return;
+    //    }
 
     QModbusDataUnitMap reg;
     reg.insert(QModbusDataUnit::HoldingRegisters,
-               { QModbusDataUnit::HoldingRegisters, 0, 9999 });
+               { QModbusDataUnit::HoldingRegisters, 0, sz });
 
     modbus_server->setMap(reg);
 }
@@ -25,7 +31,7 @@ Connector::~Connector()
     modbus_server = nullptr;
 }
 
-void Connector::startConnection(QString portname)
+bool Connector::startConnection(QString portname)
 {
     if (modbus_server) {
         modbus_server->setConnectionParameter(
@@ -47,7 +53,12 @@ void Connector::startConnection(QString portname)
 
         qDebug() << "error: " << modbus_server->errorString();
         qDebug() << "state: " << modbus_server->state();
+
+        return (modbus_server->state() == QModbusRtuSerialSlave::ConnectedState
+                    ? true
+                    : false);
     }
+    return false;
 }
 
 void Connector::endConnection()
@@ -67,7 +78,7 @@ int Connector::writeBlock(core::Block &all)
                                            all.getStartAddress() + cont++,
                                            all[i][j].getInt()))
                     qDebug() << "writing " << all[i][j].getInt()
-                             << " address: " << (all.getStartAddress() + j);
+                             << " address: " << (all.getStartAddress() + cont);
                 else
                     qDebug() << "error writing data: "
                              << modbus_server->errorString();
@@ -77,16 +88,14 @@ int Connector::writeBlock(core::Block &all)
     return cont;
 }
 
-// stocazz::stocazz(std::vector<core::Block> &all) : QModbusRtuSerialSlave()
-//{
-//    this->all = all;
-//}
+// stocazz::stocazz(QObject *parent) : QModbusRtuSerialSlave(parent) {}
 
 // QModbusResponse stocazz::processRequest(const QModbusPdu &request)
 //{
 //    QModbusResponse response(QModbusResponse::ReadHoldingRegisters,
 //                             request.data());
-//    Connector::writeBlock(all[request.data().toInt()]);
+//    //    Connector::writeBlock(all[request.data().toInt()]);
+//    qDebug() << "this thing actually does something";
 
 //    return response;
 //}

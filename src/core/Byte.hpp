@@ -1,6 +1,5 @@
 #pragma once
 
-#include <QDebug>
 #include <algorithm>
 #include <functional>
 #include <iostream>
@@ -31,5 +30,4 @@ class Byte
     bool isMask();
     double getInt();
 };
-
 } // namespace core

@@ -1,10 +1,9 @@
 #pragma once
 #include "Joined.hpp"
 #include "Mask.hpp"
-#include "Value.hpp"
 
-#include <QtWidgets/QLabel>
-
+namespace widget
+{
 class GroupWidget : public QWidget
 {
     Q_OBJECT
@@ -18,3 +17,4 @@ class GroupWidget : public QWidget
     QBoxLayout *l;
     QLabel *lblGroup;
 };
+} // namespace widget

@@ -1,6 +1,6 @@
 #include "Joined.hpp"
 
-Joined::Joined(core::Group val, QWidget *parent) : QWidget(parent)
+widget::Joined::Joined(core::Group val, QWidget *parent) : QWidget(parent)
 {
     l       = new QBoxLayout(QBoxLayout::LeftToRight, this);
     int dim = static_cast<int>(val.getDim());

@@ -1,6 +1,9 @@
 #pragma once
+
 #include "GroupWidget.hpp"
 
+namespace widget
+{
 class BlockWidget : public QWidget
 {
     Q_OBJECT
@@ -15,3 +18,4 @@ class BlockWidget : public QWidget
     QBoxLayout *l;
     std::vector<GroupWidget *> g;
 };
+} // namespace widget
