@@ -23,5 +23,5 @@ struct Connector : public QObject {
     ~Connector();
     void startConnection(QString portname);
     void endConnection();
-    void writeBlock(core::Block &block);
+    int writeBlock(core::Block &block);
 };

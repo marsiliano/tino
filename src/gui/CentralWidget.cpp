@@ -39,16 +39,20 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
     l->setColumnStretch(3, 0);
 
     connect(btnWrite, &QPushButton::clicked, this, [&]() {
-        //        for (core::Block &tb : blocks)
-        //            c->writeBlock(tb);
-        c->writeBlock(blocks[0]);
+        nBytes = 0;
+
+        for (core::Block &tb : blocks)
+            nBytes += c->writeBlock(tb);
+
+        QString s = QString("%1 bytes written").arg(nBytes);
+        lblNbytes->setText(s);
     });
 
     // load file
     btnFile = new QPushButton(this);
     btnFile->setText("load file");
     l->addWidget(btnFile, 0, 4, Qt::AlignLeft);
-    l->setColumnStretch(4, 2);
+    l->setColumnStretch(4, 0);
 
     // draw blocks
     connect(btnFile, &QPushButton::clicked, this, [&]() {
@@ -60,6 +64,12 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         c = new Connector(this);
         m = new MainSplitter(blocks, this);
 
-        l->addWidget(m, 1, 0, 1, 5, Qt::AlignLeft);
+        l->addWidget(m, 1, 0, 1, 6, Qt::AlignLeft);
     });
+
+    // nBytes
+    lblNbytes = new QLabel(this);
+    lblNbytes->setText("0 bytes written");
+    l->addWidget(lblNbytes, 0, 5, Qt::AlignLeft);
+    l->setColumnStretch(5, 2);
 }

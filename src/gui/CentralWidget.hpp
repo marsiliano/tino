@@ -20,9 +20,12 @@ class CentralWidget : public QWidget
     QPushButton *btnConnect;
     QPushButton *btnWrite;
     QPushButton *btnFile;
+    QLabel *lblNbytes;
 
     std::vector<core::Block> blocks;
     Connector *c;
 
     MainSplitter *m;
+
+    int nBytes;
 };

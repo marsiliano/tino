@@ -11,13 +11,8 @@ Connector::Connector(QObject *parent) :
     }
 
     QModbusDataUnitMap reg;
-    reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 10 });
-    reg.insert(QModbusDataUnit::DiscreteInputs,
-               { QModbusDataUnit::DiscreteInputs, 0, 999 });
-    reg.insert(QModbusDataUnit::InputRegisters,
-               { QModbusDataUnit::InputRegisters, 0, 10 });
     reg.insert(QModbusDataUnit::HoldingRegisters,
-               { QModbusDataUnit::HoldingRegisters, 0, 10 });
+               { QModbusDataUnit::HoldingRegisters, 0, 999 });
 
     modbus_server->setMap(reg);
 }
@@ -61,31 +56,24 @@ void Connector::endConnection()
         modbus_server->disconnectDevice();
 }
 
-void Connector::writeBlock(core::Block &all)
+int Connector::writeBlock(core::Block &all)
 {
+    int start = -1;
     if (modbus_server) {
-        int start = 0;
+        ++start;
         for (unsigned long i = 0; i < all.getDim(); ++i) {
             for (unsigned long j = 0; j < all[i].getDim(); ++j) {
-                int t = 0;
-
-                for (unsigned long k = 0; k < 8; ++k)
-                    t += all[i][j][k] ? 2 ^ k : 0;
                 if (modbus_server->setData(QModbusDataUnit::HoldingRegisters,
-                                           all.getStartAddress() + start++, t))
-                    qDebug() << "i can set data";
+                                           all.getStartAddress() + start++,
+                                           all[i][j].getInt()))
+                    qDebug() << "writing " << all[i][j].getInt();
                 else
                     qDebug() << "error writing data: "
                              << modbus_server->errorString();
             }
         }
-
-        //        if (modbus_server->setData(QModbusDataUnit::Coils, 0, true))
-        //            qDebug() << "i can set data";
-        //        else
-        //            qDebug() << "error writing data: " <<
-        //            modbus_server->errorString();
     }
+    return start;
 }
 
 // stocazz::stocazz(std::vector<core::Block> &all) : QModbusRtuSerialSlave()
