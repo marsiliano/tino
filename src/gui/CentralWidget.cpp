@@ -28,7 +28,7 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
             if (btnConnect->text() == "connect") {
                 if (c->startConnection(linePort->text(), filename))
                     btnConnect->setText("disconect");
-                linePort->setText(c->linePortText);
+                linePort->setText(c->getLinePortText());
             } else {
                 btnConnect->setText("connect");
                 c->endConnection();
@@ -46,8 +46,8 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
     connect(btnWrite, &QPushButton::clicked, this, [&]() {
         nBytes = 0;
 
-        for (core::Block &tb : blocks)
-            nBytes += c->writeBlock(tb);
+        for (long unsigned int i = 0; i < blocks.size(); ++i)
+            nBytes += c->writeBlock(i);
 
         QString s = QString("%1 bytes written").arg(nBytes);
         lblNbytes->setText(s);
@@ -76,10 +76,6 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         if (blocks.size() <= 0)
             return;
 
-        short unsigned int sz = 0;
-        for (core::Block &bl : blocks)
-            sz += static_cast<quint16>(bl.getNbyte());
-
         if (c) {
             c->endConnection();
             delete c;
@@ -89,7 +85,7 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
             delete m;
             m = nullptr;
         }
-        c = new Connector(blocks[0].getStartAddress(), sz, this);
+        c = new Connector(&blocks, this);
         m = new MainSplitter(blocks, this);
 
         l->addWidget(m, 1, 0, 1, 6, Qt::AlignLeft);

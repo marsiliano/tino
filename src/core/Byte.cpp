@@ -1,5 +1,6 @@
 #include "Byte.hpp"
 
+#include <QDebug>
 #include <cmath>
 
 core::Byte::Byte(std::vector<bool> v, std::vector<std::string> desc, bool rw)
@@ -63,12 +64,22 @@ bool core::Byte::isMask()
     return desc.size() == 1 ? false : true;
 }
 
-double core::Byte::getInt()
+int core::Byte::getInt()
 {
     double value = 0;
 
     for (unsigned long i = 0; i < 8; ++i)
         value += (v[i] ? pow(2, i) : 0);
 
-    return value;
+    return static_cast<int>(value);
+}
+
+void core::Byte::setInt(int n)
+{
+    for (int i = 7; i >= 0; --i) {
+        v[i] = (n > 0) && (n % 2 == 1);
+        n /= 2;
+
+        qDebug() << (v[i] ? "1" : "0") << "i: " << i << " n: " << n;
+    }
 }

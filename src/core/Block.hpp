@@ -9,13 +9,13 @@ class Block
   private:
     std::vector<core::Group> v;
     std::string name;
-    int startAddress;
+    int start;
 
   public:
-    Block(std::vector<core::Group> v, int startAddress, std::string name);
+    Block(std::vector<core::Group> v, int start, std::string name);
     ~Block()             = default;
     Block(const Block &) = default;
-    int getStartAddress();
+    int getStart();
     core::Group &operator[](long unsigned i);
     long unsigned getDim() const;
     std::string getName();

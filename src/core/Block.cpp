@@ -3,9 +3,9 @@
 core::Block::Block(std::vector<core::Group> v, int startAddress,
                    std::string name)
 {
-    this->v            = v;
-    this->name         = name;
-    this->startAddress = startAddress;
+    this->v     = v;
+    this->name  = name;
+    this->start = startAddress;
 }
 std::string core::Block::getName()
 {
@@ -42,9 +42,9 @@ core::Block &core::Block::operator=(const core::Block &other)
     return *this;
 }
 
-int core::Block::getStartAddress()
+int core::Block::getStart()
 {
-    return startAddress;
+    return start;
 }
 
 int core::Block::getNbyte()

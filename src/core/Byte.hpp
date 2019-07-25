@@ -28,6 +28,7 @@ class Byte
     void set(long unsigned i);
     bool operator==(const Byte &other) const;
     bool isMask();
-    double getInt();
+    int getInt();
+    void setInt(int n);
 };
 } // namespace core

@@ -22,6 +22,7 @@ struct Settings {
 namespace core
 {
 struct Generator {
+    Generator() = delete;
     static std::vector<core::Block> parse(std::string name);
     static rapidjson::Document getDocument(std::string name);
     static Settings getSettings(std::string name);

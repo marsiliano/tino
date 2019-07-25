@@ -2,6 +2,7 @@
 #include "Generator.hpp"
 
 #include <QDebug>
+#include <QModbusRtuSerialMaster>
 #include <QModbusRtuSerialSlave>
 #include <QtSerialPort/QSerialPort>
 
@@ -12,13 +13,20 @@
 //    QModbusResponse processRequest(const QModbusPdu &request) override;
 //};
 
-struct Connector : public QObject {
-    //    stocazz *modbus_server;
-    QModbusRtuSerialSlave *modbus_server;
-    Connector(short unsigned int strt, short unsigned int sz, QObject *parent);
+class Connector : public QObject
+{
+  private:
+    QModbusRtuSerialSlave *server;
+    QString linePortText;
+    std::vector<core::Block> *all;
+
+  public:
+    Connector(std::vector<core::Block> *v, QObject *parent);
     ~Connector();
+
     bool startConnection(QString portname, std::string filename);
     void endConnection();
-    int writeBlock(core::Block &block);
-    QString linePortText;
+
+    int writeBlock(int a);
+    QString getLinePortText();
 };
