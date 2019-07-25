@@ -83,6 +83,7 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         if (c) {
             c->endConnection();
             delete c;
+            c = nullptr;
         }
         if (m) {
             delete m;

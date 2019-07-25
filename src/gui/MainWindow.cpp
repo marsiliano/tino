@@ -31,9 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
     all = new CentralWidget(this);
     this->setCentralWidget(all);
 
-    sett = new ModbusSettings(this);
-    //    sett->show();
-
     resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
 }
 
