@@ -1,5 +1,5 @@
 #pragma once
-#include "Generator.hpp"
+#include "Parser.hpp"
 
 #include <QDebug>
 #include <QModbusRtuSerialMaster>

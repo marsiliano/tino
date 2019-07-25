@@ -1,6 +1,5 @@
 #pragma once
 #include "Connector.hpp"
-#include "Generator.hpp"
 #include "ScrollBlock.hpp"
 
 #include <QFileDialog>

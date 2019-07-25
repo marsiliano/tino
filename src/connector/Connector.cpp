@@ -54,7 +54,7 @@ Connector::~Connector()
 
 bool Connector::startConnection(QString portname, std::string filename)
 {
-    auto s = core::Generator::getSettings(filename);
+    auto s = core::Parser::getSettings(filename);
 
     if (portname.length() <= 0)
         portname = QString::fromStdString(s.portName);

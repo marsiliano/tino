@@ -1,5 +1,7 @@
-#include "MainWindow.hpp"
+#include "Parser.hpp"
+#include "Generator.hpp"
 
+#include <fstream>
 #include <QDebug>
 #include <QtTest>
 
@@ -30,7 +32,7 @@ void tst_Parse::initTestCase()
         core::Generator::getBlock(3), core::Generator::getBlock(4),
         core::Generator::getBlock(5),
     };
-    cmp = core::Generator::parse(filename);
+    cmp = core::Parser::parse(filename);
 }
 
 void tst_Parse::tst_load()

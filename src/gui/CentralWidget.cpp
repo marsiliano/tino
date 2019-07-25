@@ -68,7 +68,7 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         if (filename.length() <= 0)
             return;
 
-        blocks = core::Generator::parse(filename);
+        blocks = core::Parser::parse(filename);
 
         c = nullptr;
         lblNbytes->setText("0 bytes written");
