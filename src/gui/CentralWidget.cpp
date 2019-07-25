@@ -2,9 +2,10 @@
 
 CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
 {
-    l = new QGridLayout(this);
-    m = nullptr;
-    c = nullptr;
+    l        = new QGridLayout(this);
+    m        = nullptr;
+    c        = nullptr;
+    filename = "";
 
     // top
     lblPort = new QLabel(this);
@@ -25,12 +26,14 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
     connect(btnConnect, &QPushButton::clicked, this, [&]() {
         if (c) {
             if (btnConnect->text() == "connect") {
-                if (c->startConnection(linePort->text()))
+                if (c->startConnection(linePort->text(), filename))
                     btnConnect->setText("disconect");
+                linePort->setText(c->linePortText);
             } else {
                 btnConnect->setText("connect");
                 c->endConnection();
             }
+            lblNbytes->setText("0 bytes written");
         }
     });
 
@@ -58,16 +61,20 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
 
     // draw blocks
     connect(btnFile, &QPushButton::clicked, this, [&]() {
-        QString s = QFileDialog::getOpenFileName(this, tr("Open config"), "/",
-                                                 tr("json Files (*.json)"));
+        filename = QFileDialog::getOpenFileName(this, tr("Open config"), "/",
+                                                tr("json Files (*.json)"))
+                       .toStdString();
 
-        if (s.length() <= 0)
+        if (filename.length() <= 0)
             return;
 
-        blocks = core::Generator::parse(s.toStdString());
+        blocks = core::Generator::parse(filename);
 
         c = nullptr;
         lblNbytes->setText("0 bytes written");
+
+        if (blocks.size() <= 0)
+            return;
 
         short unsigned int sz = 0;
         for (core::Block &bl : blocks)
@@ -77,13 +84,11 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
             c->endConnection();
             delete c;
         }
-
         if (m) {
             delete m;
             m = nullptr;
         }
-
-        c = new Connector(sz, this);
+        c = new Connector(blocks[0].getStartAddress(), sz, this);
         m = new MainSplitter(blocks, this);
 
         l->addWidget(m, 1, 0, 1, 6, Qt::AlignLeft);

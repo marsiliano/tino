@@ -1,4 +1,14 @@
-{"blocks": [
+{
+    "settings":
+    {
+        "portName": "/dev/pts/1",
+        "Parity": 0,
+        "BaudRate": 57600,
+        "DataBits": 8,
+        "StopBits": 1,
+        "ServerAddress": 1
+    },
+    "blocks": [
     {
         "name": "da QUADRO a VIDEO a sola lettura",
         "start": 0,

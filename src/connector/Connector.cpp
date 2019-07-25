@@ -1,6 +1,8 @@
 ﻿#include "Connector.hpp"
 
-Connector::Connector(short unsigned int sz, QObject *parent) : QObject(parent)
+Connector::Connector(short unsigned int strt, short unsigned int sz,
+                     QObject *parent) :
+    QObject(parent)
 {
     modbus_server = new QModbusRtuSerialSlave(this);
 
@@ -17,8 +19,10 @@ Connector::Connector(short unsigned int sz, QObject *parent) : QObject(parent)
     //    }
 
     QModbusDataUnitMap reg;
+    std::cout << "strt: " << strt << std::endl;
+    std::cout << "sz: " << sz << std::endl;
     reg.insert(QModbusDataUnit::HoldingRegisters,
-               { QModbusDataUnit::HoldingRegisters, 0, sz });
+               { QModbusDataUnit::HoldingRegisters, strt, sz });
 
     modbus_server->setMap(reg);
 }
@@ -31,20 +35,28 @@ Connector::~Connector()
     modbus_server = nullptr;
 }
 
-bool Connector::startConnection(QString portname)
+bool Connector::startConnection(QString portname, std::string filename)
 {
-    if (modbus_server) {
+    auto s = core::Generator::getSettings(filename);
+
+    if (portname.length() <= 0)
+        portname = QString::fromStdString(s.portName);
+    //    else take the portname from the textbox
+
+    linePortText = portname;
+
+    if (modbus_server && portname.length() > 0) {
         modbus_server->setConnectionParameter(
             QModbusDevice::SerialPortNameParameter, portname);
         modbus_server->setConnectionParameter(
-            QModbusDevice::SerialParityParameter, QSerialPort::EvenParity);
+            QModbusDevice::SerialParityParameter, s.Parity);
         modbus_server->setConnectionParameter(
-            QModbusDevice::SerialBaudRateParameter, QSerialPort::Baud57600);
+            QModbusDevice::SerialBaudRateParameter, s.BaudRate);
         modbus_server->setConnectionParameter(
-            QModbusDevice::SerialDataBitsParameter, QSerialPort::Data8);
+            QModbusDevice::SerialDataBitsParameter, s.DataBits);
         modbus_server->setConnectionParameter(
-            QModbusDevice::SerialStopBitsParameter, QSerialPort::OneStop);
-        modbus_server->setServerAddress(1);
+            QModbusDevice::SerialStopBitsParameter, s.StopBits);
+        modbus_server->setServerAddress(s.ServerAddress);
 
         if (!modbus_server->connectDevice())
             qDebug() << "cannot connect ";
@@ -57,7 +69,7 @@ bool Connector::startConnection(QString portname)
         return (modbus_server->state() == QModbusRtuSerialSlave::ConnectedState
                     ? true
                     : false);
-    }
+    } // end if (modbus_server && portname.length() > 0)
     return false;
 }
 
@@ -75,13 +87,14 @@ int Connector::writeBlock(core::Block &all)
         for (unsigned long i = 0; i < all.getDim(); ++i) {
             for (unsigned long j = 0; j < all[i].getDim(); ++j) {
                 if (modbus_server->setData(QModbusDataUnit::HoldingRegisters,
-                                           all.getStartAddress() + cont++,
+                                           all.getStartAddress() + cont,
                                            all[i][j].getInt()))
                     qDebug() << "writing " << all[i][j].getInt()
                              << " address: " << (all.getStartAddress() + cont);
                 else
-                    qDebug() << "error writing data: "
+                    qDebug() << "error writing data: " << cont << " "
                              << modbus_server->errorString();
+                ++cont;
             }
         }
     }

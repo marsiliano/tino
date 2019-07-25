@@ -24,6 +24,7 @@ class CentralWidget : public QWidget
 
     std::vector<core::Block> blocks;
     Connector *c;
+    std::string filename;
 
     MainSplitter *m;
 

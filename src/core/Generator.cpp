@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-std::vector<core::Block> core::Generator::parse(std::string name)
+rapidjson::Document core::Generator::getDocument(std::string name)
 {
     // open the conf.json
     std::ifstream conf(name, std::ios::in);
@@ -17,7 +17,13 @@ std::vector<core::Block> core::Generator::parse(std::string name)
     rapidjson::Document d;
     d.Parse(s.c_str());
 
-    const auto &blocks = d["blocks"]; // get the main object
+    return d;
+}
+
+std::vector<core::Block> core::Generator::parse(std::string name)
+{
+    rapidjson::Document d = core::Generator::getDocument(name);
+    const auto &blocks    = d["blocks"]; // get the main object
 
     std::vector<core::Block> all;
 
@@ -53,6 +59,21 @@ std::vector<core::Block> core::Generator::parse(std::string name)
         all.push_back(tblock);
     });
     return all;
+}
+
+Settings core::Generator::getSettings(std::string name)
+{
+    rapidjson::Document d = core::Generator::getDocument(name);
+    const auto &settings  = d["settings"]; // get the main object
+
+    Settings s;
+    s.portName      = settings["portName"].GetString();
+    s.Parity        = settings["Parity"].GetInt();
+    s.BaudRate      = settings["BaudRate"].GetInt();
+    s.DataBits      = settings["DataBits"].GetInt();
+    s.StopBits      = settings["StopBits"].GetInt();
+    s.ServerAddress = settings["ServerAddress"].GetInt();
+    return s;
 }
 
 core::Byte core::Generator::getByte1()
@@ -110,3 +131,12 @@ core::Block core::Generator::getBlock(int n)
     core::Block bl(vg, (n - 1) * (vg.size() * 3), stream.str());
     return bl;
 }
+
+// template<typename T> std::string intToHex(T i)
+//{
+//    std::stringstream stream;
+//    stream << "0x" << std::setfill('0') << std::setw(sizeof(T) * 2) <<
+//    std::hex
+//           << i;
+//    return stream.str();
+//}
