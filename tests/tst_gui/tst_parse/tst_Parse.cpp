@@ -10,6 +10,7 @@ class tst_Parse : public QObject
     std::vector<core::Block> all;
     std::vector<core::Block> cmp;
     long unsigned int i;
+    std::string filename;
 
   private slots:
     void initTestCase();
@@ -22,17 +23,19 @@ class tst_Parse : public QObject
 
 void tst_Parse::initTestCase()
 {
+    filename = "../../../../tino/jsons/conf.json";
+    //you should look at the path relative to the tst_gui executable
     all = {
         core::Generator::getBlock(1), core::Generator::getBlock(2),
         core::Generator::getBlock(3), core::Generator::getBlock(4),
         core::Generator::getBlock(5),
     };
-    cmp = core::Generator::parse("/home/fsl/tino/src/conf.json");
+    cmp = core::Generator::parse(filename);
 }
 
 void tst_Parse::tst_load()
 {
-    std::ifstream conf("/home/fsl/tino/src/conf.json", std::ios::in);
+    std::ifstream conf(filename, std::ios::in);
     QVERIFY(conf.is_open());
 }
 
