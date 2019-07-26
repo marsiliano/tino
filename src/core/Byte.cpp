@@ -3,11 +3,13 @@
 #include <QDebug>
 #include <cmath>
 
-core::Byte::Byte(std::vector<bool> v, std::vector<std::string> desc, bool rw)
+core::Byte::Byte(std::vector<bool> v, std::vector<std::string> desc, bool rw,
+                 std::string name)
 {
     this->v    = v;
     this->desc = desc;
     this->rw   = rw;
+    this->name = name;
 }
 
 std::string core::Byte::getDesc(long unsigned i)
@@ -27,18 +29,26 @@ bool core::Byte::getRw()
 {
     return rw;
 }
+
+std::string core::Byte::getName()
+{
+    return name;
+}
+
 core::Byte &core::Byte::operator=(const core::Byte &other)
 {
     this->v    = other.v;
     this->rw   = other.rw;
     this->desc = other.desc;
+    this->name = other.name;
 
     return *this;
 }
 
 bool core::Byte::operator==(const core::Byte &other) const
 {
-    if ((rw != other.rw) || (desc.size() != other.desc.size()))
+    if ((name != other.name) || (rw != other.rw) ||
+        (desc.size() != other.desc.size()))
         return false;
 
     unsigned long i = 0;
@@ -61,13 +71,13 @@ bool core::Byte::operator==(const core::Byte &other) const
 
 bool core::Byte::isMask()
 {
-    return desc.size() == 1 ? false : true;
+    return (desc.size() == 0);
 }
 
 int core::Byte::getInt()
 {
     double value = 0;
-    int cont = 0;
+    int cont     = 0;
 
     for (int i = 7; i >= 0; --i)
         value += (v[cont++] ? pow(2, i) : 0);

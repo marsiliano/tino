@@ -3,6 +3,9 @@
 widget::Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
 {
     l = new QVBoxLayout(this);
+    lblName =
+        new QLabel(QString::fromStdString(val.getName()), this, Qt::Widget);
+    l->addWidget(lblName, Qt::AlignVCenter);
 
     for (int i = 0; i < 2; ++i) {
         m.push_back(new HalfMask(val, i * 4, this));

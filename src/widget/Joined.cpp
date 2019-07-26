@@ -12,7 +12,7 @@ widget::Joined::Joined(core::Group val, QWidget *parent) : QWidget(parent)
 
     long v = 0;
     for (int i = 0; i < dim; ++i) {
-        lbl.emplace_back(new QLabel(QString::fromStdString(val[i].getDesc(0)),
+        lbl.emplace_back(new QLabel(QString::fromStdString(val[i].getName()),
                                     this, Qt::Widget));
         l->addWidget(lbl[i], 0, Qt::AlignVCenter);
         v += val[i].getInt();

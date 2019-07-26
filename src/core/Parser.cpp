@@ -48,7 +48,8 @@ std::vector<core::Block> core::Parser::parse(std::string name)
                              l < static_cast<int>(byte["desc"].Size()); ++l)
                             s.push_back(byte["desc"][l].GetString());
 
-                        core::Byte tb(v, s, byte["rw"].GetBool());
+                        core::Byte tb(v, s, byte["rw"].GetBool(),
+                                      byte["name"].GetString());
                         b.push_back(tb);
                     });
                 core::Group tg(b, group["type"].GetString()[0]);

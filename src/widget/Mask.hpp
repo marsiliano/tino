@@ -2,6 +2,8 @@
 
 #include "HalfMask.hpp"
 
+#include <QLabel>
+
 namespace widget
 {
 class Mask : public QWidget
@@ -20,6 +22,7 @@ class Mask : public QWidget
   private:
     QVBoxLayout *l;
     std::vector<HalfMask *> m;
+    QLabel *lblName;
 
     friend class tst_Mask;
 };

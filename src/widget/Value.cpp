@@ -3,9 +3,8 @@
 widget::Value::Value(core::Byte val, QWidget *parent) : QWidget(parent)
 {
     l = new QBoxLayout(QBoxLayout::LeftToRight, this);
-
     lblValue =
-        new QLabel(QString::fromStdString(val.getDesc(0)), this, Qt::Widget);
+        new QLabel(QString::fromStdString(val.getName()), this, Qt::Widget);
 
     box = new QSpinBox(this);
     box->setMinimum(0);

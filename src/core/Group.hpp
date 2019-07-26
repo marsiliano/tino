@@ -13,12 +13,10 @@ class Group
 
   public:
     Group(std::vector<Byte> v, char type);
-    Group(std::vector<bool> v, std::vector<std::string> description, bool rw,
-          char type);
     ~Group()             = default;
     Group(const Group &) = default;
-    void add(std::vector<bool> v, std::vector<std::string> description,
-             bool rw);
+    void add(std::vector<bool> vect, std::vector<std::string> description,
+             bool rw, std::string name);
     char getType();
     Byte &operator[](long unsigned i);
     long unsigned getDim() const;

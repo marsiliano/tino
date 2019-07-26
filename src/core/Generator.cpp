@@ -12,7 +12,7 @@ core::Byte core::Generator::getByte1(bool rw)
         "bitname5", "bitname6", "bitname7", "bitname8",
     };
 
-    core::Byte b(v, s, rw);
+    core::Byte b(v, s, rw, "bytename");
     return b;
 }
 
@@ -21,9 +21,9 @@ core::Byte core::Generator::getByte2(bool rw)
     std::vector<bool> v = {
         true, false, true, false, true, false, true, false
     };
-    std::vector<std::string> s = { "bytename" };
+    std::vector<std::string> s = {};
 
-    core::Byte b(v, s, rw);
+    core::Byte b(v, s, rw, "bytename");
     return b;
 }
 

@@ -8,16 +8,19 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     }
@@ -28,18 +31,21 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     }
                 ]
             },
@@ -48,18 +54,21 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     }
                 ]
             }
@@ -74,16 +83,19 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     }
@@ -94,18 +106,21 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     }
                 ]
             },
@@ -114,18 +129,21 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     }
                 ]
             }
@@ -140,16 +158,19 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     }
@@ -160,18 +181,21 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     }
                 ]
             },
@@ -180,18 +204,21 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     }
                 ]
             }
@@ -206,16 +233,19 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     }
@@ -226,18 +256,21 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     }
                 ]
             },
@@ -246,18 +279,21 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     }
                 ]
             }
@@ -272,16 +308,19 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
                         "desc": ["bitname1", "bitname2", "bitname3", "bitname4", "bitname5", "bitname6", "bitname7", "bitname8"]
                     }
@@ -292,18 +331,21 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     }
                 ]
             },
@@ -312,18 +354,21 @@
                 "bytes": [
                     {
                         "rw": false,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     },
                     {
                         "rw": true,
+                        "name": "bytename",
                         "values": [true, false, true, false, true, false, true, false],
-                        "desc": ["bytename"]
+                        "desc": []
                     }
                 ]
             }

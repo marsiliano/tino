@@ -12,19 +12,12 @@ core::Group::Group(std::vector<Byte> v, char type)
     this->type = type;
 }
 
-core::Group::Group(std::vector<bool> v, /*std::tring name,*/
-                   std::vector<std::string> description, bool rw, char type)
+void core::Group::add(std::vector<bool> vect,
+                      std::vector<std::string> description, bool rw,
+                      std::string name)
 {
-    this->type = type = type;
-    this->add(v, description, rw);
-    //    this->name = name;
-}
-
-void core::Group::add(std::vector<bool> v, std::vector<std::string> description,
-                      bool rw)
-{
-    core::Byte tv(v, description, rw);
-    this->v[v.size() - 1] = tv;
+    core::Byte tv(vect, description, rw, name);
+    this->v[this->v.size() - 1] = tv;
 }
 
 char core::Group::getType()
