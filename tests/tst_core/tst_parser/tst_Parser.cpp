@@ -1,11 +1,11 @@
-#include "Parser.hpp"
 #include "Generator.hpp"
+#include "Parser.hpp"
 
-#include <fstream>
 #include <QDebug>
 #include <QtTest>
+#include <fstream>
 
-class tst_Parse : public QObject
+class tst_Parser : public QObject
 {
     Q_OBJECT
   private:
@@ -23,10 +23,10 @@ class tst_Parse : public QObject
     void parse();
 };
 
-void tst_Parse::initTestCase()
+void tst_Parser::initTestCase()
 {
     filename = "../../../../tino/jsons/conf.json";
-    //you should look at the path relative to the tst_gui executable
+    // you should look at the path relative to the tst_gui executable
     all = {
         core::Generator::getBlock(1), core::Generator::getBlock(2),
         core::Generator::getBlock(3), core::Generator::getBlock(4),
@@ -35,36 +35,36 @@ void tst_Parse::initTestCase()
     cmp = core::Parser::parse(filename);
 }
 
-void tst_Parse::tst_load()
+void tst_Parser::tst_load()
 {
     std::ifstream conf(filename, std::ios::in);
     QVERIFY(conf.is_open());
 }
 
-void tst_Parse::compareSize()
+void tst_Parser::compareSize()
 {
     QCOMPARE(all.size(), cmp.size());
 }
 
-void tst_Parse::compareBlockName()
+void tst_Parser::compareBlockName()
 {
     for (i = 0; i < all.size(); ++i)
         QCOMPARE(QString::fromStdString(all[i].getName()),
                  QString::fromStdString(cmp[i].getName()));
 }
 
-void tst_Parse::compareBlockNbytes()
+void tst_Parser::compareBlockNbytes()
 {
     for (i = 0; i < all.size(); ++i)
         QCOMPARE(all[i].getNbyte(), cmp[i].getNbyte());
 }
 
-void tst_Parse::parse()
+void tst_Parser::parse()
 {
     for (i = 0; i < all.size(); ++i)
         QVERIFY(all[i] == cmp[i]);
 }
 
-QTEST_MAIN(tst_Parse)
+QTEST_MAIN(tst_Parser)
 
-#include "tst_Parse.moc"
+#include "tst_Parser.moc"
