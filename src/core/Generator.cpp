@@ -57,6 +57,6 @@ core::Block core::Generator::getBlock(int n)
     std::stringstream stream;
     stream << "blockname" << n;
 
-    core::Block bl(vg, (n - 1) * (vg.size() * 3), stream.str());
+    core::Block bl(vg, (n - 1) * (static_cast<int>(vg.size()) * 3), stream.str());
     return bl;
 }

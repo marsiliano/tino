@@ -28,9 +28,9 @@ class Connector : public QObject
     bool startConnection(QString portname, std::string filename);
     void endConnection();
 
-    int writeBlock(int a);
+    int writeBlock(long unsigned int a);
     QString getLinePortText();
 
   signals:
-    void updateBlockReq(int);
+    void updateBlockReq(long unsigned int);
 };

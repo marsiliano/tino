@@ -35,8 +35,8 @@ Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
                 qDebug() << "data were written: "
                          << "address: " << address << ", size: " << size;
 
-                for (int i = 0; i < u.valueCount(); ++i) {
-                    int j = 0;
+                for (long unsigned int i = 0; i < u.valueCount(); ++i) {
+                    long unsigned int j = 0;
 
                     while ((*all)[j].getStart() < u.startAddress())
                         ++j;
@@ -98,7 +98,7 @@ void Connector::endConnection()
         server->disconnectDevice();
 }
 
-int Connector::writeBlock(int a)
+int Connector::writeBlock(long unsigned int a)
 {
     int cont = -1;
     if (server) {

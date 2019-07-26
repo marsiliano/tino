@@ -62,7 +62,7 @@ bool core::Block::setIntAtAddress(int values, int address)
 {
     int cont = this->start;
 
-    int i = 0, j;
+    unsigned long int i = 0, j;
 
     while (i < v.size()) { // scroll groups
         j = 0;

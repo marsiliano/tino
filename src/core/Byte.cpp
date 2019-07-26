@@ -77,7 +77,7 @@ bool core::Byte::isMask()
 int core::Byte::getInt()
 {
     double value = 0;
-    int cont     = 0;
+    unsigned long int cont = 0;
 
     for (int i = 7; i >= 0; --i)
         value += (v[cont++] ? pow(2, i) : 0);
@@ -88,7 +88,7 @@ int core::Byte::getInt()
 void core::Byte::setInt(int n)
 {
     for (int i = 7; i >= 0; --i) {
-        v[i] = (n > 0) && (n % 2 == 1);
+        v[static_cast<unsigned long int>(i)] = (n > 0) && (n % 2 == 1);
         n /= 2;
     }
 }
