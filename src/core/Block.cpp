@@ -1,11 +1,10 @@
 #include "Block.hpp"
 
-core::Block::Block(std::vector<core::Group> v, int startAddress,
-                   std::string name)
+core::Block::Block(std::vector<core::Group> v, int start, std::string name)
 {
     this->v     = v;
     this->name  = name;
-    this->start = startAddress;
+    this->start = start;
 }
 std::string core::Block::getName()
 {
@@ -23,7 +22,8 @@ long unsigned core::Block::getDim() const
 
 bool core::Block::operator==(const core::Block &other) const
 {
-    if ((name != other.name) || (v.size() != other.v.size()))
+    if ((name != other.name) || (v.size() != other.v.size()) ||
+        (start != other.start))
         return false;
 
     long unsigned i = 0;
@@ -38,7 +38,8 @@ core::Block &core::Block::operator=(const core::Block &other)
 {
     this->v = other.v;
 
-    name = other.name;
+    name  = other.name;
+    start = other.start;
     return *this;
 }
 
@@ -55,4 +56,29 @@ int core::Block::getNbyte()
                   [&n](core::Group &g) { n += g.getDim(); });
 
     return n;
+}
+
+bool core::Block::setIntAtAddress(int values, int address)
+{
+    int cont = this->start;
+
+    int i = 0, j;
+
+    while (i < v.size()) { // scroll groups
+        j = 0;
+
+        while (j < v[i].getDim()) { // scroll bytes
+
+            if (cont == address) {
+                v[i][j].setInt(values);
+                std::cout << "expecting " << values << ": " << v[i][j].getInt();
+                return true;
+            }
+            ++cont;
+            ++j;
+        }
+        ++i;
+    }
+    std::cout << "End";
+    return false;
 }

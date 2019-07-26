@@ -37,10 +37,16 @@ Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
     //            size) {
     //                QModbusDataUnit u(table, start, size);
 
-    //                for (int cont = 0; cont < size; ++cont) {
-    //                    u.value(cont);
+    //                int i = 0;
 
+    //                while (i < all->size() && (*all)[i].getStart() != start) {
     //                }
+
+    //                for (i = 0;; ++i)
+
+    //                    for (int cont = 0; cont < size; ++cont) {
+    //                        u.value(cont);
+    //                    }
     //            });
 }
 

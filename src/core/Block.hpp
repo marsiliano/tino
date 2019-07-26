@@ -22,6 +22,7 @@ class Block
     int getNbyte();
     bool operator==(const Block &other) const;
     Block &operator=(const Block &other);
+    bool setIntAtAddress(int values, int address);
 };
 
 } // namespace core
