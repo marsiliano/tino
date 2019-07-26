@@ -26,7 +26,7 @@ void tst_Mask::initTestCase()
     expr = "background-color:#ff0000";
     expb = "background-color:#0000ff";
 
-    core::Byte b = core::Generator::getByte1();
+    core::Byte b = core::Generator::getByte1(true);
     m            = new widget::Mask(b, nullptr);
 }
 
@@ -39,12 +39,8 @@ QString tst_Mask::getClr(const int i)
 
 void tst_Mask::tst_color()
 {
-    for (int i = 0; i < 8; ++i) {
-        if (i % 2 == 0)
-            QCOMPARE(getClr(i), expr);
-        else
-            QCOMPARE(getClr(i), expb);
-    }
+    for (int i = 0; i < 8; ++i)
+        QCOMPARE(getClr(i), (i % 2 == 0) ? expr : expb);
 }
 
 void tst_Mask::tst_click()
@@ -58,13 +54,8 @@ void tst_Mask::tst_click()
 
         m->clickBtn(i);
 
-        if (val == true) {
-            QCOMPARE(expb, getClr(i));
-            QCOMPARE(false, m->valAt(i));
-        } else {
-            QCOMPARE(expr, getClr(i));
-            QCOMPARE(true, m->valAt(i));
-        }
+        QCOMPARE(val ? expb : expr, getClr(i));
+        QCOMPARE((!val), m->valAt(i));
     }
 }
 QTEST_MAIN(tst_Mask)

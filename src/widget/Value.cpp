@@ -15,4 +15,6 @@ widget::Value::Value(core::Byte val, QWidget *parent) : QWidget(parent)
 
     l->addWidget(box, 0, Qt::AlignVCenter);
     l->addWidget(lblValue, 0, Qt::AlignVCenter);
+
+    this->setEnabled(val.getRw());
 }

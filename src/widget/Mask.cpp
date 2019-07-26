@@ -8,6 +8,8 @@ widget::Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
         m.push_back(new HalfMask(val, i * 4, this));
         l->addWidget(m[i], 0, Qt::AlignVCenter);
     }
+
+    this->setEnabled(val.getRw());
 }
 
 bool widget::Mask::valAt(int i)

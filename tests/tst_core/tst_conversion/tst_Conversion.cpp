@@ -17,7 +17,7 @@ class tst_Conversion : public QObject
 
 void tst_Conversion::initTestCase()
 {
-    b = core::Generator::getByte1();
+    b = core::Generator::getByte1(true);
 }
 
 void tst_Conversion::tst_BoolInt()
@@ -27,7 +27,7 @@ void tst_Conversion::tst_BoolInt()
 
 void tst_Conversion::tst_IntBool()
 {
-    std::vector<int> v = {0, 255, 85, 170};
+    std::vector<int> v = { 0, 255, 85, 170 };
 
     for (int i : v) {
         b.setInt(i);
