@@ -40,7 +40,9 @@ Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
 
                     while ((*all)[j].getStart() < u.startAddress())
                         ++j;
+
                     (*all)[j].setIntAtAddress(u.value(i), u.startAddress() + i);
+                    emit updateBlockReq(j);
                 }
             });
 }
@@ -84,6 +86,8 @@ bool Connector::startConnection(QString portname, std::string filename)
             qDebug() << "connect server";
         qDebug() << "error: " << server->errorString();
         qDebug() << "state: " << server->state();
+
+        emit updateBlockReq(0);
 
         return (server->state() == QModbusRtuSerialSlave::ConnectedState);
     } // end if (server && portname.length() > 0)

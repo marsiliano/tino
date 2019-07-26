@@ -29,4 +29,7 @@ class Connector : public QObject
 
     int writeBlock(int a);
     QString getLinePortText();
+
+  signals:
+    void updateBlockReq(int);
 };

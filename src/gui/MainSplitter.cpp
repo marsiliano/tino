@@ -27,3 +27,9 @@ MainSplitter::MainSplitter(const std::vector<core::Block> &blocks,
         mainlayout->addWidget(sp, Qt::AlignLeft);
     }
 }
+
+void MainSplitter::updateBlock(int i)
+{
+    blocksWidget[i]->update();
+    qDebug() << "updatng " << i;
+}

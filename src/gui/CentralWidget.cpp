@@ -89,6 +89,9 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         m = new MainSplitter(blocks, this);
 
         l->addWidget(m, 1, 0, 1, 6, Qt::AlignLeft);
+
+        connect(c, Connector::updateBlockReq(int ii), this,
+                m->updateBlock(int ii));
     });
 
     // nBytes
