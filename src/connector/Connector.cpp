@@ -28,26 +28,21 @@ Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
 
     server->setMap(reg);
 
-    //    connect(server,
-    //            QModbusServer::dataWritten(QModbusDataUnit::RegisterType
-    //            table,
-    //                                       int address, int size),
-    //            this,
-    //            [this](QModbusDataUnit::RegisterType table, int address, int
-    //            size) {
-    //                QModbusDataUnit u(table, start, size);
+    connect(server, &QModbusServer::dataWritten, this,
+            [this](QModbusDataUnit::RegisterType table, int address, int size) {
+                QModbusDataUnit u(table, address, size);
 
-    //                int i = 0;
+                qDebug() << "data were written: "
+                         << "address: " << address << ", size: " << size;
 
-    //                while (i < all->size() && (*all)[i].getStart() != start) {
-    //                }
+                for (int i = 0; i < u.valueCount(); ++i) {
+                    int j = 0;
 
-    //                for (i = 0;; ++i)
-
-    //                    for (int cont = 0; cont < size; ++cont) {
-    //                        u.value(cont);
-    //                    }
-    //            });
+                    while ((*all)[j].getStart() < u.startAddress())
+                        ++j;
+                    (*all)[j].setIntAtAddress(u.value(i), u.startAddress() + i);
+                }
+            });
 }
 
 Connector::~Connector()
