@@ -15,6 +15,7 @@
 
 class Connector : public QObject
 {
+    Q_OBJECT
   private:
     QModbusRtuSerialSlave *server;
     QString linePortText;

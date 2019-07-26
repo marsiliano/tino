@@ -10,8 +10,7 @@ class MainSplitter : public QWidget
   public:
     MainSplitter(const std::vector<core::Block> &blocks, QWidget *parent);
     ~MainSplitter() = default;
-
-    void updateBlock(int i);
+    void updateBlock(long unsigned int i);
 
   private:
     std::vector<ScrollBlock *> blocksWidget;

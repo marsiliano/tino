@@ -28,8 +28,8 @@ MainSplitter::MainSplitter(const std::vector<core::Block> &blocks,
     }
 }
 
-void MainSplitter::updateBlock(int i)
-{
+void MainSplitter::updateBlock(long unsigned int i) {
+
     blocksWidget[i]->update();
     qDebug() << "updatng " << i;
 }

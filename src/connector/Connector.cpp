@@ -87,8 +87,6 @@ bool Connector::startConnection(QString portname, std::string filename)
         qDebug() << "error: " << server->errorString();
         qDebug() << "state: " << server->state();
 
-        emit updateBlockReq(0);
-
         return (server->state() == QModbusRtuSerialSlave::ConnectedState);
     } // end if (server && portname.length() > 0)
     return false;
