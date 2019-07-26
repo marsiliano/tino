@@ -12,7 +12,8 @@ class tst_Parser : public QObject
     std::vector<core::Block> all;
     std::vector<core::Block> cmp;
     long unsigned int i;
-    std::string filename;
+    std::string conf;
+    std::string settings;
 
   private slots:
     void initTestCase();
@@ -21,24 +22,29 @@ class tst_Parser : public QObject
     void compareBlockName();
     void compareBlockNbytes();
     void parse();
+    void parseSettings();
 };
 
 void tst_Parser::initTestCase()
 {
-    filename = "../../../../tino/jsons/conf.json";
+    conf     = "../../../../tino/jsons/conf.json";
+    settings = "../../../../tino/jsons/quadro-video-settings.json";
     // you should look at the path relative to the tst_gui executable
     all = {
         core::Generator::getBlock(1), core::Generator::getBlock(2),
         core::Generator::getBlock(3), core::Generator::getBlock(4),
         core::Generator::getBlock(5),
     };
-    cmp = core::Parser::parse(filename);
+    cmp = core::Parser::parse(conf);
 }
 
 void tst_Parser::tst_load()
 {
-    std::ifstream conf(filename, std::ios::in);
-    QVERIFY(conf.is_open());
+    std::ifstream fconf(conf, std::ios::in);
+    QVERIFY(fconf.is_open());
+
+    std::ifstream fsettings(settings, std::ios::in);
+    QVERIFY(fsettings.is_open());
 }
 
 void tst_Parser::compareSize()
@@ -63,6 +69,21 @@ void tst_Parser::parse()
 {
     for (i = 0; i < all.size(); ++i)
         QVERIFY(all[i] == cmp[i]);
+}
+
+void tst_Parser::parseSettings()
+{
+    core::Settings s;
+    s.portName      = "/dev/pts/1";
+    s.Parity        = 0;
+    s.BaudRate      = 57600;
+    s.DataBits      = 8;
+    s.StopBits      = 1;
+    s.ServerAddress = 1;
+
+    core::Settings s1 = core::Parser::getSettings(settings);
+
+    QVERIFY(s == s1);
 }
 
 QTEST_MAIN(tst_Parser)
