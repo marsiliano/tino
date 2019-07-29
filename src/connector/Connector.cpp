@@ -36,9 +36,6 @@ Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
                 if (!server->data(&u))
                     qDebug() << "cannot server->data()";
 
-                qDebug() << "data were written: "
-                         << "address: " << address << ", size: " << size;
-
                 qDebug() << "value count: " << u.valueCount()
                          << "start: " << address << ", size: " << size;
 

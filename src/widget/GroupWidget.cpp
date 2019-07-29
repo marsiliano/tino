@@ -9,16 +9,19 @@ widget::GroupWidget::GroupWidget(core::Group *value, QWidget *parent) :
 
     if (val->getType() == 'm') {
         for (i = 0; i < val->getDim(); ++i) {
-            m.emplace_back(new Mask(&(*val)[i], this));
-            l->addWidget(m[static_cast<unsigned long>(i)], 0, Qt::AlignHCenter);
+            m.emplace_back(std::unique_ptr<Mask>(new Mask(&(*val)[i], this)));
+            l->addWidget(m[static_cast<unsigned long>(i)].get(), 0,
+                         Qt::AlignHCenter);
         }
     } else if (val->getType() == 'v') {
         for (i = 0; i < val->getDim(); ++i) {
-            v.emplace_back(new Value(&((*val)[i]), this));
-            l->addWidget(v[static_cast<unsigned long>(i)], 0, Qt::AlignHCenter);
+            v.emplace_back(
+                std::unique_ptr<Value>(new Value(&((*val)[i]), this)));
+            l->addWidget(v[static_cast<unsigned long>(i)].get(), 0,
+                         Qt::AlignHCenter);
         }
     } else if (val->getType() == 'j') {
-        jo = new Joined(val, this);
-        l->addWidget(jo, 0, Qt::AlignHCenter);
+        jo = std::unique_ptr<Joined>(new Joined(val, this));
+        l->addWidget(jo.get(), 0, Qt::AlignHCenter);
     }
 }

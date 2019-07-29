@@ -17,8 +17,8 @@ class GroupWidget : public QWidget
     QBoxLayout *l;
     core::Group *val;
 
-    std::vector<Mask *> m;
-    std::vector<Value *> v;
-    Joined *jo;
+    std::vector<std::unique_ptr<Mask>> m;
+    std::vector<std::unique_ptr<Value>> v;
+    std::unique_ptr<Joined> jo;
 };
 } // namespace widget
