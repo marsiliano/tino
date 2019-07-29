@@ -1,7 +1,8 @@
 #include "BtnContainer.hpp"
 
-widget::BtnContainer::BtnContainer()
+widget::BtnContainer::BtnContainer(core::Byte *val1)
 {
+    this->val = val1;
     for (int i = 0; i < 8; ++i) {
         b.emplace_back(std::make_pair(
             std::unique_ptr<QPushButton>(new QPushButton()), [i, this]() {

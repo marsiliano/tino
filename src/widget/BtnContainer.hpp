@@ -11,7 +11,7 @@
 namespace widget
 {
 struct BtnContainer {
-    BtnContainer();
+    BtnContainer(core::Byte *val);
     BtnContainer(const BtnContainer &) = default;
     ~BtnContainer()                    = default;
     std::vector<std::pair<std::unique_ptr<QPushButton>, std::function<void()>>>

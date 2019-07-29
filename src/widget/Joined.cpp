@@ -6,9 +6,13 @@ widget::Joined::Joined(core::Group *value, QWidget *parent) : QWidget(parent)
     l         = new QBoxLayout(QBoxLayout::LeftToRight, this);
     int dim   = static_cast<int>(val->getDim());
 
-    QSpinBox *box = new QSpinBox(this);
+    box = new QSpinBox(this);
     box->setMinimum(0);
     box->setMaximum(dim * 255);
+
+    connect(box, &QSpinBox::editingFinished, this,
+            [this]() { (*val)[0].setInt(box->value()); });
+
     l->addWidget(box, 0, Qt::AlignVCenter);
 
     long v = 0;

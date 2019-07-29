@@ -13,6 +13,9 @@ widget::Value::Value(core::Byte *value, QWidget *parent) : QWidget(parent)
 
     box->setValue(static_cast<int>(val->getInt()));
 
+    connect(box, &QSpinBox::editingFinished, this,
+            [this]() { val->setInt(box->value()); });
+
     l->addWidget(box, 0, Qt::AlignVCenter);
     l->addWidget(lblValue, 0, Qt::AlignVCenter);
 
