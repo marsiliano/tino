@@ -1,5 +1,7 @@
 #include "Joined.hpp"
 
+#include <math.h>
+
 widget::Joined::Joined(core::Group *value, QWidget *parent) : QWidget(parent)
 {
     this->val = value;
@@ -8,7 +10,7 @@ widget::Joined::Joined(core::Group *value, QWidget *parent) : QWidget(parent)
 
     box = new QSpinBox(this);
     box->setMinimum(0);
-    box->setMaximum(dim * 255);
+    box->setMaximum(pow(2, (8 * dim)) - 1);
 
     connect(box, &QSpinBox::editingFinished, this, [&]() {
         int spinValue = box->value();
