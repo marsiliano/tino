@@ -25,7 +25,7 @@
                     {
                         "rw": false,
                         "name": "SND_AMB 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -42,7 +42,7 @@
                     {
                         "rw": false,
                         "name": "SCUORE 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -59,7 +59,7 @@
                     {
                         "rw": false,
                         "name": "SCUORE2 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -76,7 +76,7 @@
                     {
                         "rw": false,
                         "name": "SND_SOTV 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -93,7 +93,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -110,7 +110,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -127,7 +127,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -144,7 +144,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -161,7 +161,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -178,7 +178,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -195,7 +195,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -212,7 +212,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -229,7 +229,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -246,7 +246,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -263,7 +263,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -280,7 +280,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -297,7 +297,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -314,7 +314,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -331,7 +331,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -348,7 +348,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -365,7 +365,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -382,7 +382,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -399,7 +399,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -416,7 +416,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -433,7 +433,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -450,7 +450,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -467,7 +467,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -484,7 +484,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -501,7 +501,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -518,7 +518,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -535,7 +535,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -552,7 +552,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -569,7 +569,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -586,7 +586,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -603,7 +603,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -620,7 +620,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -637,7 +637,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -654,7 +654,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -671,7 +671,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -688,7 +688,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -705,7 +705,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -722,7 +722,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -739,7 +739,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -756,7 +756,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -773,7 +773,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -790,7 +790,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -807,7 +807,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -824,7 +824,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -841,7 +841,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -858,7 +858,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -875,7 +875,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -892,7 +892,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -909,7 +909,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -926,7 +926,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -943,7 +943,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -960,7 +960,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -977,7 +977,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -994,7 +994,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -1011,7 +1011,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
@@ -1028,7 +1028,7 @@
                     {
                         "rw": false,
                         "name": "MED_UR 1",
-                        "values": [false, true, false, false, false, false, false, false],
+                        "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
