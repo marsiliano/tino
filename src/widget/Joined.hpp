@@ -17,5 +17,7 @@ class Joined : public QWidget
     std::vector<QLabel *> lbl;
     core::Group *val;
     QSpinBox *box;
+
+    int dim;
 };
 } // namespace widget
