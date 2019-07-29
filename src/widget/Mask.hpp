@@ -21,7 +21,7 @@ class Mask : public QWidget
 
   private:
     QVBoxLayout *l;
-    std::vector<std::unique_ptr<HalfMask>> m;
+    std::vector<std::unique_ptr<widget::HalfMask>> m;
     QLabel *lblName;
     core::Byte *val;
 

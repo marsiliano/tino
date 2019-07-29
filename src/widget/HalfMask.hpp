@@ -13,7 +13,7 @@ class HalfMask : public QWidget
     ~HalfMask() override       = default;
     HalfMask(const HalfMask &) = default;
 
-    std::unique_ptr<BtnContainer> c;
+    std::unique_ptr<widget::BtnContainer> c;
 
   private:
     QHBoxLayout *l;

@@ -13,7 +13,7 @@ class MainSplitter : public QWidget
     void updateBlock(long unsigned int i);
 
   private:
-    std::vector<ScrollBlock *> blocksWidget;
+    std::vector<std::unique_ptr<ScrollBlock>> blocksWidget;
 
     QSplitter *sp;
     std::vector<QSplitter *> spv;

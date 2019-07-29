@@ -16,7 +16,7 @@ class BlockWidget : public QWidget
 
   private:
     QBoxLayout *l;
-    std::vector<GroupWidget *> g;
+    std::vector<std::unique_ptr<widget::GroupWidget>> g;
     core::Block *val;
 };
 } // namespace widget

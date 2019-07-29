@@ -6,7 +6,7 @@ widget::HalfMask::HalfMask(core::Byte *value, int offset, QWidget *parent) :
     this->val = value;
     l         = new QHBoxLayout(this);
 
-    c = std::unique_ptr<BtnContainer>(new BtnContainer(val));
+    c = std::unique_ptr<widget::BtnContainer>(new widget::BtnContainer(val));
 
     for (int i = offset; i < 4 + offset; ++i) {
         c->setClr(i);

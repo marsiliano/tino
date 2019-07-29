@@ -10,7 +10,8 @@ class CentralWidget : public QWidget
 {
   public:
     CentralWidget(QWidget *parent);
-    ~CentralWidget() = default;
+    ~CentralWidget();
+    void clean();
 
   private:
     QGridLayout *l;

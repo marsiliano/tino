@@ -16,8 +16,9 @@ MainSplitter::MainSplitter(std::vector<core::Block> *blocks1, QWidget *parent) :
             j = 0;
         }
 
-        blocksWidget.push_back(new ScrollBlock(&((*blocks)[i]), this));
-        spv[cont]->addWidget(blocksWidget[i]);
+        blocksWidget.push_back(std::unique_ptr<ScrollBlock>(
+            new ScrollBlock(&((*blocks)[i]), this)));
+        spv[cont]->addWidget(blocksWidget[i].get());
         spv[cont]->setCollapsible(static_cast<int>(j), false);
 
         if (i == blocks->size() - 1 || i % 4 == 3) {

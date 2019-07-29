@@ -76,15 +76,7 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         if (blocks.size() <= 0)
             return;
 
-        if (c) {
-            c->endConnection();
-            delete c;
-            c = nullptr;
-        }
-        if (m) {
-            delete m;
-            m = nullptr;
-        }
+        clean();
         c = new Connector(&blocks, this);
         m = new MainSplitter(&blocks, this);
 
@@ -99,4 +91,22 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
     lblNbytes->setText("0 bytes written");
     l->addWidget(lblNbytes, 0, 5, Qt::AlignLeft);
     l->setColumnStretch(5, 2);
+}
+
+void CentralWidget::clean()
+{
+    if (c) {
+        c->endConnection();
+        delete c;
+        c = nullptr;
+    }
+    if (m) {
+        delete m;
+        m = nullptr;
+    }
+}
+
+CentralWidget::~CentralWidget()
+{
+    clean();
 }
