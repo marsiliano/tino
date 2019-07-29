@@ -9,7 +9,7 @@ class BlockWidget : public QWidget
     Q_OBJECT
 
   public:
-    BlockWidget(core::Block val, QWidget *parent = nullptr);
+    BlockWidget(core::Block *value, QWidget *parent = nullptr);
     BlockWidget(const BlockWidget &) = default;
     BlockWidget &operator=(const BlockWidget &) = default;
     ~BlockWidget() override                     = default;
@@ -17,5 +17,6 @@ class BlockWidget : public QWidget
   private:
     QBoxLayout *l;
     std::vector<GroupWidget *> g;
+    core::Block *val;
 };
 } // namespace widget

@@ -11,7 +11,7 @@ class Mask : public QWidget
     Q_OBJECT
 
   public:
-    Mask(core::Byte val, QWidget *parent = nullptr);
+    Mask(core::Byte *value, QWidget *parent = nullptr);
     ~Mask() override   = default;
     Mask(const Mask &) = default;
 
@@ -23,6 +23,7 @@ class Mask : public QWidget
     QVBoxLayout *l;
     std::vector<HalfMask *> m;
     QLabel *lblName;
+    core::Byte *val;
 
     friend class tst_Mask;
 };

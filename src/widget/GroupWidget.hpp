@@ -9,11 +9,16 @@ class GroupWidget : public QWidget
     Q_OBJECT
 
   public:
-    GroupWidget(core::Group val, QWidget *parent = nullptr);
+    GroupWidget(core::Group *value, QWidget *parent = nullptr);
     GroupWidget(const GroupWidget &) = default;
     ~GroupWidget() override          = default;
 
   private:
     QBoxLayout *l;
+    core::Group *val;
+
+    std::vector<Mask *> m;
+    std::vector<Value *> v;
+    Joined *jo;
 };
 } // namespace widget

@@ -1,10 +1,11 @@
 #include "Mask.hpp"
 
-widget::Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
+widget::Mask::Mask(core::Byte *value, QWidget *parent) : QWidget(parent)
 {
-    l = new QVBoxLayout(this);
+    this->val = value;
+    l         = new QVBoxLayout(this);
     lblName =
-        new QLabel(QString::fromStdString(val.getName()), this, Qt::Widget);
+        new QLabel(QString::fromStdString(val->getName()), this, Qt::Widget);
     l->addWidget(lblName, Qt::AlignVCenter);
 
     for (int i = 0; i < 2; ++i) {
@@ -12,12 +13,12 @@ widget::Mask::Mask(core::Byte val, QWidget *parent) : QWidget(parent)
         l->addWidget(m[i], 0, Qt::AlignVCenter);
     }
 
-    this->setEnabled(val.getRw());
+    this->setEnabled(val->getRw());
 }
 
 bool widget::Mask::valAt(int i)
 {
-    return (i < 4 ? m[0]->c->val[i] : m[1]->c->val[i]);
+    return (i < 4 ? m[0]->c->val->getBitAt(i) : m[1]->c->val->getBitAt(i));
 }
 
 QString widget::Mask::getStyleBtn(int i)

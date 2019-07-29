@@ -8,7 +8,7 @@
 class MainSplitter : public QWidget
 {
   public:
-    MainSplitter(const std::vector<core::Block> &blocks, QWidget *parent);
+    MainSplitter(std::vector<core::Block> *blocks, QWidget *parent);
     ~MainSplitter() = default;
     void updateBlock(long unsigned int i);
 
@@ -19,4 +19,5 @@ class MainSplitter : public QWidget
     std::vector<QSplitter *> spv;
 
     QVBoxLayout *mainlayout;
+    std::vector<core::Block> *blocks;
 };

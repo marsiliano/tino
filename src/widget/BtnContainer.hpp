@@ -16,7 +16,7 @@ struct BtnContainer {
     ~BtnContainer()                    = default;
     std::vector<std::pair<std::unique_ptr<QPushButton>, std::function<void()>>>
         b;
-    core::Byte val;
+    core::Byte *val;
 
     void setClr(const int i);
 };

@@ -25,6 +25,7 @@ class Byte
 
     std::string getDesc(long unsigned i);
     bool operator[](long unsigned i);
+    bool getBitAt(long unsigned i);
     bool getRw();
     std::string getName();
     Byte &operator=(const Byte &other);

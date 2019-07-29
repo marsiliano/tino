@@ -9,7 +9,7 @@ class HalfMask : public QWidget
     Q_OBJECT
 
   public:
-    HalfMask(core::Byte val, int offset, QWidget *parent = nullptr);
+    HalfMask(core::Byte *value, int offset, QWidget *parent = nullptr);
     ~HalfMask() override       = default;
     HalfMask(const HalfMask &) = default;
 
@@ -17,5 +17,6 @@ class HalfMask : public QWidget
 
   private:
     QHBoxLayout *l;
+    core::Byte *val;
 };
 } // namespace widget

@@ -1,11 +1,12 @@
 #include "ScrollBlock.hpp"
 
-ScrollBlock::ScrollBlock(core::Block val, QWidget *parent) : QWidget(parent)
+ScrollBlock::ScrollBlock(core::Block *value, QWidget *parent) : QWidget(parent)
 {
-    l = new QVBoxLayout(this);
+    this->val = value;
+    l         = new QVBoxLayout(this);
 
     lBlock = new QLabel(this);
-    lBlock->setText(QString::fromStdString(val.getName()));
+    lBlock->setText(QString::fromStdString(val->getName()));
     lBlock->setMinimumHeight(20);
     lBlock->setStyleSheet("QLabel { background-color: white; color: black; }");
 

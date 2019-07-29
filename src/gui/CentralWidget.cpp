@@ -86,7 +86,7 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
             m = nullptr;
         }
         c = new Connector(&blocks, this);
-        m = new MainSplitter(blocks, this);
+        m = new MainSplitter(&blocks, this);
 
         l->addWidget(m, 1, 0, 1, 6, Qt::AlignLeft);
 

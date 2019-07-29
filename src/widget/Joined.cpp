@@ -1,9 +1,10 @@
 #include "Joined.hpp"
 
-widget::Joined::Joined(core::Group val, QWidget *parent) : QWidget(parent)
+widget::Joined::Joined(core::Group *value, QWidget *parent) : QWidget(parent)
 {
-    l       = new QBoxLayout(QBoxLayout::LeftToRight, this);
-    int dim = static_cast<int>(val.getDim());
+    this->val = value;
+    l         = new QBoxLayout(QBoxLayout::LeftToRight, this);
+    int dim   = static_cast<int>(val->getDim());
 
     QSpinBox *box = new QSpinBox(this);
     box->setMinimum(0);
@@ -12,10 +13,10 @@ widget::Joined::Joined(core::Group val, QWidget *parent) : QWidget(parent)
 
     long v = 0;
     for (int i = 0; i < dim; ++i) {
-        lbl.emplace_back(new QLabel(QString::fromStdString(val[i].getName()),
+        lbl.emplace_back(new QLabel(QString::fromStdString((*val)[i].getName()),
                                     this, Qt::Widget));
         l->addWidget(lbl[i], 0, Qt::AlignVCenter);
-        v += val[i].getInt();
+        v += (*val)[i].getInt();
     }
     box->setValue(static_cast<int>(v));
 }

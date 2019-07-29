@@ -27,7 +27,7 @@ void tst_Mask::initTestCase()
     expb = "background-color:#0000ff";
 
     core::Byte b = core::Generator::getByte1(true);
-    m            = new widget::Mask(b, nullptr);
+    m            = new widget::Mask(&b, nullptr);
 }
 
 QString tst_Mask::getClr(const int i)

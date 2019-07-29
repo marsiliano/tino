@@ -20,6 +20,10 @@ bool core::Byte::operator[](long unsigned i)
 {
     return v[i];
 }
+bool core::Byte::getBitAt(long unsigned i)
+{
+    return v[i];
+}
 void core::Byte::set(long unsigned i)
 {
     v[i] = !v[i];
@@ -76,7 +80,7 @@ bool core::Byte::isMask()
 
 int core::Byte::getInt()
 {
-    double value = 0;
+    double value           = 0;
     unsigned long int cont = 0;
 
     for (int i = 7; i >= 0; --i)
