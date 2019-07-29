@@ -90,9 +90,8 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
 
         l->addWidget(m, 1, 0, 1, 6, Qt::AlignLeft);
 
-        connect(c, &Connector::updateBlockReq, this, [this](long unsigned int ii) {
-            m->updateBlock(ii);
-        });
+        connect(c, &Connector::updateBlockReq, this,
+                [this](long unsigned int ii) { m->updateBlock(ii); });
     });
 
     // nBytes

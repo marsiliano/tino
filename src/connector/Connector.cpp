@@ -31,19 +31,27 @@ Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
     connect(server, &QModbusServer::dataWritten, this,
             [this](QModbusDataUnit::RegisterType table, int address, int size) {
                 QModbusDataUnit u(table, address, size);
+                // unit contains one HoldingRegisters
+
+                if (!server->data(&u))
+                    qDebug() << "cannot server->data()";
 
                 qDebug() << "data were written: "
                          << "address: " << address << ", size: " << size;
 
-                for (long unsigned int i = 0; i < u.valueCount(); ++i) {
-                    long unsigned int j = 0;
+                qDebug() << "value count: " << u.valueCount()
+                         << "start: " << address << ", size: " << size;
 
-                    while ((*all)[j].getStart() < u.startAddress())
-                        ++j;
+                long unsigned int i =
+                    0; // find in which block data were written
+                while ((i < all->size()) &&
+                       (*all)[i].getStart() <= u.startAddress())
+                    ++i;
 
-                    (*all)[j].setIntAtAddress(u.value(i), u.startAddress() + i);
-                    emit updateBlockReq(j);
-                }
+                --i;
+                qDebug() << "i: " << i << ", value: " << u.value(0);
+                (*all)[i].setIntAtAddress(u.value(0), u.startAddress());
+                emit updateBlockReq(i);
             });
 }
 
@@ -59,7 +67,7 @@ bool Connector::startConnection(QString portname, std::string filename)
 {
     auto s = core::Parser::getSettings(filename);
 
-    if (portname.length() <= 0)
+    if (portname.isEmpty())
         portname = QString::fromStdString(s.portName);
     //    else take the portname from the textbox
 
