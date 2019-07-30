@@ -2,10 +2,11 @@
 
 CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
 {
-    l        = new QGridLayout(this);
-    m        = nullptr;
-    c        = nullptr;
-    filename = "";
+    l          = new QGridLayout(this);
+    m          = nullptr;
+    c          = nullptr;
+    writeTimer = nullptr;
+    filename   = "";
 
     // top
     lblPort = new QLabel(this);
@@ -44,13 +45,21 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
     l->setColumnStretch(3, 0);
 
     connect(btnWrite, &QPushButton::clicked, this, [&]() {
-        nBytes = 0;
+        if (btnWrite->text() == "write") {
+            writeTimer = new QTimer();
+            connect(writeTimer, &QTimer::timeout, this, [this]() {
+                nBytes = 0;
 
-        for (long unsigned int i = 0; i < blocks.size(); ++i)
-            nBytes += c->writeBlock(i);
+                for (long unsigned int i = 0; i < blocks.size(); ++i)
+                    nBytes += c->writeBlock(i);
 
-        QString s = QString("%1 bytes written").arg(nBytes);
-        lblNbytes->setText(s);
+                QString s = QString("%1 bytes written").arg(nBytes);
+                lblNbytes->setText(s);
+            });
+            writeTimer->start(100);
+            btnWrite->setText("stop");
+        } else
+            stopWriteTimer();
     });
 
     // load file
@@ -95,6 +104,8 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
 
 void CentralWidget::clean()
 {
+    stopWriteTimer();
+
     if (c) {
         c->endConnection();
         delete c;
@@ -104,6 +115,17 @@ void CentralWidget::clean()
         delete m;
         m = nullptr;
     }
+}
+
+void CentralWidget::stopWriteTimer()
+{
+    if (writeTimer) {
+        writeTimer->stop();
+        delete writeTimer;
+        writeTimer = nullptr;
+    }
+    if (btnWrite)
+        btnWrite->setText("write");
 }
 
 CentralWidget::~CentralWidget()

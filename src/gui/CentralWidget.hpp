@@ -5,6 +5,7 @@
 #include <QLayout>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QTimer>
 
 class CentralWidget : public QWidget
 {
@@ -12,6 +13,7 @@ class CentralWidget : public QWidget
     CentralWidget(QWidget *parent);
     ~CentralWidget();
     void clean();
+    void stopWriteTimer();
 
   private:
     QGridLayout *l;
@@ -28,6 +30,7 @@ class CentralWidget : public QWidget
     std::string filename;
 
     MainSplitter *m;
+    QTimer *writeTimer;
 
     int nBytes;
 };

@@ -5,22 +5,16 @@ Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
 {
     server = new QModbusRtuSerialSlave(this);
     all    = v;
+    //    server = dynamic_cast<QModbusRtuSerialSlave>(server1);
 
-    short unsigned int sz = 0;
-    for (core::Block &bl : (*all))
-        sz += static_cast<quint16>(bl.getNbyte());
-
-    //    QModbusRtuSerialSlave *tmpServer = new QModbusRtuSerialSlave(this);
-    //    if (!tmpServer) {
-    //        qDebug() << "tmpServer null";
-    //        return;
-    //    }
-
-    //    server = dynamic_cast<stocazz *>(tmpServer);
     //    if (!server) {
     //        qDebug() << "server null";
     //        return;
     //    }
+
+    short unsigned int sz = 0;
+    for (core::Block &bl : (*all))
+        sz += static_cast<quint16>(bl.getNbyte());
 
     QModbusDataUnitMap reg;
     reg.insert(QModbusDataUnit::HoldingRegisters,

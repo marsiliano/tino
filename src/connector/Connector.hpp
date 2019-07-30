@@ -17,6 +17,7 @@ class Connector : public QObject
 {
     Q_OBJECT
   private:
+    //    stocazz *server;
     QModbusRtuSerialSlave *server;
     QString linePortText;
     std::vector<core::Block> *all;
