@@ -36,6 +36,7 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
                 c->endConnection();
             }
             lblNbytes->setText("0 bytes written");
+            stopWriteTimer();
         }
     });
 
