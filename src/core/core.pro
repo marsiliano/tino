@@ -1,6 +1,5 @@
 include(../tinolibrary.pri)
 
-
 HEADERS += \
     $$PWD/Byte.hpp \
     $$PWD/Block.hpp \
