@@ -8,8 +8,6 @@ class tst_Mask : public QObject
     Q_OBJECT
 
   private:
-    QString expr;
-    QString expb;
     widget::Mask *m;
     core::Byte b;
 
@@ -23,9 +21,6 @@ class tst_Mask : public QObject
 
 void tst_Mask::initTestCase()
 {
-    expr = "background-color:#ff0000";
-    expb = "background-color:#0000ff";
-
     b = core::Generator::getByte1(true);
     m = new widget::Mask(&b, nullptr);
 }
@@ -33,14 +28,16 @@ void tst_Mask::initTestCase()
 QString tst_Mask::getClr(const int i)
 {
     QString cmp = m->getStyleBtn(i);
-    cmp         = cmp.mid(cmp.indexOf("background-color:"), expr.length());
+    cmp         = cmp.mid(cmp.indexOf("background-color:"),
+                  widget::BtnContainer::clrOn.length());
     return cmp;
 }
 
 void tst_Mask::tst_color()
 {
     for (int i = 0; i < 8; ++i)
-        QCOMPARE(getClr(i), (i % 2 == 0) ? expr : expb);
+        QCOMPARE(getClr(i), (i % 2 == 0) ? widget::BtnContainer::clrOn
+                                         : widget::BtnContainer::clrOff);
 }
 
 void tst_Mask::tst_click()
@@ -50,16 +47,17 @@ void tst_Mask::tst_click()
 
     for (int i = 0; i < 8; ++i) {
         clr = getClr(i);
-        qDebug() << "before valat";
         val = m->valAt(i);
-        qDebug() << "still here";
 
         m->clickBtn(i);
 
-        QCOMPARE(val ? expb : expr, getClr(i));
+        QCOMPARE(val ? widget::BtnContainer::clrOff
+                     : widget::BtnContainer::clrOn,
+                 getClr(i));
         QCOMPARE((!val), m->valAt(i));
     }
 }
+
 QTEST_MAIN(tst_Mask)
 
 #include "tst_Mask.moc"

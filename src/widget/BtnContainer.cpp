@@ -1,5 +1,8 @@
 #include "BtnContainer.hpp"
 
+QString widget::BtnContainer::clrOn  = "background-color:#ff0000;";
+QString widget::BtnContainer::clrOff = "background-color:#0000ff;";
+
 widget::BtnContainer::BtnContainer(core::Byte *val1)
 {
     this->val = val1;
@@ -17,6 +20,5 @@ widget::BtnContainer::BtnContainer(core::Byte *val1)
 
 void widget::BtnContainer::setClr(const int i)
 {
-    b[i].first->setStyleSheet((*val)[i] ? "background-color:#ff0000;"
-                                        : "background-color:#0000ff;");
+    b[i].first->setStyleSheet((*val)[i] ? clrOn : clrOff);
 }

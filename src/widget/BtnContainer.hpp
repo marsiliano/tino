@@ -22,5 +22,8 @@ struct BtnContainer {
         b;
 
     void setClr(const int i);
+
+    static QString clrOn;
+    static QString clrOff;
 };
 } // namespace widget
