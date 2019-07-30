@@ -1,4 +1,5 @@
-{"blocks": [
+{
+    "blocks": [
     {
         "name": "blockname1",
         "start": 0,
@@ -374,4 +375,5 @@
             }
         ]
     }
-]}
+    ]
+}

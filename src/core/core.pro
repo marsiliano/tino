@@ -1,7 +1,5 @@
 include(../tinolibrary.pri)
 
-INCLUDEPATH += $$PWD/../json/rapidjson/include/rapidjson
-
 HEADERS += \
     $$PWD/Byte.hpp \
     $$PWD/Block.hpp \

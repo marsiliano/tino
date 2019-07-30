@@ -4,13 +4,7 @@
 #include "Settings.hpp"
 
 // json
-#include "document.h"
-#include "stringbuffer.h"
-#include "writer.h"
-
-//#include "../json/rapidjson/include/rapidjson/document.h"
-//#include "../json/rapidjson/include/rapidjson/stringbuffer.h"
-//#include "../json/rapidjson/include/rapidjson/writer.h"
+#include "json/json.h"
 
 namespace core
 {
@@ -19,7 +13,7 @@ struct Parser {
     ~Parser() = default;
 
     static std::vector<core::Block> parse(std::string name);
-    static rapidjson::Document getDocument(std::string name);
+    static Json::Value getRoot(std::string name);
     static Settings getSettings(std::string name);
 };
 } // namespace core
