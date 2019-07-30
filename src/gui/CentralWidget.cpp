@@ -59,7 +59,7 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
                     QString s = QString("%1 bytes written").arg(nBytes);
                     lblNbytes->setText(s);
                 });
-                writeTimer->start(100);
+                writeTimer->start(150);
                 btnWrite->setText("stop");
             } else
                 stopWriteTimer();
@@ -80,6 +80,7 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         if (filename.empty())
             return;
 
+        blocks.erase(blocks.begin(), blocks.end());
         blocks = core::Parser::parse(filename);
 
         c = nullptr;

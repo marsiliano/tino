@@ -9,6 +9,7 @@ widget::Joined::Joined(core::Group *value, QWidget *parent) : QWidget(parent)
     box = new QSpinBox(this);
     box->setMinimum(0);
     box->setMaximum(pow(2, (8 * dim)) - 1);
+    l->addWidget(box, 0, Qt::AlignVCenter);
 
     long v = 0;
     for (int i = 0; i < dim; ++i) {
@@ -18,8 +19,6 @@ widget::Joined::Joined(core::Group *value, QWidget *parent) : QWidget(parent)
         v += (*val)[i].getInt();
     }
     box->setValue(static_cast<int>(v));
-
-    l->addWidget(box, 0, Qt::AlignVCenter);
 
     connect(box, &QSpinBox::editingFinished, this, [&]() {
         int spinValue = box->value();

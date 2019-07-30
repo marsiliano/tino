@@ -24,9 +24,6 @@ Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
                 if (!server->data(&u))
                     qDebug() << "cannot server->data()";
 
-                qDebug() << "value count: " << u.valueCount()
-                         << "start: " << address << ", size: " << size;
-
                 long unsigned int i =
                     0; // find in which block data were written
                 while ((i < all->size()) &&
@@ -34,7 +31,8 @@ Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
                     ++i;
 
                 --i;
-                qDebug() << "i: " << i << ", value: " << u.value(0);
+                qDebug() << "i: " << i << ", value: " << u.value(0)
+                         << ", address: " << u.startAddress();
                 (*all)[i].setIntAtAddress(u.value(0), u.startAddress());
                 emit updateBlockReq(i);
             });
@@ -99,17 +97,12 @@ int Connector::writeBlock(long unsigned int a)
         for (unsigned long i = 0; i < (*all)[a].getDim(); ++i) {
             for (unsigned long j = 0; j < (*all)[a][i].getDim(); ++j) {
                 if ((*all)[a][i][j].getWrite()) {
-                    if (server->setData(QModbusDataUnit::HoldingRegisters,
-                                        (*all)[a].getStart() + cont,
-                                        (*all)[a][i][j].getInt()))
-                        qDebug()
-                            << "writing " << (*all)[a][i][j].getInt()
-                            << " address: " << ((*all)[a].getStart() + cont);
-                    else
+                    if (!server->setData(QModbusDataUnit::HoldingRegisters,
+                                         (*all)[a].getStart() + cont,
+                                         (*all)[a][i][j].getInt()))
                         qDebug() << "error writing data: " << cont << " "
                                  << server->errorString();
-                } else
-                    qDebug() << j << " is readonly";
+                }
                 ++cont;
             }
         }
