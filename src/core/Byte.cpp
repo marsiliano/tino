@@ -23,12 +23,12 @@ void core::Byte::set(long unsigned i)
     v[i] = !v[i];
 }
 
-bool core::Byte::getWrite()
+bool core::Byte::getWrite() const
 {
     return write;
 }
 
-std::string core::Byte::getName()
+std::string core::Byte::getName() const
 {
     return name;
 }
@@ -65,11 +65,6 @@ bool core::Byte::operator==(const core::Byte &other) const
         return false;
 
     return true;
-}
-
-bool core::Byte::isMask()
-{
-    return (desc.size() == 0);
 }
 
 int core::Byte::getInt()

@@ -20,9 +20,9 @@ class Block
     bool operator==(const Block &other) const;
     core::Group &operator[](long unsigned i);
 
-    int getStart();
+    int getStart() const;
     long unsigned getDim() const;
-    std::string getName();
+    std::string getName() const;
     int getNbyte();
 
     bool setIntAtAddress(int values, int address);

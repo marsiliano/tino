@@ -20,7 +20,7 @@ void core::Group::add(std::vector<bool> vect,
     this->v[this->v.size() - 1] = tv;
 }
 
-char core::Group::getType()
+char core::Group::getType() const
 {
     return type;
 }

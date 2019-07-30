@@ -23,7 +23,7 @@ class Group
     bool operator==(const Group &other) const;
     Byte &operator[](long unsigned i);
 
-    char getType();
+    char getType() const;
     long unsigned getDim() const;
 };
 

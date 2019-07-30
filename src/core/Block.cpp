@@ -6,7 +6,7 @@ core::Block::Block(std::vector<core::Group> v, int start, std::string name)
     this->name  = name;
     this->start = start;
 }
-std::string core::Block::getName()
+std::string core::Block::getName() const
 {
     return name;
 }
@@ -43,7 +43,7 @@ core::Block &core::Block::operator=(const core::Block &other)
     return *this;
 }
 
-int core::Block::getStart()
+int core::Block::getStart() const
 {
     return start;
 }

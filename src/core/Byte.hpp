@@ -29,12 +29,11 @@ class Byte
     bool operator[](long unsigned i);
 
     std::string getDesc(long unsigned i);
-    bool getWrite();
-    std::string getName();
+    bool getWrite() const;
+    std::string getName() const;
     int getInt();
 
     void set(long unsigned i);
-    bool isMask();
     void setInt(int n);
 };
 } // namespace core

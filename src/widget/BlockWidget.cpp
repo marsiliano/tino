@@ -11,8 +11,4 @@ widget::BlockWidget::BlockWidget(core::Block *value, QWidget *parent) :
             new widget::GroupWidget(&((*val)[i]), this)));
         l->addWidget(g[i].get(), 0, Qt::AlignLeft);
     }
-
-    /*QSizePolicy policy(QSizePolicy::Maximum, QSizePolicy::Maximum,
-                       QSizePolicy::DefaultType);
-    this->setSizePolicy(policy);*/
 }
