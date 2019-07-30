@@ -11,6 +11,7 @@ class tst_Mask : public QObject
     QString expr;
     QString expb;
     widget::Mask *m;
+    core::Byte b;
 
     QString getClr(const int i);
 
@@ -25,8 +26,8 @@ void tst_Mask::initTestCase()
     expr = "background-color:#ff0000";
     expb = "background-color:#0000ff";
 
-    core::Byte b = core::Generator::getByte1(true);
-    m            = new widget::Mask(&b, nullptr);
+    b = core::Generator::getByte1(true);
+    m = new widget::Mask(&b, nullptr);
 }
 
 QString tst_Mask::getClr(const int i)
@@ -49,7 +50,9 @@ void tst_Mask::tst_click()
 
     for (int i = 0; i < 8; ++i) {
         clr = getClr(i);
+        qDebug() << "before valat";
         val = m->valAt(i);
+        qDebug() << "still here";
 
         m->clickBtn(i);
 
