@@ -14,7 +14,7 @@ widget::Mask::Mask(core::Byte *value, QWidget *parent) : QWidget(parent)
         l->addWidget(m[i].get(), 0, Qt::AlignVCenter);
     }
 
-    this->setEnabled(val->getRw());
+    this->setEnabled(val->getWrite());
 }
 
 bool widget::Mask::valAt(int i)

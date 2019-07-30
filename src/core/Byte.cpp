@@ -3,13 +3,13 @@
 #include <QDebug>
 #include <cmath>
 
-core::Byte::Byte(std::vector<bool> v, std::vector<std::string> desc, bool rw,
+core::Byte::Byte(std::vector<bool> v, std::vector<std::string> desc, bool write,
                  std::string name)
 {
-    this->v    = v;
-    this->desc = desc;
-    this->rw   = rw;
-    this->name = name;
+    this->v     = v;
+    this->desc  = desc;
+    this->write = write;
+    this->name  = name;
 }
 
 std::string core::Byte::getDesc(long unsigned i)
@@ -29,9 +29,9 @@ void core::Byte::set(long unsigned i)
     v[i] = !v[i];
 }
 
-bool core::Byte::getRw()
+bool core::Byte::getWrite()
 {
-    return rw;
+    return write;
 }
 
 std::string core::Byte::getName()
@@ -41,17 +41,17 @@ std::string core::Byte::getName()
 
 core::Byte &core::Byte::operator=(const core::Byte &other)
 {
-    this->v    = other.v;
-    this->rw   = other.rw;
-    this->desc = other.desc;
-    this->name = other.name;
+    this->v     = other.v;
+    this->write = other.write;
+    this->desc  = other.desc;
+    this->name  = other.name;
 
     return *this;
 }
 
 bool core::Byte::operator==(const core::Byte &other) const
 {
-    if ((name != other.name) || (rw != other.rw) ||
+    if ((name != other.name) || (write != other.write) ||
         (desc.size() != other.desc.size()))
         return false;
 

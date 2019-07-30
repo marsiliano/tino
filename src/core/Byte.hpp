@@ -12,7 +12,7 @@ class Byte
   private:
     std::vector<bool> v;
     std::vector<std::string> desc;
-    bool rw;
+    bool write;
     int start;
     std::string name;
 
@@ -26,7 +26,7 @@ class Byte
     std::string getDesc(long unsigned i);
     bool operator[](long unsigned i);
     bool getBitAt(long unsigned i);
-    bool getRw();
+    bool getWrite();
     std::string getName();
     Byte &operator=(const Byte &other);
     void set(long unsigned i);
