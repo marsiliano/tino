@@ -104,19 +104,28 @@ int Connector::writeBlock(long unsigned int a)
         ++cont;
         for (unsigned long i = 0; i < (*all)[a].getDim(); ++i) {
             for (unsigned long j = 0; j < (*all)[a][i].getDim(); ++j) {
-                if (server->setData(QModbusDataUnit::HoldingRegisters,
-                                    (*all)[a].getStart() + cont,
-                                    (*all)[a][i][j].getInt()))
-                    qDebug() << "writing " << (*all)[a][i][j].getInt()
-                             << " address: " << ((*all)[a].getStart() + cont);
-                else
-                    qDebug() << "error writing data: " << cont << " "
-                             << server->errorString();
+                if ((*all)[a][i][j].getRw()) {
+                    if (server->setData(QModbusDataUnit::HoldingRegisters,
+                                        (*all)[a].getStart() + cont,
+                                        (*all)[a][i][j].getInt()))
+                        qDebug()
+                            << "writing " << (*all)[a][i][j].getInt()
+                            << " address: " << ((*all)[a].getStart() + cont);
+                    else
+                        qDebug() << "error writing data: " << cont << " "
+                                 << server->errorString();
+                } else
+                    qDebug() << j << " is readonly";
                 ++cont;
             }
         }
     }
     return cont;
+}
+
+bool Connector::isConnected()
+{
+    return (server->state() == QModbusServer::ConnectedState);
 }
 
 QString Connector::getLinePortText()

@@ -31,6 +31,7 @@ class Connector : public QObject
 
     int writeBlock(long unsigned int a);
     QString getLinePortText();
+    bool isConnected();
 
   signals:
     void updateBlockReq(long unsigned int);
