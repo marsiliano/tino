@@ -12,7 +12,7 @@ widget::BlockWidget::BlockWidget(core::Block *value, QWidget *parent) :
         l->addWidget(g[i].get(), 0, Qt::AlignLeft);
     }
 
-    QSizePolicy policy(QSizePolicy::Maximum, QSizePolicy::Maximum,
+    /*QSizePolicy policy(QSizePolicy::Maximum, QSizePolicy::Maximum,
                        QSizePolicy::DefaultType);
-    this->setSizePolicy(policy);
+    this->setSizePolicy(policy);*/
 }

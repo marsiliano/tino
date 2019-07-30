@@ -19,7 +19,7 @@ widget::Mask::Mask(core::Byte *value, QWidget *parent) : QWidget(parent)
 
 bool widget::Mask::valAt(int i)
 {
-    return (i < 4 ? m[0]->c->val->getBitAt(i) : m[1]->c->val->getBitAt(i));
+    return (i < 4 ? m[0]->c->val->operator[](i) : m[1]->c->val->operator[](i));
 }
 
 QString widget::Mask::getStyleBtn(int i)

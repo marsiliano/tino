@@ -4,6 +4,10 @@
 #include "Settings.hpp"
 
 // json
+//#include "rapidjson/document.h"
+//#include "rapidjson/stringbuffer.h"
+//#include "rapidjson/writer.h"
+
 #include "../json/rapidjson/include/rapidjson/document.h"
 #include "../json/rapidjson/include/rapidjson/stringbuffer.h"
 #include "../json/rapidjson/include/rapidjson/writer.h"

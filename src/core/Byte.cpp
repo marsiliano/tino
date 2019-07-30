@@ -1,8 +1,5 @@
 #include "Byte.hpp"
 
-#include <QDebug>
-#include <cmath>
-
 core::Byte::Byte(std::vector<bool> v, std::vector<std::string> desc, bool write,
                  std::string name)
 {
@@ -20,10 +17,7 @@ bool core::Byte::operator[](long unsigned i)
 {
     return v[i];
 }
-bool core::Byte::getBitAt(long unsigned i)
-{
-    return v[i];
-}
+
 void core::Byte::set(long unsigned i)
 {
     v[i] = !v[i];

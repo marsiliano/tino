@@ -2,6 +2,7 @@
 
 #include "Block.hpp"
 
+#include <QDebug>
 #include <QWidgetSet>
 #include <QtWidgets/QBoxLayout>
 #include <QtWidgets/QPushButton>

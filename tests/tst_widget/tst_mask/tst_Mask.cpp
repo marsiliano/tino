@@ -1,7 +1,6 @@
 #include "Generator.hpp"
 #include "Mask.hpp"
 
-#include <QDebug>
 #include <QtTest>
 
 class tst_Mask : public QObject

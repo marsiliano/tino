@@ -5,12 +5,6 @@ Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
 {
     server = new QModbusRtuSerialSlave(this);
     all    = v;
-    //    server = dynamic_cast<QModbusRtuSerialSlave>(server1);
-
-    //    if (!server) {
-    //        qDebug() << "server null";
-    //        return;
-    //    }
 
     short unsigned int sz = 0;
     for (core::Block &bl : (*all))
@@ -132,15 +126,3 @@ QString Connector::getLinePortText()
 {
     return linePortText;
 }
-
-// stocazz::stocazz(QObject *parent) : QModbusRtuSerialSlave(parent) {}
-
-// QModbusResponse stocazz::processRequest(const QModbusPdu &request)
-//{
-//    QModbusResponse response(QModbusResponse::ReadHoldingRegisters,
-//                             request.data());
-//    //    Connector::writeBlock(all[request.data().toInt()]);
-//    qDebug() << "this thing actually does something";
-
-//    return response;
-//}

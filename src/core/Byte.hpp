@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cmath>
 #include <functional>
 #include <iostream>
 #include <vector>
@@ -28,7 +29,6 @@ class Byte
     bool operator[](long unsigned i);
 
     std::string getDesc(long unsigned i);
-    bool getBitAt(long unsigned i);
     bool getWrite();
     std::string getName();
     int getInt();

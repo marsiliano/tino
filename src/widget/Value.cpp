@@ -10,7 +10,6 @@ widget::Value::Value(core::Byte *value, QWidget *parent) : QWidget(parent)
     box = new QSpinBox(this);
     box->setMinimum(0);
     box->setMaximum(255);
-
     box->setValue(static_cast<int>(val->getInt()));
 
     connect(box, &QSpinBox::editingFinished, this,
