@@ -17,6 +17,7 @@ class HalfMask : public QWidget
 
   private:
     QHBoxLayout *l;
+
     core::Byte *val;
 };
 } // namespace widget

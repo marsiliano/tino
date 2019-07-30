@@ -14,8 +14,10 @@ class Joined : public QWidget
 
   private:
     QBoxLayout *l;
-    std::vector<QLabel *> lbl;
+
     core::Group *val;
+
+    std::vector<QLabel *> lbl;
     QSpinBox *box;
 
     int dim;

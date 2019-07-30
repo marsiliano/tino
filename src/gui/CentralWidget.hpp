@@ -12,11 +12,17 @@ class CentralWidget : public QWidget
   public:
     CentralWidget(QWidget *parent);
     ~CentralWidget();
+
     void clean();
     void stopWriteTimer();
 
   private:
     QGridLayout *l;
+
+    std::vector<core::Block> blocks;
+    Connector *c;
+
+    MainSplitter *m;
 
     QLabel *lblPort;
     QLineEdit *linePort;
@@ -24,13 +30,8 @@ class CentralWidget : public QWidget
     QPushButton *btnWrite;
     QPushButton *btnFile;
     QLabel *lblNbytes;
-
-    std::vector<core::Block> blocks;
-    Connector *c;
-    std::string filename;
-
-    MainSplitter *m;
     QTimer *writeTimer;
 
     int nBytes;
+    std::string filename;
 };

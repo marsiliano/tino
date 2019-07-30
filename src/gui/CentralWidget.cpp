@@ -8,21 +8,22 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
     writeTimer = nullptr;
     filename   = "";
 
-    // top
+    // label port:
     lblPort = new QLabel(this);
     lblPort->setText("Port: ");
     l->addWidget(lblPort, 0, 0, Qt::AlignLeft);
     l->setColumnStretch(0, 0);
 
+    // edit the modbus port name
     linePort = new QLineEdit(this);
     l->addWidget(linePort, 0, 1, Qt::AlignLeft);
     l->setColumnStretch(1, 0);
 
+    // button that starts connection
     btnConnect = new QPushButton(this);
     btnConnect->setText("connect");
     l->addWidget(btnConnect, 0, 2, Qt::AlignLeft);
     l->setColumnStretch(2, 0);
-
     // connect
     connect(btnConnect, &QPushButton::clicked, this, [&]() {
         if (c) {
@@ -38,12 +39,12 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         }
     });
 
-    // write something
+    // button that begins writing on modbus
     btnWrite = new QPushButton(this);
     btnWrite->setText("write");
     l->addWidget(btnWrite, 0, 3, Qt::AlignLeft);
     l->setColumnStretch(3, 0);
-
+    // write blocks
     connect(btnWrite, &QPushButton::clicked, this, [&]() {
         if (c && c->isConnected()) {
             if (btnWrite->text() == "write") {
@@ -64,19 +65,18 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         }
     });
 
-    // load file
+    // button that loads json
     btnFile = new QPushButton(this);
     btnFile->setText("load file");
     l->addWidget(btnFile, 0, 4, Qt::AlignLeft);
     l->setColumnStretch(4, 0);
-
     // draw blocks
     connect(btnFile, &QPushButton::clicked, this, [&]() {
         filename = QFileDialog::getOpenFileName(this, tr("Open config"), "/",
                                                 tr("json Files (*.json)"))
                        .toStdString();
 
-        if (filename.length() <= 0)
+        if (filename.empty())
             return;
 
         blocks = core::Parser::parse(filename);

@@ -17,8 +17,10 @@ class Value : public QWidget
 
   private:
     QBoxLayout *l;
+
+    core::Byte *val;
+
     QSpinBox *box;
     QLabel *lblValue;
-    core::Byte *val;
 };
 } // namespace widget

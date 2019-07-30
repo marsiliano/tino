@@ -23,16 +23,18 @@ class Byte
     ~Byte()            = default;
     Byte(const Byte &) = default;
 
-    std::string getDesc(long unsigned i);
+    Byte &operator=(const Byte &other);
+    bool operator==(const Byte &other) const;
     bool operator[](long unsigned i);
+
+    std::string getDesc(long unsigned i);
     bool getBitAt(long unsigned i);
     bool getWrite();
     std::string getName();
-    Byte &operator=(const Byte &other);
-    void set(long unsigned i);
-    bool operator==(const Byte &other) const;
-    bool isMask();
     int getInt();
+
+    void set(long unsigned i);
+    bool isMask();
     void setInt(int n);
 };
 } // namespace core

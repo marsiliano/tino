@@ -11,10 +11,12 @@ class ScrollBlock : public QWidget
     ScrollBlock(core::Block *value, QWidget *parent = nullptr);
 
   private:
-    widget::BlockWidget *child;
+    QVBoxLayout *l;
+
     core::Block *val;
+
+    widget::BlockWidget *child;
 
     QLabel *lBlock;
     QScrollArea *a;
-    QVBoxLayout *l;
 };

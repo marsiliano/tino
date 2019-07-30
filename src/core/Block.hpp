@@ -15,13 +15,16 @@ class Block
     Block(std::vector<core::Group> v, int start, std::string name);
     ~Block()             = default;
     Block(const Block &) = default;
-    int getStart();
+
+    Block &operator=(const Block &other);
+    bool operator==(const Block &other) const;
     core::Group &operator[](long unsigned i);
+
+    int getStart();
     long unsigned getDim() const;
     std::string getName();
     int getNbyte();
-    bool operator==(const Block &other) const;
-    Block &operator=(const Block &other);
+
     bool setIntAtAddress(int values, int address);
 };
 

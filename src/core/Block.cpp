@@ -71,7 +71,6 @@ bool core::Block::setIntAtAddress(int values, int address)
 
             if (cont == address) {
                 v[i][j].setInt(values);
-                std::cout << "expecting " << values << ": " << v[i][j].getInt();
                 return true;
             }
             ++cont;
@@ -79,6 +78,5 @@ bool core::Block::setIntAtAddress(int values, int address)
         }
         ++i;
     }
-    std::cout << "End";
     return false;
 }
