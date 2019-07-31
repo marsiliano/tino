@@ -18,16 +18,15 @@ widget::Mask::Mask(core::Byte *val, QWidget *parent) : QWidget(parent)
 
 bool widget::Mask::valAt(int i)
 {
-    return (i < 4 ? m[0]->c->val->operator[](i) : m[1]->c->val->operator[](i));
+    return (m[0]->c->val->operator[](i));
 }
 
 QString widget::Mask::getStyleBtn(int i)
 {
-    return (i < 4 ? m[0]->c->b[i].first->styleSheet()
-                  : m[1]->c->b[i].first->styleSheet());
+    return m[i / 4]->c->b[i % 4].first->styleSheet();
 }
 
 void widget::Mask::clickBtn(int i)
 {
-    i < 4 ? m[0]->c->b[i].first->click() : m[1]->c->b[i].first->click();
+    m[i / 4]->c->b[i % 4].first->click();
 }
