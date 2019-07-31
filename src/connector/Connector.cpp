@@ -1,5 +1,7 @@
 ﻿#include "Connector.hpp"
 
+#include <fstream>
+
 Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
     QObject(parent)
 {
@@ -50,7 +52,6 @@ bool Connector::startConnection(core::Settings s)
 {
     if (server) {
         // set server parameter
-        portname = "";
 
         server->setConnectionParameter(QModbusDevice::SerialPortNameParameter,
                                        QString::fromStdString(s.portName));
@@ -63,8 +64,6 @@ bool Connector::startConnection(core::Settings s)
         server->setConnectionParameter(QModbusDevice::SerialStopBitsParameter,
                                        s.StopBits);
         server->setServerAddress(s.ServerAddress);
-
-        portname = QString::fromStdString(s.portName);
 
         // connect server
         if (!server->connectDevice())
@@ -110,7 +109,34 @@ bool Connector::isConnected()
     return (server->state() == QModbusServer::ConnectedState);
 }
 
-QString Connector::getLinePortText()
+std::string Connector::openPort()
 {
-    return portname;
+    system("gnome-terminal -e \'socat -d -d -lf socatOutput.txt pty,raw,echo=0 "
+           "pty,raw,echo=0\'");
+
+    std::ifstream socatOutput;
+    socatOutput.open("socatOutput.txt");
+    std::string ret;
+    int pos;
+
+    for (int i = 0; i < 2; ++i) {
+        std::string temp;
+        getline(socatOutput, temp);
+        pos = temp.find("/dev/pts/", 0);
+
+        if (ret.empty())
+            ret = temp.substr(pos, 10);
+        else {
+            std::string notifyText = ("notify-send \"connect your client to " +
+                                      temp.substr(pos, 10) + "\"");
+            qDebug() << QString::fromStdString(notifyText);
+            system(notifyText.c_str());
+        }
+    }
+    return ret;
+}
+
+void Connector::closePort()
+{
+    system("killall socat");
 }

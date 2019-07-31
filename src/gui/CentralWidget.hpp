@@ -34,4 +34,6 @@ class CentralWidget : public QWidget
 
     int nBytes;
     std::string filename;
+
+    int btnConnectState;
 };

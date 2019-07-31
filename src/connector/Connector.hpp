@@ -26,6 +26,9 @@ class Connector : public QObject
     QString getLinePortText();
     bool isConnected();
 
+    static std::string openPort();
+    static void closePort();
+
   signals:
     void updateBlockReq(long unsigned int);
 };

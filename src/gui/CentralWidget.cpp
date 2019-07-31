@@ -26,23 +26,40 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
     btnConnect->setText("connect");
     l->addWidget(btnConnect, 0, 2, Qt::AlignLeft);
     l->setColumnStretch(2, 0);
+
+    btnConnectState = 0;
+    // 0: disconnected, 1: connected, 2: connected to auto opened serialport
+
     // connect
     connect(btnConnect, &QPushButton::clicked, this, [&]() {
         if (c) {
-            if (btnConnect->text() == "connect") {
+            if (btnConnectState == 0) {
                 core::Settings s = core::Parser::getSettings(filename);
 
                 if (!linePort->text().isEmpty()) // take portname from gui
                     s.portName = linePort->text().toStdString();
-                else // take portname from file
+                else { // take portname from file
+                    if (s.portName == "auto") {
+                        s.portName      = Connector::openPort();
+                        btnConnectState = 2;
+                    }
                     linePort->setText(QString::fromStdString(s.portName));
-
-                if (c->startConnection(s))
+                }
+                if (c->startConnection(s)) {
                     btnConnect->setText("disconect");
-
+                    if (btnConnectState != 2)
+                        btnConnectState = 1;
+                }
             } else {
                 btnConnect->setText("connect");
                 c->endConnection();
+
+                if (btnConnectState == 2) {
+                    Connector::closePort();
+                    linePort->setText("");
+                }
+
+                btnConnectState = 0;
             }
             lblNbytes->setText("0 bytes written");
             stopWriteTimer();

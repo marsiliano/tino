@@ -1,7 +1,7 @@
 {
     "settings":
     {
-        "portName": "/dev/pts/1",
+        "portName": "auto",
         "Parity": 0,
         "BaudRate": 57600,
         "DataBits": 8,
