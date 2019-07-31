@@ -1,6 +1,9 @@
-﻿#include "Connector.hpp"
+#include "Connector.hpp"
 
 #include <fstream>
+#include <future>
+#include <thread>
+#include <utility>
 
 Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
     QObject(parent)
@@ -86,6 +89,7 @@ void Connector::endConnection()
 int Connector::writeBlock(long unsigned int a)
 {
     int cont = -1;
+
     if (server) {
         ++cont;
         for (unsigned long i = 0; i < (*all)[a].getDim(); ++i) {
@@ -111,26 +115,34 @@ bool Connector::isConnected()
 
 std::string Connector::openPort()
 {
-    system("gnome-terminal -e \'socat -d -d -lf socatOutput.txt pty,raw,echo=0 "
-           "pty,raw,echo=0\'");
+    std::thread([]() {
+        system("rm /home/$(whoami)/.tino/socatOutput.txt");
+        system("socat -d -d -lf /home/$(whoami)/.tino/socatOutput.txt "
+               "pty,raw,echo=0 "
+               "pty,raw,echo=0");
+    })
+        .detach();
 
     std::ifstream socatOutput;
     socatOutput.open("socatOutput.txt");
     std::string ret;
-    int pos;
+    std::string found;
 
     for (int i = 0; i < 2; ++i) {
         std::string temp;
         getline(socatOutput, temp);
-        pos = temp.find("/dev/pts/", 0);
+        found = temp.substr(temp.find("/dev/pts/", 0), 10);
 
         if (ret.empty())
-            ret = temp.substr(pos, 10);
+            ret = found;
         else {
-            std::string notifyText = ("notify-send \"connect your client to " +
-                                      temp.substr(pos, 10) + "\"");
-            qDebug() << QString::fromStdString(notifyText);
+            std::string notifyText =
+                ("notify-send \"connect your client to " + found + "\"");
             system(notifyText.c_str());
+
+            std::string toWrite =
+                "echo \"" + found + "\" > /home/$(whoami)/.tino/clientPort.txt";
+            system(toWrite.c_str());
         }
     }
     return ret;
