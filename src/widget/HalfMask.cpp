@@ -1,10 +1,9 @@
 #include "HalfMask.hpp"
 
-widget::HalfMask::HalfMask(core::Byte *value, int offset, QWidget *parent) :
+widget::HalfMask::HalfMask(core::Byte *val, int offset, QWidget *parent) :
     QWidget(parent)
 {
-    this->val = value;
-    l         = new QHBoxLayout(this);
+    l = new QHBoxLayout(this);
 
     c = std::unique_ptr<widget::BtnContainer>(new widget::BtnContainer(val));
     c->val = val;

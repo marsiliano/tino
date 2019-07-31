@@ -23,8 +23,5 @@ class Mask : public QWidget
     QVBoxLayout *l;
     std::vector<std::unique_ptr<HalfMask>> m;
     QLabel *lblName;
-    core::Byte *val;
-
-    friend class tst_Mask;
 };
 } // namespace widget

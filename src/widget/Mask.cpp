@@ -1,9 +1,8 @@
 #include "Mask.hpp"
 
-widget::Mask::Mask(core::Byte *value, QWidget *parent) : QWidget(parent)
+widget::Mask::Mask(core::Byte *val, QWidget *parent) : QWidget(parent)
 {
-    this->val = value;
-    l         = new QVBoxLayout(this);
+    l = new QVBoxLayout(this);
     lblName =
         new QLabel(QString::fromStdString(val->getName()), this, Qt::Widget);
     l->addWidget(lblName, Qt::AlignVCenter);

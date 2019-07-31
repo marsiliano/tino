@@ -1,7 +1,5 @@
 include(../tinolibrary.pri)
 
-QT += core gui widgets
-
 FORMS += \
     $$PWD/MainWindow.ui \
 
