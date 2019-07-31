@@ -1,5 +1,6 @@
 #pragma once
-#include "Parser.hpp"
+#include "Block.hpp"
+#include "Settings.hpp"
 
 #include <QDebug>
 #include <QModbusRtuSerialMaster>
@@ -11,14 +12,14 @@ class Connector : public QObject
     Q_OBJECT
   private:
     QModbusRtuSerialSlave *server;
-    QString linePortText;
     std::vector<core::Block> *all;
+    QString portname;
 
   public:
     Connector(std::vector<core::Block> *v, QObject *parent);
     ~Connector();
 
-    bool startConnection(QString portname, std::string filename);
+    bool startConnection(core::Settings s);
     void endConnection();
 
     int writeBlock(long unsigned int a);

@@ -1,5 +1,7 @@
 #include "CentralWidget.hpp"
 
+#include "Parser.hpp"
+
 CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
 {
     l          = new QGridLayout(this);
@@ -28,9 +30,16 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
     connect(btnConnect, &QPushButton::clicked, this, [&]() {
         if (c) {
             if (btnConnect->text() == "connect") {
-                if (c->startConnection(linePort->text(), filename))
+                core::Settings s = core::Parser::getSettings(filename);
+
+                if (!linePort->text().isEmpty()) // take portname from gui
+                    s.portName = linePort->text().toStdString();
+                else // take portname from file
+                    linePort->setText(QString::fromStdString(s.portName));
+
+                if (c->startConnection(s))
                     btnConnect->setText("disconect");
-                linePort->setText(c->getLinePortText());
+
             } else {
                 btnConnect->setText("connect");
                 c->endConnection();

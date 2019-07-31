@@ -46,20 +46,14 @@ Connector::~Connector()
     server = nullptr;
 }
 
-bool Connector::startConnection(QString portname, std::string filename)
+bool Connector::startConnection(core::Settings s)
 {
-    auto s = core::Parser::getSettings(filename);
-
-    if (portname.isEmpty())
-        portname = QString::fromStdString(s.portName);
-    //    else take the portname from the textbox
-
-    linePortText = portname;
-
-    if (server && portname.length() > 0) {
+    if (server) {
         // set server parameter
+        portname = "";
+
         server->setConnectionParameter(QModbusDevice::SerialPortNameParameter,
-                                       portname);
+                                       QString::fromStdString(s.portName));
         server->setConnectionParameter(QModbusDevice::SerialParityParameter,
                                        s.Parity);
         server->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,
@@ -70,11 +64,12 @@ bool Connector::startConnection(QString portname, std::string filename)
                                        s.StopBits);
         server->setServerAddress(s.ServerAddress);
 
+        portname = QString::fromStdString(s.portName);
+
         // connect server
         if (!server->connectDevice())
             qDebug() << "cannot connect server";
-        else
-            qDebug() << "connect server";
+
         qDebug() << "error: " << server->errorString();
         qDebug() << "state: " << server->state();
 
@@ -117,5 +112,5 @@ bool Connector::isConnected()
 
 QString Connector::getLinePortText()
 {
-    return linePortText;
+    return portname;
 }
