@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Block.hpp"
 #include "Settings.hpp"
 
@@ -14,8 +15,6 @@ class Connector : public QObject
     QModbusRtuSerialSlave *server;
     std::vector<core::Block> *all;
     QString portname;
-
-    //    void portOpened(std::promise<bool> &&writePromise);
 
   public:
     Connector(std::vector<core::Block> *v, QObject *parent);

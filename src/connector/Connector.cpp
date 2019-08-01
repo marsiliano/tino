@@ -1,10 +1,9 @@
 #include "Connector.hpp"
 
 #include <fstream>
-#include <future>
+#include <stdio.h>
 #include <stdlib.h>
 #include <thread>
-#include <utility>
 
 Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
     QObject(parent)
@@ -122,35 +121,28 @@ std::string Connector::openPort()
     //    std::future<bool> result = writePromise.get_future();
 
     // socat output path
-    std::string outFile = std::getenv("HOME");
-    outFile += "/.tino/socatOutput.txt";
+    qDebug() << "env: " << QString::fromStdString(std::getenv("HOME"));
+    char outFile[300] = "";
+    strcat(outFile, std::getenv("HOME"));
+    strcat(outFile, "/.tino/socatOutput.txt");
+    qDebug() << "outfile: " << QString::fromStdString(outFile);
 
     // start socat
-    std::thread([&outFile]() {
-        std::string rm = "rm " + outFile;
-        std::string socat =
-            "socat -d -d -lf " + outFile + " pty,raw,echo=0 pty,raw,echo=0";
+    std::thread([outFile]() {
+        char rm[100] = "rm ";
+        strcat(rm, outFile);
+        qDebug() << "rm: " << QString::fromStdString(rm);
 
-        system(rm.c_str());
-        system(socat.c_str());
-        qDebug() << "process ended";
+        char socat[300] = "socat -d -d -lf ";
+        strcat(socat, outFile);
+        strcat(socat, " pty,raw,echo=0 pty,raw,echo=0");
+        qDebug() << "socat: " << QString::fromStdString(socat);
+
+        system(rm);
+        system(socat);
     })
         .detach();
 
-    // wait for socat to start
-    //    int i = 0;
-    //    do {
-    //        i = 0;
-    //        std::ifstream socatOutputControl;
-    //        socatOutputControl.open(outFile, std::ifstream::in);
-    //        std::string temp;
-
-    //        while (getline(socatOutputControl, temp)) {
-    //            qDebug() << "temp: " << QString::fromStdString(temp);
-    //            ++i;
-    //        }
-    //        qDebug() << "after while, i: " << i;
-    //    } while (i < 3);
     system("sleep 5");
 
     // open socat output
@@ -169,13 +161,22 @@ std::string Connector::openPort()
         if (ret.empty())
             ret = found;
         else {
-            std::string notifyText =
-                ("notify-send \"connect your client to " + found + "\"");
-            system(notifyText.c_str());
+            char toWrite[300] = "notify-send \"connect your client to ";
+            strcat(toWrite, found.c_str());
+            strcat(toWrite, "\"");
+            system(toWrite);
 
-            std::string toWrite =
-                "echo \"" + found + "\" > /home/$(whoami)/.tino/clientPort.txt";
-            system(toWrite.c_str());
+            //            char *clientPort = std::getenv("HOME");
+            //            strcat(clientPort, "/.tino/clientPort.txt");
+            char clientPort[300] = "/home/fsl/.tino/clientPort.txt";
+
+            toWrite[0] = '\0';
+            strcat(toWrite, "echo \"");
+            strcat(toWrite, found.c_str());
+            strcat(toWrite, "\" > ");
+            strcat(toWrite, clientPort);
+            qDebug() << "write: " << QString::fromStdString(toWrite);
+            system(toWrite);
         }
     }
     return ret;
