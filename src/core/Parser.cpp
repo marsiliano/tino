@@ -64,4 +64,5 @@ void core::Parser::getSettings(std::string name, core::Settings &s)
     s.DataBits      = settings["DataBits"].asInt();
     s.StopBits      = settings["StopBits"].asInt();
     s.ServerAddress = settings["ServerAddress"].asInt();
+    s.refreshTime   = settings["refreshTime"].asInt();
 }

@@ -15,5 +15,6 @@ struct Settings {
     int DataBits;
     int StopBits;
     int ServerAddress;
+    int refreshTime;
 };
 } // namespace core

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "MainSplitter.hpp"
 
 #include <QLabel>
@@ -34,6 +35,7 @@ class CentralWidget : public QWidget
 
     int nBytes;
     std::string filename;
+    core::Settings s;
 
     int btnConnectState;
 };

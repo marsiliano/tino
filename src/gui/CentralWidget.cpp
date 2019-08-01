@@ -34,7 +34,6 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
     connect(btnConnect, &QPushButton::clicked, this, [&]() {
         if (c) {
             if (btnConnectState == 0) {
-                core::Settings s;
                 core::Parser::getSettings(filename, s);
 
                 if (!linePort->text().isEmpty()) // take portname from gui
@@ -85,7 +84,7 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
                     QString s = QString("%1 bytes written").arg(nBytes);
                     lblNbytes->setText(s);
                 });
-                writeTimer->start(150);
+                writeTimer->start(s.refreshTime);
                 btnWrite->setText("stop");
             } else
                 stopWriteTimer();
