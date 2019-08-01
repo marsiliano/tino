@@ -117,8 +117,7 @@ bool Connector::isConnected()
 
 std::string Connector::openPort()
 {
-    //    std::promise<bool> writePromise;
-    //    std::future<bool> result = writePromise.get_future();
+    closePort();
 
     // socat output path
     qDebug() << "env: " << QString::fromStdString(std::getenv("HOME"));
@@ -129,27 +128,38 @@ std::string Connector::openPort()
 
     // start socat
     std::thread([outFile]() {
-        char rm[100] = "rm ";
-        strcat(rm, outFile);
-        qDebug() << "rm: " << QString::fromStdString(rm);
+        char socat[300] = "rm ";
+        strcat(socat, outFile);
+        qDebug() << "rm: " << QString::fromStdString(socat);
+        system(socat);
 
-        char socat[300] = "socat -d -d -lf ";
+        socat[0] = '\0';
+        strcat(socat, "socat -d -d -lf ");
         strcat(socat, outFile);
         strcat(socat, " pty,raw,echo=0 pty,raw,echo=0");
         qDebug() << "socat: " << QString::fromStdString(socat);
-
-        system(rm);
         system(socat);
     })
         .detach();
 
-    system("sleep 5");
-
-    // open socat output
-    std::ifstream socatOutput;
+    std::fstream socatOutput;
     socatOutput.open(outFile, std::ifstream::in);
     std::string ret;
     std::string found;
+
+    bool stop = true;
+    do {
+        std::string temp;
+
+        while (getline(socatOutput, temp)) {
+            if (temp.find("starting data transfer loop with FDs") ==
+                std::string::npos)
+                stop = false;
+        }
+        socatOutput.clear();
+        socatOutput.seekg(0, std::ios::beg);
+    } while (stop);
+    system("sleep 0.5");
 
     // read socat output
     for (int i = 0; i < 2; ++i) {
