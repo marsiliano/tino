@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <future>
+#include <stdlib.h>
 #include <thread>
 #include <utility>
 
@@ -113,24 +114,56 @@ bool Connector::isConnected()
     return (server->state() == QModbusServer::ConnectedState);
 }
 
+// void Connector::portOpened(std::promise<bool> &&writePromise) {}
+
 std::string Connector::openPort()
 {
-    std::thread([]() {
-        system("rm /home/$(whoami)/.tino/socatOutput.txt");
-        system("socat -d -d -lf /home/$(whoami)/.tino/socatOutput.txt "
-               "pty,raw,echo=0 "
-               "pty,raw,echo=0");
+    //    std::promise<bool> writePromise;
+    //    std::future<bool> result = writePromise.get_future();
+
+    // socat output path
+    std::string outFile = std::getenv("HOME");
+    outFile += "/.tino/socatOutput.txt";
+
+    // start socat
+    std::thread([&outFile]() {
+        std::string rm = "rm " + outFile;
+        std::string socat =
+            "socat -d -d -lf " + outFile + " pty,raw,echo=0 pty,raw,echo=0";
+
+        system(rm.c_str());
+        system(socat.c_str());
+        qDebug() << "process ended";
     })
         .detach();
 
+    // wait for socat to start
+    //    int i = 0;
+    //    do {
+    //        i = 0;
+    //        std::ifstream socatOutputControl;
+    //        socatOutputControl.open(outFile, std::ifstream::in);
+    //        std::string temp;
+
+    //        while (getline(socatOutputControl, temp)) {
+    //            qDebug() << "temp: " << QString::fromStdString(temp);
+    //            ++i;
+    //        }
+    //        qDebug() << "after while, i: " << i;
+    //    } while (i < 3);
+    system("sleep 5");
+
+    // open socat output
     std::ifstream socatOutput;
-    socatOutput.open("socatOutput.txt");
+    socatOutput.open(outFile, std::ifstream::in);
     std::string ret;
     std::string found;
 
+    // read socat output
     for (int i = 0; i < 2; ++i) {
         std::string temp;
         getline(socatOutput, temp);
+        qDebug() << "temp: " << QString::fromStdString(temp);
         found = temp.substr(temp.find("/dev/pts/", 0), 10);
 
         if (ret.empty())

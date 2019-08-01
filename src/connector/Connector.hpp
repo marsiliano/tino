@@ -15,6 +15,8 @@ class Connector : public QObject
     std::vector<core::Block> *all;
     QString portname;
 
+    //    void portOpened(std::promise<bool> &&writePromise);
+
   public:
     Connector(std::vector<core::Block> *v, QObject *parent);
     ~Connector();
