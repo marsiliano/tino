@@ -35,7 +35,7 @@ void tst_Parser::initTestCase()
         core::Generator::getBlock(3), core::Generator::getBlock(4),
         core::Generator::getBlock(5),
     };
-    cmp = core::Parser::parse(conf);
+    core::Parser::parse(conf, cmp);
 }
 
 void tst_Parser::tst_load()
@@ -74,14 +74,15 @@ void tst_Parser::parse()
 void tst_Parser::parseSettings()
 {
     core::Settings s;
-    s.portName      = "/dev/pts/1";
+    s.portName      = "auto";
     s.Parity        = 0;
     s.BaudRate      = 57600;
     s.DataBits      = 8;
     s.StopBits      = 1;
     s.ServerAddress = 1;
 
-    core::Settings s1 = core::Parser::getSettings(settings);
+    core::Settings s1;
+    core::Parser::getSettings(settings, s1);
 
     QVERIFY(s == s1);
 }

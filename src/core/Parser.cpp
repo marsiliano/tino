@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-Json::Value core::Parser::getRoot(std::string name)
+Json::Value core::Parser::getRoot(const std::string &name)
 {
     // open the conf.json
     std::ifstream conf(name, std::ios::in);
@@ -14,12 +14,11 @@ Json::Value core::Parser::getRoot(std::string name)
     return root;
 }
 
-std::vector<core::Block> core::Parser::parse(std::string name)
+void core::Parser::parse(std::string name, std::vector<core::Block> &all)
 {
     Json::Value root         = core::Parser::getRoot(name);
     const Json::Value blocks = root["blocks"]; // get the main object
-
-    std::vector<core::Block> all;
+    all.clear();
 
     std::for_each(blocks.begin(), blocks.end(), [&](const Json::Value &block) {
         std::vector<core::Group> g;
@@ -52,20 +51,17 @@ std::vector<core::Block> core::Parser::parse(std::string name)
         core::Block tblock(g, block["start"].asInt(), block["name"].asString());
         all.push_back(tblock);
     });
-    return all;
 }
 
-core::Settings core::Parser::getSettings(std::string name)
+void core::Parser::getSettings(std::string name, core::Settings &s)
 {
     Json::Value root     = core::Parser::getRoot(name);
     const auto &settings = root["settings"]; // get the main object
 
-    Settings s;
     s.portName      = settings["portName"].asString();
     s.Parity        = settings["Parity"].asInt();
     s.BaudRate      = settings["BaudRate"].asInt();
     s.DataBits      = settings["DataBits"].asInt();
     s.StopBits      = settings["StopBits"].asInt();
     s.ServerAddress = settings["ServerAddress"].asInt();
-    return s;
 }

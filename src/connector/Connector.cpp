@@ -51,7 +51,7 @@ Connector::~Connector()
     server = nullptr;
 }
 
-bool Connector::startConnection(core::Settings s)
+bool Connector::startConnection(const core::Settings &s)
 {
     if (server) {
         // set server parameter
@@ -113,8 +113,6 @@ bool Connector::isConnected()
     return (server->state() == QModbusServer::ConnectedState);
 }
 
-// void Connector::portOpened(std::promise<bool> &&writePromise) {}
-
 std::string Connector::openPort()
 {
     closePort();
@@ -130,14 +128,12 @@ std::string Connector::openPort()
     std::thread([outFile]() {
         char socat[300] = "rm ";
         strcat(socat, outFile);
-        qDebug() << "rm: " << QString::fromStdString(socat);
         system(socat);
 
         socat[0] = '\0';
         strcat(socat, "socat -d -d -lf ");
         strcat(socat, outFile);
         strcat(socat, " pty,raw,echo=0 pty,raw,echo=0");
-        qDebug() << "socat: " << QString::fromStdString(socat);
         system(socat);
     })
         .detach();
@@ -159,7 +155,7 @@ std::string Connector::openPort()
         socatOutput.clear();
         socatOutput.seekg(0, std::ios::beg);
     } while (stop);
-    system("sleep 0.5");
+    system("sleep 0.1");
 
     // read socat output
     for (int i = 0; i < 2; ++i) {
@@ -176,16 +172,12 @@ std::string Connector::openPort()
             strcat(toWrite, "\"");
             system(toWrite);
 
-            //            char *clientPort = std::getenv("HOME");
-            //            strcat(clientPort, "/.tino/clientPort.txt");
-            char clientPort[300] = "/home/fsl/.tino/clientPort.txt";
-
             toWrite[0] = '\0';
             strcat(toWrite, "echo \"");
             strcat(toWrite, found.c_str());
             strcat(toWrite, "\" > ");
-            strcat(toWrite, clientPort);
-            qDebug() << "write: " << QString::fromStdString(toWrite);
+            strcat(toWrite, std::getenv("HOME"));
+            strcat(toWrite, "/.tino/clientPort.txt");
             system(toWrite);
         }
     }

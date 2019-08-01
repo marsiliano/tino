@@ -12,8 +12,8 @@ struct Parser {
     Parser()  = delete;
     ~Parser() = default;
 
-    static std::vector<core::Block> parse(std::string name);
-    static Json::Value getRoot(std::string name);
-    static Settings getSettings(std::string name);
+    static Json::Value getRoot(const std::string &name);
+    static void parse(std::string name, std::vector<core::Block> &all);
+    static void getSettings(std::string name, Settings &s);
 };
 } // namespace core
