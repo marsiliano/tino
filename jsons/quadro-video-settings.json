@@ -7,7 +7,7 @@
         "DataBits": 8,
         "StopBits": 1,
         "ServerAddress": 1,
-        "refreshTime": 2000
+        "refreshTime": 500
     },
     "blocks": [
     {
@@ -100,17 +100,147 @@
                 ]
             },
             {
+                "type": "m",
+                "bytes": [
+                    {
+                        "write": true,
+                        "name": "FL_RET",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["start cottura da porta aperta a fine preriscaldo", "finito preriscaldamento", "finito cooldown", "fine cottura/fine clean test", "top cotura/lavaggio per allarme", "fine taratura UR%", "esci dal lavaggio a fine lavaggio per porta aperta", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "MFL_RET",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "MFL_RET+1",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "MFL_RET+2",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "MFL_RET+3",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "MFL_RET+4",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "MFL_RET+5",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "MFL_RET+6",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "MFL_RET+7",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "FLAR",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "FLAR+1",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "FLAR+2",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "FLAR+3",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "FLAR+4",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "FLAR+5",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "FLAR+6",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    },
+                    {
+                        "write": true,
+                        "name": "FLAR+7",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["", "", "", "", "", "", "", ""]
+                    }
+                ]
+            },
+            {
                 "type": "j",
                 "bytes": [
                     {
                         "write": true,
-                        "name": "MED_UR 0",
+                        "name": "MINFUNZ 0",
                         "values": [false, true, false, false, false, false, false, false],
                         "desc": []
                     },
                     {
                         "write": true,
-                        "name": "MED_UR 1",
+                        "name": "MINFUNZ 1",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": []
+                    }
+                ]
+            },
+            {
+                "type": "v",
+                "bytes": [
+                    {
+                        "write": true,
+                        "name": "UR_VIS",
+                        "values": [false, true, false, false, false, false, false, false],
+                        "desc": []
+                    },
+                    {
+                        "write": true,
+                        "name": "",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": []
+                    },
+                    {
+                        "write": true,
+                        "name": "",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
@@ -121,13 +251,13 @@
                 "bytes": [
                     {
                         "write": true,
-                        "name": "MED_UR 0",
+                        "name": "CNT_LIT2 0",
                         "values": [false, true, false, false, false, false, false, false],
                         "desc": []
                     },
                     {
                         "write": true,
-                        "name": "MED_UR 1",
+                        "name": "CNT_LIT2 1",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
@@ -138,13 +268,41 @@
                 "bytes": [
                     {
                         "write": true,
-                        "name": "MED_UR 0",
+                        "name": "TIM_PLAV 0",
                         "values": [false, true, false, false, false, false, false, false],
                         "desc": []
                     },
                     {
                         "write": true,
-                        "name": "MED_UR 1",
+                        "name": "TIM_PLAV 1",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": []
+                    }
+                ]
+            },
+            {
+                "type": "v",
+                "bytes": [
+                    {
+                        "write": true,
+                        "name": "TIM_PLAV 0",
+                        "values": [false, true, false, false, false, false, false, false],
+                        "desc": []
+                    }
+                ]
+            },
+            {
+                "type": "j",
+                "bytes": [
+                    {
+                        "write": true,
+                        "name": "",
+                        "values": [false, true, false, false, false, false, false, false],
+                        "desc": []
+                    },
+                    {
+                        "write": true,
+                        "name": "",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
@@ -155,13 +313,13 @@
                 "bytes": [
                     {
                         "write": true,
-                        "name": "MED_UR 0",
+                        "name": "CNT_LIT1 0",
                         "values": [false, true, false, false, false, false, false, false],
                         "desc": []
                     },
                     {
                         "write": true,
-                        "name": "MED_UR 1",
+                        "name": "CNT_LIT1 1",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
@@ -172,13 +330,13 @@
                 "bytes": [
                     {
                         "write": true,
-                        "name": "MED_UR 0",
+                        "name": "",
                         "values": [false, true, false, false, false, false, false, false],
                         "desc": []
                     },
                     {
                         "write": true,
-                        "name": "MED_UR 1",
+                        "name": "",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
@@ -189,13 +347,13 @@
                 "bytes": [
                     {
                         "write": true,
-                        "name": "MED_UR 0",
+                        "name": "",
                         "values": [false, true, false, false, false, false, false, false],
                         "desc": []
                     },
                     {
                         "write": true,
-                        "name": "MED_UR 1",
+                        "name": "",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
@@ -206,13 +364,13 @@
                 "bytes": [
                     {
                         "write": true,
-                        "name": "MED_UR 0",
+                        "name": "",
                         "values": [false, true, false, false, false, false, false, false],
                         "desc": []
                     },
                     {
                         "write": true,
-                        "name": "MED_UR 1",
+                        "name": "",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
@@ -223,13 +381,13 @@
                 "bytes": [
                     {
                         "write": true,
-                        "name": "MED_UR 0",
+                        "name": "",
                         "values": [false, true, false, false, false, false, false, false],
                         "desc": []
                     },
                     {
                         "write": true,
-                        "name": "MED_UR 1",
+                        "name": "",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
@@ -240,13 +398,13 @@
                 "bytes": [
                     {
                         "write": true,
-                        "name": "MED_UR 0",
+                        "name": "",
                         "values": [false, true, false, false, false, false, false, false],
                         "desc": []
                     },
                     {
                         "write": true,
-                        "name": "MED_UR 1",
+                        "name": "",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
@@ -257,13 +415,13 @@
                 "bytes": [
                     {
                         "write": true,
-                        "name": "MED_UR 0",
+                        "name": "",
                         "values": [false, true, false, false, false, false, false, false],
                         "desc": []
                     },
                     {
                         "write": true,
-                        "name": "MED_UR 1",
+                        "name": "",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
@@ -274,763 +432,32 @@
                 "bytes": [
                     {
                         "write": true,
-                        "name": "MED_UR 0",
+                        "name": "",
                         "values": [false, true, false, false, false, false, false, false],
                         "desc": []
                     },
                     {
                         "write": true,
-                        "name": "MED_UR 1",
+                        "name": "",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": []
                     }
                 ]
-            },
+            }
+        ]
+    },
+    {
+        "name": "scrittura",
+        "start": 312,
+        "groups": [
             {
-                "type": "j",
+                "type": "m",
                 "bytes": [
                     {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
+                        "write": false,
+                        "name": "FL_COM",
                         "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
-                    }
-                ]
-            },
-            {
-                "type": "j",
-                "bytes": [
-                    {
-                        "write": true,
-                        "name": "MED_UR 0",
-                        "values": [false, true, false, false, false, false, false, false],
-                        "desc": []
-                    },
-                    {
-                        "write": true,
-                        "name": "MED_UR 1",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": []
+                        "desc": ["scheda", "start", "preriscaldo", "cooldown", "lavaggio", "start configurazione forno", "salva configurazione slave in eeprom", "luci in start"]
                     }
                 ]
             }
