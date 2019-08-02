@@ -213,7 +213,7 @@
         "groups": [
             {
                 "type": "m",
-                "Write": false,
+                "write": false,
                 "bytes": [
                     {
                         "name": "bytename",
