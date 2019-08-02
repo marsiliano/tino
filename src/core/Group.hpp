@@ -10,14 +10,12 @@ class Group
     std::vector<Byte> v;
     std::string name;
     char type;
+    bool write;
 
   public:
-    Group(std::vector<Byte> v, char type);
+    Group(std::vector<Byte> v, char type, bool write);
     ~Group()             = default;
     Group(const Group &) = default;
-
-    void add(std::vector<bool> vect, std::vector<std::string> description,
-             bool rw, std::string name);
 
     Group &operator=(const Group &other);
     bool operator==(const Group &other) const;
@@ -25,6 +23,7 @@ class Group
 
     char getType() const;
     long unsigned getDim() const;
+    bool getWrite() const;
 };
 
 } // namespace core

@@ -33,28 +33,30 @@ void tst_Eq::tst_nEqBlock()
 
 void tst_Eq::tst_EqGroup()
 {
-    QVERIFY(core::Generator::getGroup1() == core::Generator::getGroup1());
-    QVERIFY(core::Generator::getGroup2() == core::Generator::getGroup2());
+    QVERIFY(core::Generator::getGroup1(true) ==
+            core::Generator::getGroup1(true));
+    QVERIFY(core::Generator::getGroup2(false) ==
+            core::Generator::getGroup2(false));
 }
 
 void tst_Eq::tst_nEqGroup()
 {
-    QVERIFY(!(core::Generator::getGroup1() == core::Generator::getGroup2()));
-    QVERIFY(!(core::Generator::getGroup2() == core::Generator::getGroup1()));
+    QVERIFY(!(core::Generator::getGroup1(true) ==
+              core::Generator::getGroup2(true)));
+    QVERIFY(!(core::Generator::getGroup2(false) ==
+              core::Generator::getGroup1(false)));
 }
 
 void tst_Eq::tst_EqByte()
 {
-    QVERIFY(core::Generator::getByte1(true) == core::Generator::getByte1(true));
-    QVERIFY(core::Generator::getByte2(true) == core::Generator::getByte2(true));
+    QVERIFY(core::Generator::getByte1() == core::Generator::getByte1());
+    QVERIFY(core::Generator::getByte2() == core::Generator::getByte2());
 }
 
 void tst_Eq::tst_nEqByte()
 {
-    QVERIFY(
-        !(core::Generator::getByte1(true) == core::Generator::getByte2(true)));
-    QVERIFY(
-        !(core::Generator::getByte2(true) == core::Generator::getByte1(true)));
+    QVERIFY(!(core::Generator::getByte1() == core::Generator::getByte2()));
+    QVERIFY(!(core::Generator::getByte2() == core::Generator::getByte1()));
 }
 
 void tst_Eq::tst_nByte()

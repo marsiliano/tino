@@ -11,7 +11,7 @@ widget::GroupWidget::GroupWidget(core::Group *value, QWidget *parent) :
         case 'm': // mask
             for (i = 0; i < val->getDim(); ++i) {
                 m.emplace_back(std::unique_ptr<widget::Mask>(
-                    new widget::Mask(&(*val)[i], this)));
+                    new widget::Mask(&(*val)[i], val->getWrite(), this)));
                 l->addWidget(m[static_cast<unsigned long>(i)].get(), 0,
                              Qt::AlignHCenter);
             }
@@ -19,7 +19,7 @@ widget::GroupWidget::GroupWidget(core::Group *value, QWidget *parent) :
         case 'v': // value
             for (i = 0; i < val->getDim(); ++i) {
                 v.emplace_back(std::unique_ptr<widget::Value>(
-                    new widget::Value(&((*val)[i]), this)));
+                    new widget::Value(&((*val)[i]), val->getWrite(), this)));
                 l->addWidget(v[static_cast<unsigned long>(i)].get(), 0,
                              Qt::AlignHCenter);
             }

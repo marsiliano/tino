@@ -22,6 +22,7 @@ void core::Parser::parse(std::string name, std::vector<core::Block> &all)
 
     std::for_each(blocks.begin(), blocks.end(), [&](const Json::Value &block) {
         std::vector<core::Group> g;
+        int byteCont = 0;
 
         std::for_each(
             block["groups"].begin(), block["groups"].end(),
@@ -41,11 +42,11 @@ void core::Parser::parse(std::string name, std::vector<core::Block> &all)
                              l < static_cast<int>(byte["desc"].size()); ++l)
                             s.push_back(byte["desc"][l].asString());
 
-                        core::Byte tb(v, s, byte["write"].asBool(),
-                                      byte["name"].asString());
+                        core::Byte tb(v, s, byte["name"].asString());
                         b.push_back(tb);
                     });
-                core::Group tg(b, group["type"].asString()[0]);
+                core::Group tg(b, group["type"].asString()[0],
+                               group["write"].asBool());
                 g.push_back(tg);
             });
         core::Block tblock(g, block["start"].asInt(), block["name"].asString());

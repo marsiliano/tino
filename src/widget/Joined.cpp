@@ -9,6 +9,7 @@ widget::Joined::Joined(core::Group *value, QWidget *parent) : QWidget(parent)
     box = new QSpinBox(this);
     box->setMinimum(0);
     box->setMaximum(pow(2, (8 * dim)) - 1);
+    box->setEnabled(val->getWrite());
     l->addWidget(box, 0, Qt::AlignVCenter);
 
     long v = 0;

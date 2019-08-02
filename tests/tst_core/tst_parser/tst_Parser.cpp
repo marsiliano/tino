@@ -80,7 +80,7 @@ void tst_Parser::parseSettings()
     s.DataBits      = 8;
     s.StopBits      = 1;
     s.ServerAddress = 1;
-    s.refreshTime   = 2000;
+    s.refreshTime   = 1000;
 
     core::Settings s1;
     core::Parser::getSettings(settings, s1);

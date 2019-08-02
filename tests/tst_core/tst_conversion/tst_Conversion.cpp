@@ -19,8 +19,7 @@ class tst_Conversion : public QObject
 
 void tst_Conversion::initTestCase()
 {
-    b = core::Generator::getByte1(true);
-    //    bl = core::Generator::getBlock(1);
+    b = core::Generator::getByte1();
 }
 
 void tst_Conversion::tst_BoolInt()

@@ -11,7 +11,7 @@ class Mask : public QWidget
     Q_OBJECT
 
   public:
-    Mask(core::Byte *value, QWidget *parent = nullptr);
+    Mask(core::Byte *value, bool write, QWidget *parent = nullptr);
     ~Mask() override   = default;
     Mask(const Mask &) = default;
 

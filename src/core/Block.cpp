@@ -31,7 +31,7 @@ bool core::Block::operator==(const core::Block &other) const
     while (i < v.size() && v[i] == other.v[i])
         ++i;
 
-    return i == v.size() ? true : false;
+    return i == v.size();
 }
 
 core::Block &core::Block::operator=(const core::Block &other)

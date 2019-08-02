@@ -21,8 +21,8 @@ class tst_Mask : public QObject
 
 void tst_Mask::initTestCase()
 {
-    b = core::Generator::getByte1(true);
-    m = new widget::Mask(&b, nullptr);
+    b = core::Generator::getByte1();
+    m = new widget::Mask(&b, true, nullptr);
 }
 
 QString tst_Mask::getClr(const int i)

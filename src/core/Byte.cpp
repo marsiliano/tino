@@ -1,12 +1,11 @@
 #include "Byte.hpp"
 
-core::Byte::Byte(std::vector<bool> v, std::vector<std::string> desc, bool write,
+core::Byte::Byte(std::vector<bool> v, std::vector<std::string> desc,
                  std::string name)
 {
-    this->v     = v;
-    this->desc  = desc;
-    this->write = write;
-    this->name  = name;
+    this->v    = v;
+    this->desc = desc;
+    this->name = name;
 }
 
 std::string core::Byte::getDesc(long unsigned i)
@@ -23,11 +22,6 @@ void core::Byte::set(long unsigned i)
     v[i] = !v[i];
 }
 
-bool core::Byte::getWrite() const
-{
-    return write;
-}
-
 std::string core::Byte::getName() const
 {
     return name;
@@ -35,18 +29,16 @@ std::string core::Byte::getName() const
 
 core::Byte &core::Byte::operator=(const core::Byte &other)
 {
-    this->v     = other.v;
-    this->write = other.write;
-    this->desc  = other.desc;
-    this->name  = other.name;
+    this->v    = other.v;
+    this->desc = other.desc;
+    this->name = other.name;
 
     return *this;
 }
 
 bool core::Byte::operator==(const core::Byte &other) const
 {
-    if ((name != other.name) || (write != other.write) ||
-        (desc.size() != other.desc.size()))
+    if ((name != other.name) || (desc.size() != other.desc.size()))
         return false;
 
     unsigned long i = 0;
@@ -61,10 +53,7 @@ bool core::Byte::operator==(const core::Byte &other) const
     while (i < desc.size() && desc[i] == other.desc[i])
         ++i;
 
-    if (i != desc.size())
-        return false;
-
-    return true;
+    return i == desc.size();
 }
 
 int core::Byte::getInt()

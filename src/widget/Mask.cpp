@@ -1,6 +1,7 @@
 #include "Mask.hpp"
 
-widget::Mask::Mask(core::Byte *val, QWidget *parent) : QWidget(parent)
+widget::Mask::Mask(core::Byte *val, bool write, QWidget *parent) :
+    QWidget(parent)
 {
     l = new QVBoxLayout(this);
     lblName =
@@ -10,10 +11,9 @@ widget::Mask::Mask(core::Byte *val, QWidget *parent) : QWidget(parent)
     for (int i = 0; i < 2; ++i) {
         m.push_back(std::unique_ptr<widget::HalfMask>(
             new widget::HalfMask(val, i * 4, this)));
+        m[i].get()->setEnabled(write);
         l->addWidget(m[i].get(), 0, Qt::AlignVCenter);
     }
-
-    this->setEnabled(val->getWrite());
 }
 
 bool widget::Mask::valAt(int i)

@@ -14,14 +14,11 @@ class Byte
   private:
     std::vector<bool> v;
     std::vector<std::string> desc;
-    bool write;
-    int start;
     std::string name;
 
   public:
     Byte() = default;
-    Byte(std::vector<bool> v, std::vector<std::string> desc, bool rw,
-         std::string name);
+    Byte(std::vector<bool> v, std::vector<std::string> desc, std::string name);
     ~Byte()            = default;
     Byte(const Byte &) = default;
 
@@ -30,7 +27,6 @@ class Byte
     bool operator[](long unsigned i);
 
     std::string getDesc(long unsigned i);
-    bool getWrite() const;
     std::string getName() const;
     int getInt();
 

@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-core::Byte core::Generator::getByte1(bool rw)
+core::Byte core::Generator::getByte1()
 {
     std::vector<bool> v = {
         true, false, true, false, true, false, true, false
@@ -12,51 +12,50 @@ core::Byte core::Generator::getByte1(bool rw)
         "bitname5", "bitname6", "bitname7", "bitname8",
     };
 
-    core::Byte b(v, s, rw, "bytename");
+    core::Byte b(v, s, "bytename");
     return b;
 }
 
-core::Byte core::Generator::getByte2(bool rw)
+core::Byte core::Generator::getByte2()
 {
     std::vector<bool> v = {
         true, false, true, false, true, false, true, false
     };
     std::vector<std::string> s = {};
 
-    core::Byte b(v, s, rw, "bytename");
+    core::Byte b(v, s, "bytename");
     return b;
 }
 
-core::Group core::Generator::getGroup1()
+core::Group core::Generator::getGroup1(bool rw)
 {
-    std::vector<core::Byte> vb = { getByte1(false), getByte1(true),
-                                   getByte1(true) };
-    core::Group g(vb, 'm');
+    std::vector<core::Byte> vb = { getByte1(), getByte1(), getByte1() };
+    core::Group g(vb, 'm', rw);
     return g;
 }
 
-core::Group core::Generator::getGroup2()
+core::Group core::Generator::getGroup2(bool rw)
 {
-    std::vector<core::Byte> vb = { getByte2(false), getByte2(true),
-                                   getByte2(true) };
-    core::Group g(vb, 'v');
+    std::vector<core::Byte> vb = { getByte2(), getByte2(), getByte2() };
+    core::Group g(vb, 'v', rw);
     return g;
 }
-core::Group core::Generator::getGroup3()
+core::Group core::Generator::getGroup3(bool rw)
 {
-    std::vector<core::Byte> vb = { getByte2(false), getByte2(true),
-                                   getByte2(true) };
-    core::Group g(vb, 'j');
+    std::vector<core::Byte> vb = { getByte2(), getByte2(), getByte2() };
+    core::Group g(vb, 'j', rw);
     return g;
 }
 
 core::Block core::Generator::getBlock(int n)
 {
-    std::vector<core::Group> vg = { getGroup1(), getGroup2(), getGroup3() };
+    std::vector<core::Group> vg = { getGroup1(false), getGroup2(true),
+                                    getGroup3(true) };
 
     std::stringstream stream;
     stream << "blockname" << n;
 
-    core::Block bl(vg, (n - 1) * (static_cast<int>(vg.size()) * 3), stream.str());
+    core::Block bl(vg, (n - 1) * (static_cast<int>(vg.size()) * 3),
+                   stream.str());
     return bl;
 }

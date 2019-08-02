@@ -93,8 +93,8 @@ int Connector::writeBlock(long unsigned int a)
     if (server) {
         ++cont;
         for (unsigned long i = 0; i < (*all)[a].getDim(); ++i) {
-            for (unsigned long j = 0; j < (*all)[a][i].getDim(); ++j) {
-                if ((*all)[a][i][j].getWrite()) {
+            if ((*all)[a][i].getWrite()) {
+                for (unsigned long j = 0; j < (*all)[a][i].getDim(); ++j) {
                     if (!server->setData(QModbusDataUnit::HoldingRegisters,
                                          (*all)[a].getStart() + cont,
                                          (*all)[a][i][j].getInt()))

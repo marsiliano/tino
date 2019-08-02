@@ -12,7 +12,7 @@ class Value : public QWidget
     Q_OBJECT
 
   public:
-    Value(core::Byte *value, QWidget *parent = nullptr);
+    Value(core::Byte *value, bool write, QWidget *parent = nullptr);
     ~Value() override = default;
 
   private:
