@@ -461,43 +461,43 @@
                     },
                     {
                         "write": false,
-                        "name": "FL_COM",
+                        "name": "FL_COM+1",
+                        "values": [false, false, false, false, false, false, false, false],
+                        "desc": ["start collaudio GAS", "/", "START procedura di taratura UR%", "start del test pompa di lavaggio", "collaudo gas C2", "interrompi test pompe di lavaggio", "start del test veloce flussostati e riduttori di pressione"]
+                    },
+                    {
+                        "write": false,
+                        "name": "FL_COM+2",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": ["scheda", "start", "preriscaldo", "cooldown", "lavaggio", "start configurazione forno", "salva configurazione slave in eeprom", "luci in start"]
                     },
                     {
                         "write": false,
-                        "name": "FL_COM",
+                        "name": "FL_COM+3",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": ["scheda", "start", "preriscaldo", "cooldown", "lavaggio", "start configurazione forno", "salva configurazione slave in eeprom", "luci in start"]
                     },
                     {
                         "write": false,
-                        "name": "FL_COM",
+                        "name": "FL_COM+4",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": ["scheda", "start", "preriscaldo", "cooldown", "lavaggio", "start configurazione forno", "salva configurazione slave in eeprom", "luci in start"]
                     },
                     {
                         "write": false,
-                        "name": "FL_COM",
+                        "name": "FL_COM+5",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": ["scheda", "start", "preriscaldo", "cooldown", "lavaggio", "start configurazione forno", "salva configurazione slave in eeprom", "luci in start"]
                     },
                     {
                         "write": false,
-                        "name": "FL_COM",
+                        "name": "FL_COM+6",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": ["scheda", "start", "preriscaldo", "cooldown", "lavaggio", "start configurazione forno", "salva configurazione slave in eeprom", "luci in start"]
                     },
                     {
                         "write": false,
-                        "name": "FL_COM",
-                        "values": [false, false, false, false, false, false, false, false],
-                        "desc": ["scheda", "start", "preriscaldo", "cooldown", "lavaggio", "start configurazione forno", "salva configurazione slave in eeprom", "luci in start"]
-                    },
-                    {
-                        "write": false,
-                        "name": "FL_COM",
+                        "name": "FL_COM+7",
                         "values": [false, false, false, false, false, false, false, false],
                         "desc": ["scheda", "start", "preriscaldo", "cooldown", "lavaggio", "start configurazione forno", "salva configurazione slave in eeprom", "luci in start"]
                     }
