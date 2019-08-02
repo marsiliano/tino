@@ -1,4 +1,14 @@
 {
+    "settings":
+    {
+        "portName": "auto",
+        "Parity": 0,
+        "BaudRate": 57600,
+        "DataBits": 8,
+        "StopBits": 1,
+        "ServerAddress": 1,
+        "refreshTime": 1000
+    },
     "blocks": [
     {
         "name": "blockname1",
@@ -347,3 +357,4 @@
     }
     ]
 }
+

@@ -27,8 +27,7 @@ class tst_Parser : public QObject
 
 void tst_Parser::initTestCase()
 {
-    conf     = "../../../../tino/jsons/conf.json";
-    settings = "../../../../tino/jsons/quadro-video-settings.json";
+    conf = "../../../../tino/jsons/conf.json";
     // you should look at the path relative to the tst_gui executable
     all = {
         core::Generator::getBlock(1), core::Generator::getBlock(2),
@@ -42,9 +41,6 @@ void tst_Parser::tst_load()
 {
     std::ifstream fconf(conf, std::ios::in);
     QVERIFY(fconf.is_open());
-
-    std::ifstream fsettings(settings, std::ios::in);
-    QVERIFY(fsettings.is_open());
 }
 
 void tst_Parser::compareSize()
@@ -83,7 +79,7 @@ void tst_Parser::parseSettings()
     s.refreshTime   = 1000;
 
     core::Settings s1;
-    core::Parser::getSettings(settings, s1);
+    core::Parser::getSettings(conf, s1);
 
     QVERIFY(s == s1);
 }
