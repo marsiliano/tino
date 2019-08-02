@@ -39,14 +39,14 @@ void tst_Conversion::tst_IntBool()
 
 void tst_Conversion::tst_setIntAtAddressOut()
 {
-    core::Block bl = core::Generator::getBlock(1);
+    core::Block bl = core::Generator::getBlock();
     QVERIFY(!(bl.setIntAtAddress(6, 9))); // address 9 doesn't exist
 }
 
 void tst_Conversion::tst_setIntAtAddress()
 {
-    std::vector<int> v = { 0, 2, 5, 8 };
-    core::Block bl     = core::Generator::getBlock(1);
+    std::vector<int> v = { 0, 1, 2, 3 };
+    core::Block bl     = core::Generator::getBlock();
 
     for (const int &i : v)
         QVERIFY(bl.setIntAtAddress(6, i));

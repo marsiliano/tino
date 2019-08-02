@@ -121,7 +121,10 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         l->addWidget(m, 1, 0, 1, 6, Qt::AlignLeft);
 
         connect(c, &Connector::updateBlockReq, this,
-                [this](long unsigned int ii) { m->updateBlock(ii); });
+                [this](long unsigned int ii) {
+                    m->updateBlock(ii);
+                    qDebug() << blocks[ii][0][0].getInt();
+                });
     });
 
     // nBytes

@@ -14,6 +14,7 @@ class tst_Parser : public QObject
     long unsigned int i;
     std::string conf;
     std::string settings;
+    std::vector<bool> write;
 
   private slots:
     void initTestCase();
@@ -27,12 +28,15 @@ class tst_Parser : public QObject
 
 void tst_Parser::initTestCase()
 {
-    conf = "../../../../tino/jsons/conf.json";
+    write = { false, true, true };
+    conf  = "../../../../tino/jsons/conf.json";
     // you should look at the path relative to the tst_gui executable
     all = {
-        core::Generator::getBlock(1), core::Generator::getBlock(2),
-        core::Generator::getBlock(3), core::Generator::getBlock(4),
-        core::Generator::getBlock(5),
+        core::Generator::getBlock(1, write),
+        core::Generator::getBlock(2, write),
+        core::Generator::getBlock(3, write),
+        core::Generator::getBlock(4, write),
+        core::Generator::getBlock(5, write),
     };
     core::Parser::parse(conf, cmp);
 }

@@ -47,15 +47,27 @@ core::Group core::Generator::getGroup3(bool rw)
     return g;
 }
 
-core::Block core::Generator::getBlock(int n)
+core::Block core::Generator::getBlock(int n, std::vector<bool> write)
 {
-    std::vector<core::Group> vg = { getGroup1(false), getGroup2(true),
-                                    getGroup3(true) };
+    std::vector<core::Group> vg = { getGroup1(write[0]), getGroup2(write[1]),
+                                    getGroup3(write[2]) };
 
     std::stringstream stream;
     stream << "blockname" << n;
 
     core::Block bl(vg, (n - 1) * (static_cast<int>(vg.size()) * 3),
                    stream.str());
+    return bl;
+}
+
+core::Block core::Generator::getBlock()
+{
+    std::vector<core::Group> vg = { getGroup1(false), getGroup2(false),
+                                    getGroup3(false) };
+
+    std::stringstream stream;
+    stream << "blockname" << 1;
+
+    core::Block bl(vg, 0, stream.str());
     return bl;
 }

@@ -6,19 +6,16 @@ MainSplitter::MainSplitter(std::vector<core::Block> *blocks, QWidget *parent) :
     mainlayout = new QVBoxLayout(this);
     sp         = new QSplitter(Qt::Vertical, this);
 
-    long unsigned int cont, i, j;
-    cont = i = j = 0;
+    long unsigned int cont, i;
+    cont = i = 0;
 
     for (i = 0; i < blocks->size(); i++) {
-        if (i == 0 || i % 4 == 0) {
+        if (i == 0 || i % 4 == 0)
             spv.emplace_back(new QSplitter(Qt::Horizontal, this));
-            j = 0;
-        }
 
         blocksWidget.emplace_back(std::unique_ptr<ScrollBlock>(
             new ScrollBlock(&((*blocks)[i]), this)));
         spv[cont]->addWidget(blocksWidget[i].get());
-        //        spv[cont]->setCollapsible(static_cast<int>(j++), false);
 
         if (i == blocks->size() - 1 || i % 4 == 3) {
             sp->addWidget(spv[cont]);
@@ -30,5 +27,5 @@ MainSplitter::MainSplitter(std::vector<core::Block> *blocks, QWidget *parent) :
 
 void MainSplitter::updateBlock(long unsigned int i)
 {
-    blocksWidget[i]->update();
+    blocksWidget[i]->refresh();
 }

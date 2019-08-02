@@ -13,6 +13,7 @@ struct Generator {
     static core::Group getGroup1(bool rw);
     static core::Group getGroup2(bool rw);
     static core::Group getGroup3(bool rw);
-    static core::Block getBlock(int n);
+    static core::Block getBlock();
+    static core::Block getBlock(int n, std::vector<bool> write);
 };
 } // namespace core

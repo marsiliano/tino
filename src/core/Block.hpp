@@ -25,7 +25,7 @@ class Block
     std::string getName() const;
     int getNbyte();
 
-    bool setIntAtAddress(int values, int address);
+    bool setIntAtAddress(int values, int addres);
 };
 
 } // namespace core

@@ -9,6 +9,7 @@ class ScrollBlock : public QWidget
 
   public:
     ScrollBlock(core::Block *value, QWidget *parent = nullptr);
+    void refresh();
 
   private:
     QVBoxLayout *l;

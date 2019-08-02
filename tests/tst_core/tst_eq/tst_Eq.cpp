@@ -8,6 +8,7 @@ class tst_Eq : public QObject
     Q_OBJECT
 
   private slots:
+    void initTestCase();
     void tst_EqBlock();
     void tst_nEqBlock();
     void tst_EqGroup();
@@ -17,18 +18,28 @@ class tst_Eq : public QObject
     void tst_nByte();
 
   private:
+    std::vector<bool> write;
 };
+
+void tst_Eq::initTestCase()
+{
+    write = { false, true, true };
+}
 
 void tst_Eq::tst_EqBlock()
 {
-    QVERIFY(core::Generator::getBlock(1) == core::Generator::getBlock(1));
-    QVERIFY(core::Generator::getBlock(2) == core::Generator::getBlock(2));
+    QVERIFY(core::Generator::getBlock(1, write) ==
+            core::Generator::getBlock(1, write));
+    QVERIFY(core::Generator::getBlock(2, write) ==
+            core::Generator::getBlock(2, write));
 }
 
 void tst_Eq::tst_nEqBlock()
 {
-    QVERIFY(!(core::Generator::getBlock(1) == core::Generator::getBlock(2)));
-    QVERIFY(!(core::Generator::getBlock(2) == core::Generator::getBlock(1)));
+    QVERIFY(!(core::Generator::getBlock(1, write) ==
+              core::Generator::getBlock(2, write)));
+    QVERIFY(!(core::Generator::getBlock(1, write) ==
+              core::Generator::getBlock(2, write)));
 }
 
 void tst_Eq::tst_EqGroup()
@@ -61,8 +72,8 @@ void tst_Eq::tst_nEqByte()
 
 void tst_Eq::tst_nByte()
 {
-    QVERIFY(core::Generator::getBlock(1).getNbyte() == 9);
-    QVERIFY(core::Generator::getBlock(2).getNbyte() == 9);
+    QVERIFY(core::Generator::getBlock(1, write).getNbyte() == 9);
+    QVERIFY(core::Generator::getBlock(2, write).getNbyte() == 9);
 }
 
 QTEST_MAIN(tst_Eq)

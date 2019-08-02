@@ -1,4 +1,4 @@
-#include "Connector.hpp"
+﻿#include "Connector.hpp"
 
 #include <fstream>
 #include <stdio.h>
@@ -37,8 +37,11 @@ Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
 
                 --i;
                 qDebug() << "i: " << i << ", value: " << u.value(0)
-                         << ", address: " << u.startAddress();
-                (*all)[i].setIntAtAddress(u.value(0), u.startAddress());
+                         << ", address: " << u.startAddress()
+                         << ", size: " << u.valueCount();
+
+                for (int j = 0; j < u.valueCount(); ++j)
+                    (*all)[i].setIntAtAddress(u.value(j), u.startAddress() + j);
                 emit updateBlockReq(i);
             });
 }
@@ -93,14 +96,19 @@ int Connector::writeBlock(long unsigned int a)
     if (server) {
         ++cont;
         for (unsigned long i = 0; i < (*all)[a].getDim(); ++i) {
-            if ((*all)[a][i].getWrite()) {
-                for (unsigned long j = 0; j < (*all)[a][i].getDim(); ++j) {
+            for (unsigned long j = 0; j < (*all)[a][i].getDim(); ++j) {
+                if ((*all)[a][i].getWrite()) {
                     if (!server->setData(QModbusDataUnit::HoldingRegisters,
                                          (*all)[a].getStart() + cont,
                                          (*all)[a][i][j].getInt()))
                         qDebug() << "error writing data: " << cont << " "
                                  << server->errorString();
-                }
+                } /**else
+                    qDebug() << "readonly";*/
+                  //                qDebug() << "Writing: " <<
+                  //                (*all)[a][i][j].getInt()
+                  //                         << " at address: " <<
+                  //                         (*all)[a].getStart() + cont;
                 ++cont;
             }
         }

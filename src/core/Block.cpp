@@ -65,16 +65,17 @@ bool core::Block::setIntAtAddress(int values, int address)
     unsigned long int i = 0, j;
 
     while (i < v.size()) { // scroll groups
-        j = 0;
 
-        while (j < v[i].getDim()) { // scroll bytes
-
-            if (cont == address) {
-                v[i][j].setInt(values);
-                return true;
+        if (!v[i].getWrite()) { // update if is readonly
+            j = 0;
+            while (j < v[i].getDim()) { // scroll bytes
+                if (cont == address) {
+                    v[i][j].setInt(values);
+                    return true;
+                }
+                ++cont;
+                ++j;
             }
-            ++cont;
-            ++j;
         }
         ++i;
     }

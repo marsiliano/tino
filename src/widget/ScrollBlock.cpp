@@ -13,11 +13,25 @@ ScrollBlock::ScrollBlock(core::Block *value, QWidget *parent) : QWidget(parent)
     child = new widget::BlockWidget(val, this);
     child->setMaximumWidth(1000);
 
-    a = new QScrollArea(this);
-    a->setWidget(child);
+    a = nullptr;
+    refresh();
 
     l->addWidget(lBlock, 0, Qt::AlignHCenter);
     l->addWidget(a);
 
     this->setMinimumWidth(50);
+}
+
+void ScrollBlock::refresh()
+{
+    if (a) {
+        delete a->takeWidget();
+        child = nullptr;
+    } else {
+        a = new QScrollArea(this);
+        a->setWidget(child);
+    }
+    child = new widget::BlockWidget(val, this);
+    child->setMaximumWidth(1000);
+    a->setWidget(child);
 }
