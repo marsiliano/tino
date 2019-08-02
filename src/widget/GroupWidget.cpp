@@ -1,10 +1,9 @@
 #include "GroupWidget.hpp"
 
-widget::GroupWidget::GroupWidget(core::Group *value, QWidget *parent) :
+widget::GroupWidget::GroupWidget(core::Group *val, QWidget *parent) :
     QWidget(parent)
 {
-    this->val = value;
-    l         = new QBoxLayout(QBoxLayout::TopToBottom, this);
+    l = new QBoxLayout(QBoxLayout::TopToBottom, this);
     long unsigned int i;
 
     switch (val->getType()) {

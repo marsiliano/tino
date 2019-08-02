@@ -1,11 +1,10 @@
 #include "MainSplitter.hpp"
 
-MainSplitter::MainSplitter(std::vector<core::Block> *blocks1, QWidget *parent) :
+MainSplitter::MainSplitter(std::vector<core::Block> *blocks, QWidget *parent) :
     QWidget(parent)
 {
-    this->blocks = blocks1;
-    mainlayout   = new QVBoxLayout(this);
-    sp           = new QSplitter(Qt::Vertical, this);
+    mainlayout = new QVBoxLayout(this);
+    sp         = new QSplitter(Qt::Vertical, this);
 
     long unsigned int cont, i, j;
     cont = i = j = 0;
