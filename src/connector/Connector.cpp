@@ -167,12 +167,12 @@ std::string Connector::openPort()
         if (ret.empty())
             ret = found;
         else {
-            char toWrite[300] = "notify-send \"connect your client to ";
-            strcat(toWrite, found.c_str());
-            strcat(toWrite, "\"");
-            system(toWrite);
+            //            char toWrite[300] = "notify-send \"connect your client
+            //            to "; strcat(toWrite, found.c_str()); strcat(toWrite,
+            //            "\""); system(toWrite);
 
-            toWrite[0] = '\0';
+            //            toWrite[0] = '\0';
+            char toWrite[300] = "";
             strcat(toWrite, "echo \"");
             strcat(toWrite, found.c_str());
             strcat(toWrite, "\" > ");
