@@ -1,5 +1,7 @@
 ﻿#include "Connector.hpp"
 
+#include <QDebug>
+#include <QModbusRtuSerialSlave>
 #include <fstream>
 #include <stdio.h>
 #include <stdlib.h>

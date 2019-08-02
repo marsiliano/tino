@@ -3,8 +3,9 @@
 #include "Block.hpp"
 #include "Settings.hpp"
 
-#include <QDebug>
-#include <QModbusRtuSerialSlave>
+#include <QObject>
+
+class QModbusRtuSerialSlave; // forward declaration
 
 class Connector : public QObject
 {
