@@ -49,14 +49,14 @@ void tst_Eq::tst_nEqGroup()
 
 void tst_Eq::tst_EqByte()
 {
-    QVERIFY(core::Generator::getByte1() == core::Generator::getByte1());
-    QVERIFY(core::Generator::getByte2() == core::Generator::getByte2());
+    QVERIFY(core::Generator::getByte1(0) == core::Generator::getByte1(0));
+    QVERIFY(core::Generator::getByte2(0) == core::Generator::getByte2(0));
 }
 
 void tst_Eq::tst_nEqByte()
 {
-    QVERIFY(!(core::Generator::getByte1() == core::Generator::getByte2()));
-    QVERIFY(!(core::Generator::getByte2() == core::Generator::getByte1()));
+    QVERIFY(!(core::Generator::getByte1(0) == core::Generator::getByte2(0)));
+    QVERIFY(!(core::Generator::getByte2(0) == core::Generator::getByte1(0)));
 }
 
 void tst_Eq::tst_nByte()

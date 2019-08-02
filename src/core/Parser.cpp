@@ -65,48 +65,51 @@ void core::Parser::parse(std::string name, std::vector<core::Block> &all)
                               << block["name"].asString() << std::endl;
 
                 // foreach BYTE
-                std::for_each(group["bytes"].begin(), group["bytes"].end(),
-                              [&](const Json::Value &byte) {
-                                  std::vector<bool> v;
-                                  std::vector<std::string> s;
-                                  int sz;
+                std::for_each(
+                    group["bytes"].begin(), group["bytes"].end(),
+                    [&](const Json::Value &byte) {
+                        std::vector<bool> v;
+                        std::vector<std::string> s;
+                        int sz;
 
-                                  // name
-                                  if (!byte.isMember("name"))
-                                      std::cout << "unnamed byte";
-                                  std::string tbName = byte["name"].asString();
+                        // name
+                        if (!byte.isMember("name"))
+                            std::cout << "unnamed byte";
+                        std::string tbName = std::to_string(byteCont++) + " " +
+                                             byte["name"].asString();
 
-                                  // desc
-                                  if (!byte.isMember("desc"))
-                                      std::cout << tbName << " no description"
-                                                << std::endl;
-                                  auto byteDesc = byte["desc"];
-                                  sz            = byteDesc.size();
-                                  if (sz != 0 && sz != 8)
-                                      std::cout << tbName << " wrong desc size"
-                                                << std::endl;
-                                  for (int l = 0; l < sz; ++l)
-                                      s.push_back(byteDesc[l].asString());
+                        // desc
+                        if (!byte.isMember("desc"))
+                            std::cout << tbName << " no description"
+                                      << std::endl;
+                        auto byteDesc = byte["desc"];
+                        sz            = byteDesc.size();
+                        if (sz != 0 && sz != 8)
+                            std::cout << tbName << " wrong desc size"
+                                      << std::endl;
+                        for (int l = 0; l < sz; ++l)
+                            s.push_back(byteDesc[l].asString());
 
-                                  // values
-                                  if (!byte.isMember("values"))
-                                      std::cout << tbName << " no values"
-                                                << std::endl;
-                                  auto byteValues = byte["values"];
-                                  sz              = byteValues.size();
-                                  if (sz != 8)
-                                      std::cout << tbName
-                                                << " wrong values size"
-                                                << std::endl;
-                                  for (int l = 0; l < sz; ++l)
-                                      v.push_back(byteValues[l].asBool());
+                        // values
+                        if (!byte.isMember("values"))
+                            std::cout << tbName << " no values" << std::endl;
+                        auto byteValues = byte["values"];
+                        sz              = byteValues.size();
+                        if (sz != 8)
+                            std::cout << tbName << " wrong values size"
+                                      << std::endl;
+                        for (int l = 0; l < sz; ++l)
+                            v.push_back(byteValues[l].asBool());
 
-                                  core::Byte tb(v, s, tbName);
-                                  b.push_back(tb);
-                              }); // end foreach BYTE
+                        // add a byte
+                        core::Byte tb(v, s, tbName);
+                        b.push_back(tb);
+                    }); // end foreach BYTE
+                // add a group
                 core::Group tg(b, groupType, group["write"].asBool());
                 g.push_back(tg);
             }); // end foreach GROUP
+        // add a block
         core::Block tblock(g, block["start"].asInt(), blockName);
         all.push_back(tblock);
     }); // end foreach BLOCK

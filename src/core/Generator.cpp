@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-core::Byte core::Generator::getByte1()
+core::Byte core::Generator::getByte1(int n)
 {
     std::vector<bool> v = {
         true, false, true, false, true, false, true, false
@@ -12,37 +12,37 @@ core::Byte core::Generator::getByte1()
         "bitname5", "bitname6", "bitname7", "bitname8",
     };
 
-    core::Byte b(v, s, "bytename");
+    core::Byte b(v, s, std::to_string(n) + " bytename");
     return b;
 }
 
-core::Byte core::Generator::getByte2()
+core::Byte core::Generator::getByte2(int n)
 {
     std::vector<bool> v = {
         true, false, true, false, true, false, true, false
     };
     std::vector<std::string> s = {};
 
-    core::Byte b(v, s, "bytename");
+    core::Byte b(v, s, std::to_string(n) + " bytename");
     return b;
 }
 
 core::Group core::Generator::getGroup1(bool rw)
 {
-    std::vector<core::Byte> vb = { getByte1(), getByte1(), getByte1() };
+    std::vector<core::Byte> vb = { getByte1(0), getByte1(1), getByte1(2) };
     core::Group g(vb, 'm', rw);
     return g;
 }
 
 core::Group core::Generator::getGroup2(bool rw)
 {
-    std::vector<core::Byte> vb = { getByte2(), getByte2(), getByte2() };
+    std::vector<core::Byte> vb = { getByte2(3), getByte2(4), getByte2(5) };
     core::Group g(vb, 'v', rw);
     return g;
 }
 core::Group core::Generator::getGroup3(bool rw)
 {
-    std::vector<core::Byte> vb = { getByte2(), getByte2(), getByte2() };
+    std::vector<core::Byte> vb = { getByte2(6), getByte2(7), getByte2(8) };
     core::Group g(vb, 'j', rw);
     return g;
 }
