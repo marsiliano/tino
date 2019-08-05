@@ -4,7 +4,6 @@
 #include <QModbusRtuSerialSlave>
 #include <fstream>
 #include <stdio.h>
-#include <stdlib.h>
 #include <thread>
 
 Connector::Connector(std::vector<core::Block> *v, QObject *parent) :
@@ -131,7 +130,15 @@ std::string Connector::openPort()
     qDebug() << "env: " << QString::fromStdString(std::getenv("HOME"));
     char outFile[300] = "";
     strcat(outFile, std::getenv("HOME"));
-    strcat(outFile, "/.tino/socatOutput.txt");
+    strcat(outFile, "/.tino");
+
+    // create ~/.tino folder
+    char mkdir[300] = "mkdir ";
+    strcat(mkdir, outFile);
+    system(mkdir);
+    qDebug() << "mkdir: " << QString::fromStdString(mkdir);
+
+    strcat(outFile, "/socatOutput.txt");
     qDebug() << "outfile: " << QString::fromStdString(outFile);
 
     // start socat

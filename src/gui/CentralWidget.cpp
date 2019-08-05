@@ -114,8 +114,10 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
         blocks.erase(blocks.begin(), blocks.end());
         core::Parser::parse(filename, blocks);
 
-        c = nullptr;
         lblNbytes->setText("0 bytes written");
+        linePort->setText("");
+        btnConnect->setText("connect");
+        btnConnectState = 0;
 
         clean();
         c = new Connector(&blocks, this);
