@@ -58,9 +58,8 @@ script
 *.patch
 
 #metrics
-*html*
-*xml*
 *gcov*
 metrics/coverage/
+metrics/checkout.xml
 *bb*
 *bbg*
