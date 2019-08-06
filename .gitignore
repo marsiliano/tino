@@ -56,3 +56,10 @@ script
 *.TMP
 
 *.patch
+
+#metrics
+*gcov*
+metrics/coverage/
+metrics/checkout.xml
+*bb*
+*bbg*

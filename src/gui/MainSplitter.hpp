@@ -1,22 +1,25 @@
 #pragma once
-#include "Connector.hpp"
-#include "Generator.hpp"
+
 #include "ScrollBlock.hpp"
 
-#include <QFileDialog>
-#include <QSplitter>
+class QSplitter;
+class QVBoxLayout;
 
 class MainSplitter : public QWidget
 {
   public:
-    MainSplitter(const std::vector<core::Block> &blocks, QWidget *parent);
+    MainSplitter(std::vector<core::Block> *blocks, QWidget *parent);
     ~MainSplitter() = default;
 
+    void updateBlock(long unsigned int i);
+
   private:
-    std::vector<ScrollBlock *> blocksWidget;
+    QVBoxLayout *mainlayout;
+
+    std::vector<core::Block> *blocks;
+
+    std::vector<std::unique_ptr<ScrollBlock>> blocksWidget;
 
     QSplitter *sp;
     std::vector<QSplitter *> spv;
-
-    QVBoxLayout *mainlayout;
 };

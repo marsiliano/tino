@@ -1,19 +1,25 @@
 #pragma once
+
 #include "BlockWidget.hpp"
 
-#include <QScrollArea>
+class QVBoxLayout;
+class QScrollArea;
 
 class ScrollBlock : public QWidget
 {
     Q_OBJECT
 
   public:
-    ScrollBlock(core::Block val, QWidget *parent = nullptr);
+    explicit ScrollBlock(core::Block *value, QWidget *parent = nullptr);
+    void refresh();
 
   private:
+    QVBoxLayout *l;
+
+    core::Block *val;
+
     widget::BlockWidget *child;
 
     QLabel *lBlock;
     QScrollArea *a;
-    QVBoxLayout *l;
 };
