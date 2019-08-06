@@ -2,7 +2,7 @@
 
 required dependencies:
 * lcov to run metrics/runCoverage.sh (see how much code is covered by tests)
-* socat to run startVSP.sh (open a virtual serial port) and use the auto connection feature
+* socat to run virtualport/startVSP.sh (open a virtual serial port) or use the auto connection feature
 
 to open a virtual comunication:
 
