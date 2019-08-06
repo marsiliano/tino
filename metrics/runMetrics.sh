@@ -1,13 +1,13 @@
 #!/bin/bash
 
-DIR="metrics/history/$(date +%Y%m%d_%H%M%S)/"
+DIR="history/$(date +%Y%m%d_%H%M%S)/"
 echo $DIR
 mkdir $DIR
 
 echo $(./countLines.sh) > "${DIR}lines.txt"
 
 ./runCppCheck.sh
-cp checkout.xml $DIR
+cp checkout.xml "${DIR}cppCheck.xml"
 
 ./runCoverage.sh
-cp coverage/html/index.html $DIR
+cp coverage/html/index.html "${DIR}coverage.html"
