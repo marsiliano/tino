@@ -7,4 +7,4 @@ include(tino.pri)
 
 TEMPLATE  = subdirs
 CONFIG   += ordered
-SUBDIRS = src
+SUBDIRS = src tests

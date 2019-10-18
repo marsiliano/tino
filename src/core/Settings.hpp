@@ -1,20 +1,20 @@
 #pragma once
 
-#include <iostream>
+#include <QSerialPortInfo>
 
 namespace core
 {
-struct Settings {
-    Settings()  = default;
-    ~Settings() = default;
-    bool operator==(const Settings &other) const;
+class Settings
+{
+    Settings()                 = default;
+    Settings(const Settings &) = default;
+    Settings(Settings &&)      = default;
+    ~Settings()                = default;
 
-    std::string portName;
-    int Parity;
-    int BaudRate;
-    int DataBits;
-    int StopBits;
-    int ServerAddress;
-    int refreshTime;
+    Settings &operator=(const Settings &) = default;
+    Settings &operator=(Settings &&) = default;
+
+    QSerialPortInfo info;
 };
+
 } // namespace core
