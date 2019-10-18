@@ -1,9 +1,8 @@
 include(../tinolibrary.pri)
 
 HEADERS += \
-    $$PWD/Connector.hpp \
+    $$PWD/Connector.hpp
 
 SOURCES += \
-    $$PWD/Connector.cpp \
-
+    $$PWD/Connector.cpp
 

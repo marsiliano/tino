@@ -52,6 +52,6 @@ void tst_Conversion::tst_setIntAtAddress()
         QVERIFY(bl.setIntAtAddress(6, i));
 }
 
-QTEST_MAIN(tst_Conversion)
+QTEST_GUILESS_MAIN(tst_Conversion)
 
 #include "tst_Conversion.moc"

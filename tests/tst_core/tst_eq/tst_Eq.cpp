@@ -76,6 +76,6 @@ void tst_Eq::tst_nByte()
     QVERIFY(core::Generator::getBlock(2, write).getNbyte() == 9);
 }
 
-QTEST_MAIN(tst_Eq)
+QTEST_GUILESS_MAIN(tst_Eq)
 
 #include "tst_Eq.moc"

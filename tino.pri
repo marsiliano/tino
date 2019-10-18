@@ -70,6 +70,7 @@ for(ever) {
             error("Library dependency $$dep not found")
         include($$dependencies_file)
         LIBS *= -L$$TINO_BUILD_DIR/src/$$dep -l$$qtLibraryName($$TINO_LIB_NAME)
+        PRE_TARGETDEPS += $$TINO_BUILD_DIR/src/$$dep/$${QMAKE_PREFIX_STATICLIB}$$qtLibraryName($$TINO_LIB_NAME).$${QMAKE_EXTENSION_STATICLIB}
         INCLUDEPATH *= $$TINO_LIB_DIRS$$dep
         DEPENDPATH *= $$TINO_LIB_DIRS$$dep
     }

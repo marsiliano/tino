@@ -1,7 +1,5 @@
 include(../tinolibrary.pri)
 
-QT += core gui widgets
-
 HEADERS += \
     $$PWD/BtnContainer.hpp \
     $$PWD/Mask.hpp \

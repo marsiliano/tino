@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-    tst_widget \
-    tst_core
+    tst_core \
+    tst_widget
 

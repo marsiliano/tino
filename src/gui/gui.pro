@@ -1,15 +1,15 @@
 include(../tinolibrary.pri)
 
 FORMS += \
-    $$PWD/MainWindow.ui \
+    $$PWD/MainWindow.ui
 
 HEADERS += \
     $$PWD/MainWindow.hpp \
     $$PWD/CentralWidget.hpp \
-    $$PWD/MainSplitter.hpp \
+    $$PWD/MainSplitter.hpp
 
 SOURCES += \
     $$PWD/MainWindow.cpp \
     $$PWD/CentralWidget.cpp \
-    $$PWD/MainSplitter.cpp \
+    $$PWD/MainSplitter.cpp
 

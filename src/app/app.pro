@@ -4,8 +4,6 @@ include(../../tino.pri)
 TEMPLATE = app
 CONFIG += qtc_runnable sliced_bundle
 TARGET = tino
-QT -= testlib
-QT += core gui widgets
 
 INCLUDEPATH += $$PWD/../gui
 
@@ -21,7 +19,6 @@ CONFIG(debug, debug|release) {
     QMAKE_CXXFLAGS += --debug
 }
 
-SOURCES += \
-    $$PWD/main.cpp \
+SOURCES += $$PWD/main.cpp
 
 

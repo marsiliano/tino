@@ -7,7 +7,6 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
-    // ui
     ui->setupUi(this);
     this->setWindowTitle("Tino");
 

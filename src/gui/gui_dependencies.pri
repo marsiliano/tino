@@ -1,6 +1,6 @@
 TINO_LIB_NAME = gui
 TINO_LIB_DEPENDS += \
     widget \
-    connector \
+    connector
 
 QT += core gui widgets

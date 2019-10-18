@@ -88,6 +88,6 @@ void tst_Parser::parseSettings()
     QVERIFY(s == s1);
 }
 
-QTEST_MAIN(tst_Parser)
+QTEST_GUILESS_MAIN(tst_Parser)
 
 #include "tst_Parser.moc"

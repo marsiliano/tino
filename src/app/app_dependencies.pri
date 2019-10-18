@@ -1,2 +1,4 @@
 TINO_LIB_DEPENDS += \
-    gui \
+    gui
+
+QT += core gui widgets

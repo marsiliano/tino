@@ -46,7 +46,8 @@ CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
                     s.portName = linePort->text().toStdString();
                 else { // take portname from file
                     if (s.portName == "auto") {
-                        s.portName      = Connector::openPort();
+                        //                        s.portName      =
+                        //                        Connector::openPort();
                         btnConnectState = 2;
                     }
                     linePort->setText(QString::fromStdString(s.portName));

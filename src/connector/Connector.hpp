@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Block.hpp"
 #include "Settings.hpp"
 
+#include <Block.hpp>
 #include <QObject>
 
 class QModbusRtuSerialSlave; // forward declaration
