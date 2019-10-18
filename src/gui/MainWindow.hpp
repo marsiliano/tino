@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CentralWidget.hpp"
-
 #include <QMainWindow>
 
 namespace Ui
@@ -19,5 +17,6 @@ class MainWindow : public QMainWindow
 
   private:
     Ui::MainWindow *ui;
-    CentralWidget *all;
+
+    void create_menubar();
 };

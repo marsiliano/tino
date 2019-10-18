@@ -1,5 +1,6 @@
 #include "MainWindow.hpp"
 
+#include "DialogAbout.hpp"
 #include "ui_MainWindow.h"
 
 #include <QDesktopWidget>
@@ -8,27 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Tino");
+    this->setWindowTitle("Tino 0.0.1");
 
-    // titlebar
-    auto file = new QMenu("File", ui->menuBar);
-    auto quit = new QAction("Quit", file);
-    connect(quit, &QAction::triggered, this, []() { qApp->quit(); });
-    file->addAction(quit);
-    ui->menuBar->addMenu(file);
-
-    auto settings = new QMenu("Settings", ui->menuBar);
-    auto modbus   = new QAction("Modbus", settings);
-    settings->addAction(modbus);
-    ui->menuBar->addMenu(settings);
-
-    auto help = new QMenu("Help", ui->menuBar);
-    //    auto help = new QAction("Help", help);
-    //    help->addAction(help);
-    ui->menuBar->addMenu(help);
-
-    all = new CentralWidget(this);
-    this->setCentralWidget(all);
+    create_menubar();
 
     resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
 }
@@ -36,4 +19,20 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::create_menubar()
+{
+    const auto file = new QMenu("File", ui->menuBar);
+    const auto quit = new QAction("Quit", file);
+    quit->setShortcut(QKeySequence::StandardKey::Quit);
+    connect(quit, &QAction::triggered, this, []() { qApp->quit(); });
+    file->addAction(quit);
+    ui->menuBar->addMenu(file);
+
+    const auto help  = new QMenu("Help", ui->menuBar);
+    const auto about = new QAction("About...", file);
+    connect(about, &QAction::triggered, this, [&]() { DialogAbout().exec(); });
+    help->addAction(about);
+    ui->menuBar->addMenu(help);
 }

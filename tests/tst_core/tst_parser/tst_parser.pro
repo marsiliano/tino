@@ -1,5 +1,5 @@
 TINO_LIB_DEPENDS += \
-    core \
+    core
 
 include(../../test.pri)
 
