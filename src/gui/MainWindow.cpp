@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Tino 0.0.1");
+    this->setWindowTitle("Tino");
 
     create_menubar();
 
