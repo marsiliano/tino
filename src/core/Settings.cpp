@@ -2,9 +2,10 @@
 
 bool core::Settings::operator==(const Settings &other) const
 {
-    return (portName == other.portName && Parity == other.Parity &&
-            BaudRate == other.BaudRate && DataBits == other.DataBits &&
-            StopBits == other.StopBits &&
-            ServerAddress == other.ServerAddress &&
-            refreshTime == other.refreshTime);
+    return baud_rate == other.baud_rate &&
+           break_enabled == other.break_enabled &&
+           data_bits == other.data_bits &&
+           data_terminal_ready == other.data_terminal_ready &&
+           stop_bits == other.stop_bits && flow_control == other.flow_control &&
+           request_to_send == other.request_to_send;
 }
