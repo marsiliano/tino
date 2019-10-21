@@ -1,0 +1,13 @@
+{
+    "settings": {
+        "baudRate" : "qint32",
+        "breakEnabled" : "bool",
+        "dataBits" : "DataBits",
+        "dataTerminalReady" : "bool",
+        "error" : "SerialPortError",
+        "flowControl" : "FlowControl",
+        "parity" : "Parity",
+        "requestToSend" : "bool",
+        "stopBits" : "StopBits"
+    }
+}

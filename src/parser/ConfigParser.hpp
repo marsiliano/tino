@@ -1,9 +1,10 @@
 #pragma once
 
 #include <QString>
+#include <Settings.hpp>
 
 class ConfigParser
 {
   public:
-    void parse(const QString &filename);
+    core::Settings parse(const QString &filename);
 };
