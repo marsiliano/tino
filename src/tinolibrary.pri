@@ -11,6 +11,8 @@ exists($$depfile) {
 TARGET = $$TINO_LIB_NAME
 CONFIG -= debug_and_release debug_and_release_target
 
+QMAKE_LFLAGS += $$QMAKE_LFLAGS_NOUNDEF
+
 CONFIG(release, debug|release) {
     QMAKE_CXXFLAGS += -O3
 }
