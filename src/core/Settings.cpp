@@ -1,6 +1,6 @@
 #include "Settings.hpp"
 
-bool core::Settings::operator==(const Settings &other) const
+bool Settings::operator==(const Settings &other) const
 {
     return baud_rate == other.baud_rate &&
            break_enabled == other.break_enabled &&

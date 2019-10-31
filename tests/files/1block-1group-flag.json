@@ -1,0 +1,53 @@
+{
+    "blocks":
+    [
+        {
+            "block1": {
+                "description": "this is the first block",
+                "startAddress": "0x1000",
+                "lenghtBytes": "1",
+                "groups":
+                [
+                    {
+                        "description": "flag for alarm",
+                        "bits": 
+                        [
+                            { 
+                                "description": "alarm 0",
+                                "defaultValue": "false"
+                            },
+                            { 
+                                "description": "alarm 1",
+                                "defaultValue": "false"
+                            },
+                            { 
+                                "description": "alarm 2",
+                                "defaultValue": "false"
+                            },
+                            { 
+                                "description": "alarm 3",
+                                "defaultValue": "false"
+                            },
+                            { 
+                                "description": "alarm 4",
+                                "defaultValue": "false"
+                            },
+                            { 
+                                "description": "alarm 5",
+                                "defaultValue": "false"
+                            },
+                            { 
+                                "description": "alarm 6",
+                                "defaultValue": "false"
+                            },
+                            { 
+                                "description": "alarm 7",
+                                "defaultValue": "false"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -12,9 +12,11 @@ class tst_Parser : public QObject
     void throw_if_not_exists();
     void without_settings();
     void normal_settings();
+    void parse_flags();
 
   private:
     QString path_{ QDir::currentPath() };
+    ConfigParser cp_;
 };
 
 void tst_Parser::initTestCase()
@@ -26,20 +28,18 @@ void tst_Parser::initTestCase()
 
 void tst_Parser::throw_if_not_exists()
 {
-    ConfigParser cp;
-    QVERIFY_EXCEPTION_THROWN(cp.parse(""), std::logic_error);
+    QVERIFY_EXCEPTION_THROWN(cp_.parse(""), std::logic_error);
 }
 
 void tst_Parser::without_settings()
 {
-    ConfigParser cp;
-    auto settings = cp.parse(path_ + "nosettings.json");
-    QVERIFY(settings == core::Settings{});
+    auto config = cp_.parse(path_ + "empty.json");
+    QVERIFY((config == Configuration{ Settings{}, Protocol{} }));
 }
 
 void tst_Parser::normal_settings()
 {
-    core::Settings right_settings;
+    Settings right_settings;
     right_settings.baud_rate           = QSerialPort::BaudRate::Baud9600;
     right_settings.break_enabled       = true;
     right_settings.data_bits           = QSerialPort::DataBits::Data5;
@@ -49,9 +49,13 @@ void tst_Parser::normal_settings()
     right_settings.request_to_send = true;
     right_settings.stop_bits       = QSerialPort::StopBits::TwoStop;
 
-    ConfigParser cp;
-    auto settings = cp.parse(path_ + "settings.json");
-    QVERIFY(settings == right_settings);
+    auto config = cp_.parse(path_ + "only-settings.json");
+    QVERIFY((config == Configuration{ std::move(right_settings), Protocol{} }));
+}
+
+void tst_Parser::parse_flags()
+{
+    auto settings = cp_.parse(path_ + "1block-1group-flag.json");
 }
 
 QTEST_GUILESS_MAIN(tst_Parser)

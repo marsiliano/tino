@@ -2,8 +2,6 @@
 
 #include <QSerialPort>
 
-namespace core
-{
 class Settings
 {
   public:
@@ -39,5 +37,3 @@ class Settings
     bool request_to_send{ false };
     QSerialPort::StopBits stop_bits{ QSerialPort::StopBits::OneStop };
 };
-
-} // namespace core
