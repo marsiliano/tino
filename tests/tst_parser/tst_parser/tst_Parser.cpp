@@ -23,7 +23,11 @@ void tst_Parser::initTestCase()
 {
     const auto last_slash = path_.lastIndexOf("build-");
     path_ = path_.remove(last_slash, (path_.size() - last_slash));
-    path_ += "tino/tests/files/";
+    if (path_.contains("tino")) {
+        path_ += "tests/files/";
+    } else {
+        path_ += "tino/tests/files/";
+    }
 }
 
 void tst_Parser::throw_if_not_exists()
