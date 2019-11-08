@@ -1,5 +1,5 @@
 TINO_LIB_NAME = gui
 TINO_LIB_DEPENDS += \
-    core
+    parser
 
 QT += core gui widgets

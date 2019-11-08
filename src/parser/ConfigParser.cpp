@@ -1,6 +1,8 @@
 #include "ConfigParser.hpp"
 
+#include <QDebug>
 #include <QFile>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 
@@ -30,11 +32,14 @@ Configuration ConfigParser::parse(const QString &filename)
 
     const auto obj      = doc.object();
     const auto settings = obj.find("settings")->toObject();
-    if (settings.isEmpty()) {
+    const auto blocks   = obj.find("blocks")->toArray();
+
+    if (settings.isEmpty() && blocks.isEmpty()) {
         return {};
     }
 
-    return Configuration{ std::move(read_settings(settings)), {} };
+    return Configuration{ std::move(read_settings(settings)),
+                          std::move(read_blocks(blocks)) };
 }
 
 Settings ConfigParser::read_settings(const QJsonObject &obj) const noexcept
@@ -59,4 +64,36 @@ Settings ConfigParser::read_settings(const QJsonObject &obj) const noexcept
         obj[Settings::Tags::stop_bits].toInt());
 
     return s;
+}
+
+Protocol ConfigParser::read_blocks(const QJsonArray &array) const noexcept
+{
+    Protocol ret;
+    foreach (auto v, array) {
+        Block blk;
+        const auto block = v.toObject();
+        blk.description  = block.find("description")->toString();
+
+        const auto groups = block.find("groups")->toArray();
+        foreach (auto g, groups) {
+            Group grp;
+            grp.description = g.toObject().find("description")->toString();
+            const auto bits = g.toObject().find("bits")->toArray();
+
+            Byte byte;
+            foreach (auto b, bits) {
+                Flag flag;
+                flag.description = b.toObject().find("description")->toString();
+                flag.default_value =
+                    b.toObject().find("defaultValue")->toBool();
+                byte.flags.emplace_back(flag);
+            }
+            grp.bytes.emplace_back(byte);
+            blk.groups.emplace_back(grp);
+        }
+
+        ret.blocks.emplace_back(blk);
+    }
+
+    return ret;
 }

@@ -5,6 +5,7 @@
 #include <Settings.hpp>
 
 class QJsonObject;
+class QJsonArray;
 
 class Configuration
 {
@@ -34,4 +35,5 @@ class ConfigParser
 
   private:
     Settings read_settings(const QJsonObject &obj) const noexcept;
+    Protocol read_blocks(const QJsonArray &array) const noexcept;
 };
