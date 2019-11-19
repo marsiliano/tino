@@ -1,11 +1,13 @@
 #include "MainWindow.hpp"
 
+#include "ConfigViewFactory.hpp"
 #include "DialogAbout.hpp"
 #include "ui_MainWindow.h"
 
 #include <ConfigParser.hpp>
 #include <QDebug>
 #include <QDesktopWidget>
+#include <QDockWidget>
 #include <QFileDialog>
 #include <QStandardPaths>
 
@@ -18,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     create_menubar();
 
     resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
+
+    connect(this, &MainWindow::importFinished, this,
+            &MainWindow::createConfigView);
 }
 
 MainWindow::~MainWindow()
@@ -43,6 +48,16 @@ void MainWindow::selectFile()
     if (m_config.isNull()) {
         qWarning() << "parsing error";
     }
+
+    emit importFinished({});
+}
+
+void MainWindow::createConfigView()
+{
+    auto dock = ConfigViewFactory().makeConfigView(m_config->protocol);
+    dock->setParent(this);
+    this->addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, dock,
+                        Qt::Orientation::Vertical);
 }
 
 void MainWindow::create_menubar()
