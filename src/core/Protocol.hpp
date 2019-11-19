@@ -7,5 +7,5 @@ class Protocol
   public:
     bool operator==(const Protocol &other) const;
 
-    std::vector<Block> blocks;
+    QVector<Block> blocks;
 };
