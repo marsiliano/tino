@@ -1,4 +1,3 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-    tst_parser \
-    tst_gui
+    tst_configView
