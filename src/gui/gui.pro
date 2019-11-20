@@ -6,8 +6,10 @@ FORMS += \
 
 HEADERS += \
     $$PWD/MainWindow.hpp \
-    $$PWD/DialogAbout.hpp
+    $$PWD/DialogAbout.hpp \
+    $$PWD/ConfigViewFactory.hpp
 
 SOURCES += \
     $$PWD/MainWindow.cpp \
-    $$PWD/DialogAbout.cpp
+    $$PWD/DialogAbout.cpp \
+    $$PWD/ConfigViewFactory.cpp

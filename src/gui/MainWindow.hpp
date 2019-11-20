@@ -18,8 +18,12 @@ class MainWindow : public QMainWindow
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+  signals:
+    void importFinished(QPrivateSignal);
+
   private slots:
     void selectFile();
+    void createConfigView();
 
   private:
     Ui::MainWindow *ui;

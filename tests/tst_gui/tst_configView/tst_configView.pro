@@ -1,7 +1,6 @@
 TINO_LIB_DEPENDS += \
-    core \
-    widget
+    gui
 
 include(../../test.pri)
 
-SOURCES += tst_Value.cpp
+SOURCES += tst_ConfigView.cpp

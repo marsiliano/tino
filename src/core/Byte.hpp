@@ -2,7 +2,7 @@
 
 #include "Flag.hpp"
 
-#include <vector>
+#include <QVector>
 
 class Byte
 {
@@ -10,5 +10,5 @@ class Byte
     bool operator==(const Byte &other) const;
 
     QString description;
-    std::vector<Flag> flags;
+    QVector<Flag> flags;
 };

@@ -8,5 +8,5 @@ class Block
     bool operator==(const Block &other) const;
 
     QString description;
-    std::vector<Group> groups;
+    QVector<Group> groups;
 };

@@ -10,5 +10,5 @@ class Group
     bool operator==(const Group &other) const;
 
     QString description;
-    std::vector<Byte> bytes;
+    QVector<Byte> bytes;
 };

@@ -86,13 +86,13 @@ Protocol ConfigParser::read_blocks(const QJsonArray &array) const noexcept
                 flag.description = b.toObject().find("description")->toString();
                 flag.default_value =
                     b.toObject().find("defaultValue")->toBool();
-                byte.flags.emplace_back(flag);
+                byte.flags.push_back(flag);
             }
-            grp.bytes.emplace_back(byte);
-            blk.groups.emplace_back(grp);
+            grp.bytes.push_back(byte);
+            blk.groups.push_back(grp);
         }
 
-        ret.blocks.emplace_back(blk);
+        ret.blocks.push_back(blk);
     }
 
     return ret;
