@@ -38,13 +38,15 @@ Configuration ConfigParser::parse(const QString &filename)
         return {};
     }
 
-    return Configuration{ std::move(read_settings(settings)),
-                          std::move(read_blocks(blocks)) };
+    return Configuration{ read_settings(settings), read_blocks(blocks) };
 }
 
 Settings ConfigParser::read_settings(const QJsonObject &obj) const noexcept
 {
     Settings s;
+
+    s.port_name = obj[Settings::Tags::port_name].toString();
+
     s.baud_rate = static_cast<QSerialPort::BaudRate>(
         obj[Settings::Tags::baud_rate].toInt());
 
