@@ -45,25 +45,28 @@ Settings ConfigParser::read_settings(const QJsonObject &obj) const noexcept
 {
     Settings s;
 
-    s.port_name = obj[Settings::Tags::port_name].toString();
+    s.port_name = obj[Settings::Tags::port_name].toString(s.port_name);
 
     s.baud_rate = static_cast<QSerialPort::BaudRate>(
-        obj[Settings::Tags::baud_rate].toInt());
+        obj[Settings::Tags::baud_rate].toInt(s.baud_rate));
 
-    s.break_enabled = obj[Settings::Tags::break_enabled].toBool();
+    s.break_enabled =
+        obj[Settings::Tags::break_enabled].toBool(s.break_enabled);
 
     s.data_bits = static_cast<QSerialPort::DataBits>(
-        obj[Settings::Tags::data_bits].toInt());
+        obj[Settings::Tags::data_bits].toInt(s.data_bits));
 
-    s.data_terminal_ready = obj[Settings::Tags::data_terminal_ready].toBool();
+    s.data_terminal_ready =
+        obj[Settings::Tags::data_terminal_ready].toBool(s.data_terminal_ready);
 
     s.flow_control = static_cast<QSerialPort::FlowControl>(
-        obj[Settings::Tags::flow_control].toInt());
+        obj[Settings::Tags::flow_control].toInt(s.flow_control));
 
-    s.request_to_send = obj[Settings::Tags::request_to_send].toBool();
+    s.request_to_send =
+        obj[Settings::Tags::request_to_send].toBool(s.request_to_send);
 
     s.stop_bits = static_cast<QSerialPort::StopBits>(
-        obj[Settings::Tags::stop_bits].toInt());
+        obj[Settings::Tags::stop_bits].toInt(s.stop_bits));
 
     return s;
 }
