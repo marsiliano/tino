@@ -29,6 +29,7 @@ class MainWindow : public QMainWindow
     Ui::MainWindow *ui;
 
     QScopedPointer<Configuration> m_config;
+    QScopedPointer<QAction> m_serialConnect;
 
     void create_menubar();
 };

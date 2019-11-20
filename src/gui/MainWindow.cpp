@@ -75,6 +75,21 @@ void MainWindow::create_menubar()
 
     ui->menuBar->addMenu(file);
 
+    const auto comMenu = new QMenu("Com", ui->menuBar);
+
+    m_serialConnect.reset(new QAction("Connect...", comMenu));
+    connect(m_serialConnect.get(), &QAction::triggered, this,
+            [&]() { m_serialConnect->setText("Disconnect..."); });
+    comMenu->addAction(m_serialConnect.get());
+
+    comMenu->addSeparator();
+
+    const auto comSettings = new QAction("Settings...", comMenu);
+    connect(comSettings, &QAction::triggered, this, []() {});
+    comMenu->addAction(comSettings);
+
+    ui->menuBar->addMenu(comMenu);
+
     const auto help  = new QMenu("Help", ui->menuBar);
     const auto about = new QAction("About...", file);
     connect(about, &QAction::triggered, this, [&]() { DialogAbout().exec(); });
