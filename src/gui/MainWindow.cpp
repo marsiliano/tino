@@ -2,6 +2,7 @@
 
 #include "ConfigViewFactory.hpp"
 #include "DialogAbout.hpp"
+#include "DialogSerialSettings.hpp"
 #include "ui_MainWindow.h"
 
 #include <ConfigParser.hpp>
@@ -49,6 +50,9 @@ void MainWindow::selectFile()
         qWarning() << "parsing error";
     }
 
+    m_serialConnect->setEnabled(true);
+    m_serialSettings->setEnabled(true);
+
     emit importFinished({});
 }
 
@@ -78,21 +82,24 @@ void MainWindow::create_menubar()
     const auto comMenu = new QMenu("Com", ui->menuBar);
 
     m_serialConnect.reset(new QAction("Connect...", comMenu));
+    m_serialConnect->setEnabled(false);
     connect(m_serialConnect.get(), &QAction::triggered, this,
             [&]() { m_serialConnect->setText("Disconnect..."); });
     comMenu->addAction(m_serialConnect.get());
 
     comMenu->addSeparator();
 
-    const auto comSettings = new QAction("Settings...", comMenu);
-    connect(comSettings, &QAction::triggered, this, []() {});
-    comMenu->addAction(comSettings);
+    m_serialSettings.reset(new QAction("Settings...", comMenu));
+    m_serialSettings->setEnabled(false);
+    connect(m_serialSettings.get(), &QAction::triggered, this,
+            [&]() { DialogSerialSettings(&m_config->settings).exec(); });
+    comMenu->addAction(m_serialSettings.get());
 
     ui->menuBar->addMenu(comMenu);
 
     const auto help  = new QMenu("Help", ui->menuBar);
     const auto about = new QAction("About...", file);
-    connect(about, &QAction::triggered, this, [&]() { DialogAbout().exec(); });
+    connect(about, &QAction::triggered, this, []() { DialogAbout().exec(); });
     help->addAction(about);
     ui->menuBar->addMenu(help);
 }

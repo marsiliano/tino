@@ -30,6 +30,7 @@ class MainWindow : public QMainWindow
 
     QScopedPointer<Configuration> m_config;
     QScopedPointer<QAction> m_serialConnect;
+    QScopedPointer<QAction> m_serialSettings;
 
     void create_menubar();
 };
