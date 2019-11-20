@@ -9,3 +9,8 @@ bool Settings::operator==(const Settings &other) const
            stop_bits == other.stop_bits && flow_control == other.flow_control &&
            request_to_send == other.request_to_send;
 }
+
+bool Settings::operator!=(const Settings &other) const
+{
+    return !(*this == other);
+}

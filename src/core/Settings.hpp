@@ -14,6 +14,7 @@ class Settings
     Settings &operator=(Settings &&) = default;
 
     bool operator==(const Settings &other) const;
+    bool operator!=(const Settings &other) const;
 
     struct Tags {
         constexpr static const auto port_name           = "portName";
