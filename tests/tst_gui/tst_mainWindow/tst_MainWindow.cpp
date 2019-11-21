@@ -8,6 +8,7 @@ class tst_MainWindow : public QObject
   private slots:
     void initTestCase();
     void doNothingWhenImportFilenameEmpty();
+    void doNothingWhenImportWrongFile();
     void emitWhenImportLooksFine();
 
   private:
@@ -28,6 +29,13 @@ void tst_MainWindow::doNothingWhenImportFilenameEmpty()
     QSignalSpy spyImportFinished(&m_mainWindow, &MainWindow::importFinished);
     m_mainWindow.importConfig({});
     QCOMPARE(spyImportFinished.count(), 0);
+}
+
+void tst_MainWindow::doNothingWhenImportWrongFile()
+{
+    QSignalSpy spyImportFinished(&m_mainWindow, &MainWindow::importFinished);
+    QVERIFY_EXCEPTION_THROWN(
+        m_mainWindow.importConfig(filesPath + "wrong-file"), std::logic_error);
 }
 
 void tst_MainWindow::emitWhenImportLooksFine()
