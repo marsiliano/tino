@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Tino");
 
-    create_menubar();
+    createMenuBar();
 
     resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
 
@@ -38,33 +38,24 @@ void MainWindow::selectFile()
         QStandardPaths::writableLocation(QStandardPaths::DesktopLocation),
         tr("Config File (*.json)"));
 
-    if (filename.isNull() || filename.isEmpty()) {
-        qDebug() << "filename not valid";
-        return;
-    }
-
-    ConfigParser parser;
-    m_config.reset(new Configuration{ parser.parse(filename) });
-
-    if (m_config.isNull()) {
-        qWarning() << "parsing error";
-    }
-
-    m_serialConnect->setEnabled(true);
-    m_serialSettings->setEnabled(true);
-
-    emit importFinished({});
+    importConfig(filename);
 }
 
 void MainWindow::createConfigView()
 {
+    auto kids = this->findChildren<QDockWidget *>("ConfigView");
+    if (!kids.isEmpty()) {
+        qDeleteAll(kids);
+    }
+
     auto dock = ConfigViewFactory().makeConfigView(m_config->protocol);
+    dock->setObjectName("ConfigView");
     dock->setParent(this);
     this->addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, dock,
                         Qt::Orientation::Vertical);
 }
 
-void MainWindow::create_menubar()
+void MainWindow::createMenuBar()
 {
     const auto file = new QMenu("File", ui->menuBar);
 
@@ -102,4 +93,24 @@ void MainWindow::create_menubar()
     connect(about, &QAction::triggered, this, []() { DialogAbout().exec(); });
     help->addAction(about);
     ui->menuBar->addMenu(help);
+}
+
+void MainWindow::importConfig(const QString &filename)
+{
+    if (filename.isNull() || filename.isEmpty()) {
+        qDebug() << "filename not valid";
+        return;
+    }
+
+    ConfigParser parser;
+    m_config.reset(new Configuration{ parser.parse(filename) });
+
+    if (m_config.isNull()) {
+        qWarning() << "parsing error";
+    }
+
+    m_serialConnect->setEnabled(true);
+    m_serialSettings->setEnabled(true);
+
+    emit importFinished({});
 }
