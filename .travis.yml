@@ -12,6 +12,7 @@ before_install:
 
 install:
   - sudo apt-get -y install qt512base
+  - sudo apt-get -y install qt512serialport 
 
 script:
   - source /opt/qt512/bin/qt512-env.sh
