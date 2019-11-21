@@ -15,7 +15,7 @@ class DialogSerialSettings : public QDialog
   public:
     explicit DialogSerialSettings(Settings *settings,
                                   QWidget *parent = nullptr);
-    ~DialogSerialSettings();
+    ~DialogSerialSettings() override;
 
   private slots:
     void on_serialPortOverrideGroupBox_clicked();

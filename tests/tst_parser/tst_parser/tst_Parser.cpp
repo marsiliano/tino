@@ -45,7 +45,7 @@ void tst_Parser::without_settings()
 void tst_Parser::normal_settings()
 {
     Settings right_settings;
-    right_settings.port_name           = QString("/dev/ttyUSB0");
+    right_settings.port_name           = "/dev/ttyUSB0";
     right_settings.baud_rate           = QSerialPort::BaudRate::Baud9600;
     right_settings.break_enabled       = true;
     right_settings.data_bits           = QSerialPort::DataBits::Data5;

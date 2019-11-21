@@ -28,7 +28,7 @@ class Settings
         constexpr static const auto stop_bits           = "stopBits";
     };
 
-    QString port_name{ QString() };
+    QString port_name{};
     QSerialPort::BaudRate baud_rate{ QSerialPort::BaudRate::Baud115200 };
     bool break_enabled{ false };
     QSerialPort::DataBits data_bits{ QSerialPort::DataBits::UnknownDataBits };
