@@ -1,0 +1,6 @@
+{
+    "settings": {
+        "portName" : "/dev/pts/5",
+        "baudRate" : 9600
+    }
+}

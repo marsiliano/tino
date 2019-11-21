@@ -14,8 +14,10 @@ class Settings
     Settings &operator=(Settings &&) = default;
 
     bool operator==(const Settings &other) const;
+    bool operator!=(const Settings &other) const;
 
     struct Tags {
+        constexpr static const auto port_name           = "portName";
         constexpr static const auto baud_rate           = "baudRate";
         constexpr static const auto break_enabled       = "breakEnabled";
         constexpr static const auto data_bits           = "dataBits";
@@ -26,6 +28,7 @@ class Settings
         constexpr static const auto stop_bits           = "stopBits";
     };
 
+    QString port_name{};
     QSerialPort::BaudRate baud_rate{ QSerialPort::BaudRate::Baud115200 };
     bool break_enabled{ false };
     QSerialPort::DataBits data_bits{ QSerialPort::DataBits::UnknownDataBits };

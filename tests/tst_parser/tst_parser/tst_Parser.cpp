@@ -12,6 +12,7 @@ class tst_Parser : public QObject
     void throw_if_not_exists();
     void without_settings();
     void normal_settings();
+    void partial_settings();
     void parse_flags();
 
   private:
@@ -44,6 +45,7 @@ void tst_Parser::without_settings()
 void tst_Parser::normal_settings()
 {
     Settings right_settings;
+    right_settings.port_name           = "/dev/ttyUSB0";
     right_settings.baud_rate           = QSerialPort::BaudRate::Baud9600;
     right_settings.break_enabled       = true;
     right_settings.data_bits           = QSerialPort::DataBits::Data5;
@@ -54,6 +56,16 @@ void tst_Parser::normal_settings()
     right_settings.stop_bits       = QSerialPort::StopBits::TwoStop;
 
     auto config = cp_.parse(path_ + "only-settings.json");
+    QVERIFY((config == Configuration{ std::move(right_settings), Protocol{} }));
+}
+
+void tst_Parser::partial_settings()
+{
+    Settings right_settings;
+    right_settings.port_name = QString("/dev/pts/5");
+    right_settings.baud_rate = QSerialPort::BaudRate::Baud9600;
+
+    auto config = cp_.parse(path_ + "only-settings-partial.json");
     QVERIFY((config == Configuration{ std::move(right_settings), Protocol{} }));
 }
 
