@@ -34,4 +34,6 @@ class MainWindow : public QMainWindow
 
     void createMenubar();
     void importConfig(const QString &filename);
+
+    friend class tst_MainWindow;
 };
