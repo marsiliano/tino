@@ -44,10 +44,7 @@ void MainWindow::selectFile()
 
 void MainWindow::createConfigView()
 {
-    auto kids = this->findChildren<QDockWidget *>("ConfigView");
-    if (!kids.isEmpty()) {
-        qDeleteAll(kids);
-    }
+    ui->mdiArea->closeAllSubWindows();
 
     m_configViewDock.reset(
         ConfigViewFactory().makeConfigView(m_config->protocol));
