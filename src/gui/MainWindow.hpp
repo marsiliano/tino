@@ -32,7 +32,7 @@ class MainWindow : public QMainWindow
     QScopedPointer<QAction> m_serialConnect;
     QScopedPointer<QAction> m_serialSettings;
 
-    void createMenubar();
+    void createMenuBar();
     void importConfig(const QString &filename);
 
     friend class tst_MainWindow;
