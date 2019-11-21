@@ -11,8 +11,9 @@ class tst_MainWindow : public QObject
     void doNothingWhenImportWrongFile();
     void emitWhenImportLooksFine();
 
+    void avoidMultipleDockWithMultipleImport();
+
   private:
-    MainWindow m_mainWindow;
     QString filesPath;
 };
 
@@ -26,22 +27,24 @@ void tst_MainWindow::initTestCase()
 
 void tst_MainWindow::doNothingWhenImportFilenameEmpty()
 {
-    QSignalSpy spyImportFinished(&m_mainWindow, &MainWindow::importFinished);
-    m_mainWindow.importConfig({});
+    MainWindow mainWindow;
+    QSignalSpy spyImportFinished(&mainWindow, &MainWindow::importFinished);
+    mainWindow.importConfig({});
     QCOMPARE(spyImportFinished.count(), 0);
 }
 
 void tst_MainWindow::doNothingWhenImportWrongFile()
 {
-    QSignalSpy spyImportFinished(&m_mainWindow, &MainWindow::importFinished);
-    QVERIFY_EXCEPTION_THROWN(
-        m_mainWindow.importConfig(filesPath + "wrong-file"), std::logic_error);
+    MainWindow mainWindow;
+    QVERIFY_EXCEPTION_THROWN(mainWindow.importConfig(filesPath + "wrong-file"),
+                             std::logic_error);
 }
 
 void tst_MainWindow::emitWhenImportLooksFine()
 {
-    QSignalSpy spyImportFinished(&m_mainWindow, &MainWindow::importFinished);
-    m_mainWindow.importConfig(filesPath + "1block-1group-flag.json");
+    MainWindow mainWindow;
+    QSignalSpy spyImportFinished(&mainWindow, &MainWindow::importFinished);
+    mainWindow.importConfig(filesPath + "1block-1group-flag.json");
     QCOMPARE(spyImportFinished.count(), 1);
     QVERIFY(!m_mainWindow.m_config.isNull());
 }
