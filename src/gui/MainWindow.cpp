@@ -43,7 +43,13 @@ void MainWindow::selectFile()
 
 void MainWindow::createConfigView()
 {
+    auto kids = this->findChildren<QDockWidget *>("ConfigView");
+    if (!kids.isEmpty()) {
+        qDeleteAll(kids);
+    }
+
     auto dock = ConfigViewFactory().makeConfigView(m_config->protocol);
+    dock->setObjectName("ConfigView");
     dock->setParent(this);
     this->addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, dock,
                         Qt::Orientation::Vertical);
