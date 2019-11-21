@@ -1,4 +1,5 @@
 #include <MainWindow.hpp>
+#include <QDockWidget>
 #include <QtTest>
 
 class tst_MainWindow : public QObject
@@ -46,7 +47,15 @@ void tst_MainWindow::emitWhenImportLooksFine()
     QSignalSpy spyImportFinished(&mainWindow, &MainWindow::importFinished);
     mainWindow.importConfig(filesPath + "1block-1group-flag.json");
     QCOMPARE(spyImportFinished.count(), 1);
-    QVERIFY(!m_mainWindow.m_config.isNull());
+    QVERIFY(!mainWindow.m_config.isNull());
+}
+
+void tst_MainWindow::avoidMultipleDockWithMultipleImport()
+{
+    MainWindow mainWindow;
+    mainWindow.importConfig(filesPath + "1block-1group-flag.json");
+    mainWindow.importConfig(filesPath + "1block-1group-flag.json");
+    QCOMPARE(mainWindow.findChildren<QDockWidget *>("ConfigView").count(), 1);
 }
 
 QTEST_MAIN(tst_MainWindow)
