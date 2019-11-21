@@ -11,6 +11,7 @@
 #include <QDesktopWidget>
 #include <QDockWidget>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QStandardItemModel>
 #include <QStandardPaths>
 #include <QTreeView>
@@ -65,9 +66,8 @@ void MainWindow::customConfigViewContextMenu(const QPoint &point)
     QModelIndex index = tree->indexAt(point);
 
     if (index.isValid()) {
-        QStandardItemModel *sModel =
-            qobject_cast<QStandardItemModel *>(tree->model());
-        QStandardItem *item         = sModel->itemFromIndex(index);
+        auto *sModel = qobject_cast<QStandardItemModel *>(tree->model());
+        auto *item   = sModel->itemFromIndex(index);
         const auto protocolItemMenu = new QMenu(this);
         const auto view             = new QAction("View", protocolItemMenu);
         view->setEnabled(item->whatsThis().contains("block"));
@@ -106,7 +106,7 @@ void MainWindow::createMenuBar()
 
     const auto quit = new QAction("Quit", file);
     quit->setShortcut(QKeySequence::StandardKey::Quit);
-    connect(quit, &QAction::triggered, this, []() { qApp->quit(); });
+    connect(quit, &QAction::triggered, this, []() { QApplication::exit(); });
     file->addAction(quit);
 
     ui->menuBar->addMenu(file);
@@ -139,7 +139,8 @@ void MainWindow::createMenuBar()
 void MainWindow::importConfig(const QString &filename)
 {
     if (filename.isNull() || filename.isEmpty()) {
-        qDebug() << "filename not valid";
+        QMessageBox::warning(this, tr("Load configuration"),
+                             tr("Filename not valid!"));
         return;
     }
 
@@ -147,7 +148,9 @@ void MainWindow::importConfig(const QString &filename)
     m_config.reset(new Configuration{ parser.parse(filename) });
 
     if (m_config.isNull()) {
-        qWarning() << "parsing error";
+        QMessageBox::warning(this, tr("Load configuration"),
+                             tr("Parsing configuration error!"));
+        return;
     }
 
     m_serialConnect->setEnabled(true);

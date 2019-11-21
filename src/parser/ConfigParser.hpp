@@ -34,6 +34,6 @@ class ConfigParser
     Configuration parse(const QString &filename);
 
   private:
-    Settings read_settings(const QJsonObject &obj) const noexcept;
-    Protocol read_blocks(const QJsonArray &array) const noexcept;
+    [[nodiscard]] Settings read_settings(const QJsonObject &obj) const noexcept;
+    [[nodiscard]] Protocol read_blocks(const QJsonArray &array) const noexcept;
 };

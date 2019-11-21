@@ -22,7 +22,7 @@ Configuration ConfigParser::parse(const QString &filename)
         throw std::logic_error("can't open file");
     }
 
-    QJsonParseError error;
+    QJsonParseError error{};
     const auto content = file.readAll();
     auto doc           = QJsonDocument::fromJson(content, &error);
     if (error.error != QJsonParseError::NoError) {

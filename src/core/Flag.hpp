@@ -8,6 +8,6 @@ class Flag
     bool operator==(const Flag &other) const;
 
     QString description;
-    bool value;
-    bool default_value;
+    bool value{};
+    bool default_value{};
 };

@@ -13,7 +13,7 @@ class Led : public QWidget
   public:
     friend class LedRenderer;
 
-    typedef enum LedColor {
+    enum LedColor {
         Red,
         Green,
         Yellow,
@@ -23,58 +23,58 @@ class Led : public QWidget
         Blue,
 
         MaxLedColor
-    } LedColor;
+    };
 
-    typedef enum LedShape {
+    enum LedShape {
         Circle,
         Square,
         Triangle,
         Rounded,
 
         MaxLedShape
-    } LedShape;
+    };
 
-    typedef enum State {
+    enum State {
         Off,
         On,
 
         MaxState
-    } State;
+    };
 
-    Led(const QString &description = QString(), QWidget *parent = nullptr,
-        const QSize &ledSize = QSize(30, 30), const Led::State state = Led::Off,
+    Led(QString description = QString(), QWidget *parent = nullptr,
+        const QSize &ledSize = QSize(30, 30), Led::State state = Led::Off,
         const Led::LedColor &onColor  = Led::Green,
         const Led::LedColor &offColor = Led::Grey,
         const Led::LedShape &shape    = Led::Circle,
-        const int textAligment        = Qt::AlignCenter);
+        int textAligment              = Qt::AlignCenter);
     Led();
-    ~Led();
+    ~Led() override;
 
-    Led::State state() const;
+    [[nodiscard]] Led::State state() const;
     void setState(const Led::State &state);
 
-    LedColor color(const State &state) const;
+    [[nodiscard]] LedColor color(const State &state) const;
     void setColor(const State &state, const LedColor &color);
 
-    LedShape shape() const;
+    [[nodiscard]] LedShape shape() const;
     void setShape(const LedShape &shape);
 
     void setLedSize(QSize size);
 
-    int textAligment() const;
+    [[nodiscard]] int textAligment() const;
     void setTextAligment(const int &textAligment);
 
-    QString description() const;
+    [[nodiscard]] QString description() const;
     void setDescription(const QString &description);
 
+    [[nodiscard]] bool isBlinking() const;
     void setBlinkEnabled(bool enable, int blinkMsec = 2000);
-    bool isBlinking() const;
 
+    [[nodiscard]] bool isInteractive();
     void setInteractive(bool value);
-    bool isInteractive();
 
+    [[nodiscard]] QString tag() const;
     void setTag(const QString &tag);
-    QString tag() const;
 
   public slots:
     void toggle();
@@ -84,21 +84,21 @@ class Led : public QWidget
     void clicked();
 
   protected:
-    void paintEvent(QPaintEvent *event);
-    void mousePressEvent(QMouseEvent *event);
+    void paintEvent(QPaintEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
 
   private:
     QSize m_ledSize;
-    State m_state;
-    LedColor m_onColor;
-    LedColor m_offColor;
-    LedShape m_shape;
-    QString m_description;
-    int m_textAligment;
-    bool m_blink;
+    State m_state{ Led::Off };
+    LedColor m_onColor{ Led::Green };
+    LedColor m_offColor{ Led::Grey };
+    LedShape m_shape{ Led::Circle };
+    QString m_description{};
+    int m_textAligment{ Qt::AlignCenter };
+    bool m_blink{ false };
     QTimer *m_blinkTimer;
-    bool m_interactive;
-    QString m_tag;
+    bool m_interactive{ true };
+    QString m_tag{};
 
     void init();
     void check();
@@ -119,9 +119,10 @@ class LedRenderer : public QObject
     static LedRenderer *istance;
 
     explicit LedRenderer(QObject *parent = nullptr);
-    ~LedRenderer();
+    ~LedRenderer() override;
+
     void init();
-    QString stringifyColor(const Led::LedColor &color) const;
-    QString stringifyShape(const Led::LedShape &shape) const;
+    [[nodiscard]] QString stringifyColor(const Led::LedColor &color) const;
+    [[nodiscard]] QString stringifyShape(const Led::LedShape &shape) const;
 };
 #endif
