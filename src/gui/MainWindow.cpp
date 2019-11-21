@@ -6,11 +6,14 @@
 #include "ui_MainWindow.h"
 
 #include <ConfigParser.hpp>
+#include <MdiChild.hpp>
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QDockWidget>
 #include <QFileDialog>
+#include <QStandardItemModel>
 #include <QStandardPaths>
+#include <QTreeView>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -19,8 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowTitle("Tino");
 
     createMenuBar();
-
-    resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
 
     connect(this, &MainWindow::importFinished, this,
             &MainWindow::createConfigView);
@@ -48,11 +49,54 @@ void MainWindow::createConfigView()
         qDeleteAll(kids);
     }
 
-    auto dock = ConfigViewFactory().makeConfigView(m_config->protocol);
-    dock->setObjectName("ConfigView");
-    dock->setParent(this);
-    this->addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, dock,
-                        Qt::Orientation::Vertical);
+    m_configViewDock.reset(
+        ConfigViewFactory().makeConfigView(m_config->protocol));
+    m_configViewDock->setObjectName("ConfigView");
+    m_configViewDock->setParent(this);
+    addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea,
+                  m_configViewDock.get(), Qt::Orientation::Vertical);
+
+    auto tree = dynamic_cast<QTreeView *>(m_configViewDock->widget());
+    tree->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(tree, &QTreeView::customContextMenuRequested, this,
+            &MainWindow::customConfigViewContextMenu);
+}
+
+void MainWindow::customConfigViewContextMenu(const QPoint &point)
+{
+    auto tree         = dynamic_cast<QTreeView *>(m_configViewDock->widget());
+    QModelIndex index = tree->indexAt(point);
+
+    if (index.isValid()) {
+        QStandardItemModel *sModel =
+            qobject_cast<QStandardItemModel *>(tree->model());
+        QStandardItem *item         = sModel->itemFromIndex(index);
+        const auto protocolItemMenu = new QMenu(this);
+        const auto view             = new QAction("View", protocolItemMenu);
+        view->setEnabled(item->whatsThis().contains("block"));
+
+        connect(view, &QAction::triggered, this, [&]() {
+            MdiChild *child;
+            auto whatsThis = item->whatsThis();
+
+            if (whatsThis.startsWith("block_") &&
+                !whatsThis.contains("group_")) {
+                auto blockId = whatsThis.split('_').at(1).toInt();
+                child = new MdiChild(m_config->protocol.blocks.at(blockId));
+            } else {
+                auto blockId = whatsThis.split('_').at(1).toInt();
+                auto groupId = whatsThis.split('_').at(3).toInt();
+                child        = new MdiChild(
+                    m_config->protocol.blocks.at(blockId).groups.at(groupId));
+            }
+
+            ui->mdiArea->addSubWindow(child);
+            child->show();
+        });
+
+        protocolItemMenu->addAction(view);
+        protocolItemMenu->exec(tree->viewport()->mapToGlobal(point));
+    }
 }
 
 void MainWindow::createMenuBar()
