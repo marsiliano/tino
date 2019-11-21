@@ -12,10 +12,16 @@ QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot)
     auto model = new QStandardItemModel(view);
 
     const auto root = model->invisibleRootItem();
+    auto blockId    = 0;
     foreach (auto b, prot.blocks) {
         auto blockItem = makeItem(b);
+        blockItem->setWhatsThis(QStringLiteral("block_%1").arg(blockId));
+        auto groupId = 0;
         foreach (auto g, b.groups) {
             auto groupItem = makeItem(g);
+            groupItem->setWhatsThis(QStringLiteral("block_%1_group_%2")
+                                        .arg(blockId)
+                                        .arg(groupId++));
             foreach (auto b, g.bytes) {
                 auto byteItem = makeItem(b);
                 foreach (auto f, b.flags) {
@@ -25,6 +31,7 @@ QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot)
             }
             blockItem->appendRow(groupItem);
         }
+        ++blockId;
         root->appendRow(blockItem);
     }
 
