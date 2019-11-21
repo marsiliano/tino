@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Tino");
 
-    create_menubar();
+    createMenubar();
 
     resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
 
@@ -64,7 +64,7 @@ void MainWindow::createConfigView()
                         Qt::Orientation::Vertical);
 }
 
-void MainWindow::create_menubar()
+void MainWindow::createMenubar()
 {
     const auto file = new QMenu("File", ui->menuBar);
 
