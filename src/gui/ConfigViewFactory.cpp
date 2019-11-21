@@ -4,7 +4,7 @@
 #include <QStandardItemModel>
 #include <QTreeView>
 
-QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot) const
+QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot)
 {
     auto dock = new QDockWidget("Protocol");
     dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
@@ -13,18 +13,13 @@ QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot) const
 
     const auto root = model->invisibleRootItem();
     foreach (auto b, prot.blocks) {
-        auto blockItem = new QStandardItem(b.description);
-        blockItem->setFlags(blockItem->flags() & ~Qt::ItemIsEditable);
+        auto blockItem = makeItem(b);
         foreach (auto g, b.groups) {
-            auto groupItem = new QStandardItem(g.description);
-            groupItem->setFlags(groupItem->flags() & ~Qt::ItemIsEditable);
+            auto groupItem = makeItem(g);
             foreach (auto b, g.bytes) {
-                auto byteItem = new QStandardItem(b.description);
-                byteItem->setFlags(byteItem->flags() & ~Qt::ItemIsEditable);
+                auto byteItem = makeItem(b);
                 foreach (auto f, b.flags) {
-                    auto flagItem = new QStandardItem(f.description);
-                    flagItem->setFlags(flagItem->flags() & ~Qt::ItemIsEditable);
-                    byteItem->appendRow(flagItem);
+                    byteItem->appendRow(makeItem(f));
                 }
                 groupItem->appendRow(byteItem);
             }
@@ -36,4 +31,15 @@ QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot) const
     view->setModel(model);
     dock->setWidget(view);
     return dock;
+}
+
+template<typename T> QStandardItem *ConfigViewFactory::makeItem(T t)
+{
+    const auto str =
+        t.description.isEmpty()
+            ? QString("item_" + QString::number(m_emptyItemCounter++))
+            : t.description;
+    auto item = new QStandardItem(str);
+    item->setFlags(item->flags() & ~Qt::ItemIsEditable);
+    return item;
 }

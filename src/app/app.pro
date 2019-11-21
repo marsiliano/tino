@@ -20,5 +20,3 @@ CONFIG(debug, debug|release) {
 }
 
 SOURCES += $$PWD/main.cpp
-
-
