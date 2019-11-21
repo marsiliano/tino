@@ -38,22 +38,7 @@ void MainWindow::selectFile()
         QStandardPaths::writableLocation(QStandardPaths::DesktopLocation),
         tr("Config File (*.json)"));
 
-    if (filename.isNull() || filename.isEmpty()) {
-        qDebug() << "filename not valid";
-        return;
-    }
-
-    ConfigParser parser;
-    m_config.reset(new Configuration{ parser.parse(filename) });
-
-    if (m_config.isNull()) {
-        qWarning() << "parsing error";
-    }
-
-    m_serialConnect->setEnabled(true);
-    m_serialSettings->setEnabled(true);
-
-    emit importFinished({});
+    importConfig(filename);
 }
 
 void MainWindow::createConfigView()
@@ -102,4 +87,24 @@ void MainWindow::createMenubar()
     connect(about, &QAction::triggered, this, []() { DialogAbout().exec(); });
     help->addAction(about);
     ui->menuBar->addMenu(help);
+}
+
+void MainWindow::importConfig(const QString &filename)
+{
+    if (filename.isNull() || filename.isEmpty()) {
+        qDebug() << "filename not valid";
+        return;
+    }
+
+    ConfigParser parser;
+    m_config.reset(new Configuration{ parser.parse(filename) });
+
+    if (m_config.isNull()) {
+        qWarning() << "parsing error";
+    }
+
+    m_serialConnect->setEnabled(true);
+    m_serialSettings->setEnabled(true);
+
+    emit importFinished({});
 }

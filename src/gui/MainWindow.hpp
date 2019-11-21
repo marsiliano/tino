@@ -33,4 +33,5 @@ class MainWindow : public QMainWindow
     QScopedPointer<QAction> m_serialSettings;
 
     void createMenubar();
+    void importConfig(const QString &filename);
 };
