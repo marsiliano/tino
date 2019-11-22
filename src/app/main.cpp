@@ -4,9 +4,11 @@
 
 int main(int argc, char *argv[])
 {
+    Q_INIT_RESOURCE(gui_resources);
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
 
-    return a.exec();
+    return QApplication::exec();
 }

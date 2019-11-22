@@ -22,6 +22,9 @@ void tst_MainWindow::initTestCase()
 {
     auto path = QDir::currentPath();
     path      = path.remove(path.lastIndexOf("build"), path.size());
+    if (!path.contains("tino")) {
+        path += "tino/";
+    }
     path += "tests/files/";
     filesPath = path;
 }

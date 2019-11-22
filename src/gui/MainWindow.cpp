@@ -6,11 +6,15 @@
 #include "ui_MainWindow.h"
 
 #include <ConfigParser.hpp>
+#include <MdiChild.hpp>
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QDockWidget>
 #include <QFileDialog>
+#include <QMessageBox>
+#include <QStandardItemModel>
 #include <QStandardPaths>
+#include <QTreeView>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -19,8 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowTitle("Tino");
 
     createMenuBar();
-
-    resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
 
     connect(this, &MainWindow::importFinished, this,
             &MainWindow::createConfigView);
@@ -43,16 +45,55 @@ void MainWindow::selectFile()
 
 void MainWindow::createConfigView()
 {
-    auto kids = this->findChildren<QDockWidget *>("ConfigView");
-    if (!kids.isEmpty()) {
-        qDeleteAll(kids);
-    }
+    ui->mdiArea->closeAllSubWindows();
 
-    auto dock = ConfigViewFactory().makeConfigView(m_config->protocol);
-    dock->setObjectName("ConfigView");
-    dock->setParent(this);
-    this->addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, dock,
-                        Qt::Orientation::Vertical);
+    m_configViewDock.reset(
+        ConfigViewFactory().makeConfigView(m_config->protocol));
+    m_configViewDock->setObjectName("ConfigView");
+    m_configViewDock->setParent(this);
+    addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea,
+                  m_configViewDock.get(), Qt::Orientation::Vertical);
+
+    auto tree = dynamic_cast<QTreeView *>(m_configViewDock->widget());
+    tree->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(tree, &QTreeView::customContextMenuRequested, this,
+            &MainWindow::customConfigViewContextMenu);
+}
+
+void MainWindow::customConfigViewContextMenu(const QPoint &point)
+{
+    auto tree         = dynamic_cast<QTreeView *>(m_configViewDock->widget());
+    QModelIndex index = tree->indexAt(point);
+
+    if (index.isValid()) {
+        auto *sModel = qobject_cast<QStandardItemModel *>(tree->model());
+        auto *item   = sModel->itemFromIndex(index);
+        const auto protocolItemMenu = new QMenu(this);
+        const auto view             = new QAction("View", protocolItemMenu);
+        view->setEnabled(item->whatsThis().contains("block"));
+
+        connect(view, &QAction::triggered, this, [&]() {
+            MdiChild *child;
+            auto whatsThis = item->whatsThis();
+
+            if (whatsThis.startsWith("block_") &&
+                !whatsThis.contains("group_")) {
+                auto blockId = whatsThis.split('_').at(1).toInt();
+                child = new MdiChild(m_config->protocol.blocks.at(blockId));
+            } else {
+                auto blockId = whatsThis.split('_').at(1).toInt();
+                auto groupId = whatsThis.split('_').at(3).toInt();
+                child        = new MdiChild(
+                    m_config->protocol.blocks.at(blockId).groups.at(groupId));
+            }
+
+            ui->mdiArea->addSubWindow(child);
+            child->show();
+        });
+
+        protocolItemMenu->addAction(view);
+        protocolItemMenu->exec(tree->viewport()->mapToGlobal(point));
+    }
 }
 
 void MainWindow::createMenuBar()
@@ -65,7 +106,7 @@ void MainWindow::createMenuBar()
 
     const auto quit = new QAction("Quit", file);
     quit->setShortcut(QKeySequence::StandardKey::Quit);
-    connect(quit, &QAction::triggered, this, []() { qApp->quit(); });
+    connect(quit, &QAction::triggered, this, []() { QApplication::exit(); });
     file->addAction(quit);
 
     ui->menuBar->addMenu(file);
@@ -98,7 +139,8 @@ void MainWindow::createMenuBar()
 void MainWindow::importConfig(const QString &filename)
 {
     if (filename.isNull() || filename.isEmpty()) {
-        qDebug() << "filename not valid";
+        QMessageBox::warning(this, tr("Load configuration"),
+                             tr("Filename not valid!"));
         return;
     }
 
@@ -106,7 +148,9 @@ void MainWindow::importConfig(const QString &filename)
     m_config.reset(new Configuration{ parser.parse(filename) });
 
     if (m_config.isNull()) {
-        qWarning() << "parsing error";
+        QMessageBox::warning(this, tr("Load configuration"),
+                             tr("Parsing configuration error!"));
+        return;
     }
 
     m_serialConnect->setEnabled(true);

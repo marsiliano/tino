@@ -24,6 +24,7 @@ class MainWindow : public QMainWindow
   private slots:
     void selectFile();
     void createConfigView();
+    void customConfigViewContextMenu(const QPoint &point);
 
   private:
     Ui::MainWindow *ui;
@@ -31,6 +32,7 @@ class MainWindow : public QMainWindow
     QScopedPointer<Configuration> m_config;
     QScopedPointer<QAction> m_serialConnect;
     QScopedPointer<QAction> m_serialSettings;
+    QScopedPointer<QDockWidget> m_configViewDock;
 
     void createMenuBar();
     void importConfig(const QString &filename);
