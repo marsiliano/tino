@@ -1,5 +1,6 @@
 #include "ConfigViewFactory.hpp"
 
+#include <Bitset.hpp>
 #include <QDockWidget>
 #include <QStandardItemModel>
 #include <QTreeView>
@@ -13,24 +14,30 @@ QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot)
 
     const auto root = model->invisibleRootItem();
     auto blockId    = 0;
-    foreach (auto b, prot.blocks) {
-        auto blockItem = makeItem(b);
+    for (const auto &b : prot.blocks) {
+        auto blockItem = new QStandardItem(b.description);
+        blockItem->setFlags(blockItem->flags() & ~Qt::ItemIsEditable);
         blockItem->setWhatsThis(QStringLiteral("block_%1").arg(blockId));
         auto groupId = 0;
-        foreach (auto g, b.groups) {
-            auto groupItem = makeItem(g);
-            groupItem->setWhatsThis(QStringLiteral("block_%1_group_%2")
-                                        .arg(blockId)
-                                        .arg(groupId++));
-            //            foreach (auto b, g.bytes) {
-            //                auto byteItem = makeItem(b);
-            //                foreach (auto f, b.flags) {
-            //                    byteItem->appendRow(makeItem(f));
-            //                }
-            //                groupItem->appendRow(byteItem);
-            //            }
-            blockItem->appendRow(groupItem);
+        for (const auto &element : b.elements) {
+            auto groupElement = makeItem(element.get());
+            groupElement->setWhatsThis(
+                QStringLiteral("block_%1_group_%2").arg(groupId++));
+
+            auto bitset = dynamic_cast<Bitset *>(element.get());
+            if (bitset != Q_NULLPTR) {
+                for (size_t i = 0; i < bitset->bits.size(); ++i) {
+                    auto str = bitset->bitsDescriptions[i].isEmpty()
+                                   ? QString("item_%1").arg(i)
+                                   : bitset->bitsDescriptions[i];
+                    auto bit = new QStandardItem(str);
+                    bit->setFlags(bit->flags() & ~Qt::ItemIsEditable);
+                    groupElement->appendRow(bit);
+                }
+            }
+            blockItem->appendRow(groupElement);
         }
+
         ++blockId;
         root->appendRow(blockItem);
     }
@@ -40,12 +47,12 @@ QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot)
     return dock;
 }
 
-template<typename T> QStandardItem *ConfigViewFactory::makeItem(T t)
+QStandardItem *ConfigViewFactory::makeItem(IElement *element)
 {
+    const auto d = element->description();
     const auto str =
-        t.description.isEmpty()
-            ? QString("item_" + QString::number(m_emptyItemCounter++))
-            : t.description;
+        d.isEmpty() ? QString("item_" + QString::number(m_emptyItemCounter++))
+                    : d;
     auto item = new QStandardItem(str);
     item->setFlags(item->flags() & ~Qt::ItemIsEditable);
     return item;

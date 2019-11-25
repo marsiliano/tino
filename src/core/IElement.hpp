@@ -9,15 +9,18 @@ class IElement
     explicit IElement(QString descr, int addr);
     IElement(const IElement &) = default;
     IElement(IElement &&)      = default;
-    virtual ~IElement();
+    virtual ~IElement()        = default;
 
     IElement &operator=(const IElement &) = default;
     IElement &operator=(IElement &&) = default;
+
+    bool operator==(const IElement &other) const;
+    bool operator!=(const IElement &other) const;
 
     QString description() const noexcept;
     int address() const noexcept;
 
   private:
-    int m_address{};
     QString m_description{};
+    int m_address{};
 };

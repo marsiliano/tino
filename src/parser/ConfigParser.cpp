@@ -1,10 +1,17 @@
 #include "ConfigParser.hpp"
 
+#include <Bitset.hpp>
 #include <QDebug>
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <functional>
+
+Configuration::Configuration(Settings &&set, Protocol &&prot) :
+    settings{ set }, protocol{ std::move(prot) }
+{
+}
 
 bool Configuration::operator==(const Configuration &other) const
 {
@@ -31,14 +38,14 @@ Configuration ConfigParser::parse(const QString &filename)
     }
 
     const auto obj      = doc.object();
-    const auto settings = obj.find("settings")->toObject();
-    const auto blocks   = obj.find("blocks")->toArray();
+    const auto settings = obj.find(Tags::settings)->toObject();
+    const auto protocol = obj.find(Tags::protocol)->toObject();
 
-    if (settings.isEmpty() && blocks.isEmpty()) {
+    if (settings.isEmpty() && protocol.isEmpty()) {
         return {};
     }
 
-    return Configuration{ read_settings(settings), read_blocks(blocks) };
+    return Configuration{ read_settings(settings), read_blocks(protocol) };
 }
 
 Settings ConfigParser::read_settings(const QJsonObject &obj) const noexcept
@@ -71,35 +78,42 @@ Settings ConfigParser::read_settings(const QJsonObject &obj) const noexcept
     return s;
 }
 
-Protocol ConfigParser::read_blocks(const QJsonArray &array) const noexcept
+Protocol ConfigParser::read_blocks(const QJsonObject &obj) const noexcept
 {
     Protocol ret;
-    foreach (auto v, array) {
-        Block blk;
-        const auto block = v.toObject();
-        blk.description  = block.find("description")->toString();
-
-        const auto groups = block.find("groups")->toArray();
-        foreach (auto g, groups) {
-            Group grp;
-            grp.description = g.toObject().find("description")->toString();
-            const auto bits = g.toObject().find("bits")->toArray();
-
-            //            Byte byte;
-            //            foreach (auto b, bits) {
-            //                Flag flag;
-            //                flag.description =
-            //                b.toObject().find("description")->toString();
-            //                flag.default_value =
-            //                    b.toObject().find("defaultValue")->toBool();
-            //                byte.flags.push_back(flag);
-            //            }
-            //            grp.bytes.push_back(byte);
-            blk.groups.push_back(grp);
-        }
-
-        ret.blocks.push_back(blk);
+    const auto array = obj.find(Tags::blocks)->toArray();
+    if (array.isEmpty()) {
+        return ret;
     }
 
+    foreach (auto v, array) {
+        Block blk;
+        const auto block  = v.toObject();
+        blk.description   = block.find(Tags::description)->toString();
+        const auto groups = block.find(Tags::groups)->toArray();
+        foreach (auto g, groups) {
+            auto description = g.toObject().find(Tags::description)->toString();
+            auto address     = g.toObject()
+                               .find(Tags::address)
+                               ->toString()
+                               .toInt(Q_NULLPTR, 16);
+            auto type = g.toObject().find(Tags::type)->toString();
+
+            std::unique_ptr<IElement> element;
+            if (type == Tags::bitsarray) {
+                element     = std::make_unique<Bitset>(description, address);
+                auto bits   = g.toObject().find(Tags::bit)->toArray();
+                auto bitset = dynamic_cast<Bitset *>(element.get());
+                foreach (auto a, bits) {
+                    auto d   = a.toObject().find(Tags::description)->toString();
+                    auto val = a.toObject().find(Tags::defaultValue)->toBool();
+                    bitset->bitsDescriptions.push_back(d);
+                    bitset->bits.set(0, val);
+                }
+            }
+            blk.elements.emplace_back(std::move(element));
+        }
+        ret.blocks.emplace_back(std::move(blk));
+    }
     return ret;
 }

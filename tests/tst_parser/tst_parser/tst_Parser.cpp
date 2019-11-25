@@ -1,3 +1,4 @@
+#include <Bitset.hpp>
 #include <ConfigParser.hpp>
 #include <QDir>
 #include <QtTest>
@@ -72,13 +73,15 @@ void tst_Parser::partial_settings()
 void tst_Parser::parse_flags()
 {
     const auto config = cp_.parse(path_ + "1block-1group-flag.json");
-    QVERIFY(config.protocol.blocks.size() == 1);
-    QVERIFY(config.protocol.blocks.front().groups.size() == 1);
-    //    QVERIFY(config.protocol.blocks.front().groups.front().bytes.size() ==
-    //    1); QVERIFY(config.protocol.blocks.front()
-    //                .groups.front()
-    //                .bytes.front()
-    //                .flags.size() == 8);
+    const auto &p     = config.protocol;
+    QVERIFY(!p.blocks.empty());
+    QCOMPARE(p.blocks.front().description, "Block n1");
+    QCOMPARE(p.blocks.front().elements.size(), size_t(1));
+    auto b = dynamic_cast<Bitset *>(p.blocks.front().elements.front().get());
+    QVERIFY(b != Q_NULLPTR);
+    QCOMPARE(b->address(), 0x10);
+    QCOMPARE(b->description(), "BitsArray n1");
+    QCOMPARE(b->bitsDescriptions.size(), 8);
 }
 
 QTEST_GUILESS_MAIN(tst_Parser)

@@ -1,6 +1,10 @@
 #pragma once
 
-#include "Group.hpp"
+class IElement;
+
+#include <QString>
+#include <memory>
+#include <vector>
 
 class Block
 {
@@ -8,5 +12,5 @@ class Block
     bool operator==(const Block &other) const;
 
     QString description;
-    QVector<Group> groups;
+    std::vector<std::unique_ptr<IElement>> elements;
 };

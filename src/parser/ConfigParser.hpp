@@ -10,11 +10,8 @@ class QJsonArray;
 class Configuration
 {
   public:
-    explicit Configuration(Settings &&set, Protocol &&prot) :
-        settings{ set }, protocol{ prot }
-    {
-    }
-    Configuration()                      = default;
+    Configuration() = default;
+    explicit Configuration(Settings &&set, Protocol &&prot);
     Configuration(const Configuration &) = default;
     Configuration(Configuration &&)      = default;
     ~Configuration()                     = default;
@@ -35,5 +32,18 @@ class ConfigParser
 
   private:
     [[nodiscard]] Settings read_settings(const QJsonObject &obj) const noexcept;
-    [[nodiscard]] Protocol read_blocks(const QJsonArray &array) const noexcept;
+    [[nodiscard]] Protocol read_blocks(const QJsonObject &obj) const noexcept;
+
+    struct Tags {
+        constexpr static const auto settings     = "SerialPortSettings";
+        constexpr static const auto protocol     = "CommunicationProtocol";
+        constexpr static const auto blocks       = "Blocks";
+        constexpr static const auto groups       = "Groups";
+        constexpr static const auto description  = "Description";
+        constexpr static const auto type         = "Type";
+        constexpr static const auto bitsarray    = "BitsArray";
+        constexpr static const auto address      = "Address";
+        constexpr static const auto bit          = "Bit";
+        constexpr static const auto defaultValue = "DefaultValue";
+    };
 };

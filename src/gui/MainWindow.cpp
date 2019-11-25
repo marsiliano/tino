@@ -6,6 +6,7 @@
 #include "ui_MainWindow.h"
 
 #include <ConfigParser.hpp>
+#include <IElement.hpp>
 #include <MdiChild.hpp>
 #include <QDebug>
 #include <QDesktopWidget>
@@ -82,9 +83,9 @@ void MainWindow::customConfigViewContextMenu(const QPoint &point)
                 child = new MdiChild(m_config->protocol.blocks.at(blockId));
             } else {
                 auto blockId = whatsThis.split('_').at(1).toInt();
-                auto groupId = whatsThis.split('_').at(3).toInt();
-                child        = new MdiChild(
-                    m_config->protocol.blocks.at(blockId).groups.at(groupId));
+                //                auto groupId =
+                //                whatsThis.split('_').at(3).toInt();
+                child = new MdiChild(m_config->protocol.blocks.at(blockId));
             }
 
             ui->mdiArea->addSubWindow(child);

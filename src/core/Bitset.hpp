@@ -8,11 +8,9 @@
 class Bitset final : public IElement
 {
   public:
-    QStringList bitsDescriptions() const;
+    explicit Bitset(QString descr, int addr);
+    ~Bitset() override = default;
 
-    std::bitset<8> bits() const;
-
-  private:
-    QStringList m_bitsDescriptions{};
-    std::bitset<8> m_bits{};
+    QStringList bitsDescriptions{};
+    std::bitset<8> bits{};
 };
