@@ -1,19 +1,15 @@
 #pragma once
 
 #include "Byte.hpp"
+#include "IElement.hpp"
 
 #include <QPair>
 
-class Word
+class Word final : public IElement
 {
-public:
-    Word() = default;
-
-    QString description() const;
-
+  public:
     QPair<Byte, Byte> bytes() const;
 
-private:
-    QString m_description{};
+  private:
     QPair<Byte, Byte> m_bytes{};
 };

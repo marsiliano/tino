@@ -1,26 +1,18 @@
 #pragma once
 
+#include "IElement.hpp"
+
+#include <QVector>
 #include <bitset>
 
-#include <QString>
-#include <QVector>
-
-class Bitset
+class Bitset final : public IElement
 {
-public:
-    Bitset() = default;
-
-    int address() const;
-
-    QString description() const;
-
+  public:
     QStringList bitsDescriptions() const;
 
     std::bitset<8> bits() const;
 
-private:
-    int m_address{};
-    QString m_description{};
+  private:
     QStringList m_bitsDescriptions{};
     std::bitset<8> m_bits{};
 };

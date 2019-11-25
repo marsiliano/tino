@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Byte.hpp"
+#include <QVector>
 
-#include <QString>
+class IElement;
 
 class Group
 {
@@ -10,5 +10,5 @@ class Group
     bool operator==(const Group &other) const;
 
     QString description;
-    QVector<Byte> bytes;
+    QVector<IElement *> m_elements;
 };

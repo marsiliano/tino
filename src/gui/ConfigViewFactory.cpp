@@ -22,13 +22,13 @@ QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot)
             groupItem->setWhatsThis(QStringLiteral("block_%1_group_%2")
                                         .arg(blockId)
                                         .arg(groupId++));
-            foreach (auto b, g.bytes) {
-                auto byteItem = makeItem(b);
-                foreach (auto f, b.flags) {
-                    byteItem->appendRow(makeItem(f));
-                }
-                groupItem->appendRow(byteItem);
-            }
+            //            foreach (auto b, g.bytes) {
+            //                auto byteItem = makeItem(b);
+            //                foreach (auto f, b.flags) {
+            //                    byteItem->appendRow(makeItem(f));
+            //                }
+            //                groupItem->appendRow(byteItem);
+            //            }
             blockItem->appendRow(groupItem);
         }
         ++blockId;

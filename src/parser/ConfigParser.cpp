@@ -85,15 +85,16 @@ Protocol ConfigParser::read_blocks(const QJsonArray &array) const noexcept
             grp.description = g.toObject().find("description")->toString();
             const auto bits = g.toObject().find("bits")->toArray();
 
-            Byte byte;
-            foreach (auto b, bits) {
-                Flag flag;
-                flag.description = b.toObject().find("description")->toString();
-                flag.default_value =
-                    b.toObject().find("defaultValue")->toBool();
-                byte.flags.push_back(flag);
-            }
-            grp.bytes.push_back(byte);
+            //            Byte byte;
+            //            foreach (auto b, bits) {
+            //                Flag flag;
+            //                flag.description =
+            //                b.toObject().find("description")->toString();
+            //                flag.default_value =
+            //                    b.toObject().find("defaultValue")->toBool();
+            //                byte.flags.push_back(flag);
+            //            }
+            //            grp.bytes.push_back(byte);
             blk.groups.push_back(grp);
         }
 

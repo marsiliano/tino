@@ -1,20 +1,12 @@
 #pragma once
 
-#include <QString>
+#include "IElement.hpp"
 
-class Byte
+class Byte final : public IElement
 {
-public:
-    Byte() = default;
-
-    int address() const;
-
-    QString description() const;
-
+  public:
     int value() const;
 
-private:
-    int m_address{};
-    QString m_description{};
+  private:
     int m_value{};
 };

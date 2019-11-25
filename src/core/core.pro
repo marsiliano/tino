@@ -7,7 +7,8 @@ HEADERS += \
     $$PWD/Byte.hpp \
     $$PWD/Bitset.hpp \
     $$PWD/Word.hpp \
-    $$PWD/Protocol.hpp \
+    $$PWD/Protocol.hpp \ \
+    IElement.hpp
 
 SOURCES += \
     $$PWD/Settings.cpp \
@@ -16,4 +17,5 @@ SOURCES += \
     $$PWD/Byte.cpp \
     $$PWD/Bitset.cpp \
     $$PWD/Word.cpp \
-    $$PWD/Protocol.cpp
+    $$PWD/Protocol.cpp \
+    IElement.cpp

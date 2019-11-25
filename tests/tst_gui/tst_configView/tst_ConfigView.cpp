@@ -23,23 +23,23 @@ class tst_ConfigView : public QObject
 
 void tst_ConfigView::initTestCase()
 {
-    Byte b;
-    b.description = "byte";
-    for (auto i = 0; i < 8; ++i) {
-        Flag f;
-        f.description = "flag " + QString::number(i);
-        b.flags.push_back(f);
-    }
+    //    Byte b;
+    //    b.description = "byte";
+    //    for (auto i = 0; i < 8; ++i) {
+    //        Flag f;
+    //        f.description = "flag " + QString::number(i);
+    //        b.flags.push_back(f);
+    //    }
 
-    Group g;
-    g.description = "";
-    g.bytes.push_back(b);
+    //    Group g;
+    //    g.description = "";
+    //    g.bytes.push_back(b);
 
-    Block bl;
-    bl.description = "block";
-    bl.groups.push_back(g);
+    //    Block bl;
+    //    bl.description = "block";
+    //    bl.groups.push_back(g);
 
-    m_protocol.blocks.push_back(bl);
+    //    m_protocol.blocks.push_back(bl);
 }
 
 void tst_ConfigView::checkEmptyProtocol()

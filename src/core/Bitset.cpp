@@ -1,15 +1,5 @@
 #include "Bitset.hpp"
 
-int Bitset::address() const
-{
-    return m_address;
-}
-
-QString Bitset::description() const
-{
-    return m_description;
-}
-
 QStringList Bitset::bitsDescriptions() const
 {
     return m_bitsDescriptions;
