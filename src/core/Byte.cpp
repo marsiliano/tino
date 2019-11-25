@@ -1,6 +1,16 @@
 #include "Byte.hpp"
 
-bool Byte::operator==(const Byte &other) const
+int Byte::address() const
 {
-    return description == other.description && flags == other.flags;
+    return m_address;
+}
+
+QString Byte::description() const
+{
+    return m_description;
+}
+
+int Byte::value() const
+{
+    return m_value;
 }

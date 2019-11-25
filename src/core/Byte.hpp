@@ -1,14 +1,20 @@
 #pragma once
 
-#include "Flag.hpp"
-
-#include <QVector>
+#include <QString>
 
 class Byte
 {
-  public:
-    bool operator==(const Byte &other) const;
+public:
+    Byte() = default;
 
-    QString description;
-    QVector<Flag> flags;
+    int address() const;
+
+    QString description() const;
+
+    int value() const;
+
+private:
+    int m_address{};
+    QString m_description{};
+    int m_value{};
 };
