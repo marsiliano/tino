@@ -8,6 +8,7 @@
 class Bitset final : public IElement
 {
   public:
+    Bitset() = default;
     explicit Bitset(QString descr, int addr);
     ~Bitset() override = default;
 

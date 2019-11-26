@@ -6,6 +6,7 @@
 
 class Bitset;
 class Byte;
+class Word;
 
 class QJsonObject;
 class QJsonArray;
@@ -43,6 +44,7 @@ class ConfigParser
         constexpr static const auto type         = "Type";
         constexpr static const auto bitsarray    = "BitsArray";
         constexpr static const auto byte         = "Byte";
+        constexpr static const auto bytes        = "Bytes";
         constexpr static const auto word         = "Word";
         constexpr static const auto address      = "Address";
         constexpr static const auto bit          = "Bit";
@@ -54,4 +56,5 @@ class ConfigParser
 
     std::unique_ptr<Bitset> makeBitset(const QJsonObject &obj) const;
     std::unique_ptr<Byte> makeByte(const QJsonObject &obj) const;
+    std::unique_ptr<Word> makeWord(const QJsonObject &obj) const;
 };

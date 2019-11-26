@@ -7,6 +7,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <Word.hpp>
 #include <functional>
 
 Configuration::Configuration(Settings &&set, Protocol &&prot) :
@@ -100,6 +101,7 @@ Protocol ConfigParser::read_blocks(const QJsonObject &obj) const noexcept
             } else if (type == Tags::byte) {
                 element = std::move(makeByte(g.toObject()));
             } else if (type == Tags::word) {
+                element = std::move(makeWord(g.toObject()));
             } else {
                 qWarning() << "tag not handled";
             }
@@ -134,5 +136,32 @@ std::unique_ptr<Byte> ConfigParser::makeByte(const QJsonObject &obj) const
     auto defaultValue = obj.find(Tags::defaultValue)->toString().toInt();
     auto element      = std::make_unique<Byte>(description, address);
     element->setValue(defaultValue);
+    return element;
+}
+
+std::unique_ptr<Word> ConfigParser::makeWord(const QJsonObject &obj) const
+{
+    auto description = obj.find(Tags::description)->toString();
+    auto bytes       = obj.find(Tags::bytes)->toArray();
+    QPair<Byte, Byte> values;
+    if (bytes.size() != 2) {
+        qWarning() << "error while make word";
+        return std::make_unique<Word>("dummy", 0);
+    }
+
+    auto b0 = bytes[0].toObject();
+    auto a0 = b0.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
+    auto d0 = b0.find(Tags::description)->toString();
+    auto v0 = b0.find(Tags::defaultValue)->toString().toInt();
+
+    auto b1 = bytes[0].toObject();
+    auto a1 = b1.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
+    auto d1 = b1.find(Tags::description)->toString();
+    auto v1 = b1.find(Tags::defaultValue)->toString().toInt();
+
+    values.first  = Byte(d0, a0, v0);
+    values.second = Byte(d1, a1, v1);
+
+    auto element = std::make_unique<Word>(description, values);
     return element;
 }

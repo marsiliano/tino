@@ -3,6 +3,7 @@
 #include <ConfigParser.hpp>
 #include <QDir>
 #include <QtTest>
+#include <Word.hpp>
 
 class tst_Parser : public QObject
 {
@@ -17,6 +18,7 @@ class tst_Parser : public QObject
     void partial_settings();
     void parse_flags();
     void parse_byte();
+    void parseWord();
 
   private:
     QString path_{ QDir::currentPath() };
@@ -103,6 +105,19 @@ void tst_Parser::parse_byte()
     QCOMPARE(b2->description(), "Byte n2");
     QCOMPARE(b1->value(), 22);
     QCOMPARE(b2->value(), 44);
+}
+
+void tst_Parser::parseWord()
+{
+    const auto config = cp_.parse(path_ + "1block-1group-word.json");
+    const auto &p     = config.protocol;
+    QVERIFY(!p.blocks.empty());
+    QCOMPARE(p.blocks.front().description, "Block n1");
+    QCOMPARE(p.blocks.front().elements.size(), size_t(1));
+    auto w = dynamic_cast<Word *>(p.blocks.front().elements.front().get());
+    QVERIFY(w != Q_NULLPTR);
+    QCOMPARE(w->address(), 0x1);
+    QCOMPARE(w->description(), "Temperatura acqua lavaggio uscita caldaia");
 }
 
 QTEST_GUILESS_MAIN(tst_Parser)
