@@ -1,6 +1,7 @@
 #include "ConfigParser.hpp"
 
 #include <Bitset.hpp>
+#include <Byte.hpp>
 #include <QDebug>
 #include <QFile>
 #include <QJsonArray>
@@ -92,28 +93,46 @@ Protocol ConfigParser::read_blocks(const QJsonObject &obj) const noexcept
         blk.description   = block.find(Tags::description)->toString();
         const auto groups = block.find(Tags::groups)->toArray();
         foreach (auto g, groups) {
-            auto description = g.toObject().find(Tags::description)->toString();
-            auto address     = g.toObject()
-                               .find(Tags::address)
-                               ->toString()
-                               .toInt(Q_NULLPTR, 16);
             auto type = g.toObject().find(Tags::type)->toString();
-
             std::unique_ptr<IElement> element;
             if (type == Tags::bitsarray) {
-                element     = std::make_unique<Bitset>(description, address);
-                auto bits   = g.toObject().find(Tags::bit)->toArray();
-                auto bitset = dynamic_cast<Bitset *>(element.get());
-                foreach (auto a, bits) {
-                    auto d   = a.toObject().find(Tags::description)->toString();
-                    auto val = a.toObject().find(Tags::defaultValue)->toBool();
-                    bitset->bitsDescriptions.push_back(d);
-                    bitset->bits.set(0, val);
-                }
+                element = std::move(makeBitset(g.toObject()));
+            } else if (type == Tags::byte) {
+                element = std::move(makeByte(g.toObject()));
+            } else if (type == Tags::word) {
+            } else {
+                qWarning() << "tag not handled";
             }
             blk.elements.emplace_back(std::move(element));
         }
         ret.blocks.emplace_back(std::move(blk));
     }
     return ret;
+}
+
+std::unique_ptr<Bitset> ConfigParser::makeBitset(const QJsonObject &obj) const
+{
+    auto description = obj.find(Tags::description)->toString();
+    auto address     = obj.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
+    auto element     = std::make_unique<Bitset>(description, address);
+    auto bits        = obj.find(Tags::bit)->toArray();
+    auto bitset      = dynamic_cast<Bitset *>(element.get());
+    foreach (auto a, bits) {
+        auto d   = obj.find(Tags::description)->toString();
+        auto val = obj.find(Tags::defaultValue)->toBool();
+        bitset->bitsDescriptions.push_back(d);
+        bitset->bits.set(0, val);
+    }
+
+    return element;
+}
+
+std::unique_ptr<Byte> ConfigParser::makeByte(const QJsonObject &obj) const
+{
+    auto description = obj.find(Tags::description)->toString();
+    auto address     = obj.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
+    auto defaultValue = obj.find(Tags::defaultValue)->toString().toInt();
+    auto element      = std::make_unique<Byte>(description, address);
+    element->setValue(defaultValue);
+    return element;
 }

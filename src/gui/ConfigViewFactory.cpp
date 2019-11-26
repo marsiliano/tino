@@ -24,8 +24,7 @@ QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot)
             groupElement->setWhatsThis(
                 QStringLiteral("block_%1_group_%2").arg(groupId++));
 
-            auto bitset = dynamic_cast<Bitset *>(element.get());
-            if (bitset != Q_NULLPTR) {
+            if (auto bitset = dynamic_cast<Bitset *>(element.get())) {
                 for (size_t i = 0; i < bitset->bits.size(); ++i) {
                     auto str = bitset->bitsDescriptions[i].isEmpty()
                                    ? QString("item_%1").arg(i)

@@ -4,6 +4,9 @@
 #include <QString>
 #include <Settings.hpp>
 
+class Bitset;
+class Byte;
+
 class QJsonObject;
 class QJsonArray;
 
@@ -31,9 +34,6 @@ class ConfigParser
     Configuration parse(const QString &filename);
 
   private:
-    [[nodiscard]] Settings read_settings(const QJsonObject &obj) const noexcept;
-    [[nodiscard]] Protocol read_blocks(const QJsonObject &obj) const noexcept;
-
     struct Tags {
         constexpr static const auto settings     = "SerialPortSettings";
         constexpr static const auto protocol     = "CommunicationProtocol";
@@ -42,8 +42,16 @@ class ConfigParser
         constexpr static const auto description  = "Description";
         constexpr static const auto type         = "Type";
         constexpr static const auto bitsarray    = "BitsArray";
+        constexpr static const auto byte         = "Byte";
+        constexpr static const auto word         = "Word";
         constexpr static const auto address      = "Address";
         constexpr static const auto bit          = "Bit";
         constexpr static const auto defaultValue = "DefaultValue";
     };
+
+    [[nodiscard]] Settings read_settings(const QJsonObject &obj) const noexcept;
+    [[nodiscard]] Protocol read_blocks(const QJsonObject &obj) const noexcept;
+
+    std::unique_ptr<Bitset> makeBitset(const QJsonObject &obj) const;
+    std::unique_ptr<Byte> makeByte(const QJsonObject &obj) const;
 };

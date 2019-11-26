@@ -9,7 +9,6 @@
                 [
                     {
                         "Type": "BitsArray",
-                        "Lenght": "1",
                         "Description": "BitsArray n1",
                         "Address": "0x10",
                         "Bit":

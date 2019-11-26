@@ -1,4 +1,5 @@
 #include <Bitset.hpp>
+#include <Byte.hpp>
 #include <ConfigParser.hpp>
 #include <QDir>
 #include <QtTest>
@@ -15,6 +16,7 @@ class tst_Parser : public QObject
     void normal_settings();
     void partial_settings();
     void parse_flags();
+    void parse_byte();
 
   private:
     QString path_{ QDir::currentPath() };
@@ -82,6 +84,25 @@ void tst_Parser::parse_flags()
     QCOMPARE(b->address(), 0x10);
     QCOMPARE(b->description(), "BitsArray n1");
     QCOMPARE(b->bitsDescriptions.size(), 8);
+}
+
+void tst_Parser::parse_byte()
+{
+    const auto config = cp_.parse(path_ + "1block-1group-byte.json");
+    const auto &p     = config.protocol;
+    QVERIFY(!p.blocks.empty());
+    QCOMPARE(p.blocks.front().description, "Block n1");
+    QCOMPARE(p.blocks.front().elements.size(), size_t(2));
+    auto b1 = dynamic_cast<Byte *>(p.blocks.front().elements.front().get());
+    auto b2 = dynamic_cast<Byte *>(p.blocks.front().elements.back().get());
+    QVERIFY(b1 != Q_NULLPTR);
+    QVERIFY(b2 != Q_NULLPTR);
+    QCOMPARE(b1->address(), 0x80);
+    QCOMPARE(b2->address(), 0x90);
+    QCOMPARE(b1->description(), "Byte n1");
+    QCOMPARE(b2->description(), "Byte n2");
+    QCOMPARE(b1->value(), 22);
+    QCOMPARE(b2->value(), 44);
 }
 
 QTEST_GUILESS_MAIN(tst_Parser)
