@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IElement.hpp"
+#include "Element.hpp"
 
-class Byte final : public IElement
+class Byte final : public Element
 {
   public:
     Byte() = default;

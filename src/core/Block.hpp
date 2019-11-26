@@ -1,6 +1,6 @@
 #pragma once
 
-class IElement;
+class Element;
 
 #include <QString>
 #include <memory>
@@ -12,5 +12,5 @@ class Block
     bool operator==(const Block &other) const;
 
     QString description;
-    std::vector<std::unique_ptr<IElement>> elements;
+    std::vector<std::unique_ptr<Element>> elements;
 };

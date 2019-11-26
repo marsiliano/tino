@@ -5,7 +5,7 @@
 class QDockWidget;
 class QStandardItem;
 
-class IElement;
+class Element;
 
 class ConfigViewFactory
 {
@@ -15,5 +15,5 @@ class ConfigViewFactory
   private:
     int m_emptyItemCounter;
 
-    QStandardItem *makeItem(IElement *element);
+    QStandardItem *makeItem(Element *element);
 };

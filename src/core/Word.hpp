@@ -4,7 +4,7 @@
 
 #include <QPair>
 
-class Word final : public IElement
+class Word final : public Element
 {
   public:
     Word() = default;

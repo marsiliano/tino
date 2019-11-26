@@ -95,7 +95,7 @@ Protocol ConfigParser::read_blocks(const QJsonObject &obj) const noexcept
         const auto groups = block.find(Tags::groups)->toArray();
         foreach (auto g, groups) {
             auto type = g.toObject().find(Tags::type)->toString();
-            std::unique_ptr<IElement> element;
+            std::unique_ptr<Element> element;
             if (type == Tags::bitsarray) {
                 element = std::move(makeBitset(g.toObject()));
             } else if (type == Tags::byte) {

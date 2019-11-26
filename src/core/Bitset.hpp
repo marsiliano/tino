@@ -1,11 +1,11 @@
 #pragma once
 
-#include "IElement.hpp"
+#include "Element.hpp"
 
 #include <QVector>
 #include <bitset>
 
-class Bitset final : public IElement
+class Bitset final : public Element
 {
   public:
     Bitset() = default;

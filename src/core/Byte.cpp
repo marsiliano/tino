@@ -1,9 +1,9 @@
 #include "Byte.hpp"
 
-Byte::Byte(QString descr, int addr) : IElement{ descr, addr } {}
+Byte::Byte(QString descr, int addr) : Element{ descr, addr } {}
 
 Byte::Byte(QString descr, int addr, int value) :
-    IElement{ descr, addr }, m_value{ value }
+    Element{ descr, addr }, m_value{ value }
 {
 }
 

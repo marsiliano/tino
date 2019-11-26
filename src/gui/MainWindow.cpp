@@ -6,7 +6,7 @@
 #include "ui_MainWindow.h"
 
 #include <ConfigParser.hpp>
-#include <IElement.hpp>
+#include <Element.hpp>
 #include <MdiChild.hpp>
 #include <QDebug>
 #include <QDesktopWidget>

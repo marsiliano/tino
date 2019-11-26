@@ -1,9 +1,9 @@
 #include "Word.hpp"
 
-Word::Word(QString descr, int addr) : IElement{ descr, addr } {}
+Word::Word(QString descr, int addr) : Element{ descr, addr } {}
 
 Word::Word(QString descr, const QPair<Byte, Byte> &value) :
-    IElement{ descr, 0 }, m_bytes{ value }
+    Element{ descr, 0 }, m_bytes{ value }
 {
 }
 

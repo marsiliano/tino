@@ -1,6 +1,6 @@
 #include "Block.hpp"
 
-#include <IElement.hpp>
+#include <Element.hpp>
 
 bool Block::operator==(const Block &other) const
 {

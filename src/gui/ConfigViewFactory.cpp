@@ -46,7 +46,7 @@ QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot)
     return dock;
 }
 
-QStandardItem *ConfigViewFactory::makeItem(IElement *element)
+QStandardItem *ConfigViewFactory::makeItem(Element *element)
 {
     const auto d = element->description();
     const auto str =
