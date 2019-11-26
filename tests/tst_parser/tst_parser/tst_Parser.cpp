@@ -12,12 +12,12 @@ class tst_Parser : public QObject
   private slots:
     void initTestCase();
 
-    void throw_if_not_exists();
-    void without_settings();
-    void normal_settings();
-    void partial_settings();
-    void parse_flags();
-    void parse_byte();
+    void throwIfNotExists();
+    void withoutSettings();
+    void normalSettings();
+    void partialSettings();
+    void parseBitset();
+    void parseByte();
     void parseWord();
 
   private:
@@ -36,18 +36,18 @@ void tst_Parser::initTestCase()
     }
 }
 
-void tst_Parser::throw_if_not_exists()
+void tst_Parser::throwIfNotExists()
 {
     QVERIFY_EXCEPTION_THROWN(cp_.parse(""), std::logic_error);
 }
 
-void tst_Parser::without_settings()
+void tst_Parser::withoutSettings()
 {
     auto config = cp_.parse(path_ + "empty.json");
     QVERIFY((config == Configuration{ Settings{}, Protocol{} }));
 }
 
-void tst_Parser::normal_settings()
+void tst_Parser::normalSettings()
 {
     Settings right_settings;
     right_settings.port_name           = "/dev/ttyUSB0";
@@ -64,7 +64,7 @@ void tst_Parser::normal_settings()
     QVERIFY((config == Configuration{ std::move(right_settings), Protocol{} }));
 }
 
-void tst_Parser::partial_settings()
+void tst_Parser::partialSettings()
 {
     Settings right_settings;
     right_settings.port_name = QString("/dev/pts/5");
@@ -74,7 +74,7 @@ void tst_Parser::partial_settings()
     QVERIFY((config == Configuration{ std::move(right_settings), Protocol{} }));
 }
 
-void tst_Parser::parse_flags()
+void tst_Parser::parseBitset()
 {
     const auto config = cp_.parse(path_ + "1block-1group-flag.json");
     const auto &p     = config.protocol;
@@ -88,7 +88,7 @@ void tst_Parser::parse_flags()
     QCOMPARE(b->bitsDescriptions.size(), 8);
 }
 
-void tst_Parser::parse_byte()
+void tst_Parser::parseByte()
 {
     const auto config = cp_.parse(path_ + "1block-1group-byte.json");
     const auto &p     = config.protocol;
