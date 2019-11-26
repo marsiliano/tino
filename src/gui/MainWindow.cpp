@@ -41,7 +41,11 @@ void MainWindow::selectFile()
         QStandardPaths::writableLocation(QStandardPaths::DesktopLocation),
         tr("Config File (*.json)"));
 
-    importConfig(filename);
+    auto result = importConfig(filename);
+    if (result.error) {
+        QMessageBox::warning(this, tr("Load configuration"),
+                             tr(result.message.toUtf8().constData()));
+    }
 }
 
 void MainWindow::createConfigView()
@@ -137,25 +141,22 @@ void MainWindow::createMenuBar()
     ui->menuBar->addMenu(help);
 }
 
-void MainWindow::importConfig(const QString &filename)
+MainWindow::Error MainWindow::importConfig(const QString &filename)
 {
     if (filename.isNull() || filename.isEmpty()) {
-        QMessageBox::warning(this, tr("Load configuration"),
-                             tr("Filename not valid!"));
-        return;
+        return Error{ true, "Filename not valid!" };
     }
 
     ConfigParser parser;
     m_config.reset(new Configuration{ parser.parse(filename) });
 
     if (m_config.isNull()) {
-        QMessageBox::warning(this, tr("Load configuration"),
-                             tr("Parsing configuration error!"));
-        return;
+        return Error{ true, "Parsing configuration error!" };
     }
 
     m_serialConnect->setEnabled(true);
     m_serialSettings->setEnabled(true);
 
     emit importFinished({});
+    return {};
 }

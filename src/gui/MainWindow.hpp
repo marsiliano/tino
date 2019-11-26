@@ -34,8 +34,13 @@ class MainWindow : public QMainWindow
     QScopedPointer<QAction> m_serialSettings;
     QScopedPointer<QDockWidget> m_configViewDock;
 
+    struct Error {
+        bool error{ false };
+        QString message{};
+    };
+
     void createMenuBar();
-    void importConfig(const QString &filename);
+    Error importConfig(const QString &filename);
 
     friend class tst_MainWindow;
 };
