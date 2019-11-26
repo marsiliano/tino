@@ -26,8 +26,8 @@ void tst_ConfigView::initTestCase()
 {
     auto bitset = std::make_unique<Bitset>("bitset 1", 0x10);
     for (size_t i = 0; i < 8; ++i) {
-        bitset->bits.set(i, true);
-        bitset->bitsDescriptions.push_back(
+        bitset->setAt(i, false);
+        bitset->descriptions().push_back(
             QStringLiteral("description_%1").arg(i));
     }
 

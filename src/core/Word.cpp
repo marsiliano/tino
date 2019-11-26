@@ -1,27 +1,27 @@
 #include "Word.hpp"
 
-Word::Word(QString descr, int addr) : Element{ descr, addr } {}
+Word::Word(QString descr, int value) : Element{ descr, 0 }
+{
+    setValue(value);
+}
 
-Word::Word(QString descr, const QPair<Byte, Byte> &value) :
-    Element{ descr, 0 }, m_bytes{ value }
+Word::Word(QString descr, Byte low, Byte high) :
+    Element{ descr, 0 }, m_low{ low }, m_high{ high }
 {
 }
 
-QPair<Byte, Byte> Word::bytes() const
+void Word::setValue(int16_t val)
 {
-    return m_bytes;
+    m_high.setValue(val >> 8);
+    m_low.setValue(val & 0xFF);
 }
 
-void Word::setBytes(const QPair<Byte, Byte> &value)
+int Word::value() const
 {
-    if (m_bytes == value) {
-        return;
-    }
-
-    m_bytes = value;
+    return (m_high.value() << 8) | m_low.value();
 }
 
 int Word::address() const noexcept
 {
-    return m_bytes.first.address();
+    return m_low.address();
 }

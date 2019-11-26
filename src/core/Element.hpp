@@ -21,15 +21,21 @@ class Element
     QString description() const noexcept;
     virtual int address() const noexcept;
 
+    virtual void setValue(int8_t val)
+    {
+        (void)(val);
+    }
+    virtual void setValue(int16_t val)
+    {
+        (void)(val);
+    }
+
+    virtual int value() const
+    {
+        return 0;
+    }
+
   private:
     QString m_description{};
     int m_address{};
 };
-
-inline QDebug operator<<(QDebug dbg, const Element &element)
-{
-    QDebugStateSaver saver(dbg);
-    dbg << "element description =" << element.description();
-    dbg << "element address =" << element.address();
-    return dbg;
-}

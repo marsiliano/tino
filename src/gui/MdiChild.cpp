@@ -18,14 +18,15 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
         groupBox->setLayout(groupBoxLayout);
         groupBox->setTitle(element->description());
 
-        auto bitset = dynamic_cast<Bitset *>(element.get());
-        if (bitset != Q_NULLPTR) {
-            for (size_t i = 0; i < bitset->bits.size(); ++i) {
+        if (auto bitset = dynamic_cast<Bitset *>(element.get())) {
+            for (size_t i = 0; i < Bitset::size; ++i) {
                 if (c == 4) {
                     ++r;
                     c = 0;
                 }
-                auto led = new Led(bitset->bitsDescriptions[i], this);
+                auto led = new Led(
+                    bitset->descriptions().at(static_cast<int>(i)), this);
+                // TODO: add value of bit
                 groupBoxLayout->addWidget(led, r, c);
                 ++c;
             }

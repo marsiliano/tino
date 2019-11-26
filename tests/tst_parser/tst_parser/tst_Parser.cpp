@@ -85,7 +85,7 @@ void tst_Parser::parseBitset()
     QVERIFY(b != Q_NULLPTR);
     QCOMPARE(b->address(), 0x10);
     QCOMPARE(b->description(), "BitsArray n1");
-    QCOMPARE(b->bitsDescriptions.size(), 8);
+    QCOMPARE(b->descriptions().size(), 8);
 }
 
 void tst_Parser::parseByte()

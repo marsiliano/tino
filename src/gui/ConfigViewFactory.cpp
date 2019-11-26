@@ -25,10 +25,10 @@ QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot)
                 QStringLiteral("block_%1_group_%2").arg(groupId++));
 
             if (auto bitset = dynamic_cast<Bitset *>(element.get())) {
-                for (size_t i = 0; i < bitset->bits.size(); ++i) {
-                    auto str = bitset->bitsDescriptions[i].isEmpty()
+                for (size_t i = 0; i < Bitset::size; ++i) {
+                    auto str = bitset->descriptions()[i].isEmpty()
                                    ? QString("item_%1").arg(i)
-                                   : bitset->bitsDescriptions[i];
+                                   : bitset->descriptions()[i];
                     auto bit = new QStandardItem(str);
                     bit->setFlags(bit->flags() & ~Qt::ItemIsEditable);
                     groupElement->appendRow(bit);

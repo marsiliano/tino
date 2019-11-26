@@ -119,11 +119,13 @@ std::unique_ptr<Bitset> ConfigParser::makeBitset(const QJsonObject &obj) const
     auto element     = std::make_unique<Bitset>(description, address);
     auto bits        = obj.find(Tags::bit)->toArray();
     auto bitset      = dynamic_cast<Bitset *>(element.get());
-    foreach (auto a, bits) {
+    const auto size  = static_cast<size_t>(bits.size());
+    for (size_t i = 0; i < size; ++i) {
+        auto obj = bits[i].toObject();
         auto d   = obj.find(Tags::description)->toString();
         auto val = obj.find(Tags::defaultValue)->toBool();
-        bitset->bitsDescriptions.push_back(d);
-        bitset->bits.set(0, val);
+        bitset->descriptions().push_back(d);
+        bitset->setAt(i, val);
     }
 
     return element;
@@ -143,7 +145,6 @@ std::unique_ptr<Word> ConfigParser::makeWord(const QJsonObject &obj) const
 {
     auto description = obj.find(Tags::description)->toString();
     auto bytes       = obj.find(Tags::bytes)->toArray();
-    QPair<Byte, Byte> values;
     if (bytes.size() != 2) {
         qWarning() << "error while make word";
         return std::make_unique<Word>("dummy", 0);
@@ -159,9 +160,7 @@ std::unique_ptr<Word> ConfigParser::makeWord(const QJsonObject &obj) const
     auto d1 = b1.find(Tags::description)->toString();
     auto v1 = b1.find(Tags::defaultValue)->toString().toInt();
 
-    values.first  = Byte(d0, a0, v0);
-    values.second = Byte(d1, a1, v1);
-
-    auto element = std::make_unique<Word>(description, values);
+    auto element =
+        std::make_unique<Word>(description, Byte(d0, a0, v0), Byte(d1, a1, v1));
     return element;
 }
