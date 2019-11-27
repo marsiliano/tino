@@ -1,6 +1,6 @@
 #include "Word.hpp"
 
-Word::Word(QString descr, int value) : Element{ descr, 0 }
+Word::Word(QString descr, int16_t value) : Element{ descr, 0 }
 {
     setValue(value);
 }
@@ -16,7 +16,7 @@ void Word::setValue(int16_t val)
     m_low  = val & 0xFF;
 }
 
-int Word::value() const
+int16_t Word::value() const
 {
     return (m_high << 8) | m_low;
 }

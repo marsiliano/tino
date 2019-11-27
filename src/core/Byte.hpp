@@ -15,8 +15,8 @@ class Byte final : public Element
     Byte &operator=(const Byte &) = default;
     Byte &operator=(Byte &&) = default;
 
-    void setValue(int8_t value);
-    int value() const;
+    void setValue(int8_t value) override;
+    int16_t value() const override;
 
   private:
     int8_t m_value{};

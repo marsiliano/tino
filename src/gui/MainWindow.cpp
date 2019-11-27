@@ -87,8 +87,6 @@ void MainWindow::customConfigViewContextMenu(const QPoint &point)
                 child = new MdiChild(m_config->protocol.blocks.at(blockId));
             } else {
                 auto blockId = whatsThis.split('_').at(1).toInt();
-                //                auto groupId =
-                //                whatsThis.split('_').at(3).toInt();
                 child = new MdiChild(m_config->protocol.blocks.at(blockId));
             }
 

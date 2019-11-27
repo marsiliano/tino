@@ -30,10 +30,7 @@ class Element
         (void)(val);
     }
 
-    virtual int value() const
-    {
-        return 0;
-    }
+    virtual int16_t value() const = 0;
 
   private:
     QString m_description{};

@@ -19,7 +19,7 @@ void Bitset::setValue(int8_t val)
     }
 }
 
-int Bitset::value() const
+int16_t Bitset::value() const
 {
     return static_cast<int>(m_bits.to_ulong());
 }

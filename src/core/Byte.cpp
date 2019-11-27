@@ -16,7 +16,7 @@ void Byte::setValue(int8_t value)
     m_value = value;
 }
 
-int Byte::value() const
+int16_t Byte::value() const
 {
     return static_cast<int>(m_value);
 }
