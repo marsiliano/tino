@@ -9,20 +9,10 @@
                 [
                     {
                         "Type": "Word",
-                        "Description": "Temperatura acqua lavaggio uscita caldaia",
-                        "Bytes":
-                        [
-                            {
-                                "Type": "Byte",
-                                "DefaultValue": "0",
-                                "Address": "0x1"
-                            },
-                            {
-                                "Type": "Byte",
-                                "DefaultValue": "1",
-                                "Address": "0x2"
-                            }
-                        ]
+                        "Description": "Word description",
+                        "Category": "Feedback",
+                        "Address": "0x10",
+                        "DefaultValue": "0x7DDA"
                     }
                 ]
             }

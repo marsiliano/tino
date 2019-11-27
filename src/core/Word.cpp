@@ -1,6 +1,6 @@
 #include "Word.hpp"
 
-Word::Word(QString descr, int16_t value) : Element{ descr, 0 }
+Word::Word(QString descr, int addr, int16_t value) : Element{ descr, addr }
 {
     m_high = value >> 8;
     m_low  = value & 0xFF;

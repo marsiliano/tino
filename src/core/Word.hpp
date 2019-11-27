@@ -6,7 +6,7 @@ class Word final : public Element
 {
   public:
     Word() = default;
-    explicit Word(QString descr, int16_t value);
+    explicit Word(QString descr, int addr, int16_t value);
     explicit Word(QString descr, int addr, uint8_t low, uint8_t high);
     ~Word() override = default;
 

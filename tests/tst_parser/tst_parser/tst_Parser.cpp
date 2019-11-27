@@ -116,8 +116,9 @@ void tst_Parser::parseWord()
     QCOMPARE(p.blocks.front().elements.size(), size_t(1));
     auto w = dynamic_cast<Word *>(p.blocks.front().elements.front().get());
     QVERIFY(w != Q_NULLPTR);
-    QCOMPARE(w->address(), 0x1);
-    QCOMPARE(w->description(), "Temperatura acqua lavaggio uscita caldaia");
+    QCOMPARE(w->address(), 0x10);
+    QCOMPARE(w->value(), 0x7DDA);
+    QCOMPARE(w->description(), "Word description");
 }
 
 QTEST_GUILESS_MAIN(tst_Parser)

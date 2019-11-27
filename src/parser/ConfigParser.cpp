@@ -144,19 +144,7 @@ std::unique_ptr<Byte> ConfigParser::makeByte(const QJsonObject &obj) const
 std::unique_ptr<Word> ConfigParser::makeWord(const QJsonObject &obj) const
 {
     auto description = obj.find(Tags::description)->toString();
-    auto bytes       = obj.find(Tags::bytes)->toArray();
-    if (bytes.size() != 2) {
-        qWarning() << "error while make word";
-        return std::make_unique<Word>("dummy", 0);
-    }
-
-    auto b0 = bytes[0].toObject();
-    auto a0 = b0.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
-    auto v0 = b0.find(Tags::defaultValue)->toString().toInt();
-
-    auto b1 = bytes[0].toObject();
-    auto v1 = b1.find(Tags::defaultValue)->toString().toInt();
-
-    auto element = std::make_unique<Word>(description, a0, v0, v1);
-    return element;
+    auto value = obj.find(Tags::defaultValue)->toString().toInt(Q_NULLPTR, 16);
+    auto addr  = obj.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
+    return std::make_unique<Word>(description, addr, value);
 }

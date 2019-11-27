@@ -56,7 +56,7 @@ void tst_Elements::checkByte()
 void tst_Elements::checkWord()
 {
     int16_t value = 4320;
-    Word w{ {}, value };
+    Word w{ {}, {}, value };
     QCOMPARE(w.low(), 224);
     QCOMPARE(w.high(), 16);
 
