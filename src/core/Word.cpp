@@ -2,7 +2,8 @@
 
 Word::Word(QString descr, int16_t value) : Element{ descr, 0 }
 {
-    setValue(value);
+    m_high = value >> 8;
+    m_low  = value & 0xFF;
 }
 
 Word::Word(QString descr, int addr, uint8_t low, uint8_t high) :
@@ -10,10 +11,10 @@ Word::Word(QString descr, int addr, uint8_t low, uint8_t high) :
 {
 }
 
-void Word::setValue(int16_t val)
+void Word::setValue(int16_t value)
 {
-    m_high = val >> 8;
-    m_low  = val & 0xFF;
+    m_high = value >> 8;
+    m_low  = value & 0xFF;
 }
 
 int16_t Word::value() const

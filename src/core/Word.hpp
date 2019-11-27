@@ -13,7 +13,7 @@ class Word final : public Element
     Word &operator=(const Word &) = default;
     Word &operator=(Word &&) = default;
 
-    void setValue(int16_t val) override;
+    void setValue(int16_t value) override;
     int16_t value() const override;
 
     uint8_t low() const noexcept;
