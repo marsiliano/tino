@@ -18,5 +18,5 @@ void Byte::setValue(int8_t value)
 
 int Byte::value() const
 {
-    return m_value;
+    return static_cast<int>(m_value);
 }

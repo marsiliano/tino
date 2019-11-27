@@ -5,23 +5,28 @@ Word::Word(QString descr, int value) : Element{ descr, 0 }
     setValue(value);
 }
 
-Word::Word(QString descr, Byte low, Byte high) :
-    Element{ descr, 0 }, m_low{ low }, m_high{ high }
+Word::Word(QString descr, int addr, uint8_t low, uint8_t high) :
+    Element{ descr, addr }, m_low{ low }, m_high{ high }
 {
 }
 
 void Word::setValue(int16_t val)
 {
-    m_high.setValue(val >> 8);
-    m_low.setValue(val & 0xFF);
+    m_high = val >> 8;
+    m_low  = val & 0xFF;
 }
 
 int Word::value() const
 {
-    return (m_high.value() << 8) | m_low.value();
+    return (m_high << 8) | m_low;
 }
 
-int Word::address() const noexcept
+uint8_t Word::low() const noexcept
 {
-    return m_low.address();
+    return m_low;
+}
+
+uint8_t Word::high() const noexcept
+{
+    return m_high;
 }

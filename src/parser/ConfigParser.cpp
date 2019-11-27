@@ -152,15 +152,11 @@ std::unique_ptr<Word> ConfigParser::makeWord(const QJsonObject &obj) const
 
     auto b0 = bytes[0].toObject();
     auto a0 = b0.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
-    auto d0 = b0.find(Tags::description)->toString();
     auto v0 = b0.find(Tags::defaultValue)->toString().toInt();
 
     auto b1 = bytes[0].toObject();
-    auto a1 = b1.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
-    auto d1 = b1.find(Tags::description)->toString();
     auto v1 = b1.find(Tags::defaultValue)->toString().toInt();
 
-    auto element =
-        std::make_unique<Word>(description, Byte(d0, a0, v0), Byte(d1, a1, v1));
+    auto element = std::make_unique<Word>(description, a0, v0, v1);
     return element;
 }
