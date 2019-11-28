@@ -1,14 +1,23 @@
 #pragma once
 
-#include "Flag.hpp"
+#include "Element.hpp"
 
-#include <QVector>
-
-class Byte
+class Byte final : public Element
 {
   public:
-    bool operator==(const Byte &other) const;
+    Byte() = default;
+    explicit Byte(QString descr, int addr);
+    explicit Byte(QString descr, int addr, int8_t value);
+    Byte(const Byte &) = default;
+    Byte(Byte &&)      = default;
+    ~Byte() override   = default;
 
-    QString description;
-    QVector<Flag> flags;
+    Byte &operator=(const Byte &) = default;
+    Byte &operator=(Byte &&) = default;
+
+    void setValue(int8_t value) override;
+    int16_t value() const override;
+
+  private:
+    int8_t m_value{};
 };

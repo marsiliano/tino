@@ -1,5 +1,6 @@
 {
-    "settings": {
+    "SerialPortSettings":
+    {
         "portName" : "/dev/ttyUSB0",
         "baudRate" : 9600,
         "breakEnabled" : true,

@@ -5,6 +5,8 @@
 class QDockWidget;
 class QStandardItem;
 
+class Element;
+
 class ConfigViewFactory
 {
   public:
@@ -13,5 +15,5 @@ class ConfigViewFactory
   private:
     int m_emptyItemCounter;
 
-    template<typename T> QStandardItem *makeItem(T t);
+    QStandardItem *makeItem(Element *element);
 };

@@ -2,16 +2,18 @@ include(../tinolibrary.pri)
 
 HEADERS += \
     $$PWD/Settings.hpp \
-    $$PWD/Flag.hpp \
-    $$PWD/Group.hpp \
     $$PWD/Block.hpp \
     $$PWD/Byte.hpp \
-    $$PWD/Protocol.hpp
+    $$PWD/Bitset.hpp \
+    $$PWD/Word.hpp \
+    $$PWD/Protocol.hpp \
+    $$PWD/Element.hpp
 
 SOURCES += \
     $$PWD/Settings.cpp \
-    $$PWD/Flag.cpp \
-    $$PWD/Group.cpp \
     $$PWD/Block.cpp \
     $$PWD/Byte.cpp \
-    $$PWD/Protocol.cpp
+    $$PWD/Bitset.cpp \
+    $$PWD/Word.cpp \
+    $$PWD/Protocol.cpp \
+    $$PWD/Element.cpp

@@ -1,5 +1,4 @@
-#ifndef QLED_H
-#define QLED_H
+#pragma once
 
 #include <QHash>
 #include <QWidget>
@@ -125,4 +124,3 @@ class LedRenderer : public QObject
     [[nodiscard]] QString stringifyColor(const Led::LedColor &color) const;
     [[nodiscard]] QString stringifyShape(const Led::LedShape &shape) const;
 };
-#endif

@@ -1,51 +1,54 @@
 {
-    "blocks":
-    [
-        {
-            "description": "this is the first block",
-            "startAddress": "0x1000",
-            "lenghtBytes": "1",
-            "groups":
-            [
-                {
-                    "description": "flag for alarm",
-                    "bits": 
-                    [
-                        { 
-                            "description": "alarm 0",
-                            "defaultValue": "false"
-                        },
-                        { 
-                            "description": "alarm 1",
-                            "defaultValue": "false"
-                        },
-                        { 
-                            "description": "alarm 2",
-                            "defaultValue": "false"
-                        },
-                        { 
-                            "description": "alarm 3",
-                            "defaultValue": "false"
-                        },
-                        { 
-                            "description": "alarm 4",
-                            "defaultValue": "false"
-                        },
-                        { 
-                            "description": "alarm 5",
-                            "defaultValue": "false"
-                        },
-                        { 
-                            "description": "alarm 6",
-                            "defaultValue": "false"
-                        },
-                        { 
-                            "description": "alarm 7",
-                            "defaultValue": "false"
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+    "CommunicationProtocol":
+    {
+        "Blocks":
+        [
+            {
+                "Description": "Block n1",
+                "Groups":
+                [
+                    {
+                        "Type": "BitsArray",
+                        "Description": "BitsArray n1",
+                        "Address": "0x10",
+                        "Bit":
+                        [
+                            {
+                                "Description": "automatic mode enable",
+                                "DefaultValue": "false"
+                            },
+                            {
+                                "Description": "hard automatic mode enable",
+                                "DefaultValue": "false"
+                            },
+                            {
+                                "Description": "b2",
+                                "DefaultValue": "false"
+                            },
+                            {
+                                "Description": "b3",
+                                "DefaultValue": "false"
+                            },
+                            {
+                                "Description": "b4",
+                                "DefaultValue": "false"
+                            },
+                            {
+                                "Description": "b5",
+                                "DefaultValue": "false"
+                            },
+                            {
+                                "Description": "b6",
+                                "DefaultValue": "false"
+                            },
+                            {
+                                "Description": "b7",
+                                "DefaultValue": "false"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 }

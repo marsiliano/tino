@@ -1,3 +1,4 @@
+#include <Bitset.hpp>
 #include <ConfigViewFactory.hpp>
 #include <QDir>
 #include <QDockWidget>
@@ -23,23 +24,18 @@ class tst_ConfigView : public QObject
 
 void tst_ConfigView::initTestCase()
 {
-    Byte b;
-    b.description = "byte";
-    for (auto i = 0; i < 8; ++i) {
-        Flag f;
-        f.description = "flag " + QString::number(i);
-        b.flags.push_back(f);
+    auto bitset = std::make_unique<Bitset>("bitset 1", 0x10);
+    for (size_t i = 0; i < 8; ++i) {
+        bitset->setAt(i, false);
+        bitset->descriptions().push_back(
+            QStringLiteral("description_%1").arg(i));
     }
-
-    Group g;
-    g.description = "";
-    g.bytes.push_back(b);
 
     Block bl;
     bl.description = "block";
-    bl.groups.push_back(g);
+    bl.elements.emplace_back(std::move(bitset));
 
-    m_protocol.blocks.push_back(bl);
+    m_protocol.blocks.emplace_back(std::move(bl));
 }
 
 void tst_ConfigView::checkEmptyProtocol()
