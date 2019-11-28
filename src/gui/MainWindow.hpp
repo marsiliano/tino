@@ -9,6 +9,7 @@ class MainWindow;
 }
 
 class Configuration;
+class QStandardItem;
 
 class MainWindow : public QMainWindow
 {
@@ -41,6 +42,7 @@ class MainWindow : public QMainWindow
 
     void createMenuBar();
     Error importConfig(const QString &filename);
+    void createWidgetRequested(QStandardItem *item);
 
     friend class tst_MainWindow;
 };

@@ -70,33 +70,22 @@ void MainWindow::customConfigViewContextMenu(const QPoint &point)
     auto tree         = dynamic_cast<QTreeView *>(m_configViewDock->widget());
     QModelIndex index = tree->indexAt(point);
 
-    if (index.isValid()) {
-        auto *sModel = qobject_cast<QStandardItemModel *>(tree->model());
-        auto *item   = sModel->itemFromIndex(index);
-        const auto protocolItemMenu = new QMenu(this);
-        const auto view             = new QAction("View", protocolItemMenu);
-        view->setEnabled(item->whatsThis().contains("block"));
-
-        connect(view, &QAction::triggered, this, [&]() {
-            MdiChild *child;
-            auto whatsThis = item->whatsThis();
-
-            if (whatsThis.startsWith("block_") &&
-                !whatsThis.contains("group_")) {
-                auto blockId = whatsThis.split('_').at(1).toInt();
-                child = new MdiChild(m_config->protocol.blocks.at(blockId));
-            } else {
-                auto blockId = whatsThis.split('_').at(1).toInt();
-                child = new MdiChild(m_config->protocol.blocks.at(blockId));
-            }
-
-            ui->mdiArea->addSubWindow(child);
-            child->show();
-        });
-
-        protocolItemMenu->addAction(view);
-        protocolItemMenu->exec(tree->viewport()->mapToGlobal(point));
+    if (!index.isValid()) {
+        qWarning() << "index not valid" << index;
+        return;
     }
+
+    auto sModel = qobject_cast<QStandardItemModel *>(tree->model());
+    auto item   = sModel->itemFromIndex(index);
+    const auto protocolItemMenu = new QMenu(this);
+    const auto view             = new QAction("View", protocolItemMenu);
+    view->setEnabled(item->accessibleText() == ConfigViewFactory::guiCreatable);
+
+    connect(view, &QAction::triggered, this,
+            [&]() { createWidgetRequested(item); });
+
+    protocolItemMenu->addAction(view);
+    protocolItemMenu->exec(tree->viewport()->mapToGlobal(point));
 }
 
 void MainWindow::createMenuBar()
@@ -157,4 +146,21 @@ MainWindow::Error MainWindow::importConfig(const QString &filename)
 
     emit importFinished({});
     return {};
+}
+
+void MainWindow::createWidgetRequested(QStandardItem *item)
+{
+    MdiChild *child;
+    auto whatsThis = item->whatsThis();
+
+    if (whatsThis.startsWith("block_") && !whatsThis.contains("group_")) {
+        auto blockId = whatsThis.split('_').at(1).toInt();
+        child        = new MdiChild(m_config->protocol.blocks.at(blockId));
+    } else {
+        auto blockId = whatsThis.split('_').at(1).toInt();
+        child        = new MdiChild(m_config->protocol.blocks.at(blockId));
+    }
+
+    ui->mdiArea->addSubWindow(child);
+    child->show();
 }

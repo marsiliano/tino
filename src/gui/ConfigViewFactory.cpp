@@ -18,6 +18,7 @@ QDockWidget *ConfigViewFactory::makeConfigView(const Protocol &prot)
         auto blockItem = new QStandardItem(b.description);
         blockItem->setFlags(blockItem->flags() & ~Qt::ItemIsEditable);
         blockItem->setWhatsThis(QStringLiteral("block_%1").arg(blockId));
+        blockItem->setAccessibleText(guiCreatable);
         auto groupId = 0;
         for (const auto &element : b.elements) {
             auto groupElement = makeItem(element.get());
