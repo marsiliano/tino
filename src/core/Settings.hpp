@@ -28,15 +28,15 @@ class Settings
         constexpr static const auto stop_bits           = "stopBits";
     };
 
-    QString port_name{};
-    QSerialPort::BaudRate baud_rate{ QSerialPort::BaudRate::Baud115200 };
-    bool break_enabled{ false };
-    QSerialPort::DataBits data_bits{ QSerialPort::DataBits::UnknownDataBits };
-    bool data_terminal_ready{ false };
-    QSerialPort::FlowControl flow_control{
+    QString portName{};
+    QSerialPort::BaudRate baudRate{ QSerialPort::BaudRate::Baud115200 };
+    bool breakEnabled{ false };
+    QSerialPort::DataBits dataBits{ QSerialPort::DataBits::UnknownDataBits };
+    bool dataTerminalReady{ false };
+    QSerialPort::FlowControl flowControl{
         QSerialPort::FlowControl::NoFlowControl
     };
     QSerialPort::Parity parity{ QSerialPort::Parity::NoParity };
-    bool request_to_send{ false };
-    QSerialPort::StopBits stop_bits{ QSerialPort::StopBits::OneStop };
+    bool requestToSend{ false };
+    QSerialPort::StopBits stopBits{ QSerialPort::StopBits::OneStop };
 };
