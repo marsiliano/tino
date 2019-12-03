@@ -28,8 +28,13 @@
     <widget class="QLabel" name="label">
      <property name="text">
       <string>Tino version 0.0.1
+
 GPL-3.0
-Federico Guerinoni</string>
+
+Federico Guerinoni
+Stefano Entatti
+Andrea Ricchi
+Massimiliano Pavesi</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
