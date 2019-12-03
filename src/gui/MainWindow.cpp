@@ -76,6 +76,11 @@ void MainWindow::customConfigViewContextMenu(const QPoint &point)
         return;
     }
 
+    if (index.parent() != tree->rootIndex()) {
+        qWarning() << "Not a root index";
+        return;
+    }
+
     auto sModel = qobject_cast<QStandardItemModel *>(tree->model());
     auto item   = sModel->itemFromIndex(index);
     const auto protocolItemMenu = new QMenu(this);
