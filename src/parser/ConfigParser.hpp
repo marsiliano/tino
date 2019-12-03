@@ -50,8 +50,8 @@ class ConfigParser
         constexpr static const auto defaultValue = "DefaultValue";
     };
 
-    [[nodiscard]] Settings read_settings(const QJsonObject &obj) const noexcept;
-    [[nodiscard]] Protocol read_blocks(const QJsonObject &obj) const noexcept;
+    [[nodiscard]] Settings readSettings(const QJsonObject &obj) const noexcept;
+    [[nodiscard]] Protocol readBlocks(const QJsonObject &obj) const noexcept;
 
     std::unique_ptr<Bitset> makeBitset(const QJsonObject &obj) const;
     std::unique_ptr<Byte> makeByte(const QJsonObject &obj) const;

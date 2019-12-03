@@ -47,40 +47,40 @@ Configuration ConfigParser::parse(const QString &filename)
         return {};
     }
 
-    return Configuration{ read_settings(settings), read_blocks(protocol) };
+    return Configuration{ readSettings(settings), readBlocks(protocol) };
 }
 
-Settings ConfigParser::read_settings(const QJsonObject &obj) const noexcept
+Settings ConfigParser::readSettings(const QJsonObject &obj) const noexcept
 {
     Settings s;
 
-    s.port_name = obj[Settings::Tags::port_name].toString(s.port_name);
+    s.portName = obj[Settings::Tags::port_name].toString(s.portName);
 
-    s.baud_rate = static_cast<QSerialPort::BaudRate>(
-        obj[Settings::Tags::baud_rate].toInt(s.baud_rate));
+    s.baudRate = static_cast<QSerialPort::BaudRate>(
+        obj[Settings::Tags::baud_rate].toInt(s.baudRate));
 
-    s.break_enabled =
-        obj[Settings::Tags::break_enabled].toBool(s.break_enabled);
+    s.breakEnabled =
+        obj[Settings::Tags::break_enabled].toBool(s.breakEnabled);
 
-    s.data_bits = static_cast<QSerialPort::DataBits>(
-        obj[Settings::Tags::data_bits].toInt(s.data_bits));
+    s.dataBits = static_cast<QSerialPort::DataBits>(
+        obj[Settings::Tags::data_bits].toInt(s.dataBits));
 
-    s.data_terminal_ready =
-        obj[Settings::Tags::data_terminal_ready].toBool(s.data_terminal_ready);
+    s.dataTerminalReady =
+        obj[Settings::Tags::data_terminal_ready].toBool(s.dataTerminalReady);
 
-    s.flow_control = static_cast<QSerialPort::FlowControl>(
-        obj[Settings::Tags::flow_control].toInt(s.flow_control));
+    s.flowControl = static_cast<QSerialPort::FlowControl>(
+        obj[Settings::Tags::flow_control].toInt(s.flowControl));
 
-    s.request_to_send =
-        obj[Settings::Tags::request_to_send].toBool(s.request_to_send);
+    s.requestToSend =
+        obj[Settings::Tags::request_to_send].toBool(s.requestToSend);
 
-    s.stop_bits = static_cast<QSerialPort::StopBits>(
-        obj[Settings::Tags::stop_bits].toInt(s.stop_bits));
+    s.stopBits = static_cast<QSerialPort::StopBits>(
+        obj[Settings::Tags::stop_bits].toInt(s.stopBits));
 
     return s;
 }
 
-Protocol ConfigParser::read_blocks(const QJsonObject &obj) const noexcept
+Protocol ConfigParser::readBlocks(const QJsonObject &obj) const noexcept
 {
     Protocol ret;
     const auto array = obj.find(Tags::blocks)->toArray();
