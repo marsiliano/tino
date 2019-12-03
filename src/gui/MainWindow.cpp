@@ -13,6 +13,7 @@
 #include <QDockWidget>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QSettings>
 #include <QStandardItemModel>
 #include <QStandardPaths>
 #include <QTreeView>
@@ -24,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowTitle("Tino");
 
     createMenuBar();
+    loadSettings();
 
     connect(this, &MainWindow::importFinished, this,
             &MainWindow::createConfigView);
@@ -37,8 +39,7 @@ MainWindow::~MainWindow()
 void MainWindow::selectFile()
 {
     const auto filename = QFileDialog::getOpenFileName(
-        this, tr("Open Config File"),
-        QStandardPaths::writableLocation(QStandardPaths::DesktopLocation),
+        this, tr("Open Config File"), m_importFilePath,
         tr("Config File (*.json)"));
 
     auto result = importConfig(filename);
@@ -145,6 +146,10 @@ MainWindow::Error MainWindow::importConfig(const QString &filename)
     m_serialSettings->setEnabled(true);
 
     emit importFinished({});
+
+    m_importFilePath = filename;
+    saveSettings();
+
     return {};
 }
 
@@ -163,4 +168,18 @@ void MainWindow::createWidgetRequested(QStandardItem *item)
 
     ui->mdiArea->addSubWindow(child);
     child->show();
+}
+
+void MainWindow::saveSettings()
+{
+    QSettings settings("Tino");
+    settings.setValue("importFilePath", m_importFilePath);
+}
+
+void MainWindow::loadSettings()
+{
+    QSettings settings("Tino");
+    auto desktop =
+        QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+    m_importFilePath = settings.value("importFilePath", desktop).toString();
 }
