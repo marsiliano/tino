@@ -11,7 +11,9 @@ HEADERS += \
     $$PWD/ConfigViewFactory.hpp \
     $$PWD/DialogSerialSettings.hpp \
     $$PWD/MdiChild.hpp \
-    $$PWD/Led.hpp
+    $$PWD/Led.hpp \
+    ByteWidget.hpp \
+    WordWidget.hpp
 
 SOURCES += \
     $$PWD/MainWindow.cpp \
@@ -19,7 +21,9 @@ SOURCES += \
     $$PWD/ConfigViewFactory.cpp \
     $$PWD/DialogSerialSettings.cpp \
     $$PWD/MdiChild.cpp \
-    $$PWD/Led.cpp
+    $$PWD/Led.cpp \
+    ByteWidget.cpp \
+    WordWidget.cpp
 
 RESOURCES += \
     $$PWD/gui_resources.qrc
