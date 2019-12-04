@@ -12,10 +12,6 @@ class ByteWidget : public QWidget
     explicit ByteWidget(QString description = QString(),
                         quint8 defaultValue = 0xFF, QWidget *parent = nullptr);
 
-  signals:
-
-  public slots:
-
   private:
     QString m_description{ "" };
     quint8 m_defaultValue{ 0x00 };

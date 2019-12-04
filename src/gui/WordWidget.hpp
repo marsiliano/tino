@@ -13,10 +13,6 @@ class WordWidget : public QWidget
                         quint16 defaultValue = 0xFFFF,
                         QWidget *parent      = nullptr);
 
-  signals:
-
-  public slots:
-
   private:
     QString m_description{ "" };
     quint16 m_defaultValue{ 0 };
