@@ -5,8 +5,10 @@
 bool Block::operator==(const Block &other) const
 {
     auto d    = description == other.description;
+    auto a    = address == other.address;
+    auto c    = category == other.category;
     auto size = elements.size() == other.elements.size();
-    if (!d || !size) {
+    if (!d || !size || !a || !c) {
         return false;
     }
 

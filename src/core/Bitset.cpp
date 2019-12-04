@@ -34,4 +34,13 @@ QStringList &Bitset::descriptions() noexcept
     return m_bitsDescriptions;
 }
 
+const QStringList &Bitset::names() const noexcept
+{
+    return m_bitsNames;
+}
+
+QStringList &Bitset::names() noexcept
+{
+    return m_bitsNames;
+}
 static_assert(Bitset::size == 8, "Is the size of bit changed?");

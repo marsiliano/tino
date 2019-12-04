@@ -26,9 +26,13 @@ class Bitset final : public Element
     const QStringList &descriptions() const noexcept;
     QStringList &descriptions() noexcept;
 
+    const QStringList &names() const noexcept;
+    QStringList &names() noexcept;
+
     constexpr static size_t size = 8;
 
   private:
+    QStringList m_bitsNames{};
     QStringList m_bitsDescriptions{};
     std::bitset<size> m_bits{};
 };

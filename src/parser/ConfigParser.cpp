@@ -59,8 +59,7 @@ Settings ConfigParser::readSettings(const QJsonObject &obj) const noexcept
     s.baudRate = static_cast<QSerialPort::BaudRate>(
         obj[Settings::Tags::baud_rate].toInt(s.baudRate));
 
-    s.breakEnabled =
-        obj[Settings::Tags::break_enabled].toBool(s.breakEnabled);
+    s.breakEnabled = obj[Settings::Tags::break_enabled].toBool(s.breakEnabled);
 
     s.dataBits = static_cast<QSerialPort::DataBits>(
         obj[Settings::Tags::data_bits].toInt(s.dataBits));
@@ -123,6 +122,7 @@ std::unique_ptr<Bitset> ConfigParser::makeBitset(const QJsonObject &obj) const
     for (size_t i = 0; i < size; ++i) {
         auto obj = bits[i].toObject();
         auto d   = obj.find(Tags::description)->toString();
+        auto n   = obj.find(Tags::name)->toString();
         auto val = obj.find(Tags::defaultValue)->toBool();
         bitset->descriptions().push_back(d);
         bitset->setAt(i, val);

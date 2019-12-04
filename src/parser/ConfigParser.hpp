@@ -40,12 +40,14 @@ class ConfigParser
         constexpr static const auto protocol     = "CommunicationProtocol";
         constexpr static const auto blocks       = "Blocks";
         constexpr static const auto groups       = "Groups";
+        constexpr static const auto name         = "Name";
         constexpr static const auto description  = "Description";
         constexpr static const auto type         = "Type";
         constexpr static const auto bitsarray    = "BitsArray";
         constexpr static const auto byte         = "Byte";
         constexpr static const auto word         = "Word";
         constexpr static const auto address      = "Address";
+        constexpr static const auto offset       = "Offset";
         constexpr static const auto bit          = "Bit";
         constexpr static const auto defaultValue = "DefaultValue";
     };
