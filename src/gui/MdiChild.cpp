@@ -1,9 +1,13 @@
 #include "MdiChild.hpp"
 
+#include "ByteWidget.hpp"
 #include "Led.hpp"
+#include "WordWidget.hpp"
 
 #include <Bitset.hpp>
+#include <Byte.hpp>
 #include <QGridLayout>
+#include <Word.hpp>
 
 MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
 {
@@ -30,6 +34,17 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
                 groupBoxLayout->addWidget(led, r, c);
                 ++c;
             }
+        }
+
+        if (auto byte = dynamic_cast<Byte *>(element.get())) {
+            auto bw = new ByteWidget(byte->description(),
+                                     static_cast<quint8>(byte->value()));
+            groupBoxLayout->addWidget(bw, r, c);
+        }
+
+        if (auto byte = dynamic_cast<Word *>(element.get())) {
+            auto ww = new WordWidget(byte->description(), byte->value());
+            groupBoxLayout->addWidget(ww, r, c);
         }
 
         blockLayout->addWidget(groupBox);

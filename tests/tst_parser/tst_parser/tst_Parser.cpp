@@ -50,15 +50,15 @@ void tst_Parser::withoutSettings()
 void tst_Parser::normalSettings()
 {
     Settings right_settings;
-    right_settings.port_name           = "/dev/ttyUSB0";
-    right_settings.baud_rate           = QSerialPort::BaudRate::Baud9600;
-    right_settings.break_enabled       = true;
-    right_settings.data_bits           = QSerialPort::DataBits::Data5;
-    right_settings.data_terminal_ready = true;
-    right_settings.flow_control    = QSerialPort::FlowControl::SoftwareControl;
+    right_settings.portName           = "/dev/ttyUSB0";
+    right_settings.baudRate           = QSerialPort::BaudRate::Baud9600;
+    right_settings.breakEnabled       = true;
+    right_settings.dataBits           = QSerialPort::DataBits::Data5;
+    right_settings.dataTerminalReady = true;
+    right_settings.flowControl    = QSerialPort::FlowControl::SoftwareControl;
     right_settings.parity          = QSerialPort::Parity::OddParity;
-    right_settings.request_to_send = true;
-    right_settings.stop_bits       = QSerialPort::StopBits::TwoStop;
+    right_settings.requestToSend = true;
+    right_settings.stopBits       = QSerialPort::StopBits::TwoStop;
 
     auto config = cp_.parse(path_ + "only-settings.json");
     QVERIFY((config == Configuration{ std::move(right_settings), Protocol{} }));
@@ -67,8 +67,8 @@ void tst_Parser::normalSettings()
 void tst_Parser::partialSettings()
 {
     Settings right_settings;
-    right_settings.port_name = QString("/dev/pts/5");
-    right_settings.baud_rate = QSerialPort::BaudRate::Baud9600;
+    right_settings.portName = QString("/dev/pts/5");
+    right_settings.baudRate = QSerialPort::BaudRate::Baud9600;
 
     auto config = cp_.parse(path_ + "only-settings-partial.json");
     QVERIFY((config == Configuration{ std::move(right_settings), Protocol{} }));
