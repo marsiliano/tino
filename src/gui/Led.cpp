@@ -188,10 +188,10 @@ void Led::init()
 {
     connect(m_blinkTimer, SIGNAL(timeout()), this, SLOT(toggle()));
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    check();
+    checkWidgetSize();
 }
 
-void Led::check()
+void Led::checkWidgetSize()
 {
     if (m_ledSize.isEmpty()) {
         // calculate minimum size
@@ -231,7 +231,7 @@ void Led::setDescription(const QString &description)
     QString desc = description.trimmed();
     if (m_description != desc) {
         m_description = desc;
-        check();
+        checkWidgetSize();
     }
 }
 
@@ -279,7 +279,7 @@ int Led::textAligment() const
 void Led::setTextAligment(const int &textAligment)
 {
     m_textAligment = textAligment;
-    check();
+    checkWidgetSize();
 }
 
 Led::LedShape Led::shape() const
@@ -290,7 +290,7 @@ Led::LedShape Led::shape() const
 void Led::setShape(const LedShape &shape)
 {
     m_shape = shape;
-    check();
+    checkWidgetSize();
 }
 
 Led::State Led::state() const
@@ -324,5 +324,5 @@ void Led::setColor(const Led::State &state, const Led::LedColor &color)
         m_onColor = color;
     else
         m_offColor = color;
-    check();
+    checkWidgetSize();
 }

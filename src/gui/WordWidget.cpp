@@ -32,10 +32,10 @@ void WordWidget::init()
     layout->addWidget(m_valueSpinBox, 0, index++);
     layout->addWidget(m_decValueLabel, 0, index++);
     layout->addWidget(m_hexValueLabel, 0, index++);
-    check();
+    checkWidgetSize();
 }
 
-void WordWidget::check()
+void WordWidget::checkWidgetSize()
 {
     setMinimumSize(100, 25);
     update();

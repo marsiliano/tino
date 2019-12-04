@@ -21,6 +21,6 @@ class WordWidget : public QWidget
     QLabel *m_hexValueLabel{ nullptr };
     QSpinBox *m_valueSpinBox{ nullptr };
     void init();
-    void check();
+    void checkWidgetSize();
     void update();
 };

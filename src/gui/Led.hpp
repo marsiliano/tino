@@ -100,7 +100,7 @@ class Led : public QWidget
     QString m_tag{};
 
     void init();
-    void check();
+    void checkWidgetSize();
 };
 
 class LedRenderer : public QObject

@@ -32,10 +32,10 @@ void ByteWidget::init()
     layout->addWidget(m_valueSpinBox, 0, index++);
     layout->addWidget(m_decValueLabel, 0, index++);
     layout->addWidget(m_hexValueLabel, 0, index++);
-    check();
+    checkWidgetSize();
 }
 
-void ByteWidget::check()
+void ByteWidget::checkWidgetSize()
 {
     setMinimumSize(50, 25);
     update();
