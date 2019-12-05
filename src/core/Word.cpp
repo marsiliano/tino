@@ -1,13 +1,14 @@
 #include "Word.hpp"
 
-Word::Word(QString descr, int addr, int16_t value) : Element{ descr, addr }
+Word::Word(QString name, QString descr, int addr, int16_t value) :
+    Element{ name, descr, addr }
 {
     m_high = value >> 8;
     m_low  = value & 0xFF;
 }
 
-Word::Word(QString descr, int addr, uint8_t low, uint8_t high) :
-    Element{ descr, addr }, m_low{ low }, m_high{ high }
+Word::Word(QString name, QString descr, int addr, uint8_t low, uint8_t high) :
+    Element{ name, descr, addr }, m_low{ low }, m_high{ high }
 {
 }
 

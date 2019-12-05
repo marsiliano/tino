@@ -8,10 +8,10 @@
                 "Groups":
                 [
                     {
-                        "Type": "BitsArray",
+                        "Type": "Bitset",
                         "Description": "BitsArray n1",
                         "Address": "0x10",
-                        "Bit":
+                        "Bits":
                         [
                             {
                                 "Description": "automatic mode enable",

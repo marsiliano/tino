@@ -1,9 +1,11 @@
 #include "Byte.hpp"
 
-Byte::Byte(QString descr, int addr) : Element{ descr, addr } {}
+Byte::Byte(QString name, QString descr, int addr) : Element{ name, descr, addr }
+{
+}
 
-Byte::Byte(QString descr, int addr, int8_t value) :
-    Element{ descr, addr }, m_value{ value }
+Byte::Byte(QString name, QString descr, int addr, int8_t value) :
+    Element{ name, descr, addr }, m_value{ value }
 {
 }
 

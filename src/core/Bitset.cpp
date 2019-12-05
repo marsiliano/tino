@@ -1,6 +1,9 @@
 #include "Bitset.hpp"
 
-Bitset::Bitset(QString descr, int addr) : Element{ descr, addr } {}
+Bitset::Bitset(QString name, QString descr, int addr) :
+    Element{ name, descr, addr }
+{
+}
 
 void Bitset::setAt(size_t index, bool value)
 {
@@ -34,4 +37,13 @@ QStringList &Bitset::descriptions() noexcept
     return m_bitsDescriptions;
 }
 
+const QStringList &Bitset::names() const noexcept
+{
+    return m_bitsNames;
+}
+
+QStringList &Bitset::names() noexcept
+{
+    return m_bitsNames;
+}
 static_assert(Bitset::size == 8, "Is the size of bit changed?");

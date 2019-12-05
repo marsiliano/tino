@@ -59,8 +59,7 @@ Settings ConfigParser::readSettings(const QJsonObject &obj) const noexcept
     s.baudRate = static_cast<QSerialPort::BaudRate>(
         obj[Settings::Tags::baud_rate].toInt(s.baudRate));
 
-    s.breakEnabled =
-        obj[Settings::Tags::break_enabled].toBool(s.breakEnabled);
+    s.breakEnabled = obj[Settings::Tags::break_enabled].toBool(s.breakEnabled);
 
     s.dataBits = static_cast<QSerialPort::DataBits>(
         obj[Settings::Tags::data_bits].toInt(s.dataBits));
@@ -90,13 +89,15 @@ Protocol ConfigParser::readBlocks(const QJsonObject &obj) const noexcept
 
     foreach (auto v, array) {
         Block blk;
-        const auto block  = v.toObject();
-        blk.description   = block.find(Tags::description)->toString();
+        const auto block = v.toObject();
+        blk.description  = block.find(Tags::description)->toString();
+        blk.address =
+            block.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
         const auto groups = block.find(Tags::groups)->toArray();
         foreach (auto g, groups) {
             auto type = g.toObject().find(Tags::type)->toString();
             std::unique_ptr<Element> element;
-            if (type == Tags::bitsarray) {
+            if (type == Tags::bitset) {
                 element = std::move(makeBitset(g.toObject()));
             } else if (type == Tags::byte) {
                 element = std::move(makeByte(g.toObject()));
@@ -112,18 +113,26 @@ Protocol ConfigParser::readBlocks(const QJsonObject &obj) const noexcept
     return ret;
 }
 
-std::unique_ptr<Bitset> ConfigParser::makeBitset(const QJsonObject &obj) const
+std::unique_ptr<Bitset> ConfigParser::makeBitset(const QJsonObject &obj,
+                                                 const Block &b) const
 {
+    auto name        = obj.find(Tags::name)->toString();
     auto description = obj.find(Tags::description)->toString();
     auto address     = obj.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
-    auto element     = std::make_unique<Bitset>(description, address);
-    auto bits        = obj.find(Tags::bit)->toArray();
-    auto bitset      = dynamic_cast<Bitset *>(element.get());
-    const auto size  = static_cast<size_t>(bits.size());
+    if (address == 0) {
+        address = b.address;
+        address += obj.find(Tags::offset)->toString().toInt(Q_NULLPTR, 16);
+    }
+    auto element    = std::make_unique<Bitset>(name, description, address);
+    auto bits       = obj.find(Tags::bits)->toArray();
+    auto bitset     = dynamic_cast<Bitset *>(element.get());
+    const auto size = static_cast<size_t>(bits.size());
     for (size_t i = 0; i < size; ++i) {
         auto obj = bits[i].toObject();
         auto d   = obj.find(Tags::description)->toString();
+        auto n   = obj.find(Tags::name)->toString();
         auto val = obj.find(Tags::defaultValue)->toBool();
+        bitset->names().push_back(n);
         bitset->descriptions().push_back(d);
         bitset->setAt(i, val);
     }
@@ -133,18 +142,20 @@ std::unique_ptr<Bitset> ConfigParser::makeBitset(const QJsonObject &obj) const
 
 std::unique_ptr<Byte> ConfigParser::makeByte(const QJsonObject &obj) const
 {
+    auto name        = obj.find(Tags::name)->toString();
     auto description = obj.find(Tags::description)->toString();
     auto address     = obj.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
     auto defaultValue = obj.find(Tags::defaultValue)->toString().toInt();
-    auto element      = std::make_unique<Byte>(description, address);
+    auto element      = std::make_unique<Byte>(name, description, address);
     element->setValue(defaultValue);
     return element;
 }
 
 std::unique_ptr<Word> ConfigParser::makeWord(const QJsonObject &obj) const
 {
+    auto name        = obj.find(Tags::name)->toString();
     auto description = obj.find(Tags::description)->toString();
     auto value = obj.find(Tags::defaultValue)->toString().toInt(Q_NULLPTR, 16);
     auto addr  = obj.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
-    return std::make_unique<Word>(description, addr, value);
+    return std::make_unique<Word>(name, description, addr, value);
 }

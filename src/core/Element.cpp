@@ -1,6 +1,6 @@
 #include "Element.hpp"
 
-Element::Element(QString descr, int addr) :
+Element::Element(QString name, QString descr, int addr) :
     m_description{ descr }, m_address{ addr }
 {
 }
@@ -13,6 +13,11 @@ bool Element::operator==(const Element &other) const
 bool Element::operator!=(const Element &other) const
 {
     return !(*this == other);
+}
+
+QString Element::name() const noexcept
+{
+    return m_name;
 }
 
 QString Element::description() const noexcept

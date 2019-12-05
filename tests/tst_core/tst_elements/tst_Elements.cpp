@@ -42,12 +42,14 @@ void tst_Elements::checkBitset()
 
 void tst_Elements::checkByte()
 {
-    Byte b{ "description", 0x90, 99 };
+    Byte b{ "name", "description", 0x90, 99 };
+    QCOMPARE(b.name(), "name");
     QCOMPARE(b.description(), "description");
     QCOMPARE(b.address(), 0x90);
     QCOMPARE(b.value(), 99);
 
-    Byte bNeg{ "rewq", 0xA0, -127 };
+    Byte bNeg{ "rewq", "rewq", 0xA0, -127 };
+    QCOMPARE(bNeg.name(), "rewq");
     QCOMPARE(bNeg.description(), "rewq");
     QCOMPARE(bNeg.address(), 0xA0);
     QCOMPARE(bNeg.value(), -127);
@@ -56,12 +58,12 @@ void tst_Elements::checkByte()
 void tst_Elements::checkWord()
 {
     int16_t value = 4320;
-    Word w{ {}, {}, value };
+    Word w{ {}, {}, {}, value };
     QCOMPARE(w.low(), 224);
     QCOMPARE(w.high(), 16);
 
     value = 2043;
-    w     = Word{ "", 0x11, 251, 7 };
+    w     = Word{ "", "", 0x11, 251, 7 };
     QCOMPARE(w.value(), value);
 }
 
