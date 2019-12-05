@@ -43,19 +43,20 @@ class ConfigParser
         constexpr static const auto name         = "Name";
         constexpr static const auto description  = "Description";
         constexpr static const auto type         = "Type";
-        constexpr static const auto bitsarray    = "BitsArray";
+        constexpr static const auto bitset       = "Bitset";
         constexpr static const auto byte         = "Byte";
         constexpr static const auto word         = "Word";
         constexpr static const auto address      = "Address";
         constexpr static const auto offset       = "Offset";
-        constexpr static const auto bit          = "Bit";
+        constexpr static const auto bits         = "Bits";
         constexpr static const auto defaultValue = "DefaultValue";
     };
 
     [[nodiscard]] Settings readSettings(const QJsonObject &obj) const noexcept;
     [[nodiscard]] Protocol readBlocks(const QJsonObject &obj) const noexcept;
 
-    std::unique_ptr<Bitset> makeBitset(const QJsonObject &obj) const;
+    std::unique_ptr<Bitset> makeBitset(const QJsonObject &obj,
+                                       const Block &b = Block()) const;
     std::unique_ptr<Byte> makeByte(const QJsonObject &obj) const;
     std::unique_ptr<Word> makeWord(const QJsonObject &obj) const;
 };

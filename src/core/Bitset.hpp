@@ -9,7 +9,7 @@ class Bitset final : public Element
 {
   public:
     Bitset() = default;
-    explicit Bitset(QString descr, int addr);
+    explicit Bitset(QString name, QString descr, int addr);
     Bitset(const Bitset &) = default;
     Bitset(Bitset &&)      = default;
     ~Bitset() override     = default;

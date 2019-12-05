@@ -1,6 +1,9 @@
 #include "Bitset.hpp"
 
-Bitset::Bitset(QString descr, int addr) : Element{ descr, addr } {}
+Bitset::Bitset(QString name, QString descr, int addr) :
+    Element{ name, descr, addr }
+{
+}
 
 void Bitset::setAt(size_t index, bool value)
 {

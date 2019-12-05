@@ -24,7 +24,8 @@ class tst_ConfigView : public QObject
 
 void tst_ConfigView::initTestCase()
 {
-    auto bitset = std::make_unique<Bitset>("bitset 1", 0x10);
+    auto bitset =
+        std::make_unique<Bitset>("bitset 1", "bitset 1 description", 0x10);
     for (size_t i = 0; i < 8; ++i) {
         bitset->setAt(i, false);
         bitset->descriptions().push_back(

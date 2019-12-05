@@ -6,8 +6,8 @@ class Byte final : public Element
 {
   public:
     Byte() = default;
-    explicit Byte(QString descr, int addr);
-    explicit Byte(QString descr, int addr, int8_t value);
+    explicit Byte(QString name, QString descr, int addr);
+    explicit Byte(QString name, QString descr, int addr, int8_t value);
     Byte(const Byte &) = default;
     Byte(Byte &&)      = default;
     ~Byte() override   = default;

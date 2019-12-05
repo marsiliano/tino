@@ -28,8 +28,8 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
                     ++r;
                     c = 0;
                 }
-                auto led = new Led(
-                    bitset->descriptions().at(static_cast<int>(i)), this);
+                auto led =
+                    new Led(bitset->names().at(static_cast<int>(i)), this);
                 // TODO: add value of bit
                 groupBoxLayout->addWidget(led, r, c);
                 ++c;
@@ -37,13 +37,13 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
         }
 
         if (auto byte = dynamic_cast<Byte *>(element.get())) {
-            auto bw = new ByteWidget(byte->description(),
+            auto bw = new ByteWidget(byte->name(),
                                      static_cast<quint8>(byte->value()));
             groupBoxLayout->addWidget(bw, r, c);
         }
 
         if (auto byte = dynamic_cast<Word *>(element.get())) {
-            auto ww = new WordWidget(byte->description(), byte->value());
+            auto ww = new WordWidget(byte->name(), byte->value());
             groupBoxLayout->addWidget(ww, r, c);
         }
 
