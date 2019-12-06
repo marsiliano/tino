@@ -1,7 +1,7 @@
 #include "Element.hpp"
 
 Element::Element(QString name, QString descr, int addr) :
-    m_description{ descr }, m_address{ addr }
+    m_name{ name }, m_description{ descr }, m_address{ addr }
 {
 }
 
