@@ -28,9 +28,10 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
                     ++r;
                     c = 0;
                 }
-                auto led =
-                    new Led(bitset->names().at(static_cast<int>(i)), this);
-                // TODO: add value of bit
+                auto led = new Led(bitset->names().at(static_cast<int>(i)),
+                                   this, QSize(30, 30),
+                                   bitset->valueAt(i) ? Led::State::On
+                                                      : Led::State::Off);
                 groupBoxLayout->addWidget(led, r, c);
                 ++c;
             }
