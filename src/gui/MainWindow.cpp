@@ -14,6 +14,7 @@
 #include <QFileDialog>
 #include <QHeaderView>
 #include <QMessageBox>
+#include <QScrollArea>
 #include <QSettings>
 #include <QStandardItemModel>
 #include <QStandardPaths>
@@ -161,9 +162,9 @@ MainWindow::Error MainWindow::importConfig(const QString &filename)
 
 void MainWindow::createWidgetRequested(QStandardItem *item)
 {
-    MdiChild *child;
-    auto whatsThis = item->whatsThis();
+    const auto whatsThis = item->whatsThis();
 
+    MdiChild *child;
     if (whatsThis.startsWith("block_") && !whatsThis.contains("group_")) {
         auto blockId = whatsThis.split('_').at(1).toInt();
         child        = new MdiChild(m_config->protocol.blocks.at(blockId));
@@ -172,8 +173,16 @@ void MainWindow::createWidgetRequested(QStandardItem *item)
         child        = new MdiChild(m_config->protocol.blocks.at(blockId));
     }
 
-    ui->mdiArea->addSubWindow(child);
-    child->show();
+    auto subWindow = new QWidget(ui->mdiArea);
+    subWindow->setWindowTitle(child->title());
+    subWindow->setLayout(new QVBoxLayout(subWindow));
+
+    auto scrollArea = new QScrollArea(subWindow);
+    subWindow->layout()->addWidget(scrollArea);
+    scrollArea->setWidget(child);
+
+    ui->mdiArea->addSubWindow(subWindow);
+    subWindow->show();
 }
 
 void MainWindow::saveSettings()
