@@ -135,8 +135,14 @@ void ModbusCom::updateRegisters(QModbusDataUnit::RegisterType table,
             case QModbusDataUnit::HoldingRegisters:
                 m_modbusDevice->data(QModbusDataUnit::HoldingRegisters,
                                      static_cast<quint16>(add), &value);
-                m_protocolRef->elementMap.at(add)->setValue(
-                    static_cast<int16_t>(value));
+                if (m_protocolRef->elementMap.find(add) !=
+                    m_protocolRef->elementMap.end()) {
+                    m_protocolRef->elementMap.at(add)->setValue(
+                        static_cast<int16_t>(value));
+                } else {
+                    qWarning()
+                        << QStringLiteral("Address %1 is invalid!").arg(add);
+                }
                 Q_EMIT updateGui(add);
                 break;
             default:
