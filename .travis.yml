@@ -15,6 +15,7 @@ install:
   - sudo apt-get -y install qt512base
   - sudo apt-get -y install qt512serialport
   - sudo apt-get -y install qt512svg
+  - sudo apt-get -y install qt512serialbus
 
 script:
   - source /opt/qt512/bin/qt512-env.sh
