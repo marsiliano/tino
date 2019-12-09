@@ -31,6 +31,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(this, &MainWindow::importFinished, this,
             &MainWindow::createConfigView);
+
+    m_modbus.reset(new ModbusCom(this));
+    connect(m_modbus.get(), &ModbusCom::updateGui, this, [this](int address) {
+        for (const auto &mdi : m_mdiChilds) {
+            if (mdi->hasElementWithAddress(address)) {
+                mdi->updateGuiElemets();
+                return;
+            }
+        }
+    });
 }
 
 MainWindow::~MainWindow()
@@ -115,8 +125,19 @@ void MainWindow::createMenuBar()
 
     m_serialConnect.reset(new QAction("Connect...", comMenu));
     m_serialConnect->setEnabled(false);
-    connect(m_serialConnect.get(), &QAction::triggered, this,
-            [&]() { m_serialConnect->setText("Disconnect..."); });
+    connect(m_serialConnect.get(), &QAction::triggered, this, [&]() {
+        if (m_modbus->isConnected()) {
+            m_modbus->disconnectModbus();
+            m_serialConnect->setText("Connect...");
+        } else {
+            if (!m_modbus->connectModbus(m_config->settings)) {
+                QMessageBox::critical(this, tr("Tino"),
+                                      tr("Modbus connection failed."));
+                return;
+            }
+            m_serialConnect->setText("Disconnect...");
+        }
+    });
     comMenu->addAction(m_serialConnect.get());
 
     comMenu->addSeparator();
@@ -149,6 +170,8 @@ MainWindow::Error MainWindow::importConfig(const QString &filename)
         return Error{ true, "Parsing configuration error!" };
     }
 
+    m_modbus->initializeServer(std::make_shared<Protocol>(m_config->protocol));
+
     m_serialConnect->setEnabled(true);
     m_serialSettings->setEnabled(true);
 
@@ -172,6 +195,10 @@ void MainWindow::createWidgetRequested(QStandardItem *item)
         auto blockId = whatsThis.split('_').at(1).toInt();
         child        = new MdiChild(m_config->protocol.blocks.at(blockId));
     }
+
+    connect(child, &MdiChild::updateModbus, m_modbus.get(),
+            &ModbusCom::writeRegister);
+    m_mdiChilds.emplace_back(child);
 
     auto subWindow = new QWidget(ui->mdiArea);
     subWindow->setWindowTitle(child->title());

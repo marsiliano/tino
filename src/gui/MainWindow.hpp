@@ -1,5 +1,7 @@
 #pragma once
 
+#include <MdiChild.hpp>
+#include <ModbusCom.hpp>
 #include <QMainWindow>
 #include <QScopedPointer>
 #include <memory>
@@ -37,6 +39,9 @@ class MainWindow : public QMainWindow
     QScopedPointer<QDockWidget> m_configViewDock;
 
     QString m_importFilePath;
+
+    std::unique_ptr<ModbusCom> m_modbus;
+    std::vector<std::shared_ptr<MdiChild>> m_mdiChilds;
 
     struct Error {
         bool error{ false };
