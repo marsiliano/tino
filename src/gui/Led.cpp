@@ -266,6 +266,12 @@ void Led::setTag(const QString &tag)
         m_tag = tag;
 }
 
+void Led::attachBitset(Bitset *bitset, size_t bitIndex)
+{
+    m_bitset.reset(bitset);
+    m_bitIndex = bitIndex;
+}
+
 QString Led::tag() const
 {
     return m_tag;
@@ -308,7 +314,19 @@ void Led::setState(const State &state)
 
 void Led::toggle()
 {
-    m_state == Led::On ? setState(Led::Off) : setState(Led::On);
+    auto bitEnabled = false;
+
+    if (m_state == Led::On) {
+        setState(Led::Off);
+    } else {
+        bitEnabled = true;
+        setState(Led::On);
+    }
+
+    if (m_bitset != nullptr) {
+        m_bitset->setAt(m_bitIndex, bitEnabled);
+        Q_EMIT bitsetStateChanged(m_bitset->address());
+    }
 }
 
 Led::LedColor Led::color(const Led::State &state) const
