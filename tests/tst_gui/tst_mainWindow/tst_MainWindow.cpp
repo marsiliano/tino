@@ -47,7 +47,7 @@ void tst_MainWindow::emitWhenImportLooksFine()
     QSignalSpy spyImportFinished(&mainWindow, &MainWindow::importFinished);
     mainWindow.importConfig(filesPath + "1block-1group-flag.json");
     QCOMPARE(spyImportFinished.count(), 1);
-    QVERIFY(!mainWindow.m_config.isNull());
+    QVERIFY(mainWindow.m_config);
 }
 
 void tst_MainWindow::avoidMultipleDockWithMultipleImport()

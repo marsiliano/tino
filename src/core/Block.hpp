@@ -14,5 +14,5 @@ class Block
     QString description;
     QString category;
     quint16 address;
-    std::vector<std::unique_ptr<Element>> elements;
+    std::vector<std::shared_ptr<Element>> elements;
 };

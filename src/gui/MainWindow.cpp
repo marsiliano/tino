@@ -145,7 +145,7 @@ MainWindow::Error MainWindow::importConfig(const QString &filename)
     ConfigParser parser;
     m_config.reset(new Configuration{ parser.parse(filename) });
 
-    if (m_config.isNull()) {
+    if (m_config == nullptr) {
         return Error{ true, "Parsing configuration error!" };
     }
 
