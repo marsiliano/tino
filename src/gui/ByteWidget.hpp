@@ -12,6 +12,8 @@ class ByteWidget : public QWidget
     explicit ByteWidget(QString description = QString(),
                         quint8 defaultValue = 0xFF, QWidget *parent = nullptr);
 
+    void updateValue(int16_t value);
+
   private:
     QString m_description{ "" };
     quint8 m_defaultValue{ 0x00 };

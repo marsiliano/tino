@@ -12,6 +12,11 @@ ByteWidget::ByteWidget(QString description, quint8 defaultValue,
     init();
 }
 
+void ByteWidget::updateValue(int16_t value)
+{
+    m_valueSpinBox->setValue(value);
+}
+
 void ByteWidget::init()
 {
     m_value = m_defaultValue;

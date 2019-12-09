@@ -12,6 +12,11 @@ WordWidget::WordWidget(QString description, quint16 defaultValue,
     init();
 }
 
+void WordWidget::updateValue(int16_t val)
+{
+    m_valueSpinBox->setValue(val);
+}
+
 void WordWidget::init()
 {
     m_value = m_defaultValue;

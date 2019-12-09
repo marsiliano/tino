@@ -13,6 +13,8 @@ class WordWidget : public QWidget
                         quint16 defaultValue = 0xFFFF,
                         QWidget *parent      = nullptr);
 
+    void updateValue(int16_t val);
+
   private:
     QString m_description{ "" };
     quint16 m_defaultValue{ 0 };
