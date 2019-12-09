@@ -17,7 +17,7 @@ class WordWidget : public QWidget
 
     void updateValue(int16_t val);
 
-    void attachWord(Word *word);
+    void attachWord(std::shared_ptr<Word> word);
 
   signals:
     void wordValueChanged(int address);
@@ -30,7 +30,7 @@ class WordWidget : public QWidget
     QLabel *m_hexValueLabel{ nullptr };
     QSpinBox *m_valueSpinBox{ nullptr };
 
-    std::unique_ptr<Word> m_word;
+    std::shared_ptr<Word> m_word;
 
     void init();
     void checkWidgetSize();

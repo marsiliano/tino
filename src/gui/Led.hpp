@@ -77,7 +77,7 @@ class Led : public QWidget
     [[nodiscard]] QString tag() const;
     void setTag(const QString &tag);
 
-    void attachBitset(Bitset *bitset, size_t bitIndex);
+    void attachBitset(std::shared_ptr<Bitset> bitset, size_t bitIndex);
 
   public slots:
     void toggle();
@@ -104,7 +104,7 @@ class Led : public QWidget
     bool m_interactive{ true };
     QString m_tag{};
 
-    std::unique_ptr<Bitset> m_bitset{};
+    std::shared_ptr<Bitset> m_bitset{};
     size_t m_bitIndex{};
 
     void init();

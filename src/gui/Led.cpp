@@ -266,9 +266,9 @@ void Led::setTag(const QString &tag)
         m_tag = tag;
 }
 
-void Led::attachBitset(Bitset *bitset, size_t bitIndex)
+void Led::attachBitset(std::shared_ptr<Bitset> bitset, size_t bitIndex)
 {
-    m_bitset.reset(bitset);
+    m_bitset   = bitset;
     m_bitIndex = bitIndex;
 }
 

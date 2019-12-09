@@ -17,9 +17,9 @@ void ByteWidget::updateValue(int16_t value)
     m_valueSpinBox->setValue(value);
 }
 
-void ByteWidget::attachByte(Byte *byte)
+void ByteWidget::attachByte(std::shared_ptr<Byte> byte)
 {
-    m_byte.reset(byte);
+    m_byte = byte;
 }
 
 void ByteWidget::init()

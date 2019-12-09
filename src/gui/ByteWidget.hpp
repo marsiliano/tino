@@ -16,7 +16,7 @@ class ByteWidget : public QWidget
 
     void updateValue(int16_t value);
 
-    void attachByte(Byte *byte);
+    void attachByte(std::shared_ptr<Byte> byte);
 
   signals:
     void byteValueChanged(int address);
@@ -28,7 +28,7 @@ class ByteWidget : public QWidget
     QLabel *m_decValueLabel{ nullptr };
     QLabel *m_hexValueLabel{ nullptr };
     QSpinBox *m_valueSpinBox{ nullptr };
-    std::unique_ptr<Byte> m_byte;
+    std::shared_ptr<Byte> m_byte;
 
     void init();
     void checkWidgetSize();
