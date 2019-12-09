@@ -17,15 +17,15 @@ class Settings
     bool operator!=(const Settings &other) const;
 
     struct Tags {
-        constexpr static const auto port_name           = "portName";
-        constexpr static const auto baud_rate           = "baudRate";
-        constexpr static const auto break_enabled       = "breakEnabled";
-        constexpr static const auto data_bits           = "dataBits";
-        constexpr static const auto data_terminal_ready = "dataTerminalReady";
-        constexpr static const auto flow_control        = "flowControl";
-        constexpr static const auto parity              = "parity";
-        constexpr static const auto request_to_send     = "requestToSend";
-        constexpr static const auto stop_bits           = "stopBits";
+        constexpr static const auto port_name           = "PortName";
+        constexpr static const auto baud_rate           = "BaudRate";
+        constexpr static const auto break_enabled       = "BreakEnabled";
+        constexpr static const auto data_bits           = "DataBits";
+        constexpr static const auto data_terminal_ready = "DataTerminalReady";
+        constexpr static const auto flow_control        = "FlowControl";
+        constexpr static const auto parity              = "Parity";
+        constexpr static const auto request_to_send     = "RequestToSend";
+        constexpr static const auto stop_bits           = "StopBits";
     };
 
     QString portName{};
