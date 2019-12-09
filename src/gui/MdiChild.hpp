@@ -17,6 +17,9 @@ class MdiChild : public QGroupBox
 
     bool hasElementWithAddress(int address) const;
 
+  signals:
+    void updateModbus(int address);
+
   public slots:
     void updateGuiElemets();
 

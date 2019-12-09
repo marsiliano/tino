@@ -29,13 +29,18 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
                     ++r;
                     c = 0;
                 }
+                ++c;
+
                 auto led = new Led(bitset->names().at(static_cast<int>(i)),
                                    this, QSize(30, 30),
                                    bitset->valueAt(i) ? Led::State::On
                                                       : Led::State::Off);
-                groupBoxLayout->addWidget(led, r, c);
-                ++c;
+                led->attachBitset(bitset, i);
+                connect(led, &Led::bitsetStateChanged, this,
+                        &MdiChild::updateModbus);
                 leds.emplace_back(led);
+
+                groupBoxLayout->addWidget(led, r, c);
             }
             m_guiElements.emplace_back(GuiElement{ element.get(), leds });
         }
