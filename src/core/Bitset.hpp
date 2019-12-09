@@ -21,6 +21,7 @@ class Bitset final : public Element
     bool valueAt(size_t index) const;
 
     void setValue(int8_t val) override;
+    void setValue(int16_t val) override;
     int16_t value() const override;
 
     const QStringList &descriptions() const noexcept;

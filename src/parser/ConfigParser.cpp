@@ -150,8 +150,9 @@ std::unique_ptr<Byte> ConfigParser::makeByte(const QJsonObject &obj,
         address = b.address;
         address += obj.find(Tags::offset)->toString().toInt(Q_NULLPTR, 16);
     }
-    auto defaultValue = obj.find(Tags::defaultValue)->toString().toInt();
-    auto element      = std::make_unique<Byte>(name, description, address);
+    auto defaultValue =
+        static_cast<int8_t>(obj.find(Tags::defaultValue)->toString().toInt());
+    auto element = std::make_unique<Byte>(name, description, address);
     element->setValue(defaultValue);
     return element;
 }
