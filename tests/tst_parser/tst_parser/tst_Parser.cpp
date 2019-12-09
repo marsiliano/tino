@@ -83,6 +83,8 @@ void tst_Parser::parseBitset()
     QCOMPARE(b->address(), 0x10);
     QCOMPARE(b->description(), "BitsArray n1");
     QCOMPARE(b->descriptions().size(), 8);
+
+    QCOMPARE(p.elementMap.at(b->address())->description(), b->description());
 }
 
 void tst_Parser::parseByte()
@@ -102,6 +104,9 @@ void tst_Parser::parseByte()
     QCOMPARE(b2->description(), "Byte n2");
     QCOMPARE(b1->value(), 22);
     QCOMPARE(b2->value(), 44);
+
+    QCOMPARE(p.elementMap.at(b1->address())->description(), b1->description());
+    QCOMPARE(p.elementMap.at(b2->address())->description(), b2->description());
 }
 
 void tst_Parser::parseWord()
@@ -116,6 +121,8 @@ void tst_Parser::parseWord()
     QCOMPARE(w->address(), 0x10);
     QCOMPARE(w->value(), 0x7DDA);
     QCOMPARE(w->description(), "Word description");
+
+    QCOMPARE(p.elementMap.at(w->address())->description(), w->description());
 }
 
 QTEST_GUILESS_MAIN(tst_Parser)

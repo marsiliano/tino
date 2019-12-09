@@ -110,6 +110,13 @@ Protocol ConfigParser::readBlocks(const QJsonObject &obj) const noexcept
         }
         ret.blocks.emplace_back(std::move(blk));
     }
+
+    for (const auto &b : ret.blocks) {
+        for (const auto &el : b.elements) {
+            ret.elementMap.insert({ el->address(), el.get() });
+        }
+    }
+
     return ret;
 }
 
