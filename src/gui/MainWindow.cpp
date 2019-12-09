@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, &MainWindow::importFinished, this,
             &MainWindow::createConfigView);
 
-    m_modbus.reset(new ModbusCom(this));
+    m_modbus = std::make_unique<ModbusCom>();
     connect(m_modbus.get(), &ModbusCom::updateGui, this, [this](int address) {
         for (const auto &mdi : m_mdiChilds) {
             if (mdi->hasElementWithAddress(address)) {
