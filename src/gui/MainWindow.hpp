@@ -41,7 +41,7 @@ class MainWindow : public QMainWindow
     QString m_importFilePath;
 
     std::unique_ptr<ModbusCom> m_modbus;
-    std::vector<std::shared_ptr<MdiChild>> m_mdiChilds;
+    std::vector<MdiChild *> m_mdiChilds;
 
     struct Error {
         bool error{ false };
