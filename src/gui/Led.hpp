@@ -85,7 +85,7 @@ class Led : public QWidget
   signals:
     void sizeChanged();
     void clicked();
-    void bitsetStateChanged(int index);
+    void bitsetStateChanged(int address);
 
   protected:
     void paintEvent(QPaintEvent *event) override;
