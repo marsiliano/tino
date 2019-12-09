@@ -1,6 +1,8 @@
 #pragma once
 
+#include <Byte.hpp>
 #include <QWidget>
+#include <memory>
 
 class QLabel;
 class QSpinBox;
@@ -14,6 +16,11 @@ class ByteWidget : public QWidget
 
     void updateValue(int16_t value);
 
+    void attachByte(Byte *byte);
+
+  signals:
+    void byteValueChanged(int address);
+
   private:
     QString m_description{ "" };
     quint8 m_defaultValue{ 0x00 };
@@ -21,6 +28,8 @@ class ByteWidget : public QWidget
     QLabel *m_decValueLabel{ nullptr };
     QLabel *m_hexValueLabel{ nullptr };
     QSpinBox *m_valueSpinBox{ nullptr };
+    std::unique_ptr<Byte> m_byte;
+
     void init();
     void checkWidgetSize();
     void update();

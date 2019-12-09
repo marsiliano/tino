@@ -17,6 +17,11 @@ void ByteWidget::updateValue(int16_t value)
     m_valueSpinBox->setValue(value);
 }
 
+void ByteWidget::attachByte(Byte *byte)
+{
+    m_byte.reset(byte);
+}
+
 void ByteWidget::init()
 {
     m_value = m_defaultValue;
@@ -30,6 +35,10 @@ void ByteWidget::init()
             [=](int i) {
                 m_value = i;
                 update();
+
+                if (m_byte) {
+                    Q_EMIT byteValueChanged(m_byte->address());
+                }
             });
     m_decValueLabel = new QLabel(this);
     m_hexValueLabel = new QLabel(this);

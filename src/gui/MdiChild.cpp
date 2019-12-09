@@ -48,8 +48,11 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
         if (auto byte = dynamic_cast<Byte *>(element.get())) {
             auto bw = new ByteWidget(byte->name(),
                                      static_cast<quint8>(byte->value()));
-            groupBoxLayout->addWidget(bw, r, c);
+            bw->attachByte(byte);
+            connect(bw, &ByteWidget::byteValueChanged, this,
+                    &MdiChild::updateModbus);
             m_guiElements.emplace_back(GuiElement{ element.get(), { bw } });
+            groupBoxLayout->addWidget(bw, r, c);
         }
 
         if (auto word = dynamic_cast<Word *>(element.get())) {
