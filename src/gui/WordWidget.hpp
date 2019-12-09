@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QWidget>
+#include <Word.hpp>
+#include <memory>
 
 class QLabel;
 class QSpinBox;
@@ -15,6 +17,11 @@ class WordWidget : public QWidget
 
     void updateValue(int16_t val);
 
+    void attachWord(Word *word);
+
+  signals:
+    void wordValueChanged(int address);
+
   private:
     QString m_description{ "" };
     quint16 m_defaultValue{ 0 };
@@ -22,6 +29,9 @@ class WordWidget : public QWidget
     QLabel *m_decValueLabel{ nullptr };
     QLabel *m_hexValueLabel{ nullptr };
     QSpinBox *m_valueSpinBox{ nullptr };
+
+    std::unique_ptr<Word> m_word;
+
     void init();
     void checkWidgetSize();
     void update();

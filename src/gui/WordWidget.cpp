@@ -17,6 +17,11 @@ void WordWidget::updateValue(int16_t val)
     m_valueSpinBox->setValue(val);
 }
 
+void WordWidget::attachWord(Word *word)
+{
+    m_word.reset(word);
+}
+
 void WordWidget::init()
 {
     m_value = m_defaultValue;
@@ -30,6 +35,10 @@ void WordWidget::init()
             [=](int i) {
                 m_value = i;
                 update();
+
+                if (m_word) {
+                    Q_EMIT wordValueChanged(m_word->address());
+                }
             });
     m_decValueLabel = new QLabel(this);
     m_hexValueLabel = new QLabel(this);

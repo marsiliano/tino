@@ -57,8 +57,11 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
 
         if (auto word = dynamic_cast<Word *>(element.get())) {
             auto ww = new WordWidget(word->name(), word->value());
-            groupBoxLayout->addWidget(ww, r, c);
+            ww->attachWord(word);
+            connect(ww, &WordWidget::wordValueChanged, this,
+                    &MdiChild::updateModbus);
             m_guiElements.emplace_back(GuiElement{ element.get(), { ww } });
+            groupBoxLayout->addWidget(ww, r, c);
         }
 
         blockLayout->addWidget(groupBox);
