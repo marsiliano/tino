@@ -2,6 +2,9 @@
 #include <QDockWidget>
 #include <QtTest>
 
+#define STRINGIFY_INTERNAL(x) #x
+#define STRINGIFY(x) STRINGIFY_INTERNAL(x)
+
 class tst_MainWindow : public QObject
 {
     Q_OBJECT
@@ -20,13 +23,7 @@ class tst_MainWindow : public QObject
 
 void tst_MainWindow::initTestCase()
 {
-    auto path = QDir::currentPath();
-    path      = path.remove(path.lastIndexOf("build"), path.size());
-    if (!path.contains("tino")) {
-        path += "tino/";
-    }
-    path += "tests/files/";
-    filesPath = path;
+    filesPath = STRINGIFY(TINO_PROJECT_DIR) + QStringLiteral("/tests/files/");
 }
 
 void tst_MainWindow::doNothingWhenImportFilenameEmpty()

@@ -4,6 +4,8 @@ TINO_PRI_INCLUDED = 1
 TINO_LIB_DIRS = $$PWD/src/
 TINO_BUILD_DIR = $$shadowed($$PWD)
 
+DEFINES *= TINO_PROJECT_DIR=$$system(pwd)
+
 CONFIG += c++17
 
 defineTest(minQtVersion) {
