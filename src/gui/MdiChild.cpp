@@ -7,20 +7,22 @@
 #include <Bitset.hpp>
 #include <Byte.hpp>
 #include <QGridLayout>
+#include <QGroupBox>
+#include <QScrollArea>
 #include <Word.hpp>
 
-MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
+MdiChild::MdiChild(const Block &block, QWidget *parent) : QWidget(parent)
 {
-    setTitle(block.description);
-    auto blockLayout = new QGridLayout(this);
-    auto r           = 0;
-    auto c           = 0;
+    setWindowTitle(block.description);
+    setLayout(new QGridLayout);
+
+    auto r = 0;
+    auto c = 0;
 
     for (const auto &element : block.elements) {
-        auto groupBox       = new QGroupBox(this);
-        auto groupBoxLayout = new QGridLayout(groupBox);
-        groupBox->setLayout(groupBoxLayout);
+        auto groupBox = new QGroupBox(this);
         groupBox->setTitle(element->description());
+        groupBox->setLayout(new QGridLayout);
 
         if (auto bitset = dynamic_cast<Bitset *>(element.get())) {
             auto leds = std::vector<QWidget *>();
@@ -40,7 +42,8 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
                         &MdiChild::updateModbus);
                 leds.emplace_back(led);
 
-                groupBoxLayout->addWidget(led, r, c);
+                dynamic_cast<QGridLayout *>(groupBox->layout())
+                    ->addWidget(led, r, c);
             }
             m_guiElements.emplace_back(GuiElement{ element.get(), leds });
         }
@@ -52,7 +55,8 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
             connect(bw, &ByteWidget::byteValueChanged, this,
                     &MdiChild::updateModbus);
             m_guiElements.emplace_back(GuiElement{ element.get(), { bw } });
-            groupBoxLayout->addWidget(bw, r, c);
+            dynamic_cast<QGridLayout *>(groupBox->layout())
+                ->addWidget(bw, r, c);
         }
 
         if (auto word = dynamic_cast<Word *>(element.get())) {
@@ -61,14 +65,12 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QGroupBox(parent)
             connect(ww, &WordWidget::wordValueChanged, this,
                     &MdiChild::updateModbus);
             m_guiElements.emplace_back(GuiElement{ element.get(), { ww } });
-            groupBoxLayout->addWidget(ww, r, c);
+            dynamic_cast<QGridLayout *>(groupBox->layout())
+                ->addWidget(ww, r, c);
         }
 
-        blockLayout->addWidget(groupBox);
-        m_addresses.emplace_back(element->address());
+        layout()->addWidget(groupBox);
     }
-
-    setLayout(blockLayout);
 }
 
 bool MdiChild::hasElementWithAddress(int address) const

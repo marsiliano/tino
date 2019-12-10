@@ -1,14 +1,14 @@
 #pragma once
 
 #include <Block.hpp>
-#include <QGroupBox>
+#include <QWidget>
 
 struct GuiElement {
     Element *el;
     std::vector<QWidget *> w;
 };
 
-class MdiChild : public QGroupBox
+class MdiChild : public QWidget
 {
     Q_OBJECT
 

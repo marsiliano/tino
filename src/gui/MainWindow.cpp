@@ -14,7 +14,6 @@
 #include <QFileDialog>
 #include <QHeaderView>
 #include <QMessageBox>
-#include <QScrollArea>
 #include <QSettings>
 #include <QStandardItemModel>
 #include <QStandardPaths>
@@ -199,17 +198,8 @@ void MainWindow::createWidgetRequested(QStandardItem *item)
     connect(child, &MdiChild::updateModbus, m_modbus.get(),
             &ModbusCom::writeRegister);
     m_mdiChilds.emplace_back(child);
-
-    auto subWindow = new QWidget(ui->mdiArea);
-    subWindow->setWindowTitle(child->title());
-    subWindow->setLayout(new QVBoxLayout(subWindow));
-
-    auto scrollArea = new QScrollArea(subWindow);
-    subWindow->layout()->addWidget(scrollArea);
-    scrollArea->setWidget(child);
-
-    ui->mdiArea->addSubWindow(subWindow);
-    subWindow->show();
+    ui->mdiArea->addSubWindow(child);
+    child->show();
 }
 
 void MainWindow::saveSettings()
