@@ -185,16 +185,14 @@ MainWindow::Error MainWindow::importConfig(const QString &filename)
 void MainWindow::createWidgetRequested(QStandardItem *item)
 {
     const auto whatsThis = item->whatsThis();
+    const auto blockId   = whatsThis.split('_').at(1).toInt();
+    const auto block     = m_config->protocol.blocks.at(blockId);
 
-    MdiChild *child;
-    if (whatsThis.startsWith("block_") && !whatsThis.contains("group_")) {
-        auto blockId = whatsThis.split('_').at(1).toInt();
-        child        = new MdiChild(m_config->protocol.blocks.at(blockId));
-    } else {
-        auto blockId = whatsThis.split('_').at(1).toInt();
-        child        = new MdiChild(m_config->protocol.blocks.at(blockId));
+    if (setFocusIfAlreadyExists(block)) {
+        return;
     }
 
+    const auto child = new MdiChild(block);
     connect(child, &MdiChild::updateModbus, m_modbus.get(),
             &ModbusCom::writeRegister);
     m_mdiChilds.emplace_back(child);
@@ -214,4 +212,18 @@ void MainWindow::loadSettings()
     auto desktop =
         QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
     m_importFilePath = settings.value("importFilePath", desktop).toString();
+}
+
+bool MainWindow::setFocusIfAlreadyExists(const Block &block) const
+{
+    const auto it = std::find_if(
+        m_mdiChilds.cbegin(), m_mdiChilds.cend(),
+        [&](MdiChild *k) { return k->windowTitle() == block.description; });
+
+    if (it == m_mdiChilds.cend()) {
+        return false;
+    }
+
+    m_mdiChilds.at(std::distance(m_mdiChilds.cbegin(), it))->setFocus();
+    return true;
 }

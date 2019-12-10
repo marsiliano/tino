@@ -53,6 +53,7 @@ class MainWindow : public QMainWindow
     void createWidgetRequested(QStandardItem *item);
     void saveSettings();
     void loadSettings();
+    bool setFocusIfAlreadyExists(const Block &block) const;
 
     friend class tst_MainWindow;
 };
