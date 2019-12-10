@@ -1,8 +1,8 @@
 #include "ModbusCom.hpp"
 
 #include <Element.hpp>
+#include <QDebug>
 #include <QModbusRtuSerialSlave>
-#include <QtDebug>
 
 ModbusCom::ModbusCom(QObject *parent) : QObject(parent)
 {
