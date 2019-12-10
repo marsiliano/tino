@@ -1,7 +1,9 @@
 #pragma once
 
+#include <Bitset.hpp>
 #include <QHash>
 #include <QWidget>
+#include <memory>
 
 class QSvgRenderer;
 
@@ -75,12 +77,15 @@ class Led : public QWidget
     [[nodiscard]] QString tag() const;
     void setTag(const QString &tag);
 
+    void attachBitset(std::shared_ptr<Bitset> bitset, size_t bitIndex);
+
   public slots:
     void toggle();
 
   signals:
     void sizeChanged();
     void clicked();
+    void bitsetStateChanged(int address);
 
   protected:
     void paintEvent(QPaintEvent *event) override;
@@ -98,6 +103,9 @@ class Led : public QWidget
     QTimer *m_blinkTimer;
     bool m_interactive{ true };
     QString m_tag{};
+
+    std::shared_ptr<Bitset> m_bitset{};
+    size_t m_bitIndex{};
 
     void init();
     void checkWidgetSize();

@@ -57,6 +57,8 @@ class ConfigParser
 
     std::unique_ptr<Bitset> makeBitset(const QJsonObject &obj,
                                        const Block &b = Block()) const;
-    std::unique_ptr<Byte> makeByte(const QJsonObject &obj) const;
-    std::unique_ptr<Word> makeWord(const QJsonObject &obj) const;
+    std::unique_ptr<Byte> makeByte(const QJsonObject &obj,
+                                   const Block &b = Block()) const;
+    std::unique_ptr<Word> makeWord(const QJsonObject &obj,
+                                   const Block &b = Block()) const;
 };

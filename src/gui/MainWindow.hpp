@@ -1,7 +1,10 @@
 #pragma once
 
+#include <MdiChild.hpp>
+#include <ModbusCom.hpp>
 #include <QMainWindow>
 #include <QScopedPointer>
+#include <memory>
 
 namespace Ui
 {
@@ -30,12 +33,15 @@ class MainWindow : public QMainWindow
   private:
     Ui::MainWindow *ui;
 
-    QScopedPointer<Configuration> m_config;
+    std::shared_ptr<Configuration> m_config;
     QScopedPointer<QAction> m_serialConnect;
     QScopedPointer<QAction> m_serialSettings;
     QScopedPointer<QDockWidget> m_configViewDock;
 
     QString m_importFilePath;
+
+    std::unique_ptr<ModbusCom> m_modbus;
+    std::vector<MdiChild *> m_mdiChilds;
 
     struct Error {
         bool error{ false };

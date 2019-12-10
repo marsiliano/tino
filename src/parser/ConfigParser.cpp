@@ -98,11 +98,11 @@ Protocol ConfigParser::readBlocks(const QJsonObject &obj) const noexcept
             auto type = g.toObject().find(Tags::type)->toString();
             std::unique_ptr<Element> element;
             if (type == Tags::bitset) {
-                element = std::move(makeBitset(g.toObject()));
+                element = makeBitset(g.toObject(), blk);
             } else if (type == Tags::byte) {
-                element = std::move(makeByte(g.toObject()));
+                element = makeByte(g.toObject(), blk);
             } else if (type == Tags::word) {
-                element = std::move(makeWord(g.toObject()));
+                element = makeWord(g.toObject(), blk);
             } else {
                 qWarning() << "tag not handled";
             }
@@ -110,6 +110,13 @@ Protocol ConfigParser::readBlocks(const QJsonObject &obj) const noexcept
         }
         ret.blocks.emplace_back(std::move(blk));
     }
+
+    for (const auto &b : ret.blocks) {
+        for (const auto &el : b.elements) {
+            ret.elementMap.insert({ el->address(), el.get() });
+        }
+    }
+
     return ret;
 }
 
@@ -140,22 +147,33 @@ std::unique_ptr<Bitset> ConfigParser::makeBitset(const QJsonObject &obj,
     return element;
 }
 
-std::unique_ptr<Byte> ConfigParser::makeByte(const QJsonObject &obj) const
+std::unique_ptr<Byte> ConfigParser::makeByte(const QJsonObject &obj,
+                                             const Block &b) const
 {
     auto name        = obj.find(Tags::name)->toString();
     auto description = obj.find(Tags::description)->toString();
     auto address     = obj.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
-    auto defaultValue = obj.find(Tags::defaultValue)->toString().toInt();
-    auto element      = std::make_unique<Byte>(name, description, address);
+    if (address == 0) {
+        address = b.address;
+        address += obj.find(Tags::offset)->toString().toInt(Q_NULLPTR, 16);
+    }
+    auto defaultValue =
+        static_cast<int8_t>(obj.find(Tags::defaultValue)->toString().toInt());
+    auto element = std::make_unique<Byte>(name, description, address);
     element->setValue(defaultValue);
     return element;
 }
 
-std::unique_ptr<Word> ConfigParser::makeWord(const QJsonObject &obj) const
+std::unique_ptr<Word> ConfigParser::makeWord(const QJsonObject &obj,
+                                             const Block &b) const
 {
     auto name        = obj.find(Tags::name)->toString();
     auto description = obj.find(Tags::description)->toString();
     auto value = obj.find(Tags::defaultValue)->toString().toInt(Q_NULLPTR, 16);
-    auto addr  = obj.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
-    return std::make_unique<Word>(name, description, addr, value);
+    auto address = obj.find(Tags::address)->toString().toInt(Q_NULLPTR, 16);
+    if (address == 0) {
+        address = b.address;
+        address += obj.find(Tags::offset)->toString().toInt(Q_NULLPTR, 16);
+    }
+    return std::make_unique<Word>(name, description, address, value);
 }

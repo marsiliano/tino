@@ -5,6 +5,9 @@
 #include <QtTest>
 #include <Word.hpp>
 
+#define STRINGIFY_INTERNAL(x) #x
+#define STRINGIFY(x) STRINGIFY_INTERNAL(x)
+
 class tst_Parser : public QObject
 {
     Q_OBJECT
@@ -21,19 +24,13 @@ class tst_Parser : public QObject
     void parseWord();
 
   private:
-    QString path_{ QDir::currentPath() };
+    QString path_{};
     ConfigParser cp_;
 };
 
 void tst_Parser::initTestCase()
 {
-    const auto last_slash = path_.lastIndexOf("build-");
-    path_ = path_.remove(last_slash, (path_.size() - last_slash));
-    if (path_.contains("tino")) {
-        path_ += "tests/files/";
-    } else {
-        path_ += "tino/tests/files/";
-    }
+    path_ = STRINGIFY(TINO_PROJECT_DIR) + QStringLiteral("/tests/files/");
 }
 
 void tst_Parser::throwIfNotExists()
@@ -50,15 +47,15 @@ void tst_Parser::withoutSettings()
 void tst_Parser::normalSettings()
 {
     Settings right_settings;
-    right_settings.portName           = "/dev/ttyUSB0";
-    right_settings.baudRate           = QSerialPort::BaudRate::Baud9600;
-    right_settings.breakEnabled       = true;
-    right_settings.dataBits           = QSerialPort::DataBits::Data5;
+    right_settings.portName          = "/dev/ttyUSB0";
+    right_settings.baudRate          = QSerialPort::BaudRate::Baud9600;
+    right_settings.breakEnabled      = true;
+    right_settings.dataBits          = QSerialPort::DataBits::Data5;
     right_settings.dataTerminalReady = true;
-    right_settings.flowControl    = QSerialPort::FlowControl::SoftwareControl;
-    right_settings.parity          = QSerialPort::Parity::OddParity;
+    right_settings.flowControl   = QSerialPort::FlowControl::SoftwareControl;
+    right_settings.parity        = QSerialPort::Parity::OddParity;
     right_settings.requestToSend = true;
-    right_settings.stopBits       = QSerialPort::StopBits::TwoStop;
+    right_settings.stopBits      = QSerialPort::StopBits::TwoStop;
 
     auto config = cp_.parse(path_ + "only-settings.json");
     QVERIFY((config == Configuration{ std::move(right_settings), Protocol{} }));
@@ -86,6 +83,8 @@ void tst_Parser::parseBitset()
     QCOMPARE(b->address(), 0x10);
     QCOMPARE(b->description(), "BitsArray n1");
     QCOMPARE(b->descriptions().size(), 8);
+
+    QCOMPARE(p.elementMap.at(b->address())->description(), b->description());
 }
 
 void tst_Parser::parseByte()
@@ -105,6 +104,9 @@ void tst_Parser::parseByte()
     QCOMPARE(b2->description(), "Byte n2");
     QCOMPARE(b1->value(), 22);
     QCOMPARE(b2->value(), 44);
+
+    QCOMPARE(p.elementMap.at(b1->address())->description(), b1->description());
+    QCOMPARE(p.elementMap.at(b2->address())->description(), b2->description());
 }
 
 void tst_Parser::parseWord()
@@ -119,6 +121,8 @@ void tst_Parser::parseWord()
     QCOMPARE(w->address(), 0x10);
     QCOMPARE(w->value(), 0x7DDA);
     QCOMPARE(w->description(), "Word description");
+
+    QCOMPARE(p.elementMap.at(w->address())->description(), w->description());
 }
 
 QTEST_GUILESS_MAIN(tst_Parser)

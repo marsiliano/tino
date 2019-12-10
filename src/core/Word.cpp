@@ -12,6 +12,11 @@ Word::Word(QString name, QString descr, int addr, uint8_t low, uint8_t high) :
 {
 }
 
+void Word::setValue(int8_t val)
+{
+    setValue(static_cast<int16_t>(val));
+}
+
 void Word::setValue(int16_t value)
 {
     m_high = value >> 8;

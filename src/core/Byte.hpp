@@ -16,6 +16,7 @@ class Byte final : public Element
     Byte &operator=(Byte &&) = default;
 
     void setValue(int8_t value) override;
+    void setValue(int16_t val) override;
     int16_t value() const override;
 
   private:

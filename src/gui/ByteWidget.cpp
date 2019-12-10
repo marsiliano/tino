@@ -12,6 +12,16 @@ ByteWidget::ByteWidget(QString description, quint8 defaultValue,
     init();
 }
 
+void ByteWidget::updateValue(int16_t value)
+{
+    m_valueSpinBox->setValue(value);
+}
+
+void ByteWidget::attachByte(std::shared_ptr<Byte> byte)
+{
+    m_byte = byte;
+}
+
 void ByteWidget::init()
 {
     m_value = m_defaultValue;
@@ -25,6 +35,10 @@ void ByteWidget::init()
             [=](int i) {
                 m_value = i;
                 update();
+
+                if (m_byte) {
+                    Q_EMIT byteValueChanged(m_byte->address());
+                }
             });
     m_decValueLabel = new QLabel(this);
     m_hexValueLabel = new QLabel(this);

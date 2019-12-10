@@ -1,8 +1,9 @@
 TEMPLATE  = subdirs
 CONFIG   += ordered
 
-SUBDIRS +=  \
-    core    \
-    parser  \
-    gui     \
+SUBDIRS +=      \
+    core        \
+    parser      \
+    serialcom   \
+    gui         \
     app

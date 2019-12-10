@@ -1,14 +1,14 @@
 {
     "SerialPortSettings":
     {
-        "portName" : "/dev/ttyUSB0",
-        "baudRate" : 9600,
-        "breakEnabled" : true,
-        "dataBits" : 5,
-        "dataTerminalReady" : true,
-        "flowControl" : 2,
-        "parity" : 3,
-        "requestToSend" : true,
-        "stopBits" : 2
+        "PortName" : "/dev/ttyUSB0",
+        "BaudRate" : 9600,
+        "BreakEnabled" : true,
+        "DataBits" : 5,
+        "DataTerminalReady" : true,
+        "FlowControl" : 2,
+        "Parity" : 3,
+        "RequestToSend" : true,
+        "StopBits" : 2
     }
 }

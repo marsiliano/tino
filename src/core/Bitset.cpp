@@ -22,9 +22,14 @@ void Bitset::setValue(int8_t val)
     }
 }
 
+void Bitset::setValue(int16_t val)
+{
+    setValue(static_cast<int8_t>(val));
+}
+
 int16_t Bitset::value() const
 {
-    return static_cast<int>(m_bits.to_ulong());
+    return static_cast<int16_t>(m_bits.to_ulong());
 }
 
 const QStringList &Bitset::descriptions() const noexcept

@@ -22,14 +22,8 @@ class Element
     QString description() const noexcept;
     virtual int address() const noexcept;
 
-    virtual void setValue(int8_t val)
-    {
-        (void)(val);
-    }
-    virtual void setValue(int16_t val)
-    {
-        (void)(val);
-    }
+    virtual void setValue(int8_t val)  = 0;
+    virtual void setValue(int16_t val) = 0;
 
     virtual int16_t value() const = 0;
 
