@@ -31,6 +31,7 @@ void WordWidget::init()
     m_valueSpinBox->setValue(m_value);
     m_valueSpinBox->setMinimum(0);
     m_valueSpinBox->setMaximum(0xFFFF);
+    m_valueSpinBox->setAlignment(Qt::AlignRight);
     connect(m_valueSpinBox, QOverload<int>::of(&QSpinBox::valueChanged),
             [=](int i) {
                 m_value = i;
@@ -41,8 +42,12 @@ void WordWidget::init()
                 }
             });
     m_decValueLabel = new QLabel(this);
+    m_decValueLabel->setAlignment(Qt::AlignRight);
     m_hexValueLabel = new QLabel(this);
-    int index       = 0;
+    m_hexValueLabel->setAlignment(Qt::AlignRight);
+    int index = 0;
+    layout->setMargin(0);
+    layout->setSpacing(0);
     layout->addWidget(m_valueSpinBox, 0, index++);
     layout->addWidget(m_decValueLabel, 0, index++);
     layout->addWidget(m_hexValueLabel, 0, index++);
