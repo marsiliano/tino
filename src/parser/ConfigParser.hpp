@@ -36,7 +36,8 @@ class ConfigParser
 
   private:
     struct Tags {
-        constexpr static const auto settings     = "SerialPortSettings";
+        constexpr static const auto settings     = "Settings";
+        constexpr static const auto serialPort   = "SerialPort";
         constexpr static const auto protocol     = "CommunicationProtocol";
         constexpr static const auto blocks       = "Blocks";
         constexpr static const auto groups       = "Groups";

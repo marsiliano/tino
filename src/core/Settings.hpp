@@ -31,7 +31,7 @@ class Settings
     QString portName{};
     QSerialPort::BaudRate baudRate{ QSerialPort::BaudRate::Baud115200 };
     bool breakEnabled{ false };
-    QSerialPort::DataBits dataBits{ QSerialPort::DataBits::UnknownDataBits };
+    QSerialPort::DataBits dataBits{ QSerialPort::DataBits::Data8 };
     bool dataTerminalReady{ false };
     QSerialPort::FlowControl flowControl{
         QSerialPort::FlowControl::NoFlowControl
