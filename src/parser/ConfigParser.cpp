@@ -39,15 +39,16 @@ Configuration ConfigParser::parse(const QString &filename)
                                std::to_string(error.error));
     }
 
-    const auto obj      = doc.object();
-    const auto settings = obj.find(Tags::settings)->toObject();
+    const auto obj = doc.object();
+    const auto serial =
+        obj.find(Tags::settings)->toObject().find(Tags::serialPort)->toObject();
     const auto protocol = obj.find(Tags::protocol)->toObject();
 
-    if (settings.isEmpty() && protocol.isEmpty()) {
+    if (serial.isEmpty() && protocol.isEmpty()) {
         return {};
     }
 
-    return Configuration{ readSettings(settings), readBlocks(protocol) };
+    return Configuration{ readSettings(serial), readBlocks(protocol) };
 }
 
 Settings ConfigParser::readSettings(const QJsonObject &obj) const noexcept
