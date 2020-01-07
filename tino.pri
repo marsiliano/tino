@@ -8,6 +8,11 @@ DEFINES *= TINO_PROJECT_DIR=$$system(pwd)
 
 CONFIG += c++17
 
+CONFIG(debug, debug|release) {
+    QMAKE_CXXFLAGS += --coverage
+    QMAKE_LFLAGS += --coverage
+}
+
 defineTest(minQtVersion) {
     maj = $$1
     min = $$2
