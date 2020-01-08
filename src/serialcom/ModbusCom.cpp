@@ -67,6 +67,7 @@ bool ModbusCom::disconnectModbus()
 
 void ModbusCom::writeRegister(int address)
 {
+    qDebug() << address << m_protocolRef.elementMap.at(address)->value();
     m_modbusDevice->setData(QModbusDataUnit::HoldingRegisters, address,
                             m_protocolRef.elementMap.at(address)->value());
 }
@@ -144,7 +145,7 @@ bool ModbusCom::initializeServer()
 
     reg.insert(QModbusDataUnit::HoldingRegisters,
                { QModbusDataUnit::HoldingRegisters, 0,
-                 static_cast<quint16>(maxAddress) });
+                 static_cast<quint16>(maxAddress + 1) });
 
     return m_modbusDevice->setMap(reg);
 }

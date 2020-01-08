@@ -326,7 +326,7 @@ void Led::toggle()
         setState(Led::On);
     }
 
-    if (!m_bitset) {
+    if (m_bitset) {
         m_bitset->setAt(m_bitIndex, bitEnabled);
         Q_EMIT bitsetStateChanged(m_bitset->address());
     }
