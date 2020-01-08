@@ -19,21 +19,20 @@ DialogSerialSettings::DialogSerialSettings(Settings *settings,
         ui->serialPortComboBox->addItem(serialPort.portName());
 
         if (serialPort.portName() ==
-            m_settings->portName.mid(m_settings->portName.lastIndexOf('/') +
-                                          1,
-                                      m_settings->portName.size())) {
+            m_settings->portName.mid(m_settings->portName.lastIndexOf('/') + 1,
+                                     m_settings->portName.size())) {
             portAvailable = true;
         }
     }
 
     if (portAvailable) {
-        ui->serialPortComboBox->setCurrentText(m_settings->portName.mid(
-            m_settings->portName.lastIndexOf('/') + 1,
-            m_settings->portName.size()));
+        ui->serialPortComboBox->setCurrentText(
+            m_settings->portName.mid(m_settings->portName.lastIndexOf('/') + 1,
+                                     m_settings->portName.size()));
     } else {
         ui->serialPortOverrideGroupBox->setChecked(true);
         ui->serialPortOverrideLineEdit->setText(m_settings->portName);
-        on_serialPortOverrideGroupBox_clicked();
+        serialPortOverrideBox();
     }
 
     QMetaEnum metaEnum = QMetaEnum::fromType<QSerialPort::BaudRate>();
@@ -76,7 +75,7 @@ DialogSerialSettings::~DialogSerialSettings()
     delete ui;
 }
 
-void DialogSerialSettings::on_serialPortOverrideGroupBox_clicked()
+void DialogSerialSettings::serialPortOverrideBox()
 {
     ui->serialPortComboBox->setEnabled(
         !ui->serialPortOverrideGroupBox->isChecked());
@@ -93,10 +92,10 @@ void DialogSerialSettings::accept()
     }
 
     QMetaEnum metaEnum = QMetaEnum::fromType<QSerialPort::BaudRate>();
-    s.baudRate        = static_cast<QSerialPort::BaudRate>(metaEnum.keyToValue(
+    s.baudRate         = static_cast<QSerialPort::BaudRate>(metaEnum.keyToValue(
         ui->baudRateComboBox->currentText().toStdString().c_str()));
 
-    metaEnum    = QMetaEnum::fromType<QSerialPort::DataBits>();
+    metaEnum   = QMetaEnum::fromType<QSerialPort::DataBits>();
     s.dataBits = static_cast<QSerialPort::DataBits>(metaEnum.keyToValue(
         ui->dataBitsComboBox->currentText().toStdString().c_str()));
 
@@ -104,11 +103,11 @@ void DialogSerialSettings::accept()
     s.parity = static_cast<QSerialPort::Parity>(metaEnum.keyToValue(
         ui->parityComboBox->currentText().toStdString().c_str()));
 
-    metaEnum    = QMetaEnum::fromType<QSerialPort::StopBits>();
+    metaEnum   = QMetaEnum::fromType<QSerialPort::StopBits>();
     s.stopBits = static_cast<QSerialPort::StopBits>(metaEnum.keyToValue(
         ui->stopBitsComboBox->currentText().toStdString().c_str()));
 
-    metaEnum       = QMetaEnum::fromType<QSerialPort::FlowControl>();
+    metaEnum      = QMetaEnum::fromType<QSerialPort::FlowControl>();
     s.flowControl = static_cast<QSerialPort::FlowControl>(metaEnum.keyToValue(
         ui->flowControlComboBox->currentText().toStdString().c_str()));
 

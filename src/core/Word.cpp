@@ -1,7 +1,7 @@
 #include "Word.hpp"
 
 Word::Word(QString name, QString descr, int addr, int16_t value) :
-    Element{ name, descr, addr }
+    Element{ std::move(name), std::move(descr), addr }
 {
     m_high = value >> 8;
     m_low  = value & 0xFF;

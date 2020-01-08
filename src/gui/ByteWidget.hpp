@@ -28,7 +28,7 @@ class ByteWidget : public QWidget
     QLabel *m_decValueLabel{ nullptr };
     QLabel *m_hexValueLabel{ nullptr };
     QSpinBox *m_valueSpinBox{ nullptr };
-    Byte *m_byte;
+    Byte *m_byte{ nullptr };
 
     void init();
     void checkWidgetSize();

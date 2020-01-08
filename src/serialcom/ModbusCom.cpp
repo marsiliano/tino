@@ -5,10 +5,11 @@
 #include <QModbusRtuSerialSlave>
 
 ModbusCom::ModbusCom(const Protocol &protocol, QObject *parent) :
-    QObject(parent), m_protocolRef{ protocol }
+    QObject(parent),
+    m_modbusDevice{ std::make_unique<QModbusRtuSerialSlave>() }, m_protocolRef{
+        protocol
+    }
 {
-    m_modbusDevice.reset(new QModbusRtuSerialSlave(this));
-
     connect(m_modbusDevice.get(), &QModbusServer::errorOccurred, this,
             [this](QModbusDevice::Error error) {
                 handleError(m_modbusDevice->errorString(), error);

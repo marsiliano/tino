@@ -26,7 +26,7 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QWidget(parent)
 
         if (auto bitset = dynamic_cast<Bitset *>(element.get())) {
             auto leds = std::vector<QWidget *>();
-            for (size_t i = 0; i < bitset->size; ++i) {
+            for (size_t i = 0; i < Bitset::size; ++i) {
                 if (c == 4) {
                     ++r;
                     c = 0;
@@ -84,7 +84,7 @@ void MdiChild::updateGuiElemets()
 {
     for (const auto &guiElement : m_guiElements) {
         if (auto bitset = dynamic_cast<Bitset *>(guiElement.el)) {
-            for (size_t i = 0; i < bitset->size; ++i) {
+            for (size_t i = 0; i < Bitset::size; ++i) {
                 if (auto led = dynamic_cast<Led *>(guiElement.w.at(i))) {
                     auto state =
                         bitset->valueAt(i) ? Led::State::On : Led::State::Off;

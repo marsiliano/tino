@@ -1,11 +1,12 @@
 #include "Byte.hpp"
 
-Byte::Byte(QString name, QString descr, int addr) : Element{ name, descr, addr }
+Byte::Byte(QString name, QString descr, int addr) :
+    Element{ std::move(name), std::move(descr), addr }
 {
 }
 
 Byte::Byte(QString name, QString descr, int addr, int8_t value) :
-    Element{ name, descr, addr }, m_value{ value }
+    Element{ std::move(name), std::move(descr), addr }, m_value{ value }
 {
 }
 

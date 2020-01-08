@@ -29,7 +29,7 @@ class WordWidget : public QWidget
     QLabel *m_decValueLabel{ nullptr };
     QLabel *m_hexValueLabel{ nullptr };
     QSpinBox *m_valueSpinBox{ nullptr };
-    Word *m_word;
+    Word *m_word{ nullptr };
 
     void init();
     void checkWidgetSize();

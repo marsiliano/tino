@@ -18,8 +18,7 @@ class DialogSerialSettings : public QDialog
     ~DialogSerialSettings() override;
 
   private slots:
-    void on_serialPortOverrideGroupBox_clicked(); // FIXME: do not use automatic
-                                                  // slot generation
+    void serialPortOverrideBox();
     void accept() override;
 
   private:
