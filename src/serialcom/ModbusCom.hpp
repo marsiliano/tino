@@ -29,7 +29,7 @@ class ModbusCom : public QObject
 
   private:
     std::unique_ptr<QModbusServer> m_modbusDevice;
-    const Protocol &m_protocolRef;
+    const Protocol &m_protocol;
 
     bool initializeServer();
 };

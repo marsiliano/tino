@@ -6,7 +6,7 @@
 
 ModbusCom::ModbusCom(const Protocol &protocol, QObject *parent) :
     QObject(parent),
-    m_modbusDevice{ std::make_unique<QModbusRtuSerialSlave>() }, m_protocolRef{
+    m_modbusDevice{ std::make_unique<QModbusRtuSerialSlave>() }, m_protocol{
         protocol
     }
 {
@@ -67,9 +67,9 @@ bool ModbusCom::disconnectModbus()
 
 void ModbusCom::writeRegister(int address)
 {
-    qDebug() << address << m_protocolRef.elementMap.at(address)->value();
+    qDebug() << address << m_protocol.elementMap.at(address)->value();
     m_modbusDevice->setData(QModbusDataUnit::HoldingRegisters, address,
-                            m_protocolRef.elementMap.at(address)->value());
+                            m_protocol.elementMap.at(address)->value());
 }
 
 void ModbusCom::handleError(const QString &errorString,
@@ -116,9 +116,9 @@ void ModbusCom::updateRegisters(QModbusDataUnit::RegisterType table,
             case QModbusDataUnit::HoldingRegisters:
                 m_modbusDevice->data(QModbusDataUnit::HoldingRegisters,
                                      static_cast<quint16>(add), &value);
-                if (m_protocolRef.elementMap.find(add) !=
-                    m_protocolRef.elementMap.end()) {
-                    m_protocolRef.elementMap.at(add)->setValue(
+                if (m_protocol.elementMap.find(add) !=
+                    m_protocol.elementMap.end()) {
+                    m_protocol.elementMap.at(add)->setValue(
                         static_cast<int16_t>(value));
                 } else {
                     qWarning()
@@ -137,7 +137,7 @@ bool ModbusCom::initializeServer()
     QModbusDataUnitMap reg;
     auto maxAddress = 0;
 
-    for (const auto &el : m_protocolRef.elementMap) {
+    for (const auto &el : m_protocol.elementMap) {
         if (el.first > maxAddress) {
             maxAddress = el.first;
         }
