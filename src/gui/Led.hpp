@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Bitset.hpp>
 #include <QHash>
 #include <QWidget>
 #include <memory>
 
+class Bitset;
 class QSvgRenderer;
 
 class Led : public QWidget
@@ -77,7 +77,7 @@ class Led : public QWidget
     [[nodiscard]] QString tag() const;
     void setTag(const QString &tag);
 
-    void attachBitset(std::shared_ptr<Bitset> bitset, size_t bitIndex);
+    void attachBitset(Bitset *bitset, size_t bitIndex);
 
   public slots:
     void toggle();
@@ -104,7 +104,7 @@ class Led : public QWidget
     bool m_interactive{ true };
     QString m_tag{};
 
-    std::shared_ptr<Bitset> m_bitset{};
+    Bitset *m_bitset{ nullptr };
     size_t m_bitIndex{};
 
     void init();

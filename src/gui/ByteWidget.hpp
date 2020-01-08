@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Byte.hpp>
 #include <QWidget>
 #include <memory>
 
+class Byte;
 class QLabel;
 class QSpinBox;
 
@@ -16,7 +16,7 @@ class ByteWidget : public QWidget
 
     void updateValue(int16_t value);
 
-    void attachByte(std::shared_ptr<Byte> byte);
+    void attachByte(Byte *byte);
 
   signals:
     void byteValueChanged(int address);
@@ -28,7 +28,7 @@ class ByteWidget : public QWidget
     QLabel *m_decValueLabel{ nullptr };
     QLabel *m_hexValueLabel{ nullptr };
     QSpinBox *m_valueSpinBox{ nullptr };
-    std::shared_ptr<Byte> m_byte;
+    Byte *m_byte;
 
     void init();
     void checkWidgetSize();

@@ -1,5 +1,6 @@
 ﻿#include "ByteWidget.hpp"
 
+#include <Byte.hpp>
 #include <QGridLayout>
 #include <QLabel>
 #include <QSpinBox>
@@ -17,7 +18,7 @@ void ByteWidget::updateValue(int16_t value)
     m_valueSpinBox->setValue(value);
 }
 
-void ByteWidget::attachByte(std::shared_ptr<Byte> byte)
+void ByteWidget::attachByte(Byte *byte)
 {
     m_byte = byte;
 }

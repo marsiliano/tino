@@ -1,7 +1,9 @@
 #include "Led.hpp"
 
+#include <Bitset.hpp>
 #include <QApplication>
 #include <QtSvg>
+#include <bitset>
 #include <utility>
 
 const int spacing        = 2;
@@ -266,7 +268,8 @@ void Led::setTag(const QString &tag)
         m_tag = tag;
 }
 
-void Led::attachBitset(std::shared_ptr<Bitset> bitset, size_t bitIndex)
+void Led::attachBitset(Bitset *bitset, size_t bitIndex)
+
 {
     m_bitset   = bitset;
     m_bitIndex = bitIndex;
@@ -323,7 +326,7 @@ void Led::toggle()
         setState(Led::On);
     }
 
-    if (m_bitset != nullptr) {
+    if (!m_bitset) {
         m_bitset->setAt(m_bitIndex, bitEnabled);
         Q_EMIT bitsetStateChanged(m_bitset->address());
     }

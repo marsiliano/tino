@@ -3,6 +3,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QSpinBox>
+#include <Word.hpp>
 
 WordWidget::WordWidget(QString description, quint16 defaultValue,
                        QWidget *parent) :
@@ -17,7 +18,7 @@ void WordWidget::updateValue(int16_t val)
     m_valueSpinBox->setValue(val);
 }
 
-void WordWidget::attachWord(std::shared_ptr<Word> word)
+void WordWidget::attachWord(Word *word)
 {
     m_word = word;
 }
