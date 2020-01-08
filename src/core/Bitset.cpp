@@ -1,7 +1,7 @@
 #include "Bitset.hpp"
 
 Bitset::Bitset(QString name, QString descr, int addr) :
-    Element{ name, descr, addr }
+    Element{ std::move(name), std::move(descr), addr }
 {
 }
 

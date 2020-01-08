@@ -3,7 +3,6 @@
 #include <MdiChild.hpp>
 #include <ModbusCom.hpp>
 #include <QMainWindow>
-#include <QScopedPointer>
 #include <memory>
 
 namespace Ui
@@ -33,10 +32,10 @@ class MainWindow : public QMainWindow
   private:
     Ui::MainWindow *ui;
 
-    std::shared_ptr<Configuration> m_config;
-    QScopedPointer<QAction> m_serialConnect;
-    QScopedPointer<QAction> m_serialSettings;
-    QScopedPointer<QDockWidget> m_configViewDock;
+    std::unique_ptr<Configuration> m_config;
+    std::unique_ptr<QAction> m_serialConnect;
+    std::unique_ptr<QAction> m_serialSettings;
+    std::unique_ptr<QDockWidget> m_configViewDock;
 
     QString m_importFilePath;
 

@@ -26,7 +26,7 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QWidget(parent)
 
         if (auto bitset = dynamic_cast<Bitset *>(element.get())) {
             auto leds = std::vector<QWidget *>();
-            for (size_t i = 0; i < bitset->size; ++i) {
+            for (size_t i = 0; i < Bitset::size; ++i) {
                 if (c == 4) {
                     ++r;
                     c = 0;
@@ -37,7 +37,7 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QWidget(parent)
                                    this, QSize(30, 30),
                                    bitset->valueAt(i) ? Led::State::On
                                                       : Led::State::Off);
-                led->attachBitset(std::make_shared<Bitset>(*bitset), i);
+                led->attachBitset(bitset, i);
                 connect(led, &Led::bitsetStateChanged, this,
                         &MdiChild::updateModbus);
                 leds.emplace_back(led);
@@ -51,7 +51,7 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QWidget(parent)
         if (auto byte = dynamic_cast<Byte *>(element.get())) {
             auto bw = new ByteWidget(byte->name(),
                                      static_cast<quint8>(byte->value()));
-            bw->attachByte(std::make_shared<Byte>(*byte));
+            bw->attachByte(byte);
             connect(bw, &ByteWidget::byteValueChanged, this,
                     &MdiChild::updateModbus);
             m_guiElements.emplace_back(GuiElement{ element.get(), { bw } });
@@ -61,7 +61,7 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QWidget(parent)
 
         if (auto word = dynamic_cast<Word *>(element.get())) {
             auto ww = new WordWidget(word->name(), word->value());
-            ww->attachWord(std::make_shared<Word>(*word));
+            ww->attachWord(word);
             connect(ww, &WordWidget::wordValueChanged, this,
                     &MdiChild::updateModbus);
             m_guiElements.emplace_back(GuiElement{ element.get(), { ww } });
@@ -84,7 +84,7 @@ void MdiChild::updateGuiElemets()
 {
     for (const auto &guiElement : m_guiElements) {
         if (auto bitset = dynamic_cast<Bitset *>(guiElement.el)) {
-            for (size_t i = 0; i < bitset->size; ++i) {
+            for (size_t i = 0; i < Bitset::size; ++i) {
                 if (auto led = dynamic_cast<Led *>(guiElement.w.at(i))) {
                     auto state =
                         bitset->valueAt(i) ? Led::State::On : Led::State::Off;

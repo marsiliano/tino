@@ -30,16 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(this, &MainWindow::importFinished, this,
             &MainWindow::createConfigView);
-
-    m_modbus = std::make_unique<ModbusCom>();
-    connect(m_modbus.get(), &ModbusCom::updateGui, this, [this](int address) {
-        for (const auto &mdi : m_mdiChilds) {
-            if (mdi->hasElementWithAddress(address)) {
-                mdi->updateGuiElemets();
-                return;
-            }
-        }
-    });
 }
 
 MainWindow::~MainWindow()
@@ -169,7 +159,15 @@ MainWindow::Error MainWindow::importConfig(const QString &filename)
         return Error{ true, "Parsing configuration error!" };
     }
 
-    m_modbus->initializeServer(std::make_shared<Protocol>(m_config->protocol));
+    m_modbus = std::make_unique<ModbusCom>(m_config->protocol);
+    connect(m_modbus.get(), &ModbusCom::updateGui, this, [this](int address) {
+        for (const auto &mdi : m_mdiChilds) {
+            if (mdi->hasElementWithAddress(address)) {
+                mdi->updateGuiElemets();
+                return;
+            }
+        }
+    });
 
     m_serialConnect->setEnabled(true);
     m_serialSettings->setEnabled(true);

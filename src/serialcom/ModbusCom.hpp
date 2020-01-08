@@ -9,10 +9,9 @@
 class ModbusCom : public QObject
 {
     Q_OBJECT
-  public:
-    explicit ModbusCom(QObject *parent = nullptr);
 
-    bool initializeServer(std::shared_ptr<Protocol> protocol);
+  public:
+    explicit ModbusCom(const Protocol &protocol, QObject *parent = nullptr);
 
     bool isConnected() const;
     bool connectModbus(const Settings &settings);
@@ -30,5 +29,7 @@ class ModbusCom : public QObject
 
   private:
     std::unique_ptr<QModbusServer> m_modbusDevice;
-    std::shared_ptr<Protocol> m_protocolRef;
+    const Protocol &m_protocol;
+
+    bool initializeServer();
 };

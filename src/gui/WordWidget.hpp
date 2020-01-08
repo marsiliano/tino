@@ -1,9 +1,9 @@
 #pragma once
 
 #include <QWidget>
-#include <Word.hpp>
 #include <memory>
 
+class Word;
 class QLabel;
 class QSpinBox;
 
@@ -17,7 +17,7 @@ class WordWidget : public QWidget
 
     void updateValue(int16_t val);
 
-    void attachWord(std::shared_ptr<Word> word);
+    void attachWord(Word *word);
 
   signals:
     void wordValueChanged(int address);
@@ -29,8 +29,7 @@ class WordWidget : public QWidget
     QLabel *m_decValueLabel{ nullptr };
     QLabel *m_hexValueLabel{ nullptr };
     QSpinBox *m_valueSpinBox{ nullptr };
-
-    std::shared_ptr<Word> m_word;
+    Word *m_word{ nullptr };
 
     void init();
     void checkWidgetSize();
