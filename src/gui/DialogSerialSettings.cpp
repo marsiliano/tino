@@ -68,6 +68,9 @@ DialogSerialSettings::DialogSerialSettings(Settings *settings,
     }
     ui->flowControlComboBox->setCurrentText(
         metaEnum.valueToKey(m_settings->flowControl));
+
+    connect(ui->serialPortOverrideGroupBox, &QGroupBox::clicked, this,
+            &DialogSerialSettings::serialPortOverrideBox);
 }
 
 DialogSerialSettings::~DialogSerialSettings()
