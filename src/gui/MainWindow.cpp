@@ -193,6 +193,13 @@ void MainWindow::createWidgetRequested(QStandardItem *item)
     const auto child = new MdiChild(block);
     connect(child, &MdiChild::updateModbus, m_modbus.get(),
             &ModbusCom::writeRegister);
+    connect(child, &MdiChild::destroyed, this, [&]() {
+        const auto it =
+            std::find(m_mdiChilds.cbegin(), m_mdiChilds.cbegin(), child);
+        if (it != m_mdiChilds.cend()) {
+            m_mdiChilds.erase(it);
+        }
+    });
     m_mdiChilds.emplace_back(child);
     ui->mdiArea->addSubWindow(child);
     child->show();
