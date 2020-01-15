@@ -48,6 +48,7 @@ class ConfigParser
         constexpr static const auto byte         = "Byte";
         constexpr static const auto word         = "Word";
         constexpr static const auto address      = "Address";
+        constexpr static const auto category     = "Category";
         constexpr static const auto offset       = "Offset";
         constexpr static const auto bits         = "Bits";
         constexpr static const auto defaultValue = "DefaultValue";

@@ -94,6 +94,7 @@ Protocol ConfigParser::readBlocks(const QJsonObject &obj) const noexcept
         Block blk;
         const auto block = v.toObject();
         blk.description  = block.find(Tags::description)->toString();
+        blk.category     = block.find(Tags::category)->toString();
         blk.address =
             block.find(Tags::address)->toString().toInt(Q_NULLPTR, HexBase);
         const auto groups = block.find(Tags::groups)->toArray();
