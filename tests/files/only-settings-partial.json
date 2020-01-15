@@ -1,7 +1,0 @@
-{
-    "SerialPortSettings":
-    {
-        "PortName" : "/dev/pts/5",
-        "BaudRate" : 9600
-    }
-}

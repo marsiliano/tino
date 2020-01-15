@@ -18,7 +18,6 @@ class tst_Parser : public QObject
     void throwIfNotExists();
     void withoutSettings();
     void normalSettings();
-    void partialSettings();
     void parseBitset();
     void parseByte();
     void parseWord();
@@ -47,28 +46,18 @@ void tst_Parser::withoutSettings()
 void tst_Parser::normalSettings()
 {
     Settings right_settings;
-    right_settings.portName          = "/dev/ttyUSB0";
-    right_settings.baudRate          = QSerialPort::BaudRate::Baud9600;
-    right_settings.breakEnabled      = true;
-    right_settings.dataBits          = QSerialPort::DataBits::Data5;
-    right_settings.dataTerminalReady = true;
-    right_settings.flowControl   = QSerialPort::FlowControl::SoftwareControl;
-    right_settings.parity        = QSerialPort::Parity::OddParity;
-    right_settings.requestToSend = true;
-    right_settings.stopBits      = QSerialPort::StopBits::TwoStop;
+    right_settings.portName          = "/dev/ttymxc1";
+    right_settings.baudRate          = QSerialPort::BaudRate::Baud115200;
+    right_settings.breakEnabled      = false;
+    right_settings.dataBits          = QSerialPort::DataBits::Data8;
+    right_settings.dataTerminalReady = false;
+    right_settings.flowControl       = QSerialPort::FlowControl::NoFlowControl;
+    right_settings.parity            = QSerialPort::Parity::NoParity;
+    right_settings.requestToSend     = true;
+    right_settings.stopBits          = QSerialPort::StopBits::OneStop;
 
-    auto config = cp_.parse(path_ + "only-settings.json");
-    QVERIFY((config == Configuration{ std::move(right_settings), Protocol{} }));
-}
-
-void tst_Parser::partialSettings()
-{
-    Settings right_settings;
-    right_settings.portName = QString("/dev/pts/5");
-    right_settings.baudRate = QSerialPort::BaudRate::Baud9600;
-
-    auto config = cp_.parse(path_ + "only-settings-partial.json");
-    QVERIFY((config == Configuration{ std::move(right_settings), Protocol{} }));
+    auto config = cp_.parse(path_ + "protocol.json");
+    QVERIFY(config.settings == right_settings);
 }
 
 void tst_Parser::parseBitset()

@@ -1,12 +1,254 @@
 {
-  "SerialPortSettings": {
-    "PortName": "/dev/ttymxc1",
-    "BaudRate": 115200,
-    "DataBits": 8,
-    "StopBits": 1
+  "Settings" : {
+    "SerialPort": {
+      "PortName": "/dev/ttymxc1",
+      "BaudRate": 115200,
+      "DataBits": 8,
+      "RequestToSend": true,
+      "StopBits": 1
+    },
+    "Modbus": {
+      "Type": "Master",
+      "ServerId": 1
+    },
+    "Timings": {
+        "Alarm" : 250,
+        "Feedback" : 500
+    }
   },
   "CommunicationProtocol": {
     "Blocks": [
+      {
+        "Description": "Control Panel Parameter Block",
+        "Address": "0x125",
+        "Category": "Parameter",
+        "Groups": [
+          {
+            "Type": "Byte",
+            "Offset": "0x01",
+            "Name": "P01",
+            "Description": "P01 Parameter - Machine Type",
+            "DefaultValue" : "0x00"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x02",
+            "Name": "P02",
+            "Description": "P02 Parameter - Granita consistency multiplier",
+            "DefaultValue" : "0x0A"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x03",
+            "Name": "P03",
+            "Description": "P03 Parameter",
+            "DefaultValue" : "0x0A"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x04",
+            "Name": "P04",
+            "Description": "P04 Parameter",
+            "DefaultValue" : "0x00"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x05",
+            "Name": "P05",
+            "Description": "P05 Parameter",
+            "DefaultValue" : "0x96"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x06",
+            "Name": "P06",
+            "Description": "P06 Parameter",
+            "DefaultValue" : "0x0A"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x07",
+            "Name": "P07",
+            "Description": "P07 Parameter",
+            "DefaultValue" : "0xBE"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x08",
+            "Name": "P08",
+            "Description": "P08 Parameter",
+            "DefaultValue" : "0x04"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x09",
+            "Name": "P09",
+            "Description": "P09 Parameter",
+            "DefaultValue" : "0xB4"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x0A",
+            "Name": "P0A",
+            "Description": "P0A Parameter",
+            "DefaultValue" : "0x0E"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x0B",
+            "Name": "P0B",
+            "Description": "P0B Parameter",
+            "DefaultValue" : "0XC8"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x0C",
+            "Name": "P0C",
+            "Description": "P0C Parameter",
+            "DefaultValue" : "0x0A"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x0D",
+            "Name": "P0D",
+            "Description": "P0D Parameter",
+            "DefaultValue" : "0x02"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x0E",
+            "Name": "P0E",
+            "Description": "P0E Parameter",
+            "DefaultValue" : "0x01"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x0F",
+            "Name": "P0F",
+            "Description": "P0F Parameter",
+            "DefaultValue" : "0x01"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x10",
+            "Name": "P10",
+            "Description": "P10 Parameter",
+            "DefaultValue" : "0x32"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x11",
+            "Name": "P11",
+            "Description": "P11 Parameter",
+            "DefaultValue" : "0x0A"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x12",
+            "Name": "P12",
+            "Description": "P12 Parameter",
+            "DefaultValue" : "0x00"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x13",
+            "Name": "P13",
+            "Description": "P13 Parameter",
+            "DefaultValue" : "0x00"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x14",
+            "Name": "P14",
+            "Description": "P14 Parameter",
+            "DefaultValue" : "0x00"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x15",
+            "Name": "P15",
+            "Description": "P15 Parameter",
+            "DefaultValue" : "0x00"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x16",
+            "Name": "P16",
+            "Description": "P16 Parameter",
+            "DefaultValue" : "0x00"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x17",
+            "Name": "P17",
+            "Description": "P17 Parameter",
+            "DefaultValue" : "0x00"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x18",
+            "Name": "P18",
+            "Description": "P18 Parameter",
+            "DefaultValue" : "0x04"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x19",
+            "Name": "P19",
+            "Description": "P19 Parameter",
+            "DefaultValue" : "0x3C"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x1A",
+            "Name": "P1A",
+            "Description": "P1A Parameter",
+            "DefaultValue" : "0x3C"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x1B",
+            "Name": "P1B",
+            "Description": "P1B Parameter",
+            "DefaultValue" : "0x2D"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x1C",
+            "Name": "P1C",
+            "Description": "P1C Parameter",
+            "DefaultValue" : "0x5A"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x1D",
+            "Name": "P1D",
+            "Description": "P1D Parameter",
+            "DefaultValue" : "0x41"
+          } ,
+          {
+            "Type": "Byte",
+            "Offset": "0x1E",
+            "Name": "P1E",
+            "Description": "P1E Parameter",
+            "DefaultValue" : "0x78"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x1F",
+            "Name": "P1F",
+            "Description": "P1F Parameter",
+            "DefaultValue" : "0x14"
+          },
+          {
+            "Type": "Byte",
+            "Offset": "0x20",
+            "Name": "P20",
+            "Description": "P20 Parameter",
+            "DefaultValue" : "0x14"
+          }
+        ]
+      },
       {
         "Description": "Control Panel Feedback Block",
         "Address": "0x0156",
@@ -41,18 +283,11 @@
             "Offset": "0x0C",
             "Name": "CurrentPhaseTime",
             "Description": "Cleaning current phase time"
-          }
-        ]
-      },
-      {
-        "Description": "Control Panel Byte Block",
-        "Category": "Feedback",
-        "Address": "0x0164",
-        "Groups": [
+          },
           {
             "Type": "Byte",
             "Name": "CleaningPhase",
-            "Offset": "0x00",
+            "Address": "0x0164",
             "Description": "Cleaning current phase"
           }
         ]
@@ -456,7 +691,7 @@
         ]
       },
       {
-        "Description": "Control Panel Alarm Block",
+        "Description": "Control Panel Command Block",
         "Category": "Command",
         "Address": "0x0106",
         "Groups": [
@@ -564,10 +799,17 @@
           },
           {
             "Type": "Byte",
+            "Offset": "0x03",
+            "Name": "ValidData",
+            "Description": "0x5A Data Valid",
+            "DefaultValue": "0x5A"
+          },
+          {
+            "Type": "Byte",
             "Offset": "0x05",
             "Name": "ConsistencyCorrection",
             "Description": "100-250, 200 no correction",
-            "DefaultValue": "200"
+            "DefaultValue": "0xC8"
           }
 
         ]
