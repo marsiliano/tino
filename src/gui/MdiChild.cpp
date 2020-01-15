@@ -69,6 +69,7 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QWidget(parent)
                 ->addWidget(ww, r, c);
         }
 
+        m_addresses.emplace_back(element->address());
         layout()->addWidget(groupBox);
     }
 }
