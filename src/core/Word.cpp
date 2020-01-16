@@ -1,13 +1,21 @@
 #include "Word.hpp"
 
-UWord::UWord(QString name, QString descr, int addr, int16_t value) :
+UWord::UWord(QString name, QString descr, uint16_t addr, int16_t value) :
     Element{ std::move(name), std::move(descr), addr }
 {
+    setType(Element::Type::UWord);
 }
 
-UWord::UWord(QString name, QString descr, int addr, uint8_t low, uint8_t high) :
+UWord::UWord(QString name, QString descr, uint16_t addr, uint8_t low,
+             uint8_t high) :
     Element{ name, descr, addr }
 {
+    setType(Element::Type::UWord);
+}
+
+uint16_t UWord::uValue() const
+{
+    return m_value;
 }
 
 int16_t UWord::sValue() const
@@ -33,14 +41,17 @@ void UWord::setValue(uint16_t value)
     m_value = value;
 }
 
-SWord::SWord(QString name, QString descr, int addr, int16_t value) :
+SWord::SWord(QString name, QString descr, uint16_t addr, int16_t value) :
     Element{ std::move(name), std::move(descr), addr }
 {
+    setType(Element::Type::SWord);
 }
 
-SWord::SWord(QString name, QString descr, int addr, uint8_t low, uint8_t high) :
+SWord::SWord(QString name, QString descr, uint16_t addr, uint8_t low,
+             uint8_t high) :
     Element{ name, descr, addr }
 {
+    setType(Element::Type::SWord);
 }
 
 uint16_t SWord::uValue() const

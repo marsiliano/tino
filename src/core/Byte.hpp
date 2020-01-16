@@ -5,9 +5,9 @@
 class UByte final : public Element
 {
   public:
-    UByte() = default;
-    explicit UByte(QString name, QString descr, int addr);
-    explicit UByte(QString name, QString descr, int addr, uint8_t value);
+    UByte() = delete;
+    explicit UByte(QString name, QString descr, uint16_t addr);
+    explicit UByte(QString name, QString descr, uint16_t addr, uint8_t value);
     UByte(const UByte &) = default;
     UByte(UByte &&)      = default;
     ~UByte() override    = default;
@@ -28,9 +28,9 @@ class UByte final : public Element
 class SByte final : public Element
 {
   public:
-    SByte() = default;
-    explicit SByte(QString name, QString descr, int addr);
-    explicit SByte(QString name, QString descr, int addr, int8_t value);
+    SByte() = delete;
+    explicit SByte(QString name, QString descr, uint16_t addr);
+    explicit SByte(QString name, QString descr, uint16_t addr, int8_t value);
     SByte(const SByte &) = default;
     SByte(SByte &&)      = default;
     ~SByte() override    = default;

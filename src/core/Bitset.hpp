@@ -8,8 +8,8 @@
 class Bitset final : public Element
 {
   public:
-    Bitset() = default;
-    explicit Bitset(QString name, QString descr, int addr);
+    Bitset() = delete;
+    explicit Bitset(QString name, QString descr, uint16_t addr);
     Bitset(const Bitset &) = default;
     Bitset(Bitset &&)      = default;
     ~Bitset() override     = default;

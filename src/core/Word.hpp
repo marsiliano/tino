@@ -5,9 +5,9 @@
 class UWord final : public Element
 {
   public:
-    UWord() = default;
-    explicit UWord(QString name, QString descr, int addr, int16_t value);
-    explicit UWord(QString name, QString descr, int addr, uint8_t low,
+    UWord() = delete;
+    explicit UWord(QString name, QString descr, uint16_t addr, int16_t value);
+    explicit UWord(QString name, QString descr, uint16_t addr, uint8_t low,
                    uint8_t high);
     UWord(const UWord &) = default;
     UWord(UWord &&)      = default;
@@ -29,9 +29,9 @@ class UWord final : public Element
 class SWord final : public Element
 {
   public:
-    SWord() = default;
-    explicit SWord(QString name, QString descr, int addr, int16_t value);
-    explicit SWord(QString name, QString descr, int addr, uint8_t low,
+    SWord() = delete;
+    explicit SWord(QString name, QString descr, uint16_t addr, int16_t value);
+    explicit SWord(QString name, QString descr, uint16_t addr, uint8_t low,
                    uint8_t high);
     SWord(const SWord &) = default;
     SWord(SWord &&)      = default;
