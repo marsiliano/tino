@@ -18,8 +18,8 @@ class UByte final : public Element
     uint16_t uValue() const override;
     int16_t sValue() const override;
 
-    void setValue(const int16_t value) override;
-    void setValue(const uint16_t value) override;
+    void setValue(int16_t value) override;
+    void setValue(uint16_t value) override;
 
   private:
     uint8_t m_value{};
@@ -41,8 +41,8 @@ class SByte final : public Element
     uint16_t uValue() const override;
     int16_t sValue() const override;
 
-    void setValue(const int16_t value) override;
-    void setValue(const uint16_t value) override;
+    void setValue(int16_t value) override;
+    void setValue(uint16_t value) override;
 
   private:
     int8_t m_value{};

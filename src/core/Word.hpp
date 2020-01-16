@@ -7,8 +7,7 @@ class UWord final : public Element
   public:
     UWord() = delete;
     explicit UWord(QString name, QString descr, uint16_t addr, int16_t value);
-    explicit UWord(QString name, QString descr, uint16_t addr, uint8_t low,
-                   uint8_t high);
+    explicit UWord(QString name, QString descr, uint16_t addr);
     UWord(const UWord &) = default;
     UWord(UWord &&)      = default;
     ~UWord() override    = default;
@@ -31,8 +30,7 @@ class SWord final : public Element
   public:
     SWord() = delete;
     explicit SWord(QString name, QString descr, uint16_t addr, int16_t value);
-    explicit SWord(QString name, QString descr, uint16_t addr, uint8_t low,
-                   uint8_t high);
+    explicit SWord(QString name, QString descr, uint16_t addr);
     SWord(const SWord &) = default;
     SWord(SWord &&)      = default;
     ~SWord() override    = default;

@@ -1,13 +1,12 @@
 #include "Word.hpp"
 
 UWord::UWord(QString name, QString descr, uint16_t addr, int16_t value) :
-    Element{ std::move(name), std::move(descr), addr }
+    Element{ std::move(name), std::move(descr), addr }, m_value{ value }
 {
     setType(Element::Type::UWord);
 }
 
-UWord::UWord(QString name, QString descr, uint16_t addr, uint8_t low,
-             uint8_t high) :
+UWord::UWord(QString name, QString descr, uint16_t addr) :
     Element{ name, descr, addr }
 {
     setType(Element::Type::UWord);
@@ -42,13 +41,12 @@ void UWord::setValue(uint16_t value)
 }
 
 SWord::SWord(QString name, QString descr, uint16_t addr, int16_t value) :
-    Element{ std::move(name), std::move(descr), addr }
+    Element{ std::move(name), std::move(descr), addr }, m_value{ value }
 {
     setType(Element::Type::SWord);
 }
 
-SWord::SWord(QString name, QString descr, uint16_t addr, uint8_t low,
-             uint8_t high) :
+SWord::SWord(QString name, QString descr, uint16_t addr) :
     Element{ name, descr, addr }
 {
     setType(Element::Type::SWord);

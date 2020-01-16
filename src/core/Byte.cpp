@@ -22,7 +22,7 @@ int16_t UByte::sValue() const
     return static_cast<int16_t>(m_value);
 }
 
-void UByte::setValue(const int16_t value)
+void UByte::setValue(int16_t value)
 {
     if (valOutOfBound<int16_t, uint8_t>(value)) {
         throw std::logic_error("Out of bound value <int16_t, uint8_t>");
@@ -31,7 +31,7 @@ void UByte::setValue(const int16_t value)
     m_value = static_cast<uint8_t>(value);
 }
 
-void UByte::setValue(const uint16_t value)
+void UByte::setValue(uint16_t value)
 {
     if (valOutOfBound<uint16_t, uint8_t>(value)) {
         throw std::logic_error("Out of bound value <uint16_t, uint8_t>");
@@ -62,18 +62,18 @@ int16_t SByte::sValue() const
     return static_cast<int16_t>(m_value);
 }
 
-void SByte::setValue(const int16_t value)
+void SByte::setValue(int16_t value)
 {
-    if (valOutOfBound<int16_t, uint8_t>(value)) {
+    if (valOutOfBound<int16_t, int8_t>(value)) {
         throw std::logic_error("Out of bound value <int16_t, uint8_t>");
     }
 
     m_value = static_cast<int8_t>(value);
 }
 
-void SByte::setValue(const uint16_t value)
+void SByte::setValue(uint16_t value)
 {
-    if (valOutOfBound<uint16_t, uint8_t>(value)) {
+    if (valOutOfBound<uint16_t, int8_t>(value)) {
         throw std::logic_error("Out of bound value <uint16_t, uint8_t>");
     }
 

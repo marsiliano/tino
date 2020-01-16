@@ -1,108 +1,104 @@
 {
-    "Settings":{
-        "SerialPort":{
-            "PortName":"/dev/ttymxc1",
-            "BaudRate":115200,
-            "DataBits":8,
-            "StopBits":1
-        },
-        "Modbus":{
-            "Type":"Master",
-            "ServerId":1
-        },
-        "Timings":{
-            "Alarm":250,
-            "Feedback":500
-        }
+  "Settings": {
+    "SerialPort": {
+      "PortName": "/dev/ttymxc1",
+      "BaudRate": 115200,
+      "DataBits": 8,
+      "StopBits": 1
     },
-    "CommunicationProtocol":{
-        "Blocks":[
-            {
-                "Category":"Command",
-                "Address":"0x106",
-                "Groups":[
-                    {
-                        "Type":"Bitset",
-                        "Name":"BitsetName",
-                        "Description":"BitsetDescription",
-                        "Offset":"0x0",
-                        "Bits":[
-                            {
-                                "Name":"Bit0",
-                                "Description":"Bit0Descr",
-                                "DefaultValue":false
-                            },
-                            {
-                                "Name":"Bit1",
-                                "Description":"Bit1Descr",
-                                "DefaultValue":true
-                            },
-                            {
-                                "Name":"Bit2",
-                                "Description":"Bit2Descr",
-                                "DefaultValue":false
-                            },
-                            {
-                                "Name":"Bit3",
-                                "Description":"Bit3Descr",
-                                "DefaultValue":false
-                            },
-                            {
-                                "Name":"Bit4",
-                                "Description":"Bit4Descr",
-                                "DefaultValue":false
-                            },
-                            {
-                                "Name":"Bit5",
-                                "Description":"Bit5Descr",
-                                "DefaultValue":false
-                            },
-                            {
-                                "Name":"Bit6",
-                                "Description":"Bit6Descr",
-                                "DefaultValue":false
-                            },
-                            {
-                                "Name":"Bit7",
-                                "Description":"Bit7Descr",
-                                "DefaultValue":false
-                            }
-                        ]
-                    },
-                    {
-                        "Type":"SByte",
-                        "Offset":"0x01",
-                        "Name":"SByte",
-                        "Description":"SByteDescr",
-                        "Signedness":true,
-                        "DefaultValue":"-0x7B"
-                    },
-                    {
-                        "Type":"UByte",
-                        "Offset":"0x02",
-                        "Name":"UByte",
-                        "Description":"UByteDescr",
-                        "Signedness":false,
-                        "DefaultValue":"0x85"
-                    },
-                    {
-                        "Type":"SWord",
-                        "Offset":"0x03",
-                        "Name":"SWord",
-                        "Description":"SWordDescr",
-                        "Signedness":true,
-                        "DefaultValue":"0xF085"
-                    },
-                    {
-                        "Type":"UWord",
-                        "Offset":"0x04",
-                        "Name":"UWord",
-                        "Description":"UWordDescr",
-                        "Signedness":false,
-                        "DefaultValue":"0x0085"
-                    }
-                ]
-            }
-        ]
+    "Modbus": {
+      "Type": "Master",
+      "ServerId": 1
+    },
+    "Timings": {
+      "Alarm": 250,
+      "Feedback": 500
     }
+  },
+  "CommunicationProtocol": {
+    "Blocks": [
+      {
+        "Category": "Command",
+        "Address": "0x106",
+        "Groups": [
+          {
+            "Type": "Bitset",
+            "Name": "BitsetName",
+            "Description": "BitsetDescription",
+            "Offset": "0x0",
+            "Bits": [
+              {
+                "Name": "Bit0",
+                "Description": "Bit0Descr",
+                "DefaultValue": false
+              },
+              {
+                "Name": "Bit1",
+                "Description": "Bit1Descr",
+                "DefaultValue": true
+              },
+              {
+                "Name": "Bit2",
+                "Description": "Bit2Descr",
+                "DefaultValue": false
+              },
+              {
+                "Name": "Bit3",
+                "Description": "Bit3Descr",
+                "DefaultValue": false
+              },
+              {
+                "Name": "Bit4",
+                "Description": "Bit4Descr",
+                "DefaultValue": false
+              },
+              {
+                "Name": "Bit5",
+                "Description": "Bit5Descr",
+                "DefaultValue": false
+              },
+              {
+                "Name": "Bit6",
+                "Description": "Bit6Descr",
+                "DefaultValue": false
+              },
+              {
+                "Name": "Bit7",
+                "Description": "Bit7Descr",
+                "DefaultValue": false
+              }
+            ]
+          },
+          {
+            "Type": "SByte",
+            "Offset": "0x01",
+            "Name": "SByte",
+            "Description": "SByteDescr",
+            "DefaultValue": "-0x7B"
+          },
+          {
+            "Type": "UByte",
+            "Offset": "0x02",
+            "Name": "UByte",
+            "Description": "UByteDescr",
+            "DefaultValue": "0x85"
+          },
+          {
+            "Type": "SWord",
+            "Offset": "0x03",
+            "Name": "SWord",
+            "Description": "SWordDescr",
+            "DefaultValue": "0xF085"
+          },
+          {
+            "Type": "UWord",
+            "Offset": "0x04",
+            "Name": "UWord",
+            "Description": "UWordDescr",
+            "DefaultValue": "0x0085"
+          }
+        ]
+      }
+    ]
+  }
 }
