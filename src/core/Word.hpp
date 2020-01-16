@@ -6,7 +6,7 @@ class UWord final : public Element
 {
   public:
     UWord() = delete;
-    explicit UWord(QString name, QString descr, uint16_t addr, int16_t value);
+    explicit UWord(QString name, QString descr, uint16_t addr, uint16_t value);
     explicit UWord(QString name, QString descr, uint16_t addr);
     UWord(const UWord &) = default;
     UWord(UWord &&)      = default;

@@ -1,6 +1,6 @@
 #include "Word.hpp"
 
-UWord::UWord(QString name, QString descr, uint16_t addr, int16_t value) :
+UWord::UWord(QString name, QString descr, uint16_t addr, uint16_t value) :
     Element{ std::move(name), std::move(descr), addr }, m_value{ value }
 {
     setType(Element::Type::UWord);

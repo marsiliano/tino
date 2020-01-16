@@ -85,7 +85,7 @@ void tst_Parser::parseByte()
     QCOMPARE(b.description, "");
     QCOMPARE(b.category, "Command");
     QCOMPARE(b.address, 0x0106);
-    QCOMPARE(b.elements.size(), 5);
+    QCOMPARE(b.elements.size(), std::size_t(5));
     auto byte = b.elements.at(2);
     QCOMPARE(byte->name(), "UByte");
     auto v =
@@ -106,7 +106,7 @@ void tst_Parser::parseWord()
     QCOMPARE(w.description, "");
     QCOMPARE(w.category, "Command");
     QCOMPARE(w.address, 0x0106);
-    QCOMPARE(w.elements.size(), 5);
+    QCOMPARE(w.elements.size(), std::size_t(5));
     auto word = w.elements.back();
     QCOMPARE(word->name(), "UWord");
     auto v =
