@@ -2,7 +2,7 @@
 
 #include "Element.hpp"
 
-#include <QVector>
+#include <QStringList>
 #include <bitset>
 
 class Bitset final : public Element
@@ -14,15 +14,17 @@ class Bitset final : public Element
     Bitset(Bitset &&)      = default;
     ~Bitset() override     = default;
 
-    Bitset &operator=(const Bitset &) = default;
-    Bitset &operator=(Bitset &&) = default;
+    Bitset &operator=(const Bitset &other) = default;
+    Bitset &operator=(Bitset &&other) = default;
 
     void setAt(size_t index, bool value);
     bool valueAt(size_t index) const;
 
-    void setValue(int8_t val) override;
-    void setValue(int16_t val) override;
-    int16_t value() const override;
+    uint16_t uValue() const override;
+    int16_t sValue() const override;
+
+    void setValue(int16_t value) override;
+    void setValue(uint16_t value) override;
 
     const QStringList &descriptions() const noexcept;
     QStringList &descriptions() noexcept;

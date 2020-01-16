@@ -1,39 +1,72 @@
 #include "Word.hpp"
 
-Word::Word(QString name, QString descr, int addr, int16_t value) :
+UWord::UWord(QString name, QString descr, int addr, int16_t value) :
     Element{ std::move(name), std::move(descr), addr }
 {
-    m_high = value >> 8;
-    m_low  = value & 0xFF;
 }
 
-Word::Word(QString name, QString descr, int addr, uint8_t low, uint8_t high) :
-    Element{ name, descr, addr }, m_low{ low }, m_high{ high }
+UWord::UWord(QString name, QString descr, int addr, uint8_t low, uint8_t high) :
+    Element{ name, descr, addr }
 {
 }
 
-void Word::setValue(int8_t val)
+int16_t UWord::sValue() const
 {
-    setValue(static_cast<int16_t>(val));
+    return static_cast<int16_t>(m_value);
 }
 
-void Word::setValue(int16_t value)
+void UWord::setValue(int16_t value)
 {
-    m_high = value >> 8;
-    m_low  = value & 0xFF;
+    if (valOutOfBound<int16_t, uint16_t>(value)) {
+        throw std::logic_error("Out of bound value <int16_t, uint16_t>");
+    }
+
+    m_value = static_cast<uint16_t>(value);
 }
 
-int16_t Word::value() const
+void UWord::setValue(uint16_t value)
 {
-    return (m_high << 8) | m_low;
+    if (valOutOfBound<uint16_t, uint16_t>(value)) {
+        throw std::logic_error("Out of bound value <uint16_t, uint16_t>");
+    }
+
+    m_value = value;
 }
 
-uint8_t Word::low() const noexcept
+SWord::SWord(QString name, QString descr, int addr, int16_t value) :
+    Element{ std::move(name), std::move(descr), addr }
 {
-    return m_low;
 }
 
-uint8_t Word::high() const noexcept
+SWord::SWord(QString name, QString descr, int addr, uint8_t low, uint8_t high) :
+    Element{ name, descr, addr }
 {
-    return m_high;
+}
+
+uint16_t SWord::uValue() const
+{
+    return static_cast<uint16_t>(m_value);
+}
+
+int16_t SWord::sValue() const
+{
+    return m_value;
+}
+
+void SWord::setValue(int16_t value)
+{
+    if (valOutOfBound<int16_t, int16_t>(value)) {
+        throw std::logic_error("Out of bound value <int16_t, int16_t>");
+    }
+
+    m_value = value;
+}
+
+void SWord::setValue(uint16_t value)
+{
+    if (valOutOfBound<uint16_t, int16_t>(value)) {
+        throw std::logic_error("Out of bound value <uint16_t, int16_t>");
+    }
+
+    m_value = static_cast<int16_t>(value);
 }

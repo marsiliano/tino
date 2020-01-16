@@ -1,6 +1,6 @@
 #include "Element.hpp"
 
-Element::Element(QString name, QString descr, int addr) :
+Element::Element(QString name, QString descr, uint16_t addr) :
     m_name{ std::move(name) }, m_description{ std::move(descr) }, m_address{
         addr
     }
@@ -17,17 +17,24 @@ bool Element::operator!=(const Element &other) const
     return !(*this == other);
 }
 
-QString Element::name() const noexcept
+uint16_t Element::uValue() const
 {
-    return m_name;
+    throw std::logic_error("Undefined function");
 }
 
-QString Element::description() const noexcept
+int16_t Element::sValue() const
 {
-    return m_description;
+    throw std::logic_error("Undefined function");
 }
 
-int Element::address() const noexcept
+void Element::setValue(uint16_t value)
 {
-    return m_address;
+    (void)value;
+    throw std::logic_error("Undefined function");
+}
+
+void Element::setValue(int16_t value)
+{
+    (void)value;
+    throw std::logic_error("Undefined function");
 }
