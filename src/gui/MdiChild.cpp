@@ -20,7 +20,8 @@ MdiChild::MdiChild(const Block &block, QWidget *parent) : QWidget(parent)
 
     for (const auto &element : block.elements) {
         auto groupBox = new QGroupBox(this);
-        groupBox->setTitle(element->description());
+        groupBox->setTitle(element->description() + " - 0x" +
+                           QString::number(element->address(), 16));
         groupBox->setLayout(new QGridLayout);
 
         if (auto bitset = dynamic_cast<Bitset *>(element.get())) {
