@@ -1,9 +1,9 @@
 #include "ModbusCom.hpp"
 
-#include <Bitset.hpp>
-#include <Element.hpp>
+#include "../core/Bitset.hpp"
+#include "../core/Element.hpp"
 
-#include <QDebug>
+#include <QtDebug>
 #include <QModbusRtuSerialSlave>
 
 ModbusCom::ModbusCom(const Protocol &protocol, QObject *parent)

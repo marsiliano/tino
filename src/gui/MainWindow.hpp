@@ -1,7 +1,8 @@
 #pragma once
 
-#include <MdiChild.hpp>
-#include <ModbusCom.hpp>
+#include "../serialcom/ModbusCom.hpp"
+#include "../gui/MdiChild.hpp"
+
 #include <memory>
 #include <QMainWindow>
 

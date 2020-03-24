@@ -1,10 +1,12 @@
 #pragma once
 
-#include <Protocol.hpp>
-#include <Settings.hpp>
-#include <memory>
+#include "../core/Protocol.hpp"
+#include "../core/Settings.hpp"
+
 #include <QModbusServer>
 #include <QObject>
+
+#include <memory>
 
 class ModbusCom : public QObject
 {

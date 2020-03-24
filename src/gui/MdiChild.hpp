@@ -1,6 +1,7 @@
 #pragma once
 
-#include <Block.hpp>
+#include "../core/Block.hpp"
+
 #include <QWidget>
 
 struct GuiElement

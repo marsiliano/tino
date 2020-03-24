@@ -1,6 +1,7 @@
 #include "Led.hpp"
 
-#include <Bitset.hpp>
+#include "../core/Bitset.hpp"
+
 #include <bitset>
 #include <utility>
 #include <QApplication>
