@@ -1,16 +1,13 @@
-#include <MainWindow.hpp>
+#include "../../../src/gui/MainWindow.hpp"
+
 #include <QDockWidget>
 #include <QtTest>
-
-#define STRINGIFY_INTERNAL(x) #x
-#define STRINGIFY(x) STRINGIFY_INTERNAL(x)
 
 class tst_MainWindow : public QObject
 {
     Q_OBJECT
 
 private slots:
-    void initTestCase();
     void doNothingWhenImportFilenameEmpty();
     void doNothingWhenImportWrongFile();
     void emitWhenImportLooksFine();
@@ -18,13 +15,8 @@ private slots:
     void avoidMultipleDockWithMultipleImport();
 
 private:
-    QString filesPath;
+    QString filesPath{FILESPATH};
 };
-
-void tst_MainWindow::initTestCase()
-{
-    filesPath = STRINGIFY(TINO_PROJECT_DIR) + QStringLiteral("/tests/files/");
-}
 
 void tst_MainWindow::doNothingWhenImportFilenameEmpty()
 {

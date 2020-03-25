@@ -1,20 +1,16 @@
-#include <Bitset.hpp>
-#include <Byte.hpp>
-#include <ConfigParser.hpp>
-#include <Word.hpp>
+#include "../../src/core/Bitset.hpp"
+#include "../../src/core/Byte.hpp"
+#include "../../src/core/Word.hpp"
+#include "../../src/parser/ConfigParser.hpp"
+
 #include <QDir>
 #include <QtTest>
-
-#define STRINGIFY_INTERNAL(x) #x
-#define STRINGIFY(x) STRINGIFY_INTERNAL(x)
 
 class tst_Parser : public QObject
 {
     Q_OBJECT
 
 private slots:
-    void initTestCase();
-
     void throwIfNotExists();
     void withoutSettings();
     void normalSettings();
@@ -23,14 +19,9 @@ private slots:
     void parseWord();
 
 private:
-    QString path_{};
+    QString path_{FILESPATH};
     ConfigParser cp_;
 };
-
-void tst_Parser::initTestCase()
-{
-    path_ = STRINGIFY(TINO_PROJECT_DIR) + QStringLiteral("/tests/files/");
-}
 
 void tst_Parser::throwIfNotExists()
 {
