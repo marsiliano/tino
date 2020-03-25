@@ -8,6 +8,16 @@
 | :---------------: |  :---------: | :----------------------------: |
 | [![Build Status](https://travis-ci.org/guerinoni/tino.svg?branch=master)](https://travis-ci.org/guerinoni/tino) | [![CodeQuality](https://api.codacy.com/project/badge/Grade/294970b7a9b84d54b9be7c6240fe7ed3)](https://www.codacy.com/manual/guerinoni/tino?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=guerinoni/tino&amp;utm_campaign=Badge_Grade) | ![Ubuntu](https://github.com/guerinoni/tino/workflows/Ubuntu/badge.svg) ![Windows](https://github.com/guerinoni/tino/workflows/Windows/badge.svg) |
 
+## Build
+```
+move in folder project
+> mkdir build
+> cd build
+> cmake -DCMAKE_PREFIX_PATH=<your_path> .. (path example: ~/Qt/5.12.7/gcc_64)
+> make
+```
+
+
 ## Feature
 
 This is a desktop application useful to simulate communication between the logic board and video board.
