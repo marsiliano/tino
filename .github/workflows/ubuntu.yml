@@ -27,9 +27,11 @@ jobs:
           fetch-depth: 1
       - name: Build Project
         run: |
-          qmake
+          cmake
           make
       - name: Run Tests
         run: |
           ./tests/tst_core/tst_elements/tst_elements
           ./tests/tst_parser/tst_parser/tst_parser
+          ./tests/tst_gui/tst_configView/tst_configView
+          ./tests/tst_gui/tst_mainWindow/tst_mainWindow
