@@ -33,5 +33,3 @@ jobs:
         run: |
           ./tests/tst_core/tst_core
           ./tests/tst_parser/tst_parser
-          ./tests/tst_gui/tst_configView/tst_configView
-          ./tests/tst_gui/tst_mainWindow/tst_mainWindow
