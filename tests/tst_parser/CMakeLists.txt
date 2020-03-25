@@ -21,6 +21,6 @@ add_executable(tst_parser
 
     ../../src/parser/ConfigParser.cpp   ../../src/parser/ConfigParser.hpp
 
-    tst_Parser.cpp)
+    tst_ProtocolParser.cpp)
 
 target_link_libraries(tst_parser PRIVATE Qt5::Core Qt5::Gui Qt5::Test Qt5::SerialPort)

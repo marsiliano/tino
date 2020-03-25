@@ -6,7 +6,7 @@
 #include <QDir>
 #include <QtTest>
 
-class tst_Parser : public QObject
+class tst_ProtocolParser : public QObject
 {
     Q_OBJECT
 
@@ -23,18 +23,18 @@ private:
     ConfigParser cp_;
 };
 
-void tst_Parser::throwIfNotExists()
+void tst_ProtocolParser::throwIfNotExists()
 {
     QVERIFY_EXCEPTION_THROWN(cp_.parse(""), std::logic_error);
 }
 
-void tst_Parser::withoutSettings()
+void tst_ProtocolParser::withoutSettings()
 {
     auto config = cp_.parse(path_ + "empty.json");
     QVERIFY((config == Configuration{Settings{}, Protocol{}}));
 }
 
-void tst_Parser::normalSettings()
+void tst_ProtocolParser::normalSettings()
 {
     Settings right_settings;
     right_settings.portName = "/dev/ttymxc1";
@@ -51,7 +51,7 @@ void tst_Parser::normalSettings()
     QVERIFY(config.settings == right_settings);
 }
 
-void tst_Parser::parseBitset()
+void tst_ProtocolParser::parseBitset()
 {
     const auto config = cp_.parse(path_ + "protocol.json");
     const auto &p = config.protocol;
@@ -66,7 +66,7 @@ void tst_Parser::parseBitset()
     QCOMPARE(p.elementMap.at(b->address())->description(), b->description());
 }
 
-void tst_Parser::parseByte()
+void tst_ProtocolParser::parseByte()
 {
     const auto config = cp_.parse(path_ + "protocol.json");
     const auto &p = config.protocol;
@@ -85,7 +85,7 @@ void tst_Parser::parseByte()
     QCOMPARE(byte->description(), "UByteDescr");
 }
 
-void tst_Parser::parseWord()
+void tst_ProtocolParser::parseWord()
 {
     const auto config = cp_.parse(path_ + "protocol.json");
     const auto &p = config.protocol;
@@ -105,6 +105,6 @@ void tst_Parser::parseWord()
     QCOMPARE(word->description(), "UWordDescr");
 }
 
-QTEST_GUILESS_MAIN(tst_Parser)
+QTEST_GUILESS_MAIN(tst_ProtocolParser)
 
-#include "tst_Parser.moc"
+#include "tst_ProtocolParser.moc"
