@@ -7,11 +7,12 @@ sudo: require
 dist: bionic
 
 before_install:
-  - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.12.3-bionic
+  - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.12.7-bionic
   - sudo apt-get update -qq
 
 install:
   - sudo apt-get -y install libgl1-mesa-dev
+  - sudo apt-get -y install cmake
   - sudo apt-get -y install qt512base
   - sudo apt-get -y install qt512serialport
   - sudo apt-get -y install qt512svg
@@ -21,5 +22,5 @@ script:
   - source /opt/qt512/bin/qt512-env.sh
   - mkdir build
   - cd build
-  - /opt/qt512/bin/qmake ..
+  - cmake ..
   - make
