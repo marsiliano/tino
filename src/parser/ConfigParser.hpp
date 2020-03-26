@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Protocol.hpp>
-#include <Settings.hpp>
+#include "../core/Protocol.hpp"
+#include "../core/Settings.hpp"
 
 class Bitset;
 class UByte;

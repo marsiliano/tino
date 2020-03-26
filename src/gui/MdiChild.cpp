@@ -3,9 +3,10 @@
 #include "Led.hpp"
 #include "ValueWidget.hpp"
 
-#include <Bitset.hpp>
-#include <Byte.hpp>
-#include <Word.hpp>
+#include "../core/Bitset.hpp"
+#include "../core/Byte.hpp"
+#include "../core/Word.hpp"
+
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QMetaEnum>

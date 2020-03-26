@@ -1,14 +1,15 @@
 #include "MainWindow.hpp"
+#include "ui_MainWindow.h"
 
 #include "ConfigViewFactory.hpp"
 #include "DialogAbout.hpp"
 #include "DialogSerialSettings.hpp"
-#include "ui_MainWindow.h"
+#include "MdiChild.hpp"
 
-#include <ConfigParser.hpp>
-#include <Element.hpp>
-#include <MdiChild.hpp>
-#include <QDebug>
+#include "../parser/ConfigParser.hpp"
+
+#include "../core/Element.hpp"
+
 #include <QDesktopWidget>
 #include <QDockWidget>
 #include <QFileDialog>
@@ -18,6 +19,7 @@
 #include <QStandardItemModel>
 #include <QStandardPaths>
 #include <QTreeView>
+#include <QtDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

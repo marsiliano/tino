@@ -1,6 +1,7 @@
 #include "ConfigViewFactory.hpp"
 
-#include <Bitset.hpp>
+#include "../core/Bitset.hpp"
+
 #include <QDockWidget>
 #include <QStandardItemModel>
 #include <QTreeView>

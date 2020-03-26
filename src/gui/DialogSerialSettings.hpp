@@ -1,6 +1,7 @@
 #pragma once
 
-#include <Settings.hpp>
+#include "../core/Settings.hpp"
+
 #include <QDialog>
 
 namespace Ui {

@@ -1,0 +1,2 @@
+add_subdirectory(tst_configView)
+add_subdirectory(tst_mainWindow)

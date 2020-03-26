@@ -1,13 +1,14 @@
 #include "ConfigParser.hpp"
 
-#include <Bitset.hpp>
-#include <Byte.hpp>
-#include <Word.hpp>
-#include <QDebug>
+#include "../core/Bitset.hpp"
+#include "../core/Byte.hpp"
+#include "../core/Word.hpp"
+
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QtDebug>
 
 static constexpr int HexBase = 16;
 

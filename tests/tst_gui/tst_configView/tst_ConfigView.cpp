@@ -1,5 +1,6 @@
-#include <Bitset.hpp>
-#include <ConfigViewFactory.hpp>
+#include "../../../src/core/Bitset.hpp"
+#include "../../../src/gui/ConfigViewFactory.hpp"
+
 #include <QDir>
 #include <QDockWidget>
 #include <QStandardItemModel>

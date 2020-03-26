@@ -1,6 +1,7 @@
 #include "ValueWidget.hpp"
 
-#include <Element.hpp>
+#include "../core/Element.hpp"
+
 #include <QGridLayout>
 #include <QLabel>
 #include <QSpinBox>

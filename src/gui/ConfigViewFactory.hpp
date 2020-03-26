@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Protocol.hpp>
+#include "../core/Protocol.hpp"
 
 class QDockWidget;
 class QStandardItem;

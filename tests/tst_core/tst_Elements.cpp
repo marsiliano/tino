@@ -1,6 +1,6 @@
-#include <Bitset.hpp>
-#include <Word.hpp>
-#include <QDockWidget>
+#include "../../src/core/Bitset.hpp"
+#include "../../src/core/Word.hpp"
+
 #include <QtTest>
 
 class tst_Elements : public QObject
