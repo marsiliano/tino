@@ -24,8 +24,3 @@ jobs:
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           cmake .
           cmake --build .
-      - name: Run Tests
-        shell: cmd
-        run: |
-          tests\tst_core\tst_core.exe
-          tests\tst_parser\tst_parser.exe
