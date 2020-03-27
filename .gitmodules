@@ -1,0 +1,3 @@
+[submodule "3rd-party/qtxlsx"]
+	path = 3rd-party/qtxlsx
+	url = https://github.com/VSRonin/QtXlsxWriter.git
