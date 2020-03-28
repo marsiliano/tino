@@ -20,7 +20,9 @@ add_executable(tst_mainWindow
     ../../../src/core/Word.cpp       ../../../src/core/Word.hpp
 
     ../../../src/parser/ConfigParser.cpp   ../../../src/parser/ConfigParser.hpp
-
+    ../../../src/parser/ParserImplJson.cpp ../../../src/parser/ParserImplJson.hpp
+    ../../../src/parser/IParserImplementation.hpp
+    ../../../src/parser/Configuration.hpp
 
     ../../../src/serialcom/ModbusCom.cpp   ../../../src/serialcom/ModbusCom.hpp
 

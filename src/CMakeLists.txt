@@ -14,7 +14,10 @@ add_executable(${CMAKE_PROJECT_NAME}
     core/Settings.cpp   core/Settings.hpp
     core/Word.cpp       core/Word.hpp
 
-    parser/ConfigParser.cpp parser/ConfigParser.hpp
+    parser/ConfigParser.cpp     parser/ConfigParser.hpp
+    parser/ParserImplJson.cpp   parser/ParserImplJson.hpp
+    parser/IParserImplementation.hpp
+    parser/Configuration.hpp
 
     serialcom/ModbusCom.cpp serialcom/ModbusCom.hpp
 

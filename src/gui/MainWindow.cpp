@@ -165,8 +165,8 @@ MainWindow::Error MainWindow::importConfig(const QString &filename)
         return Error{true, "Filename not valid!"};
     }
 
-    ConfigParser parser;
-    m_config = std::make_unique<Configuration>(parser.parse(filename));
+    ConfigParser parser(filename);
+    m_config = std::make_unique<Configuration>(parser.parse());
 
     if (m_config == nullptr) {
         return Error{true, "Parsing configuration error!"};

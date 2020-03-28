@@ -20,6 +20,9 @@ add_executable(tst_parser
     ../../src/core/Word.cpp       ../../src/core/Word.hpp
 
     ../../src/parser/ConfigParser.cpp   ../../src/parser/ConfigParser.hpp
+    ../../src/parser/ParserImplJson.cpp ../../src/parser/ParserImplJson.hpp
+    ../../src/parser/IParserImplementation.hpp
+    ../../src/parser/Configuration.hpp
 
     tst_ProtocolParser.cpp)
 

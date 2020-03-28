@@ -20,17 +20,18 @@ private slots:
 
 private:
     QString path_{FILESPATH};
-    ConfigParser cp_;
 };
 
 void tst_ProtocolParser::throwIfNotExists()
 {
-    QVERIFY_EXCEPTION_THROWN(cp_.parse(""), std::logic_error);
+    ConfigParser parser("");
+    QVERIFY_EXCEPTION_THROWN(parser.parse(), std::logic_error);
 }
 
 void tst_ProtocolParser::withoutSettings()
 {
-    auto config = cp_.parse(path_ + "empty.json");
+    ConfigParser parser(path_ + "empty.json");
+    auto config = parser.parse();
     QVERIFY((config == Configuration{Settings{}, Protocol{}}));
 }
 
@@ -47,13 +48,15 @@ void tst_ProtocolParser::normalSettings()
     right_settings.requestToSend = false;
     right_settings.stopBits = QSerialPort::StopBits::OneStop;
 
-    auto config = cp_.parse(path_ + "protocol.json");
+    ConfigParser parser(path_ + "protocol.json");
+    auto config = parser.parse();
     QVERIFY(config.settings == right_settings);
 }
 
 void tst_ProtocolParser::parseBitset()
 {
-    const auto config = cp_.parse(path_ + "protocol.json");
+    ConfigParser parser(path_ + "protocol.json");
+    const auto config = parser.parse();
     const auto &p = config.protocol;
     QVERIFY(!p.blocks.empty());
     QCOMPARE(p.blocks.front().description, "");
@@ -68,7 +71,8 @@ void tst_ProtocolParser::parseBitset()
 
 void tst_ProtocolParser::parseByte()
 {
-    const auto config = cp_.parse(path_ + "protocol.json");
+    ConfigParser parser(path_ + "protocol.json");
+    const auto config = parser.parse();
     const auto &p = config.protocol;
     QVERIFY(!p.blocks.empty());
     QCOMPARE(p.blocks.size(), std::size_t(1));
@@ -87,7 +91,8 @@ void tst_ProtocolParser::parseByte()
 
 void tst_ProtocolParser::parseWord()
 {
-    const auto config = cp_.parse(path_ + "protocol.json");
+    ConfigParser parser(path_ + "protocol.json");
+    const auto config = parser.parse();
     const auto &p = config.protocol;
     QVERIFY(!p.blocks.empty());
     QCOMPARE(p.blocks.front().description, "");
