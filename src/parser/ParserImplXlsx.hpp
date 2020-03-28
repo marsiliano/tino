@@ -2,10 +2,6 @@
 
 #include "IParserImplementation.hpp"
 
-class Bitset;
-class UWord;
-class SWord;
-
 namespace QXlsx {
     class Document;
 }
@@ -16,6 +12,8 @@ public:
     Configuration parse(const QString &filename) override;
 
 private:
+    friend class tst_ParserXlsx;
+
     enum XlsxColumns {
         Resource = 1,
         DefaultValue,
@@ -33,11 +31,7 @@ private:
     };
 
     Block readDigitalResource(const QXlsx::Document &doc, const QString &resource);
-    Block readInputs(const QXlsx::Document &doc);
+    Block readAnalogResource(const QXlsx::Document &doc, const QString &resource);
     int searchTag(const QXlsx::Document &doc, const QString &tag);
     bool isTag(const QString &item);
-
-    std::unique_ptr<Bitset> makeBitset(const QString &obj, const Block &b = Block()) const;
-    std::unique_ptr<UWord> makeUWord(const QString &obj, const Block &b = Block()) const;
-    std::unique_ptr<SWord> makeSWord(const QString &obj, const Block &b = Block()) const;
 };

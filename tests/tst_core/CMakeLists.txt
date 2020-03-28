@@ -18,6 +18,7 @@ add_executable(tst_core
     ../../src/core/Protocol.cpp   ../../src/core/Protocol.hpp
     ../../src/core/Settings.cpp   ../../src/core/Settings.hpp
     ../../src/core/Word.cpp       ../../src/core/Word.hpp
+    ../../src/core/DoubleSWord.cpp ../../src/core/DoubleSWord.hpp
 
     tst_Elements.cpp)
 

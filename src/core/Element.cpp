@@ -31,6 +31,11 @@ QString Element::name() const
     return m_name;
 }
 
+void Element::setName(const QString &name)
+{
+    m_name = name;
+}
+
 QString Element::description() const
 {
     return m_description;
@@ -56,6 +61,11 @@ int16_t Element::sValue() const
     throw std::logic_error("Undefined function");
 }
 
+int32_t Element::dSValue() const
+{
+    throw std::logic_error("Undefined function");
+}
+
 void Element::setValue(uint16_t value)
 {
     (void) value;
@@ -67,3 +77,10 @@ void Element::setValue(int16_t value)
     (void) value;
     throw std::logic_error("Undefined function");
 }
+
+void Element::setValue(int32_t value)
+{
+    (void) value;
+    throw std::logic_error("Undefined function");
+}
+

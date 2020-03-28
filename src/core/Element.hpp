@@ -14,6 +14,7 @@ public:
         SByte,
         UWord,
         SWord,
+        DSWord,
 
         UndefinedType = -1
     };
@@ -51,9 +52,11 @@ public:
 
     virtual uint16_t uValue() const;
     virtual int16_t sValue() const;
+    virtual int32_t dSValue() const;
 
     virtual void setValue(uint16_t value);
     virtual void setValue(int16_t value);
+    virtual void setValue(int32_t value);
 
 protected:
     Element::Type m_type{Element::Type::UndefinedType};

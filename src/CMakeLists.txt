@@ -15,6 +15,7 @@ add_executable(${CMAKE_PROJECT_NAME}
     core/Protocol.cpp   core/Protocol.hpp
     core/Settings.cpp   core/Settings.hpp
     core/Word.cpp       core/Word.hpp
+    core/DoubleSWord.cpp core/DoubleSWord.hpp
 
     parser/ConfigParser.cpp     parser/ConfigParser.hpp
     parser/ParserImplJson.cpp   parser/ParserImplJson.hpp

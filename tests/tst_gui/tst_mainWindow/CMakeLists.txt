@@ -20,6 +20,7 @@ add_executable(tst_mainWindow
     ../../../src/core/Protocol.cpp   ../../../src/core/Protocol.hpp
     ../../../src/core/Settings.cpp   ../../../src/core/Settings.hpp
     ../../../src/core/Word.cpp       ../../../src/core/Word.hpp
+    ../../../src/core/DoubleSWord.cpp ../../../src/core/DoubleSWord.hpp
 
     ../../../src/parser/ConfigParser.cpp   ../../../src/parser/ConfigParser.hpp
     ../../../src/parser/ParserImplJson.cpp ../../../src/parser/ParserImplJson.hpp

@@ -2,8 +2,7 @@
 
 #include "Configuration.hpp"
 #include "../core/Bitset.hpp"
-#include "../core/Byte.hpp"
-#include "../core/Word.hpp"
+#include "../core/DoubleSWord.hpp"
 
 #include <xlsx/xlsxdocument.h>
 
@@ -22,11 +21,15 @@ Configuration ParserImplXlsx::parse(const QString &filename)
 
     protocol.blocks.emplace_back(readDigitalResource(xlsx, Tags::digitalInputs));
     protocol.blocks.emplace_back(readDigitalResource(xlsx, Tags::digitalOutputs));
+    protocol.blocks.emplace_back(readAnalogResource(xlsx, Tags::analogInputs));
+    protocol.blocks.emplace_back(readAnalogResource(xlsx, Tags::analogOutputs));
+    protocol.blocks.emplace_back(readAnalogResource(xlsx, Tags::encoders));
 
     return Configuration{{}, std::move(protocol)};
 }
 
-Block ParserImplXlsx::readDigitalResource(const QXlsx::Document &doc, const QString &resource)
+Block ParserImplXlsx::readDigitalResource(const QXlsx::Document &doc,
+                                          const QString &resource)
 {
     const auto rows = doc.dimension().lastRow();
     const auto firstRow = searchTag(doc, resource);
@@ -41,7 +44,7 @@ Block ParserImplXlsx::readDigitalResource(const QXlsx::Document &doc, const QStr
     Bitset bitset({},{}, 0);
     uint8_t bitsetCounter = 0;
 
-    for (auto i = (firstRow + 1); i < rows; i++, bitsetCounter++) {
+    for (auto i = (firstRow + 1); i <= rows; i++, bitsetCounter++) {
         QString resource = doc.read(i, Resource).toString();
         if (resource.isEmpty() || isTag(resource)) {
             break;
@@ -60,6 +63,33 @@ Block ParserImplXlsx::readDigitalResource(const QXlsx::Document &doc, const QStr
     //Add last bitset
     if (!block.elements.empty()) {
         block.elements.emplace_back(std::make_shared<Bitset>(bitset));
+    }
+
+    return block;
+}
+
+Block ParserImplXlsx::readAnalogResource(const QXlsx::Document &doc,
+                                         const QString &resource)
+{
+    const auto rows = doc.dimension().lastRow();
+    const auto firstRow = searchTag(doc, resource);
+
+    if (firstRow == -1) {
+        return {};
+    }
+
+    Block block;
+    block.description = resource;
+
+    for (auto i = (firstRow + 1); i <= rows; i++) {
+        QString resource = doc.read(i, Resource).toString();
+        if (resource.isEmpty() || isTag(resource)) {
+            break;
+        }
+
+        QString value = doc.read(i, DefaultValue).toString();
+        DoubleSWord word(resource, {}, {}, value.toInt());
+        block.elements.emplace_back(std::make_shared<DoubleSWord>(word));
     }
 
     return block;
