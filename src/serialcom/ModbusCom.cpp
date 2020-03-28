@@ -1,10 +1,12 @@
 #include "ModbusCom.hpp"
 
 #include "../core/Bitset.hpp"
+#include "../core/Byte.hpp"
 #include "../core/Element.hpp"
+#include "../core/Word.hpp"
 
-#include <QtDebug>
 #include <QModbusRtuSerialSlave>
+#include <QtDebug>
 
 ModbusCom::ModbusCom(const Protocol &protocol, QObject *parent)
     : QObject(parent)
@@ -67,11 +69,12 @@ bool ModbusCom::disconnectModbus()
 
 void ModbusCom::writeRegister(int address)
 {
-    m_modbusDevice->disconnect();
-    m_modbusDevice->setData(QModbusDataUnit::HoldingRegisters,
-                            address,
-                            m_protocol.elementMap.at(address)->uValue());
-    connect(m_modbusDevice.get(), &QModbusServer::dataWritten, this, &ModbusCom::updateRegisters);
+    //    qDebug(__func__);
+    //    m_modbusDevice->disconnect();
+    //    m_modbusDevice->setData(QModbusDataUnit::HoldingRegisters,
+    //                            address,
+    //                            m_protocol.elementMap.at(address)->uValue());
+    //    connect(m_modbusDevice.get(), &QModbusServer::dataWritten, this, &ModbusCom::updateRegisters);
 }
 
 void ModbusCom::handleError(const QString &errorString, QModbusDevice::Error error)
@@ -108,37 +111,100 @@ void ModbusCom::handleError(const QString &errorString, QModbusDevice::Error err
 
 void ModbusCom::updateRegisters(QModbusDataUnit::RegisterType table, int address, int size)
 {
-    for (auto i = 0; i < size; ++i) {
-        quint16 value;
-        quint16 add = static_cast<quint16>(address + i);
+    const auto writeLowByte = [this](uint16_t lowAddress, uint16_t value) {
+        if (m_protocol.elementMap.find(lowAddress) == m_protocol.elementMap.end()) {
+            qWarning() << "Element at" << QString::number(lowAddress, 16) << "not found";
+            return;
+        }
 
-        if (table != QModbusDataUnit::HoldingRegisters) {
+        const auto el = m_protocol.elementMap.at(lowAddress);
+
+        switch (el->type()) {
+        case Element::Type::SByte:
+            if (const auto sb = dynamic_cast<SByte *>(el)) {
+                sb->setValue(static_cast<int16_t>(value));
+                Q_EMIT updateGui(sb->address());
+            }
+            break;
+        case Element::Type::UByte:
+            if (const auto ub = dynamic_cast<UByte *>(el)) {
+                ub->setValue(static_cast<uint16_t>(value));
+                Q_EMIT updateGui(ub->address());
+            }
+            break;
+        case Element::Type::Bitset:
+            if (const auto bitset = dynamic_cast<Bitset *>(el)) {
+                bitset->setValue(static_cast<uint16_t>(value));
+                Q_EMIT updateGui(bitset->address());
+            }
+            break;
+        default:
+            break;
+        }
+    };
+
+    if (table != QModbusDataUnit::HoldingRegisters) {
+        return;
+    }
+
+    for (auto i = 0; i < size; ++i) {
+        const auto valueAddress = address + i;
+        uint16_t value;
+        m_modbusDevice->data(QModbusDataUnit::HoldingRegisters, valueAddress, &value);
+
+        const auto elementAddress = address + (i * 2);
+        qDebug() << QString::number(elementAddress, 16) << QString::number(valueAddress, 16)
+                 << value;
+
+        if (m_protocol.elementMap.find(elementAddress) == m_protocol.elementMap.end()) {
+            qWarning() << "Element at" << QString::number(elementAddress, 16) << "not found";
             continue;
         }
 
-        m_modbusDevice->data(QModbusDataUnit::HoldingRegisters, static_cast<quint16>(add), &value);
+        const auto el = m_protocol.elementMap.at(elementAddress);
 
-        if (m_protocol.elementMap.find(add) == m_protocol.elementMap.end()) {
-            qWarning() << "Address is invalid (" << add << ")";
-        }
-
-        auto el = m_protocol.elementMap.at(add);
-
-        if (const auto type = el->type(); type == Element::Type::Bitset) {
-            const auto h = static_cast<int16_t>((value & 0xff00) >> 8);
+        switch (el->type()) {
+        case Element::Type::SWord:
+            if (const auto sw = dynamic_cast<SWord *>(el)) {
+                sw->setValue(static_cast<int16_t>(value));
+                Q_EMIT updateGui(sw->address());
+            }
+            break;
+        case Element::Type::UWord:
+            if (const auto uw = dynamic_cast<UWord *>(el)) {
+                uw->setValue(static_cast<uint16_t>(value));
+                Q_EMIT updateGui(uw->address());
+            }
+            break;
+        case Element::Type::SByte: {
+            const auto hi = value >> 8;
+            if (const auto sb = dynamic_cast<SByte *>(el)) {
+                sb->setValue(static_cast<int16_t>(hi));
+                Q_EMIT updateGui(sb->address());
+            }
+            const auto lo = value & 0xFF;
+            writeLowByte(elementAddress + 1, lo);
+        } break;
+        case Element::Type::UByte: {
+            const auto hi = value >> 8;
+            if (const auto ub = dynamic_cast<UByte *>(el)) {
+                ub->setValue(static_cast<uint16_t>(hi));
+                Q_EMIT updateGui(ub->address());
+            }
+            const auto lo = value & 0xFF;
+            writeLowByte(elementAddress + 1, lo);
+        } break;
+        case Element::Type::Bitset: {
+            const auto hi = value >> 8;
             if (const auto bitset = dynamic_cast<Bitset *>(el)) {
-                bitset->setValue(h);
+                bitset->setValue(static_cast<uint16_t>(hi));
                 Q_EMIT updateGui(bitset->address());
             }
-
-            const auto lowAdd = add + 1;
-            if (m_protocol.elementMap.find(lowAdd) != m_protocol.elementMap.end()) {
-                const auto l = static_cast<int16_t>((value & 0x00ff));
-                if (const auto bitset = dynamic_cast<Bitset *>(m_protocol.elementMap.at(lowAdd))) {
-                    bitset->setValue(l);
-                    Q_EMIT updateGui(bitset->address());
-                }
-            }
+            const auto lo = value & 0xFF;
+            writeLowByte(elementAddress + 1, lo);
+        } break;
+        default:
+            break;
         }
     }
 }
