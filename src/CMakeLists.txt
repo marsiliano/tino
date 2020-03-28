@@ -3,6 +3,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+include_directories(${PROJECT_SOURCE_DIR}/3rd-party/qtxlsx/src)
+
 find_package(Qt5 COMPONENTS Core Gui Widgets SerialPort SerialBus Svg REQUIRED)
 
 add_executable(${CMAKE_PROJECT_NAME}
@@ -16,6 +18,7 @@ add_executable(${CMAKE_PROJECT_NAME}
 
     parser/ConfigParser.cpp     parser/ConfigParser.hpp
     parser/ParserImplJson.cpp   parser/ParserImplJson.hpp
+    parser/ParserImplXlsx.cpp   parser/ParserImplXlsx.hpp
     parser/IParserImplementation.hpp
     parser/Configuration.hpp
 
@@ -34,6 +37,7 @@ add_executable(${CMAKE_PROJECT_NAME}
     app/main.cpp)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets
-                                                    Qt5::SerialPort Qt5::SerialBus Qt5::Svg)
+                                                    Qt5::SerialPort Qt5::SerialBus Qt5::Svg
+                                            PUBLIC  QtXlsxWriter)
 
 add_definitions(-DVERSION=\"${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}\")

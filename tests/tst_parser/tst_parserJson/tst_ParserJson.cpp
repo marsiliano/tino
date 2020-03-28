@@ -1,12 +1,12 @@
-#include "../../src/core/Bitset.hpp"
-#include "../../src/core/Byte.hpp"
-#include "../../src/core/Word.hpp"
-#include "../../src/parser/ConfigParser.hpp"
+#include "../../../src/core/Bitset.hpp"
+#include "../../../src/core/Byte.hpp"
+#include "../../../src/core/Word.hpp"
+#include "../../../src/parser/ConfigParser.hpp"
 
 #include <QDir>
 #include <QtTest>
 
-class tst_ProtocolParser : public QObject
+class tst_ParserJson : public QObject
 {
     Q_OBJECT
 
@@ -22,20 +22,20 @@ private:
     QString path_{FILESPATH};
 };
 
-void tst_ProtocolParser::throwIfNotExists()
+void tst_ParserJson::throwIfNotExists()
 {
     ConfigParser parser("");
     QVERIFY_EXCEPTION_THROWN(parser.parse(), std::logic_error);
 }
 
-void tst_ProtocolParser::withoutSettings()
+void tst_ParserJson::withoutSettings()
 {
     ConfigParser parser(path_ + "empty.json");
     auto config = parser.parse();
     QVERIFY((config == Configuration{Settings{}, Protocol{}}));
 }
 
-void tst_ProtocolParser::normalSettings()
+void tst_ParserJson::normalSettings()
 {
     Settings right_settings;
     right_settings.portName = "/dev/ttymxc1";
@@ -53,7 +53,7 @@ void tst_ProtocolParser::normalSettings()
     QVERIFY(config.settings == right_settings);
 }
 
-void tst_ProtocolParser::parseBitset()
+void tst_ParserJson::parseBitset()
 {
     ConfigParser parser(path_ + "protocol.json");
     const auto config = parser.parse();
@@ -69,7 +69,7 @@ void tst_ProtocolParser::parseBitset()
     QCOMPARE(p.elementMap.at(b->address())->description(), b->description());
 }
 
-void tst_ProtocolParser::parseByte()
+void tst_ParserJson::parseByte()
 {
     ConfigParser parser(path_ + "protocol.json");
     const auto config = parser.parse();
@@ -89,7 +89,7 @@ void tst_ProtocolParser::parseByte()
     QCOMPARE(byte->description(), "UByteDescr");
 }
 
-void tst_ProtocolParser::parseWord()
+void tst_ParserJson::parseWord()
 {
     ConfigParser parser(path_ + "protocol.json");
     const auto config = parser.parse();
@@ -110,6 +110,6 @@ void tst_ProtocolParser::parseWord()
     QCOMPARE(word->description(), "UWordDescr");
 }
 
-QTEST_GUILESS_MAIN(tst_ProtocolParser)
+QTEST_GUILESS_MAIN(tst_ParserJson)
 
-#include "tst_ProtocolParser.moc"
+#include "tst_ParserJson.moc"

@@ -8,6 +8,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+include_directories(${PROJECT_SOURCE_DIR}/3rd-party/qtxlsx/src)
+
 find_package(Qt5 COMPONENTS Core Gui Test Widgets SerialPort SerialBus Svg Widgets REQUIRED)
 
 add_executable(tst_configView
@@ -21,6 +23,7 @@ add_executable(tst_configView
 
     ../../../src/parser/ConfigParser.cpp   ../../../src/parser/ConfigParser.hpp
     ../../../src/parser/ParserImplJson.cpp ../../../src/parser/ParserImplJson.hpp
+    ../../../src/parser/ParserImplXlsx.cpp ../../../src/parser/ParserImplXlsx.hpp
     ../../../src/parser/IParserImplementation.hpp
     ../../../src/parser/Configuration.hpp
 
@@ -39,4 +42,5 @@ add_executable(tst_configView
 
     tst_ConfigView.cpp)
 
-target_link_libraries(tst_configView PRIVATE Qt5::Core Qt5::Gui Qt5::Test Qt5::Widgets Qt5::SerialPort Qt5::SerialBus Qt5::Svg)
+target_link_libraries(tst_configView PRIVATE Qt5::Core Qt5::Gui Qt5::Test Qt5::Widgets Qt5::SerialPort Qt5::SerialBus Qt5::Svg
+                                     PUBLIC  QtXlsxWriter)

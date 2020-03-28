@@ -32,6 +32,8 @@ public:
 
     constexpr static size_t size = 8;
 
+    void clear();
+
 private:
     QStringList m_bitsNames{{}, {}, {}, {}, {}, {}, {}, {}};
     QStringList m_bitsDescriptions{{}, {}, {}, {}, {}, {}, {}, {}};

@@ -56,4 +56,12 @@ const QStringList &Bitset::names() const noexcept
     return m_bitsNames;
 }
 
+void Bitset::clear()
+{
+    QStringList empty{{}, {}, {}, {}, {}, {}, {}, {}};
+    m_bitsNames = empty;
+    m_bitsDescriptions = empty;
+    m_bits.reset();
+}
+
 static_assert(Bitset::size == 8, "Is the size of bit changed?");

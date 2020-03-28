@@ -10,9 +10,9 @@ set(CMAKE_AUTOUIC ON)
 
 include_directories(${PROJECT_SOURCE_DIR}/3rd-party/qtxlsx/src)
 
-find_package(Qt5 COMPONENTS Core Gui Test Widgets SerialPort SerialBus Svg Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Core Gui Test SerialPort REQUIRED)
 
-add_executable(tst_mainWindow
+add_executable(tst_parserXlsx
     ../../../src/core/Bitset.cpp     ../../../src/core/Bitset.hpp
     ../../../src/core/Block.cpp      ../../../src/core/Block.hpp
     ../../../src/core/Byte.cpp       ../../../src/core/Byte.hpp
@@ -27,19 +27,7 @@ add_executable(tst_mainWindow
     ../../../src/parser/IParserImplementation.hpp
     ../../../src/parser/Configuration.hpp
 
-    ../../../src/serialcom/ModbusCom.cpp   ../../../src/serialcom/ModbusCom.hpp
+    tst_ParserXlsx.cpp)
 
-    ../../../src/gui/ConfigViewFactory.cpp       ../../../src/gui/ConfigViewFactory.hpp
-    ../../../src/gui/Led.cpp                     ../../../src/gui/Led.hpp
-    ../../../src/gui/MdiChild.cpp                ../../../src/gui/MdiChild.hpp
-    ../../../src/gui/ValueWidget.cpp             ../../../src/gui/ValueWidget.hpp
-    ../../../src/gui/DialogAbout.cpp             ../../../src/gui/DialogAbout.hpp             ../../../src/gui/DialogAbout.ui
-    ../../../src/gui/DialogSerialSettings.cpp    ../../../src/gui/DialogSerialSettings.hpp    ../../../src/gui/DialogSerialSettings.ui
-    ../../../src/gui/MainWindow.cpp              ../../../src/gui/MainWindow.hpp              ../../../src/gui/MainWindow.ui
-
-    ../../../src/gui/gui_resources.qrc
-
-    tst_MainWindow.cpp)
-
-target_link_libraries(tst_mainWindow PRIVATE Qt5::Core Qt5::Gui Qt5::Test Qt5::Widgets Qt5::SerialPort Qt5::SerialBus Qt5::Svg
+target_link_libraries(tst_parserXlsx PRIVATE Qt5::Core Qt5::Gui Qt5::Test Qt5::SerialPort
                                      PUBLIC  QtXlsxWriter)
