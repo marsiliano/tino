@@ -123,7 +123,7 @@ void MainWindow::createMenuBar()
 
     ui->menuBar->addMenu(file);
 
-    const auto comMenu = new QMenu("Com", ui->menuBar);
+    const auto comMenu = new QMenu("Communication", ui->menuBar);
 
     m_serialConnect = std::make_unique<QAction>("Connect...", comMenu);
     m_serialConnect->setEnabled(false);
