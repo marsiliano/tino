@@ -80,7 +80,7 @@ void MdiChild::updateGuiElemets()
             }
             continue;
         } else if (auto vw = dynamic_cast<ValueWidget *>(guiElement.w.front())) {
-            vw->updateValue(guiElement.el->sValue());
+            vw->updateValueFromCommunication(guiElement.el->sValue());
         }
     }
 }

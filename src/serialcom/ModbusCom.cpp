@@ -69,12 +69,12 @@ bool ModbusCom::disconnectModbus()
 
 void ModbusCom::writeRegister(int address)
 {
-    //    qDebug(__func__);
-    //    m_modbusDevice->disconnect();
-    //    m_modbusDevice->setData(QModbusDataUnit::HoldingRegisters,
-    //                            address,
-    //                            m_protocol.elementMap.at(address)->uValue());
-    //    connect(m_modbusDevice.get(), &QModbusServer::dataWritten, this, &ModbusCom::updateRegisters);
+    qDebug() << "write " << address << m_protocol.elementMap.at(address)->uValue();
+    m_modbusDevice->disconnect();
+    m_modbusDevice->setData(QModbusDataUnit::HoldingRegisters,
+                            address,
+                            m_protocol.elementMap.at(address)->uValue());
+    connect(m_modbusDevice.get(), &QModbusServer::dataWritten, this, &ModbusCom::updateRegisters);
 }
 
 void ModbusCom::handleError(const QString &errorString, QModbusDevice::Error error)
