@@ -16,9 +16,22 @@ ValueWidget::ValueWidget(Element *element, int16_t value, QString description, Q
     init();
 }
 
-void ValueWidget::updateValue(int16_t val)
+void ValueWidget::updateValueFromCommunication(int16_t val)
 {
-    m_valueSpinBox->setValue(val);
+    m_value = val;
+    m_valueSpinBox->disconnect();
+    m_valueSpinBox->setValue(m_value);
+    connectChangesWithCommunication();
+}
+
+void ValueWidget::updateCommunicationForChanged(int v)
+{
+    m_value = v;
+    update();
+
+    if (m_element) {
+        Q_EMIT valueChanged(m_element->address());
+    }
 }
 
 void ValueWidget::init()
@@ -31,14 +44,6 @@ void ValueWidget::init()
     m_valueSpinBox->setMinimum(0);
     m_valueSpinBox->setMaximum(0xFFFF);
     m_valueSpinBox->setAlignment(Qt::AlignRight);
-    connect(m_valueSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int i) {
-        m_value = i;
-        update();
-
-        if (m_element) {
-            emit valueChanged(m_element->address());
-        }
-    });
     m_decValueLabel = new QLabel(this);
     m_decValueLabel->setAlignment(Qt::AlignRight);
     m_hexValueLabel = new QLabel(this);
@@ -50,6 +55,12 @@ void ValueWidget::init()
     layout->addWidget(m_decValueLabel, 0, index++);
     layout->addWidget(m_hexValueLabel, 0, index++);
     checkWidgetSize();
+    connectChangesWithCommunication();
+}
+
+void ValueWidget::connectChangesWithCommunication()
+{
+    connect(m_valueSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &ValueWidget::updateCommunicationForChanged);
 }
 
 void ValueWidget::checkWidgetSize()

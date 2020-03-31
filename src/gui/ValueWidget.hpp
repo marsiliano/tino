@@ -16,10 +16,13 @@ public:
                          QString description = {},
                          QWidget *parent = nullptr);
 
-    void updateValue(int16_t val);
+    void updateValueFromCommunication(int16_t val);
 
 signals:
     void valueChanged(int address);
+
+private Q_SLOTS:
+    void updateCommunicationForChanged(int v);
 
 private:
     QString m_description{""};
@@ -31,6 +34,9 @@ private:
     Element *m_element{nullptr};
 
     void init();
+    void connectChangesWithCommunication();
     void checkWidgetSize();
     void update();
 };
+
+
