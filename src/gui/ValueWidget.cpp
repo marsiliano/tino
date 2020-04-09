@@ -30,6 +30,7 @@ void ValueWidget::updateCommunicationForChanged(int v)
     update();
 
     if (m_element) {
+        m_element->setValue(m_value);
         Q_EMIT valueChanged(m_element->address());
     }
 }
@@ -60,7 +61,10 @@ void ValueWidget::init()
 
 void ValueWidget::connectChangesWithCommunication()
 {
-    connect(m_valueSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &ValueWidget::updateCommunicationForChanged);
+    connect(m_valueSpinBox,
+            QOverload<int>::of(&QSpinBox::valueChanged),
+            this,
+            &ValueWidget::updateCommunicationForChanged);
 }
 
 void ValueWidget::checkWidgetSize()
