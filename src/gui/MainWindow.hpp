@@ -47,7 +47,6 @@ private:
     QString m_importFilePath;
 
     std::unique_ptr<ModbusCom> m_modbus;
-    std::vector<MdiChild *> m_mdiChilds;
 
     struct Error
     {

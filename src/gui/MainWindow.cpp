@@ -12,6 +12,7 @@
 
 #include <QDockWidget>
 #include <QFileDialog>
+#include <QMdiSubWindow>
 #include <QMessageBox>
 #include <QSettings>
 #include <QStandardItemModel>
@@ -126,7 +127,11 @@ void MainWindow::disconnectClient()
     m_actions[Actions::Connect]->setEnabled(true);
     m_actions[Actions::Disconnect]->setEnabled(false);
 
-    std::for_each(std::begin(m_mdiChilds), std::end(m_mdiChilds), [](auto &m) { m->resetToDefault(); });
+    const auto list = ui->mdiArea->subWindowList();
+    std::for_each(std::cbegin(list), std::cend(list), [](const auto &w) {
+        auto mdiChild = dynamic_cast<MdiChild *>(w->widget());
+        mdiChild->resetToDefault();
+    });
 }
 
 void MainWindow::createActions()
@@ -216,7 +221,10 @@ MainWindow::Error MainWindow::importConfig(const QString &filename)
 
     m_modbus = std::make_unique<ModbusCom>(m_config->protocol);
     connect(m_modbus.get(), &ModbusCom::updateGui, this, [this](int address) {
-        for (const auto &mdi : m_mdiChilds) {
+        const auto list = ui->mdiArea->subWindowList();
+        for (const auto &w : list) {
+            auto mdi = dynamic_cast<MdiChild *>(w->widget());
+            // FIXME: maybe some ValueWidget are not refreshed
             if (mdi->hasElementWithAddress(address)) {
                 mdi->updateGuiElemets();
                 return;
@@ -248,13 +256,6 @@ void MainWindow::createWidgetRequested(QStandardItem *item)
 
     const auto child = new MdiChild(block);
     connect(child, &MdiChild::updateModbus, m_modbus.get(), &ModbusCom::writeRegister);
-    connect(child, &MdiChild::destroyed, this, [&]() {
-        const auto it = std::find(m_mdiChilds.cbegin(), m_mdiChilds.cbegin(), child);
-        if (it != m_mdiChilds.cend()) {
-            m_mdiChilds.erase(it);
-        }
-    });
-    m_mdiChilds.emplace_back(child);
     ui->mdiArea->addSubWindow(child);
     child->show();
 }
@@ -276,14 +277,15 @@ void MainWindow::loadSettings()
 
 bool MainWindow::setFocusIfAlreadyExists(const Block &block) const
 {
-    const auto it = std::find_if(m_mdiChilds.cbegin(), m_mdiChilds.cend(), [&](MdiChild *k) {
+    const auto list = ui->mdiArea->subWindowList();
+    const auto it = std::find_if(std::cbegin(list), std::cend(list), [&](const auto &k) {
         return k->windowTitle() == block.description;
     });
 
-    if (it == m_mdiChilds.cend()) {
+    if (it == list.cend()) {
         return false;
     }
 
-    m_mdiChilds.at(std::distance(m_mdiChilds.cbegin(), it))->setFocus();
+    list.at(std::distance(std::cbegin(list), it))->setFocus();
     return true;
 }
