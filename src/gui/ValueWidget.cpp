@@ -24,6 +24,12 @@ void ValueWidget::updateValueFromCommunication(int16_t val)
     connectChangesWithCommunication();
 }
 
+void ValueWidget::resetToDefault()
+{
+    m_value = m_defaultValue;
+    m_valueSpinBox->setValue(m_value);
+}
+
 void ValueWidget::updateCommunicationForChanged(int v)
 {
     m_value = v;

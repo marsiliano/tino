@@ -26,6 +26,7 @@ add_executable(tst_mainWindow
 
     ../../../src/gui/ConfigViewFactory.cpp       ../../../src/gui/ConfigViewFactory.hpp
     ../../../src/gui/Led.cpp                     ../../../src/gui/Led.hpp
+    ../../../src/gui/GuiElement.cpp              ../../../src/gui/GuiElement.hpp
     ../../../src/gui/MdiChild.cpp                ../../../src/gui/MdiChild.hpp
     ../../../src/gui/ValueWidget.cpp             ../../../src/gui/ValueWidget.hpp
     ../../../src/gui/DialogAbout.cpp             ../../../src/gui/DialogAbout.hpp             ../../../src/gui/DialogAbout.ui

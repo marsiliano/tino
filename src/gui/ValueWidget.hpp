@@ -17,6 +17,7 @@ public:
                          QWidget *parent = nullptr);
 
     void updateValueFromCommunication(int16_t val);
+    void resetToDefault();
 
 signals:
     void valueChanged(int address);

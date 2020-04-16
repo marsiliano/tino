@@ -11,8 +11,9 @@ constexpr static int spacing = 2;
 constexpr static int ledMinimumSize = 24;
 constexpr static int ledMaximumSize = 32;
 
-Led::Led(QString description, State state, QWidget *parent)
+Led::Led(QString description, State state, bool defaultValue, QWidget *parent)
     : QWidget(parent)
+    , m_defaultValue {defaultValue}
     , m_ledSize(QSize(32, 32))
     , m_state(state)
     , m_onColor(Green)
@@ -132,6 +133,15 @@ void Led::attachBitset(Bitset *bitset, size_t bitIndex)
 {
     m_bitset = bitset;
     m_bitIndex = bitIndex;
+}
+
+void Led::resetToDefault()
+{
+    m_defaultValue ? setState(Led::On) : setState(Led::Off);
+    if (m_bitset) {
+        m_bitset->setAt(m_bitIndex, m_defaultValue);
+        Q_EMIT bitsetStateChanged(m_bitset->address());
+    }
 }
 
 Led::State Led::state() const

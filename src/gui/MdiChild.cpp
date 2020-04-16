@@ -38,7 +38,7 @@ MdiChild::MdiChild(const Block &block, QWidget *parent)
                 ++c;
 
                 auto led = new Led(bitset->names().at(static_cast<int>(i)),
-                                   bitset->valueAt(i) ? Led::State::On : Led::State::Off,
+                                   bitset->valueAt(i) ? Led::State::On : Led::State::Off, false,
                                    this);
                 led->attachBitset(bitset, i);
                 connect(led, &Led::bitsetStateChanged, this, &MdiChild::updateModbus);
@@ -48,7 +48,7 @@ MdiChild::MdiChild(const Block &block, QWidget *parent)
             }
             m_guiElements.emplace_back(GuiElement{element.get(), leds});
         } else {
-            auto w = new ValueWidget(element.get(), element->sValue(), element->name());
+            auto w = new ValueWidget(element.get(), element->sValue(), element->name(), this);
             connect(w, &ValueWidget::valueChanged, this, &MdiChild::updateModbus);
             m_guiElements.emplace_back(GuiElement{element.get(), {w}});
             dynamic_cast<QGridLayout *>(groupBox->layout())->addWidget(w, r, c);
@@ -67,18 +67,23 @@ bool MdiChild::hasElementWithAddress(int address) const
     return (it != m_addresses.end());
 }
 
+void MdiChild::resetToDefault()
+{
+    std::for_each (std::begin(m_guiElements), std::end(m_guiElements), [](auto &g){ g.resetToDefault(); });
+}
+
 void MdiChild::updateGuiElemets()
 {
     for (const auto &guiElement : m_guiElements) {
         if (auto bitset = dynamic_cast<Bitset *>(guiElement.el)) {
             for (size_t i = 0; i < Bitset::size; ++i) {
-                if (auto led = dynamic_cast<Led *>(guiElement.w.at(i))) {
+                if (auto led = dynamic_cast<Led *>(guiElement.widgets.at(i))) {
                     auto state = bitset->valueAt(i) ? Led::State::On : Led::State::Off;
                     led->setState(state);
                 }
             }
             continue;
-        } else if (auto vw = dynamic_cast<ValueWidget *>(guiElement.w.front())) {
+        } else if (auto vw = dynamic_cast<ValueWidget *>(guiElement.widgets.front())) {
             vw->updateValueFromCommunication(guiElement.el->sValue());
         }
     }

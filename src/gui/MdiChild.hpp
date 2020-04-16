@@ -1,14 +1,6 @@
 #pragma once
 
-#include "../core/Block.hpp"
-
-#include <QWidget>
-
-struct GuiElement
-{
-    Element *el;
-    std::vector<QWidget *> w;
-};
+#include "GuiElement.hpp"
 
 class MdiChild : public QWidget
 {
@@ -18,6 +10,7 @@ public:
     explicit MdiChild(const Block &block, QWidget *parent = nullptr);
 
     bool hasElementWithAddress(int address) const;
+    void resetToDefault();
 
 signals:
     void updateModbus(int address);

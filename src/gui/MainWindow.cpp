@@ -125,6 +125,8 @@ void MainWindow::disconnectClient()
     m_modbus->disconnectModbus();
     m_actions[Actions::Connect]->setEnabled(true);
     m_actions[Actions::Disconnect]->setEnabled(false);
+
+    std::for_each(std::begin(m_mdiChilds), std::end(m_mdiChilds), [](auto &m) { m->resetToDefault(); });
 }
 
 void MainWindow::createActions()

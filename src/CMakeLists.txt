@@ -20,6 +20,7 @@ add_executable(${CMAKE_PROJECT_NAME}
 
     gui/ConfigViewFactory.cpp       gui/ConfigViewFactory.hpp
     gui/Led.cpp                     gui/Led.hpp
+    gui/GuiElement.cpp              gui/GuiElement.hpp
     gui/MdiChild.cpp                gui/MdiChild.hpp
     gui/ValueWidget.cpp             gui/ValueWidget.hpp
     gui/DialogAbout.cpp             gui/DialogAbout.hpp             gui/DialogAbout.ui

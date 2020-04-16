@@ -31,7 +31,7 @@ public:
         MaxState
     };
 
-    explicit Led(QString description = {}, Led::State state = Led::Off, QWidget *parent = nullptr);
+    explicit Led(QString description = {}, Led::State state = Led::Off, bool defaultValue = false, QWidget *parent = nullptr);
 
     [[nodiscard]] Led::State state() const;
     void setState(const Led::State &state);
@@ -43,6 +43,7 @@ public:
     void setInteractive(bool value);
 
     void attachBitset(Bitset *bitset, size_t bitIndex);
+    void resetToDefault();
 
 public slots:
     void toggle();
@@ -68,6 +69,7 @@ private:
 
     Bitset *m_bitset{nullptr};
     size_t m_bitIndex{};
+    bool m_defaultValue;
 
     void checkWidgetSize();
 };
