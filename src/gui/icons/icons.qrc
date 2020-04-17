@@ -6,5 +6,15 @@
         <file>icons8-scollegato-48.png</file>
         <file>circle_green.svg</file>
         <file>circle_grey.svg</file>
+        <file>logos/cover.png</file>
+        <file>logos/default.png</file>
+        <file>logos/profile.png</file>
+        <file>logos/vector/default.svg</file>
+        <file>logos/vector/default-monochrome.svg</file>
+        <file>logos/vector/default-monochrome-black.svg</file>
+        <file>logos/vector/default-monochrome-white.svg</file>
+        <file>logos/vector/isolated-layout.svg</file>
+        <file>logos/vector/isolated-monochrome-black.svg</file>
+        <file>logos/vector/isolated-monochrome-white.svg</file>
     </qresource>
 </RCC>

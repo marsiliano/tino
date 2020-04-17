@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("Tino");
+    this->setWindowIcon(QIcon(":/logos/vector/isolated-layout.svg"));
 
     createActions();
     createMenuBar();
