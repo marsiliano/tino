@@ -4,7 +4,7 @@
 
 | Travis CI (Linux) | Github Actions <br> Linux/Win  |
 | :---------------: | :----------------------------: |
-| [![Build Status](https://travis-ci.org/guerinoni/tino.svg?branch=master)](https://travis-ci.org/guerinoni/tino) | [! | ![Ubuntu](https://github.com/guerinoni/tino/workflows/Ubuntu/badge.svg) ![Windows](https://github.com/guerinoni/tino/workflows/Windows/badge.svg) |
+| [![Build Status](https://travis-ci.org/guerinoni/tino.svg?branch=master)](https://travis-ci.org/guerinoni/tino) | ![Ubuntu](https://github.com/guerinoni/tino/workflows/Ubuntu/badge.svg) ![Windows](https://github.com/guerinoni/tino/workflows/Windows/badge.svg) |
 
 ## Build
 ```
