@@ -22,13 +22,13 @@ public:
 signals:
     void valueChanged(int address);
 
-private Q_SLOTS:
-    void updateCommunicationForChanged(int v);
+private slots:
+    void updateCommunicationForChanged(quint64 v);
 
 private:
     QString m_description{""};
-    int16_t m_defaultValue{0};
-    int16_t m_value{0};
+    qint64 m_defaultValue{0};
+    qint64 m_value{0};
     QLabel *m_decValueLabel{nullptr};
     QLabel *m_hexValueLabel{nullptr};
     QSpinBox *m_valueSpinBox{nullptr};
@@ -39,5 +39,3 @@ private:
     void checkWidgetSize();
     void update();
 };
-
-

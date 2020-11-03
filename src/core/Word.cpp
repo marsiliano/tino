@@ -23,9 +23,10 @@ int16_t UWord::sValue() const
 {
     return static_cast<int16_t>(m_value);
 }
-
+#include <QtDebug>
 void UWord::setValue(int16_t value)
 {
+    qDebug() << value << "uword";
     if (valOutOfBound<int16_t, uint16_t>(value)) {
         throw std::logic_error("Out of bound value <int16_t, uint16_t>");
     }

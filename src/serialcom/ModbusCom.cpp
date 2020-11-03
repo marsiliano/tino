@@ -69,10 +69,64 @@ bool ModbusCom::disconnectModbus()
 
 void ModbusCom::writeRegister(int address)
 {
-    const auto uV = m_protocol.elementMap.at(address)->uValue();
-    qDebug() << __func__ << QString::number(address, 16) << uV;
+    if (m_protocol.elementMap.find(address) == m_protocol.elementMap.end()) {
+        qWarning() << "Element at" << QString::number(address, 16) << "not found";
+        return;
+    }
+
+    quint16 value = 0;
+    const auto el = m_protocol.elementMap.at(address);
+    switch (el->type()) {
+    case Element::UByte:
+    case Element::SByte:
+    case Element::Bitset: {
+        auto hi = 0;
+        auto lo = 0;
+        if (address % 2 == 0) {
+            hi = el->uValue();
+            if (m_protocol.elementMap.find(address + 1) != m_protocol.elementMap.end()) {
+                lo = m_protocol.elementMap.at(address + 1)->uValue();
+            }
+            value = (hi << 8) | lo;
+        } else {
+            lo = el->uValue();
+            if (m_protocol.elementMap.find(address - 1) != m_protocol.elementMap.end()) {
+                hi = m_protocol.elementMap.at(address - 1)->uValue();
+            }
+            value = (hi << 8) | lo;
+            address--;
+        }
+    } break;
+
+    case Element::UWord:
+    case Element::SWord: {
+        auto hi = 0;
+        auto lo = 0;
+        if (address % 2 == 0) {
+            hi = el->uValue();
+            if (m_protocol.elementMap.find(address + 1) != m_protocol.elementMap.end()) {
+                lo = m_protocol.elementMap.at(address + 1)->uValue();
+            }
+            value = (hi << 8) | lo;
+        } else {
+            //            lo = el->uValue();
+            //            if (m_protocol.elementMap.find(address - 1) != m_protocol.elementMap.end()) {
+            //                hi = m_protocol.elementMap.at(address - 1)->uValue();
+            //            }
+            //            value = (hi << 8) | lo;
+            //            address--;
+        }
+        QString hexvalue = QString("0x%1").arg(address, 4, 16, QLatin1Char('0'));
+        qDebug() << "write word" << hexvalue << el->uValue();
+    } break;
+
+    default:
+        qWarning() << "case non handled";
+        break;
+    }
+
     m_modbusDevice->disconnect();
-    m_modbusDevice->setData(QModbusDataUnit::HoldingRegisters, address, uV);
+    m_modbusDevice->setData(QModbusDataUnit::HoldingRegisters, address, value);
     connect(m_modbusDevice.get(), &QModbusServer::dataWritten, this, &ModbusCom::updateRegisters);
 }
 
@@ -110,6 +164,7 @@ void ModbusCom::handleError(const QString &errorString, QModbusDevice::Error err
 
 void ModbusCom::updateRegisters(QModbusDataUnit::RegisterType table, int address, int size)
 {
+    qDebug() << "received " << address << size;
     const auto writeLowByte = [this](uint16_t lowAddress, uint16_t value) {
         if (m_protocol.elementMap.find(lowAddress) == m_protocol.elementMap.end()) {
             qWarning() << "Element at" << QString::number(lowAddress, 16) << "not found";

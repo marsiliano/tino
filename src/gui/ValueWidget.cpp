@@ -5,6 +5,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QSpinBox>
+#include <QtDebug>
 
 ValueWidget::ValueWidget(Element *element, int16_t value, QString description, QWidget *parent)
     : QWidget(parent)
@@ -30,14 +31,34 @@ void ValueWidget::resetToDefault()
     m_valueSpinBox->setValue(m_value);
 }
 
-void ValueWidget::updateCommunicationForChanged(int v)
+void ValueWidget::updateCommunicationForChanged(quint64 v)
 {
     m_value = v;
     update();
 
     if (m_element) {
-        m_element->setValue(m_value);
-        Q_EMIT valueChanged(m_element->address());
+        switch (m_element->type()) {
+        case Element::UWord:
+            m_element->setValue(static_cast<quint16>(m_value));
+            break;
+
+        case Element::SWord:
+            m_element->setValue(static_cast<qint16>(m_value));
+            break;
+
+        case Element::UByte:
+            m_element->setValue(static_cast<quint16>(m_value));
+            break;
+
+        case Element::SByte:
+            m_element->setValue(static_cast<qint16>(m_value));
+            break;
+
+        default:
+            qWarning() << "case not handled";
+            break;
+        }
+        emit valueChanged(m_element->address());
     }
 }
 
